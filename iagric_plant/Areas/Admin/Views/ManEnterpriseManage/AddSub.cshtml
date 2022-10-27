@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var sendData = {
+                eid: $("#enterpriseid").val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/ManEnterpriseManage/AddSubInfo',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == 1) {
+                        alert(data.info);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("SubIndex")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label" style="width: 120px">选择企业：</span>
+                                <div class="fl">
+                                    @Html.Action("GetEnterpriseList", "ManEnterpriseManage", new { ParentID = 0, FirstDisplay = "请选择" })
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

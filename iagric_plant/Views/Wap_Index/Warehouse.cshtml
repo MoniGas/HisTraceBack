@@ -1,0 +1,55 @@
+﻿@model LinqModel.ScanWareHouseInfo
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@if (Model != null && ViewBag.Ambient==true)
+{
+    try
+    {
+    <div class="list clearfix">
+        <div class="list-title">
+            原料存储环境信息
+        </div>
+        <div class="prod-spec">
+            @if (!string.IsNullOrEmpty(Model.WarehouseName))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">仓库名称</span>
+                    <div class="base-txt">
+                        @Model.WarehouseName
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Temperature))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">仓库温度</span>
+                    <div class="base-txt">
+                        @Model.Temperature
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.OutData) && !string.IsNullOrEmpty(Model.InData))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">存储时间</span>
+                    <div class="base-txt">
+                        @(Model.InData + "至" + Model.OutData)
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Remark))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">备注</span>
+                    <div class="base-txt">
+                        @Model.Remark
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    }
+    catch { }
+}

@@ -1,0 +1,72 @@
+﻿@model LinqModel.Enterprise_FWCode_00
+@{
+    ViewBag.Title = "ParameterInfo";
+
+    LinqModel.Material MaterialModel = ViewBag.MaterialModel as LinqModel.Material;
+    LinqModel.RequestCode RequestCodeModel = ViewBag.RequestCodeModel as LinqModel.RequestCode;
+}
+@if(Model != null)
+{
+<section class="section-module">
+    <section> 
+    @if (MaterialModel.StrPropertyInfo != null)
+    {
+        System.Xml.Linq.XElement xml = System.Xml.Linq.XElement.Parse(MaterialModel.StrPropertyInfo);
+        IEnumerable<System.Xml.Linq.XElement> allProperty = xml.Elements("info");
+        foreach (var varAllProperty in allProperty)
+        {
+            <dl class="contact-dl">
+                <dt>
+                    @varAllProperty.Attribute("iname").Value.ToString()：</dt>
+                <dd>
+                    @varAllProperty.Attribute("ivalue").Value.ToString()</dd>
+                    </dl>
+        }
+    }
+            
+            <dl class="contact-dl">
+                <dt>码类型：</dt>
+                <dd>@if (Model.Type == 1)
+                    { <a>套标组码</a>}
+                    else if (Model.Type == 2)
+                    {<a>套标子码</a>}
+                    else if (Model.Type == 3)
+                    { <a>单品码</a> }</dd>
+            </dl>
+            @if (Model.Type == 1 && RequestCodeModel != null && RequestCodeModel.Specifications != null)
+            {
+            <dl class="contact-dl">
+            <dt>箱标码规格：</dt>
+            <dd>@(RequestCodeModel.Specifications.Value)@(RequestCodeModel.GuiGe)</dd>
+            </dl>
+            }
+            @if (RequestCodeModel.EwmEncryption == false)
+            {
+                if (!string.IsNullOrEmpty(Model.EWM)) 
+                { 
+                    <dl class="contact-dl">
+            <dt>码值：</dt>
+            <dd>@Model.EWM</dd>
+            </dl>
+                }
+                <dl class="contact-dl">
+                    @if (Model.Type == 1)
+                    { 
+                        <dt>包含的子码：</dt>
+                        <dd>
+                            @foreach (var item in Model.codeXML.Descendants("bottlecode"))
+                            {
+                                 <p>@item.Attribute("value").Value</p>
+                            }
+                        </dd>
+                    }
+                    else if (Model.Type == 2)
+                    {
+                        <dt>所属组码：</dt>
+                        <dd>@Model.codeXML.Descendants("boxcode").FirstOrDefault().Attribute("value").Value</dd>
+                    }
+            </dl> 
+            }
+    </section>
+</section>
+    }

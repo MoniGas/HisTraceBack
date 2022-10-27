@@ -1,0 +1,94 @@
+﻿@model LinqModel.View_PRRU_PlatFormUser
+@{
+    ViewBag.Title = "GetPlatInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-------------------main start---------------------------------->
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li class="dqwz"><a href="/Admin/SysSupervision/Supervision"></a>代理管理<span class="divider">›</span></li>
+            <li class="dqwz">详情</li>
+        </ul>
+    </div>
+    @if (Model != null)
+    {
+        <div class="card_pa40 clearfix">
+            <div class="details-main">
+                <div class="position-head">
+                    <div class="position-content clearfix">
+                        <h3 class="gs-name" style=" display:inline-block">@Model.CompanyName</h3>
+                        <a href="javascript:openwin('@Url.Action("Edit", new { eId = @Model.PRRU_PlatForm_ID })','修改代理信息',700,500)" class="lnk mar10" style=" margin-left:20px;">
+                                        修改信息</a>
+                        <ul class="baseInfo clearfix" style=" margin-top:20px;">
+                            <li><span class="project_key">联系人：</span><span>@Model.LinkMan</span></li>
+                            <li><span class="project_key">联系电话：</span><span>@Model.LinkPhone</span></li>
+                            <li><span class="project_key">注册时间：</span><span>@Model.AddDate</span></li>
+                            <li><span class="project_key">地址：</span><span>@Model.CenterAddress</span></li>
+                            <li><span class="project_key">代理编码：</span><span>@Model.PRRU_PlatForm_ID</span></li>
+                            @if (Model.UserStatus == 1)
+                            {
+                                <li><span class="project_key">代理状态：</span><span class="blue">正常</span>
+                                <a href="javascript:AjaxUrl('/SysSupervision/DisableSupervision/AdminInfo?userId=@Model.PRRU_PlatForm_User_ID','您确定要停用吗？')"
+                                    class="category_tag_red">停用</a></li>
+                    }
+                            else
+                            { 
+                                <li><span class="project_key">代理状态：</span><span class="blue">停用</span>
+                                <a href="javascript:AjaxUrl('/SysSupervision/EnableSupervision?userId=@Model.PRRU_PlatForm_User_ID','您确定要启用吗？')"
+                                    class="category_tag">启用</a></li>
+                    }
+                        </ul>
+                    </div>
+                </div>
+                <div class="project_list clearfix">
+                    <ul>
+                        <li>
+                            <div class="project_type develop">
+                                <i class="icons">
+                                    <img src="/images/ico-qiye.png"></i>企业</div>
+                            <div class="project_main">
+                                <div class="bottom_data clearfix">
+                                    <div>
+                                        <div class="title">
+                                            发展企业</div>
+                                        <div class="txt">
+                                            <strong>@Model.EnterprsieCount</strong></div>
+                                    </div>
+                                    <div>
+                                        <div class="title">
+                                            总用码量</div>
+                                        <div class="txt">
+                                            <strong>@Model.CodeCount</strong></div>
+                                    </div>
+                                </div>
+                                <div class="category_list">
+                                    <a href="/Admin/SysSupervision/GetEn?platID=@Model.PRRU_PlatForm_ID">查看企业</a>
+                                     <a href="/Admin/SysSupervision/GetContinneCodeRecord?platId=@Model.PRRU_PlatForm_ID">续码记录</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="project_type develop">
+                                <i class="icons">
+                                    <img src="/images/ico-zhanghu.png"></i>账户</div>
+                            <div class="project_main">
+                                <div class="bottom_data clearfix">
+                                    <div style="width: 100%;">
+                                        <div class="title">
+                                            管理账户</div>
+                                        <div class="txt">
+                                            <strong>@Model.LoginName</strong></div>
+                                    </div>
+                                </div>
+                                <div class="category_list">
+                                    <a href="javascript:AjaxUrl('/SysSupervision/ResetPassword?userId=@Model.PRRU_PlatForm_User_ID','您确定要重置密码吗？')"  style="width: 100%;">重置密码</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+<!-------------------main end---------------------------------->

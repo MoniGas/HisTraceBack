@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UnitType</title>
+</head>
+<body>
+    <div>
+        <select id="unitType_ID" name="unitType_ID" style="width: 123px;
+            height: 28px; font-size: 14px; padding-left: 10px;">
+            <option selected="selected" value="-2">请选择</option>
+            @if (ViewBag.unitType != null)
+            {
+                List<SelectListItem> itemList = ViewBag.unitType as List<SelectListItem>;
+                foreach (SelectListItem item in itemList)
+                {
+                <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "BuyEWMOrder";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function setValue() {
+        var shul = $("tbody :radio:checked").parent().parent().find("td").eq(2).text();
+        var jiage = $("tbody :radio:checked").closest("tr").find("td").eq(3).text();
+        $("#shul").val($.trim(shul));
+        $("#jiage").val($.trim(jiage));
+    }
+    function BuyCode() {
+        if ($("tbody :radio:checked").parent().parent().find("td").eq(2).text() == "" || $("tbody :radio:checked").parent().parent().find("td").eq(2).text() == null) {
+            alert("请选择要购买的套餐！");
+            return false;
+        }
+        var a = $.trim($("tbody :radio:checked").closest("tr").find("td").eq(4).text());
+        var b = $("ul :radio:checked").val();
+        var sendData = {
+            tcid: a,
+            paytype: b
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Market/BuyCodeOrdePay/BuyEWMOrder",
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                if (data.flag == "wx") {
+                    openwinEwm('@Url.Action("LookEwm")?tradeNo=' + data.tradeNo + "&jg=" + $("#jiage").val(), '微信支付', 270, 300, data.tradeNo);
+                    return;
+                }
+                if (data.flag == "zfb") {
+                    if (data.url != null && data.url != "") {
+                        //                        top.location.href = data.url;
+                        window.open(data.url, "_top", "");
+                        return;
+                    }
+                }
+                if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        location.href = data.url;
+                    }
+                }
+            }
+        })
+    }
+</script>
+<!-------------------main start---------------------------------->
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>二维码管理<span class="divider">›</span>二维码订单<span class="divider">›</span></li>
+        <li>购买二维码</li>
+    </ul>
+</div>
+<div class="card_pa40 clearfix">
+    <div class="mod-main">
+        <div class="mc">
+            <div class="user-set userset-lcol">
+                <div class="form">
+                    <div class="infoitem">
+                        <span class="label">选择套餐：</span>
+                        <div class="fl">
+                            <div class="boxtable" style="width: 560px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th width="50">
+                                                选择
+                                            </th>
+                                            <th>
+                                                套餐
+                                            </th>
+                                            <th width="140">
+                                                二维码数量（个）
+                                            </th>
+                                            <th width="120">
+                                                价格（元）
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            if (ViewBag.packageList.Count > 0)
+                                            {
+                                                foreach (var item in ViewBag.packageList)
+                                                {
+                                            <tr>
+                                                <td class="valign_m">
+                                                    <input type="radio" name="tcName" onclick="setValue()">
+                                                </td>
+                                                <td>
+                                                    @item.PackbageName
+                                                </td>
+                                                <td>
+                                                    @item.PackbageCodeCount
+                                                </td>
+                                                <td>
+                                                    <span class="bold red">@item.PackagePrice</span>
+                                                </td>
+                                                <td style="display: none">
+                                                    @item.PackageID
+                                                </td>
+                                            </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">二维码数量：</span>
+                        <div class="fl">
+                            <input type="text" id="shul" readonly="readonly" />
+                            个
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">套餐价格：</span>
+                        <div class="fl">
+                            <input type="text" id="jiage" readonly="readonly" />
+                            元
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">支付方式：</span>
+                        <div class="fl">
+                            <ul class="payment_ul clearfix">
+                                <li>
+                                    <div class="bd_wrap">
+                                        <input type="radio" name="gateway" id="Alipay" value="1" checked="checked">
+                                        <label class="bg Alipay" for="Alipay">
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bd_wrap">
+                                        <input type="radio" name="gateway" id="WeixinQRCodeWeb" value="2">
+                                        <label class="bg WeixinQRCodeWeb" for="WeixinQRCodeWeb">
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bd_wrap">
+                                        <input type="radio" name="gateway" id="Offlinepayment" value="3">
+                                        <label class="bg Offlinepayment" for="Offlinepayment">
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">&nbsp;</span>
+                        <div class="fl">
+                            <input type="button" value="立即购买" class="button-big" onclick="BuyCode()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->

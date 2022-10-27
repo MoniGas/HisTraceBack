@@ -1,0 +1,347 @@
+﻿@model LinqModel.Material
+@{
+    ViewBag.Title = "OtherProductInfo";
+    Layout = null;
+
+    List<LinqModel.View_NavigationForMaterial> NavigationForMaterialList =
+        ViewBag.NavigationForMaterialList as List<LinqModel.View_NavigationForMaterial>;
+
+    List<LinqModel.View_MaterialSpecForMarket> MaterialSpecList =
+    ViewBag.MaterialSpecList as List<LinqModel.View_MaterialSpecForMarket>;
+
+    LinqModel.Enterprise_Info EnterpriseModel = new BLL.EnterpriseInfoBLL().GetModel(Model.Enterprise_Info_ID.Value);
+    var IsOpenShop = EnterpriseModel.IsOpenShop;
+    var ShopVerify = EnterpriseModel.ShopVerify;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#count").val(1);
+            $("#ddlSpec").change(function () {
+                $("#listProperty").html('');
+                var ddlId = this.value;
+                var price = 0.00;
+                if (ddlId != "0") {
+                    price = parseFloat(ddlId.split("_")[1]);
+                }
+                $("#price").text(price.toFixed(2));
+                var count = parseInt($("#count").val());
+                if (isNaN(count)) {
+                    count = 0;
+                }
+                var totalMoney = price.toFixed(2) * count;
+                $("#total").text(totalMoney.toFixed(2));
+
+                var sendData = { MaterialSpecId: $(this).val().split('_')[0] }
+                $.ajax({
+                    type: "POST",
+                    url: "/Wap_Order/GetMaterialProperty",
+                    contentType: "application/json;charset=utf-8", //必须有
+                    dataType: "json", //表示返回值类型，不必须
+                    data: JSON.stringify(sendData),
+                    async: false,
+                    success: function (jsonResult) {
+                        var data = jsonResult;
+                        $.each(data, function (n, proprety) {
+                            $("#listProperty").append('<li>' + proprety.PropertyName + '</li>');
+                        });
+                    },
+                    error: function (Error) {
+
+                    }
+                });
+
+            });
+            $("#count").keyup(function () {
+                $("#listProperty").html('');
+                var count = parseInt($("#count").val());
+                if (isNaN(count)) {
+                    count = 0;
+                }
+                var price = parseFloat($("#price").text());
+                var totalMoney = price * count;
+                $("#total").text(totalMoney.toFixed(2));
+
+                var sendData = { MaterialSpecId: $(this).val().split('_')[0] }
+                $.ajax({
+                    type: "POST",
+                    url: "/Wap_Order/GetMaterialProperty",
+                    contentType: "application/json;charset=utf-8", //必须有
+                    dataType: "json", //表示返回值类型，不必须
+                    data: JSON.stringify(sendData),
+                    async: false,
+                    success: function (jsonResult) {
+                        var data = jsonResult;
+                        $.each(data, function (n, proprety) {
+                            $("#listProperty").append('<li>' + proprety.PropertyName + '</li>');
+                        });
+                    },
+                    error: function (Error) {
+
+                    }
+                });
+            });
+            $("#minusCount").click(function () {
+                var count = parseInt($("#count").val());
+                if (isNaN(count)) {
+                    count = 1;
+                    $("#count").val(count);
+                }
+                count = count - 1;
+                if (count == 0) return;
+
+                $("#count").val(count);
+                var price = parseFloat($("#price").text());
+                var totalMoney = price * count;
+                $("#total").text(totalMoney.toFixed(2));
+            });
+            $("#addCount").click(function () {
+                var count = parseInt($("#count").val());
+                if (isNaN(count)) {
+                    $("#count").val("0");
+                    count = 0;
+                }
+                count = count + 1;
+                $("#count").val(count);
+                var price = parseFloat($("#price").text());
+                var totalMoney = price * count;
+                $("#total").text(totalMoney.toFixed(2));
+            });
+
+            $("#btnBuy").click(function () {
+                if ("@IsOpenShop" == "False" || "@ShopVerify" == 0) {
+                    alert('该企业还没开通商城，请选择其他购买方式！');
+                    return;
+                }
+                if ($("#ddlSpec").val() == 0) {
+                    alert('请选择要购买产品的规格！');
+                    return;
+                }
+                if (isNull($("#count").val())) {
+                    alert('请填写购买产品的数量！');
+                    return;
+                }
+                if (!isInteger($("#count").val())) {
+                    alert('请正确填写购买产品的数量！');
+                    return;
+                }
+                var count = parseInt($("#count").val());
+                if (count <= 0) {
+                    alert('请正确填写购买产品的数量！');
+                    return;
+                }
+                window.location.href = "/Public/ConfirmOrder?MaterialSpecId=" + $("#ddlSpec").val().split("_")[0] + "&Count=" + $("#count").val() + "&uppage=5";
+            });
+
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#divBody").height($(window).height() - $("#divFooter").height() - $("#divBodyTop").height());
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="divBodyTop">
+        <!-- 页头 -->
+        <section>
+	<header class="headerbox">
+        <a href="/Wap_Index/OtherProduct" class="art-back">返回</a>
+		<h1 title="医疗器械（UDI）服务云平台">医疗器械（UDI）服务云平台
+        @{
+            LinqModel.View_Order_Consumers consumers = Common.Argument.SessCokieOrder.Get;
+            if (consumers == null)
+            {
+                <a href="/Wap_Order/Login" class="art-login">登录</a>
+            }
+            else
+            {
+                <a href="/Wap_Consumers/Index" class="art-list">查看订单</a>
+            }
+        }
+        </h1>
+	</header>
+</section>
+        <!--banner图-->
+        <section class="top_slide_pic">
+	<img src="/Content/wap/images/banner.jpg">
+</section>
+        <!--nav导航-->
+        <nav class="main_nav">
+	<div class="main_nav_list">
+    @if (NavigationForMaterialList != null)
+    {
+        for (int i = 0; i < NavigationForMaterialList.Count; i++)
+        {
+            <a id="@NavigationForMaterialList[i].NavigationId" name="menu" 
+            href="@("Index?uppage=" + NavigationForMaterialList[i].NavigationId)"
+            title="@NavigationForMaterialList[i].NavigationName">
+            @NavigationForMaterialList[i].NavigationName</a>
+        }
+    }
+	</div>
+</nav>
+    </div>
+    <div id="divBody">
+        @if (Model != null)
+        {
+        <section class="section-module">
+        <section class="border-bottom" style=" padding-bottom:10px;">
+            	<div class="product-info">
+        <dl class="contact-dl brand-info">
+                @if (Model.imgs != null && Model.imgs.Count > 0)
+                {
+                                <dt>
+                                <a href="@Model.imgs[0].fileUrls" target="_blank" class="imgboxli">
+                            <img class="imgboximg" style=" width:160px; margin-left:20px;" src="@Model.imgs[0].fileUrls"/>
+                        </a>
+                                </dt>
+                }
+                else
+                {
+                    <dt>
+                    <img class="imgboximg" style=" width:160px; margin-left:20px;" src="/images/pic-def.jpg"/>
+                    </dt>
+                }
+                </dl>
+                @if (!string.IsNullOrEmpty(Model.MaterialFullName))
+                {
+    		<dl class="contact-dl">
+                <dt>
+                    产品名称：</dt>
+                <dd>
+                    @Model.MaterialFullName</dd>
+            </dl>
+                }
+                
+               @if (!string.IsNullOrEmpty(EnterpriseModel.EnterpriseName))
+               {
+                    <dl class="contact-dl">
+                    <dt>生产厂家：</dt><dd>@EnterpriseModel.EnterpriseName</dd>
+                    </dl>
+               }
+              
+        </div> 
+        <div class="brand-content">
+            <p>@Html.Raw(Model.Memo)</p>
+        </div> 
+        </section>
+        </section>
+        if (MaterialSpecList != null && MaterialSpecList.Count > 0 && IsOpenShop == true
+        && ShopVerify == (int)Common.EnumFile.ShopVerify.Open) {
+        <div class="scroll-wrap" id="OrderDiv">
+            <div class="scroll-content">
+                <section class="order-cont">
+                <ul class="order-list">
+                    <li>
+                        <div class="item-list o-t-item">
+                            <div class="item-img">
+                                <p>
+                                @if (Model.imgs != null && Model.imgs.Count > 0)
+                                {
+                        <a href="@Model.imgs[0].fileUrls" target="_blank" class="imgboxli">
+                            <img class="imgboximg" src="@Model.imgs[0].fileUrls"/>
+                        </a>
+                                }
+                                
+                                </p>
+                            </div>
+                            <div class="item-info">
+                                <h3 class="title">
+                                    @Model.MaterialFullName
+                                </h3>
+                                <p class="sku" style=" font-size:12px;">
+                                规格：<select id="ddlSpec" name="ddlSpec" style=" width:70px;">
+                                <option value="-1" selected="selected">请选择规格</option>
+                                    @if (MaterialSpecList != null)
+                                    {
+                                        for (int i = 0; i < MaterialSpecList.Count; i++)
+                                        {
+                                            string ddlValue = MaterialSpecList[i].MaterialSpecId + "_" + MaterialSpecList[i].Price;
+                                            if (i == 0)
+                                            {
+                                    <option value="@ddlValue" selected="selected">@MaterialSpecList[i].MaterialSpecification</option>
+                                            }
+                                            else
+                                            {
+                                    <option value="@ddlValue">@MaterialSpecList[i].MaterialSpecification</option>
+                                            }
+                                        }
+                                    }
+                                    </select>
+                                    @*颜色分类:619/中牛仔蓝;尺寸:30*@
+                                </p>
+                                <p class="nums sku clearfix">
+                                <span class="countname" style=" font-size:12px;">数量：</span>
+                                        <span class="add-border-green num-box" id="minusCount" name="minusCount">-</span>
+                                        <input type="text" value="1" id="count" name="count" style="ime-mode:disabled; width:18px; height:16px; line-height:20px; float:left; margin:0 3px; text-align:center;" onkeydown="if(event.keyCode==13)event.keyCode=9" onKeyPress="if ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
+                                        <span class="add-border-green num-box" id="addCount" name="addCount">+</span>
+                                </p>
+                            </div>
+                            <div class="item-pay" style=" width:70px;">
+                                <div class="item-pay-data">
+                                    <p class="price">
+                                        ￥<span id="price">@MaterialSpecList[0].Price.Value.ToString("0.00")</span>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <ul id="listProperty" class="order-serviceinfo" style="padding:0 10px 15px 10px;">
+                                    @*<li>
+                                        七天退换
+                                    </li>*@
+                        </ul>
+                        <div class="o-total-price">
+                            <div class="cont">
+                                <span>
+                                    合计:
+                                    <b>￥<span id="total">@MaterialSpecList[0].Price.Value.ToString("0.00")</span>
+                                    </b>
+                                </span>
+                                @*<span>
+                                    (含运费
+                                    <b>
+                                        ￥0.00
+                                    </b>
+                                    )
+                                </span>*@
+                            </div>
+                        </div>
+                        <div class="o-tab-btn clearfix">
+                            <ul>
+                                <li class="btn-org" style="width:100px;">
+                                    <a href="#" id="btnBuy">购买</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>             
+                </ul>
+            </section>
+            </div>
+        </div>
+          }
+        }
+        else
+        {
+        <a>暂无数据。或数据获取失败。</a>
+        }
+    </div>
+    <div id="divFooter" class="juchou-footer">
+        <footer id="footer">
+        <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

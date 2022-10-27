@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model List<LinqModel.SYS_NewModual>
+<div class="col_side">
+    <div class="menu_box">
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model.Where(a => a.Modual_Level == 1))
+            {
+            <dl class="menu">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="@item.Img">
+                </i><i class="icon_menu_switch"></i>@item.Title </dt>
+                @if (Model.Where(a => a.Parent_ID == item.PRRU_Modual_ID).Count() > 0) {
+                <ul class="submenu nav-show" style="display: block;">
+                    @foreach (var itemChild in Model.Where(a => a.Parent_ID == item.PRRU_Modual_ID))
+                    {
+                    
+                        <li class=""><a href="@itemChild.url" target="mainFrame">@itemChild.Title </a></li>
+              
+                    }
+                </ul>
+                }
+            </dl>
+            }
+        }
+    </div>
+</div>

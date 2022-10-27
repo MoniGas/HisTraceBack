@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>医疗器械（UDI）服务云平台</title>
+    <script type="text/jscript">
+        function Exit() {
+            if (confirm("确认要退出吗？")) {
+                parent.location.href = "/Home/Index";
+            }
+        }
+    </script>
+</head>
+@*<div class="header-wrapper" id="topheader">
+			<div class="header17 clearfix">
+				<div class="logo fl">
+					<a href="#"><img src="@Url.Content("~/newmenu/images/bg_logo.png")"></a>
+				</div>
+			</div>
+            <div class="top-nav fr">
+    <span class="layer cw-icon"> <a href="@Url.Action("Index", "ManHome")" target="mainFrame">主页</a><span>|</span>   <a href="@Url.Action("Exit")">退出</a></span>
+</div>
+		</div>*@
+
+        <div class="head clearfix">
+    <div class="head_box" id="topheader">
+        <div class="inner wrp">
+            <h1 class="logojg">
+                <a href="#" title="宣传营销后台监管平台"></a>
+            </h1>
+
+            <div class="out fr">
+                <a href="@Url.Action("Exit")">退出</a>
+            </div>
+@*                         <div class="out fr">
+                <a href="@Url.Action("Index", "ManHome")" target="mainFrame">主页</a>
+            </div>*@
+        </div>
+    </div>
+</div>

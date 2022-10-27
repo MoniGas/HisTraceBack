@@ -1,0 +1,79 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 650px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    商品上架</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>产品名称：</label>
+                        <div class="col-md-9">
+                            <select data-bind="options: materialModelsArray,optionsText: 'MaterialFullName',optionsValue:'Material_ID',optionsCaption: '选择产品',value:selectedModel">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selmaterialmodel">请选择产品名称！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            <span class="alert-danger">*</span>商品规格：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="商品规格" class="col-md-5" data-bind="value:MaterialSpecification,validationElement:MaterialSpecification,hasfocus:selTitle" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                        </label>
+                        <div class="col-md-9">
+                            <span class="alert-danger-new">例：（25kg/箱）</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>价格（元）：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="价格" maxlength="10" class="col-md-5" data-bind="value:Price,validationElement:Price,hasfocus:selprice" />
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            运费（元）：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="运费" class="col-md-5" data-bind="value:ExpressPrice,validationElement:ExpressPrice,hasfocus:selExpressPrice" />
+                        </div>
+                    </div>-->
+                    <div class="form-group" style="display: none">
+                        <label class="col-md-3 control-label" for="name">
+                            商品活动：</label>
+                        <div class="col-md-9">
+                            <select id="slProperty" data-bind="options: materialPropertys,optionsText: 'PropertyName',optionsValue:'Material_Property_ID',optionsCaption: '无活动',value:selectedProperty">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label class="col-md-3 control-label" for="name">
+                            触发条件：</label>
+                        <div class="col-md-9">
+                            <label class="inline" style="line-height: 30px;">
+                                <input type="checkbox" id="ChkCondition" name="ChkCondition" class="cbx1" value="1"
+                                    disabled="disabled" />&nbsp;<span class="line-height">通过验证触发</span>&nbsp;&nbsp;
+                            </label>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:Register">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+                取消</button>
+        </div>
+    </div>
+</div>

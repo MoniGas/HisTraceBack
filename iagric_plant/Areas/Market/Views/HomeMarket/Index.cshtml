@@ -1,0 +1,100 @@
+﻿@model LinqModel.Enterprise_Info
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+    <script type="text/javascript">
+        $(function () {
+            //获取工作区域高度
+            var windowsHeight = $(window).height();
+            //获取顶部高度
+            var toolbarHeight = $("#toolbar").height();
+            //获取头部高度
+            var topHeight = $("#topheader").height();
+            //计算操作区域高度
+            var handlerHeight = windowsHeight - topHeight;
+            //给操作区域容器赋值
+            $(".col_side").height(handlerHeight);
+        });
+    </script>
+<!-------------------main start---------------------------------->
+@*<div class="col_main">*@
+    <div class="card_pa40 clearfix">
+        <div class="index-part">
+            <div class="user-bar clearfix">
+                <div class="user-info">
+                    <div class="gWel-top-new clearfix">
+                        <div class="gWel-avatar-new">
+                            <img src="@ViewBag.xmlimg" width="36" height="36">
+                        </div>
+                        <div class="gWel-greet-new">
+                            <span class="gWel-greet-trueName">您好，<br>
+                                <span>@Model.EnterpriseName</span> </span>
+                        </div>
+                    </div>
+                    <div class="topinfo">
+                        <p>
+                            联系人：<span>@Model.LinkMan</span>
+                        </p>
+                        <p>
+                            联系电话：<span>@Model.LinkPhone</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="user-set">
+                    <div class="firsthome clearfix">
+                        <h2 class="blacktxt">
+                            今日和昨日数据看板</h2>
+                    </div>
+                    <div class="huodong clearfix">
+                        <p>
+                            活动名称：<span>@ViewBag.ActivityTitle</span></p>
+                        <div class="h-b">
+                            <h3>
+                                昨日数据</h3>
+                            <p>
+                                <i>@ViewBag.ZuoScanRecord</i>个用户扫码</p>
+                            <p>
+                                <i>@ViewBag.ZuoRedUserRecord</i>个用户参与活动领取了红包</p>
+                            <p>
+                                红包总共被领取<i>@ViewBag.sumZuo</i>元</p>
+                        </div>
+                        <div class="h-b">
+                            <h3>
+                                今日数据<span>（@DateTime.Now.ToString("HH:mm")前）</span></h3>
+                            <p>
+                                <i>@ViewBag.JinScanRecord</i>个用户扫码</p>
+                            <p>
+                                <i>@ViewBag.JinRedUserRecord</i>个用户参与活动领取了红包</p>
+                            <p>
+                                红包总共被领取<i>@ViewBag.sumJin</i>元</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-step borderTop">
+                <div class="firsthome clearfix">
+                    <h2 class="blacktxt">
+                        常用功能</h2>
+                </div>
+                <ul class="com-func">
+                 @*   <li><a href="@Url.Action("Add", "Packet")">
+                        <img src="@Url.Content("~/Areas/Market/images/greenimages/ind-ico-hb.png")" />
+                        <p>
+                            创建红包活动</p>
+                    </a></li>*@
+                    <li><a href="@Url.Action("Index", "ActivityManager")">
+                        <img src="@Url.Content("~/Areas/Market/images/greenimages/ind-ico-hd.png")" />
+                        <p>
+                            活动管理</p>
+                    </a></li>
+                @*           <li><a href="@Url.Action("BuyEWMOrder", "BuyCodeOrdePay")">
+                            <img src="@Url.Content("~/Areas/Market/images/greenimages/ind-ico-ewm.png")" />
+                            <p>
+                                购买二维码</p>
+                        </a></li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-------------------main end---------------------------------->

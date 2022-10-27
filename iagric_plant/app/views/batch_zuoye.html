@@ -1,0 +1,94 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看生产环节</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            显示内容：</label>
+                        <div class="col-md-4 no-padding">
+                            <select data-bind="options: opTypeModelsArray,optionsText: 'OperationTypeName',optionsValue:'Batch_ZuoYeType_ID',optionsCaption: '选择生产环节',value:selectedModel,event:{onchange:onchange()}">
+                            </select>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-allbordered table-hover">
+                        <tbody data-bind="foreach:vmBatch_ZuoYe.ObjList">
+                            <tr>
+                                <td width="175">
+                                    <div class="view-operation">
+                                        <div class="form-inline">
+                                        <p class="lbl cut width150" data-bind="text:'作业：'+$data.OperationTypeName()"></p>
+                                            <!--<span class="lbl">作业：</span> <span class="lbl" data-bind="text:$data.OperationTypeName">
+                                            </span>-->
+                                        </div>
+                                        <div class="form-inline">
+                                            <span class="lbl">采集：</span> <span class="lbl" data-bind="text:$data.UserName"></span>
+                                        </div>
+                                        <div class="form-inline">
+                                            <!--<span class="lbl">日期：</span> <span class="lbl">2015-08-01</span>-->
+                                            <span class="lbl">日期：</span> <span class="lbl" data-bind="text:$data.AddDate"></span>
+                                        </div>
+                                        <div class="form-inline mat10">
+                                            <button type="button" class="btn  btn-xs btn-cancel" data-bind="click: function(data, event) {$root.editZuoYe($data.Batch_ZuoYe_ID,data,event);}">
+                                                修 改</button>
+                                            <button type="button" class="btn  btn-xs btn-cancel mal15" data-bind="click: function(data, event) {$root.delBatch_ZuoYe($data.Batch_ZuoYe_ID,data,event);}">
+                                                删 除</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="view-operation">
+<!--                                        <div class="form-inline">
+                                            <span class="lbl" data-bind="text:$data.imgs[0][0]"></span>
+                                        </div>-->
+                                        <div class="form-inline">
+                                            <div class="pic-item list clearfix">
+                                                <ul>
+                                                    <!-- ko foreach:$data.imgs -->
+                                                    <li>
+                                                        <div class="thumbnail">
+                                                            <img data-bind="attr:{src:$data.fileUrls}" width="84">
+                                                        </div>
+                                                    </li>
+                                                    <!-- /ko -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
+                    <ul class="pagination" id="batchZuoYePager" data-bind="batchZuoYePager:vmBatch_ZuoYe.pageSize,totalCounts:vmBatch_ZuoYe.totalCounts,pageIndex:vmBatch_ZuoYe.pageIndex">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:calcel">
+                取消</button>
+        </div>-->
+    </div>
+</div>

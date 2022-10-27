@@ -1,0 +1,135 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="产品名称" data-bind="value:mName,valueUpdate: 'afterkeydown'">
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:searchRB">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+            <button class="btn btn-lg btn-success" data-bind="click:addregionalbrand">
+                申请加入区域品牌</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            区域品牌
+                        </th>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmregionbrand.ObjList">
+                    <tr>
+                        <td>
+                            <span data-bind="text:$data.BrandName"></span>
+                        </td>
+                        <td class="width-60">
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.replace($data.BrandEnterpriseStatus)"></span>
+                        </td>
+                        <td>
+                            <!--      <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="green" href="#" data-bind="click: function(data, event) {$parent.editBrand($data.Brand_ID,data,event);}">
+                                    <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" data-bind="click: function(data, event) {$parent.delBrand($data.Brand_ID,data,event);}">
+                                        <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer no-margin-top no-t-border">
+            <ul class="pagination" id="regionbrandPager" data-bind="regionbrandPager:vmregionbrand.pageSize,totalCounts:vmregionbrand.totalCounts,pageIndex:vmregionbrand.pageIndex">
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<div class="breadcrumbs navbar-fixed-top" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">管理主页</a> </li>
+        <li><a href="#news">申请加入区域品牌</a> </li>
+    </ul>
+    <div class="page-content">
+        <div class="page-header">
+            <a class="btn btn-white btn-info btn-bold" href="javascript:void(0);" data-bind="click:addregionalbrand">
+                <i class="ace-icon fa fa-plus bigger-120 blue"></i>申请加入区域品牌</a>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <input type="text" id="txtSearchTitle" placeholder="产品名称" data-bind="value: mName,valueUpdate: 'afterkeydown'" />
+        <a class="btn btn-white btn-info btn-bold" href="javascript:void(0);" data-bind="click:searchBatch">
+        <i class="ace-icon fa fa-search bigger-120 blue"></i>搜索</a>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="newsList" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th>
+                                    区域品牌
+                                </th>
+                                <th>
+                                    产品名称
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:vmregionbrand.ObjList">
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" name="cbx" data-bind="value:$data.Brand_Enterprise_ID" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.BrandName"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.MaterialFullName"></span>
+                                </td>
+                                <td>
+                                <span data-bind="text:$parent.replace($data.BrandEnterpriseStatus)"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <ul class="pagination" id="regionbrandPager" data-bind="regionbrandPager:vmregionbrand.pageSize,totalCounts:vmregionbrand.totalCounts,pageIndex:vmregionbrand.pageIndex">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

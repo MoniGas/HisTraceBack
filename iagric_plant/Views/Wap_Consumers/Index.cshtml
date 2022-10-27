@@ -1,0 +1,393 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<LinqModel.View_Material_OnlineOrder>
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../public_css/base.css">
+    <link rel="stylesheet" type="text/css" href="../public_css/public-style.css">
+    <link rel="stylesheet" type="text/css" href="../public_css/login.css">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var orderStatus = '@ViewBag.OrderStatus';
+            if (orderStatus != "0") {
+                $("[name]=liSataus").removeClass("cur");
+                $("#" + orderStatus).addClass("cur");
+            }
+            $("[name]=liStatus").click(function () {
+                $("[name]=liSataus").removeClass("cur");
+                $(this).addClass("cur");
+                $("#OrderType").val(this.id);
+                formChangeStatus.submit();
+            });
+        });
+        function changeStatusSelect(li) {
+            //            $("[name]=liSataus").removeClass("cur");
+            //            $(li).addClass("cur");
+            //            $("#OrderType").val(li.id);
+            //            formChangeStatus.submit();
+        }
+        function changeStatus(url, status) {
+            var myConfirm = '您确定已经收到货物了吗？';
+            if (status == '0') {
+                myConfirm = '您确定取消订单吗？';
+            }
+            else if (status == '10') {
+                myConfirm = '您确定拒收了商品吗？';
+            }
+            if (confirm(myConfirm)) {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    success: function (data) {
+                        if (data.res) {
+                            alert('操作成功！');
+                            location.reload();
+                        }
+                        else {
+                            alert('网络连接失败，请稍后再试！');
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+    <style>
+        .linle-pag
+        {
+            width: 100%;
+            text-align: center;
+            vertical-align: middle;
+            background-color: White;
+            height: 30px;
+        }
+        #linle-pag a
+        {
+            border: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页头 -->
+    <div class="public-main mod-user">
+        <div class="mod-user-header">
+            <section>
+                <header class="OriginHead bar-green">
+                    @{
+                        if (Session["ewm"] != null)
+                        {
+                        <a href="/wap_index/index" class="art-back">返回首页</a>
+@*<a href="/wap_index/index" class="art-back">返回</a>*@
+                        }
+                    }
+                    <h1 title="订单管理" class="bar-title">
+                        我的订单</h1>
+                    <a href="/Wap_Consumers/LogOut" class="art-login">退出</a>
+                </header>
+            </section>
+            <!--内容-->
+            @{
+                LinqModel.View_Order_Consumers consumers = ViewBag.consumers as LinqModel.View_Order_Consumers;
+                if (consumers != null)
+                {
+                <div class="qsc-list-group">
+                    <a href="/Wap_Consumers/SheZhi" class="list-item list-thumb-md"><i class="user_thumb">
+                        <img src="../public_img/notouxiang.png">
+                    </i>
+                        <div class="user-base-wrap">
+                            <div class="user_name">
+                                <span class="user_nickname">@consumers.UserName </span><span class="user_id">( phone:
+                                    @consumers.LinkPhone ) </span>
+                            </div>
+                            <div class="user_signature">
+                                设置
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mod-user-header_project clearfix hairline_top">
+                    <a href="/Wap_Integral/Index" class="item">
+                        @if (ViewBag.IntegralCount == null)
+                        {
+                            <p>
+                                0
+                            </p> 
+                        }
+                        else
+                        {
+                            <p>
+                                @ViewBag.IntegralCount
+                            </p>
+                        }
+                        <span>我的积分 </span></a><a href="@Url.Action("GetRedChange", "Wap_Consumers")" class="item">
+                            <p>
+                                ¥@ViewBag.TotalMoney
+                            </p>
+                            <span>零钱 </span></a><a href="@Url.Action("GetCouponLst", "Wap_Coupon", new { area = "market" })" class="item">
+                                <i class="icon-user-service">
+                                    <img src="../public_img/ico-yhq.png">
+                                </i><span>优惠券 </span></a>
+                </div>
+                }
+            }
+        </div>
+    </div>
+    <form id="formChangeStatus" method="get">
+    <input type="hidden" id="OrderType" name="OrderType" value="">
+    <section class="order-manage">
+        <div class="nav-tab-top">
+            <ul>
+                @*-1删除 0交易关闭 1货到付款 2未付款 3已付款 4已发货 5确认收货 6交易完成*@
+                <li name="liSataus" class="cur" onclick="changeStatusSelect(this)" id="0">全部 </li>
+                <li name="liSataus" onclick="changeStatusSelect(this)" id="@((int)Common.EnumFile.PayStatus.NotPay)">
+                    未付款 </li>
+                <li name="liSataus" onclick="changeStatusSelect(this)" id="@((int)Common.EnumFile.PayStatus.Paid)">
+                    已付款 </li>
+                <li name="liSataus" onclick="changeStatusSelect(this)" id="@((int)Common.EnumFile.PayStatus.Delivered)">
+                    已发货 </li>
+                <li name="liSataus" onclick="changeStatusSelect(this)" id="@((int)Common.EnumFile.PayStatus.Confirm)">
+                    已收货 </li>
+            </ul>
+        </div>
+    </section>
+    </form>
+    <div class="scroll-wrap">
+        <div class="scroll-content">
+            <section class="order-cont">
+                <ul class="order-list">
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                        <li>
+                            <div class="o-t-title-shop">
+                                <div class="tcont">
+                                    <div class="contact">
+                                        @{    
+                            string companyUrl = "#";
+                            LinqModel.ShowCompany ShowCompanyModel = new BLL.ShowCompanyBLL().GetModel(Convert.ToInt64(item.Enterprise_ID)).ObjModel as LinqModel.ShowCompany;
+                            if (ShowCompanyModel != null)
+                            {
+                                companyUrl = ShowCompanyModel.Url;
+                            }
+                                        }
+                                        <a href="@companyUrl">
+                                            <p class="title">
+                                                @item.EnterpriseName
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div class="state">
+                                        <div class="state-cont">
+                                            <p class="h">
+                                                @Common.EnumText.EnumToText(typeof(Common.EnumFile.PayStatus), item.OrderType).Replace("确认收货", "已收货")
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @{
+                            string codeUrl = "#";
+                            if (!string.IsNullOrEmpty(item.ewm))
+                            {
+                                codeUrl = "/Wap_Index/Index?ewm=" + item.ewm;
+                            }
+                            }
+                            @*  <a href="@codeUrl">*@ <a href="/Wap_Consumers/ConMaterialInfo?material_id=@item.MateriaID">
+                                <div class="item-list o-t-item">
+                                    <div class="item-img">
+                                        <p>
+                                            @*<img src="images/nopic1.jpg">*@
+                                            <img src="@item.MaterialImgInfo">
+                                        </p>
+                                    </div>
+                                    <div class="item-info">
+                                        <h3 class="title">
+                                            @item.MaterialName
+                                        </h3>
+                                        <p class="sku">
+                                            @item.MaterialSpec
+                                        </p>
+                                    </div>
+                                    <div class="item-pay">
+                                        <div class="item-pay-data">
+                                            <p class="price">
+                                                ￥@item.MaterialPrice.ToString("0.00")
+                                            </p>
+                                            <p class="nums">
+                                                x @item.MaterialCount
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            @{
+                            if (item.OrderType >= (int)Common.EnumFile.PayStatus.Paid
+                                || item.OrderType == (int)Common.EnumFile.PayStatus.PayDelivery)
+                            {
+                                string[] activeArray = (item.Activity ?? "").Split(',');
+                                if (activeArray != null && activeArray.Length > 1)
+                                {
+                                <ul id="listProperty" class="order-serviceinfo" style="padding: 0 10px 15px 10px;">
+                                    @foreach (var itemSub in activeArray)
+                                    {
+                                        if (!string.IsNullOrEmpty(itemSub))
+                                        {
+                                        <li>
+                                            @itemSub
+                                        </li>
+                                        }
+                                    }
+                                </ul>
+                                }
+                            }
+                            else
+                            {
+                                List<LinqModel.View_Material_Property> activeList = new BLL.MaterialPropertyBLL().GetMaterialPropertyList(item.SpecID.GetValueOrDefault(0));
+                                if (activeList != null && activeList.Count > 0)
+                                {
+                                <ul id="listProperty" class="order-serviceinfo" style="padding: 0 10px 15px 10px;">
+                                    @foreach (var itemSub in activeList)
+                                    {
+                                        if (!string.IsNullOrEmpty(itemSub.PropertyName))
+                                        {
+                                        <li>
+                                            @itemSub.PropertyName
+                                        </li>
+                                        }
+                                    }
+                                </ul>
+                                }
+                            }
+                            }
+                            <div class="o-total-price">
+                                <div class="cont">
+                                    <span>合计: <b>￥@item.TotalMoney.Value.ToString("0.00")
+                                    </b></span>
+                                </div>
+                            </div>
+                            <div class="o-tab-btn clearfix">
+                                <ul>
+                                    @switch (item.OrderType)
+                                    {
+                                        case (int)Common.EnumFile.PayStatus.DelOrder:
+                                        case (int)Common.EnumFile.PayStatus.Trade_Closed:
+                                        case (int)Common.EnumFile.PayStatus.ReturnMoney:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a></li>
+                                                                                                       break;
+                                        case (int)Common.EnumFile.PayStatus.PayDelivery:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a></li>
+                                        <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Trade_Closed)','@((int)Common.EnumFile.PayStatus.Trade_Closed)')">
+                                            取消订单</a></li>
+                                                                                                                                                                                                        break;
+                                        case (int)Common.EnumFile.PayStatus.Paid:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a></li>
+                                        <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                            申请退货</a> </li>
+                                                                                                         break;
+                                        case (int)Common.EnumFile.PayStatus.NotPay:
+                                        <li class="btn-green"><a href="/Wap_Consumers/PayOrder?orderNum=@item.OrderNum">付款</a>
+                                        </li>                                            
+                                        <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Trade_Closed)','@((int)Common.EnumFile.PayStatus.Trade_Closed)')">
+                                            取消订单</a></li>
+                                                                                                                                                                                                        break;
+                                        case (int)Common.EnumFile.PayStatus.Delivered:
+                                            
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a></li>
+                                        <li class="btn-green"><a href="/Wap_Consumers/CheckExpress?orderNum=@item.OrderNum">
+                                            查看物流</a> </li>
+                                        <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Confirm)','@((int)Common.EnumFile.PayStatus.Confirm)')">
+                                            确认收货</a> </li>
+                                        <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                            申请退货</a> </li>
+                                                                                                         break;
+                                        case (int)Common.EnumFile.PayStatus.Confirm:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a> </li>
+                                        <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                            评论</a> </li>
+@*    <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                                申请退货</a> </li>*@
+                                                                                                                                                         break;
+                                        case (int)Common.EnumFile.PayStatus.Finished:
+                                        case (int)Common.EnumFile.PayStatus.ReturnMaterial:
+                                        case (int)Common.EnumFile.PayStatus.ReturnFinsh:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a> </li>
+                                        <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                            评论</a> </li>
+                                                                                                                                                         break;
+                                        case (int)Common.EnumFile.PayStatus.ReturnRefuse:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a> </li>
+                                                                                                       if (item.DeliveryTime != null)
+                                                                                                       {
+                                        <li class="btn-green"><a href="/Wap_Consumers/CheckExpress?orderNum=@item.OrderNum">
+                                            查看物流</a> </li>
+                                        <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Confirm)','@((int)Common.EnumFile.PayStatus.Confirm)')">
+                                            确认收货</a> </li>
+                                                                                                       }
+                                        <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                            申请退货</a> </li>
+                                                                                                         break;
+                                        case (int)Common.EnumFile.PayStatus.ReturnAgree:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a> </li>
+                                        <li class="btn-green"><a href="/Wap_Consumers/SetExpressInfo?orderNum=@item.OrderNum">
+                                            填写运单信息</a> </li>
+                                        <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/DotSend?OrderNum=@item.OrderNum','@((int)Common.EnumFile.PayStatus.Returned)')">
+                                            拒收商品</a> </li>
+                                                                                                                                             break;
+                                        case (int)Common.EnumFile.PayStatus.Returned:
+                                        <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                            投诉</a> </li>
+                                        <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                            评论</a> </li>
+                                        <li class="btn-green"><a href="/Wap_Consumers/CheckExpress?orderNum=@item.OrderNum">
+                                            查看物流</a> </li>
+                                                                                                       break;
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                        }
+                        <div class="linle-pag">
+                            @Html.Pager(Model, new PagerOptions
+                       {
+                           PageIndexParameterName = "pageIndex",
+                           NumericPagerItemWrapperFormatString = "{0}",
+                           ShowDisabledPagerItems = false,
+                           AlwaysShowFirstLastPageNumber = true
+                       })
+                        </div>
+                    }
+                </ul>
+            </section>
+        </div>
+    </div>
+    </div>
+    <div class="juchou-footer">
+        <footer>
+            <p>
+                医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

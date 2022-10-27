@@ -1,0 +1,301 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>医疗器械（UDI）服务云平台企业注册</title>
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <link href="/css/loginstyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $("#unitName").keyup(function (data) {
+                if ($.trim($("#unitName").val()).length == 0) {
+                    $("#errorEnterpriseName").show();
+                }
+                else {
+                    $("#errorEnterpriseName").hide();
+                }
+            });
+            $("#unitName").change(function (data) {
+                if ($.trim($("#unitName").val()).length == 0) {
+                    $("#errorEnterpriseName").show();
+                }
+                else {
+                    $("#errorEnterpriseName").hide();
+                }
+            });
+
+            $("#loginName").keyup(function (data) {
+                if ($.trim($("#loginName").val()) == "") {
+                    $("#errorLoginName").show();
+                    $("#successLoginName").hide();
+                }
+                else {
+                    $("#errorLoginName").hide();
+                    $("#successLoginName").show();
+                }
+            });
+            $("#loginName").change(function (data) {
+                if ($.trim($("#loginName").val()) == "") {
+                    $("#errorLoginName").show();
+                    $("#successLoginName").hide();
+                }
+                else {
+                    $("#errorLoginName").hide();
+                    $("#successLoginName").show();
+                }
+            });
+
+            $("#loginPwd").keyup(function (data) {
+                if ($.trim($("#loginPwd").val()) == "") {
+                    $("#errorPassword").show();
+                    $("#successPassword").hide();
+                }
+                else {
+                    $("#errorPassword").hide();
+                    $("#successPassword").show();
+                }
+            });
+            $("#loginPwd").change(function (data) {
+                if ($.trim($("#loginPwd").val()) == "") {
+                    $("#errorPassword").show();
+                    $("#successPassword").hide();
+                }
+                else {
+                    $("#errorPassword").hide();
+                    $("#successPassword").show();
+                }
+            });
+        })
+        function onNavClick(page) {
+            for (var i = 1; i < 5; i++) {
+                if (page == i) {
+                    $("#div" + i).removeAttr("style");
+                }
+                else {
+                    $("#div" + i).attr("style", "display:none");
+                }
+            }
+        }
+        function FinndUnit() {
+            var unitName = $.trim($("#unitName").val());
+            if (unitName.length == 0) {
+                $("#error").show();
+                $("#success").hide();
+                return false;
+            }
+            var sendData = {
+                unitName: unitName
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Register/FindUnitName",
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (jsonResult) {
+                    switch (jsonResult.code) {
+                        case "0": //找到企业
+                            $("#div2").removeAttr("style");
+                            $("#div1").attr("style", "display:none");
+                            $("#ULinkMan").val(jsonResult.ObjModel.Linkman);
+                            $("#ULinkPhone").val(jsonResult.ObjModel.Linkphone);
+                            $("#UEmail").val(jsonResult.ObjModel.Email);
+                            $("#UOrganUnitAddress").val(jsonResult.ObjModel.OrganUnitAddress);
+                            break;
+                        case "1": //接口出现异常
+                            alert(jsonResult.Msg);
+                            break;
+                        case "2": //没有找到对应的企业
+                            $("#Organize").val(unitName);
+                            $("#div4").removeAttr("style");
+                            $("#div1").attr("style", "display:none");
+                            break;
+                        case "3": //输入企业全称
+                            $("#errorEnterpriseName").show();
+                            break;
+                        default:
+                            alert(jsonResult.Msg);
+                            break;
+                    }
+                }
+            })
+        }
+        function Login() {
+            var unitName = $.trim($("#unitName").val());
+            var loginName = $.trim($("#loginName").val());
+            var loginPass = $.trim($("#loginPwd").val());
+            if (loginName == "" || loginPass == "") {
+                if (loginName == "") {
+                    $("#errorLoginName").show();
+                    $("#successLoginName").hide();
+                }
+                if (loginPass == "") {
+                    $("#errorPassword").show();
+                    $("#successPassword").hide();
+                }
+                return;
+            }
+            var sendData = {
+                unitName: unitName,
+                loginName: loginName,
+                loginPass: loginPass
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Register/GetUnit",
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (jsonResult) {
+                    switch (jsonResult.code) {
+                        case "0": //登录成功
+                            $("#OrganizeNameq").val(jsonResult.ObjModel.OrganUnitName);
+                            $("#OrganizeNameEnq").val(jsonResult.ObjModel.OrganUnitNameen);
+                            $("#Areaq").val(jsonResult.ObjModel.Areaaddress);
+                            $("#OrganizeUserq").val(jsonResult.ObjModel.Linkman);
+                            $("#OrganizeUserTelq").val(jsonResult.ObjModel.Linkphone);
+                            $("#provinceq").val(jsonResult.ObjModel.Province_ID);
+                            $("#cityq").val(jsonResult.ObjModel.City_ID);
+                            $("#areaq").val(jsonResult.ObjModel.Area_ID);
+                            $("#unitTypeq").val(jsonResult.ObjModel.UnitType_ID);
+                            $("#idCodeq").val(jsonResult.ObjModel.OrganUnit_Oid);
+                            $("#div3").removeAttr("style");
+                            $("#div2").attr("style", "display:none");
+                            break;
+                        case "2":
+                            alert('请输入账号信息！');
+                            break;
+                        default: //登录失败
+                            alert('登录IDcode平台失败，\r请输入在IDcode平台上注册时的账号信息！');
+                            break;
+                    }
+                }
+            })
+        }
+        function DownLoad() {
+            window.location.href = "/Register/OperaManual?name=HT";
+        }
+    </script>
+</head>
+<body>
+    <div class="reg-wrap" style="display: none;">
+        <div class="reg-top">
+            <h1 class="logoRe">
+                医疗器械（UDI）服务云平台</h1>
+        </div>
+    </div>
+    <div class="reg-main" id="div1">
+        <div class="reg-article mod">
+            <div class="art-hd clearfix">
+                <h2>
+                    企业全称</h2>
+            </div>
+            <div class="art-bd">
+                <div class="form form-1 mod-reslut-t2">
+                    <form class="check-account-form">
+                    <ul class="mt10">
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                企业全称：</label>
+                            <span class="v">
+                                <input type="text" id="unitName" class="text text3" maxlength="50" />
+                                <span class="text-error account-info">
+                                    <div id="errorEnterpriseName">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">请输入企业全称</em>
+                                    </div>
+                                </span></span></li>
+                    </ul>
+                    <div class="btns">
+                        <input type="button" class="btn btn-2" value="下一步" onclick="FinndUnit()" />
+                        @* <a href="/" class="register">返回首页</a>*@
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reg-main" id="div2" style="display: none">
+        <div class="reg-article mod">
+            <div class="art-hd clearfix">
+                <h2>
+                    您已经在IDcode平台注册，请输入在IDcode平台的注册账号以获取更多注册信息：</h2>
+            </div>
+            <div class="art-bd">
+                <div class="form form-1 mod-reslut-t2">
+                    <form class="check-account-form">
+                    <input type="hidden" id="UOrganUnitAddress" name="UOrganUnitAddress" />
+                    <ul class="mt10">
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                企业邮箱：</label>
+                            <input type="text" id="UEmail" name="UEmail" class="text text3" readonly="readonly" />
+                            <span class="text-error account-info"><i class="ico ico-err-1"></i><em class="gray error-info">
+                                您在IDcode平台注册时的企业邮箱</em></span> </li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                联系人：</label>
+                            <input type="text" id="ULinkMan" name="ULinkMan" class="text text3" readonly="readonly" />
+                            <span class="text-error account-info"><i class="ico ico-err-1"></i><em class="gray error-info">
+                                您在IDcode平台注册时的联系人</em></span> </li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                联系电话：</label>
+                            <input type="text" id="ULinkPhone" name="ULinkPhone" class="text text3" readonly="readonly" />
+                            <span class="text-error account-info"><i class="ico ico-err-1"></i><em class="gray error-info">
+                                您在IDcode平台注册时的联系电话</em></span> </li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 用户名：</label>
+                            <span class="v">
+                                <input type="text" id="loginName" class="text text3" />
+                                <span class="text-error account-info"><span id="errorLoginName"><i class="ico ico-err-2">
+                                </i><em class="red error-info">请输入在IDcode平台注册时的用户名</em> </span><span id="successLoginName"
+                                    style="display: none"><i class="ico ico-err-1"></i><em class="gray error-info">已输入在IDcode平台注册时的用户名</em>
+                                </span></span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 密码：</label>
+                            <span class="v">
+                                <input type="password" id="loginPwd" class="text text3">
+                                <span class="text-error account-info">
+                                    <div id="errorPassword">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">请输入在IDcode平台注册时的密码</em>
+                                    </div>
+                                    <div id="successPassword" style="display: none">
+                                        <i class="ico ico-err-1"></i><em class="gray error-info">已输入在IDcode平台注册时的密码</em>
+                                    </div>
+                                </span></span></li>
+                    </ul>
+                    <div class="btns">
+                        <input type="button" class="btn btn-2" value="上一步" onclick="onNavClick(1)" />
+                        <input type="button" value="确认" onclick="Login()" class="btn btn-1" />
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div3" style="display: none">
+        @Html.Action("RegisterQuery", "Register")
+    </div>
+    <div id="div4" style="display: none">
+        @Html.Action("Register", "Register")
+    </div>
+    <div class="footer" style="display: none;">
+        <p>
+            运营单位：统一二维码标识注册管理中心 &nbsp;&nbsp;&nbsp;指导单位：中关村工信二维码技术研究院
+        </p>
+        @*<p>
+            技术支持：北京四聪科技发展有限公司、河北广联信息技术有限公司、佛山云数智能科技有限公司
+        </p>*@
+        <p>
+            <span>京ICP备19010367号-2</span>@*<span>丨</span>
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802023558"><span>京公网安备11010802023558号</span>
+            <img src="../../images/ghs.png" /></a>*@
+        </p>
+    </div>
+</body>
+</html>

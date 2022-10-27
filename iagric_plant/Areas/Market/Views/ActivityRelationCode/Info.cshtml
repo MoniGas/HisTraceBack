@@ -1,0 +1,84 @@
+﻿@model LinqModel.View_ActvitiyRelationCode
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<!-------------------main start---------------------------------->
+<div>
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li>红包活动管理<span class="divider">›</span>二维码活动管理管理<span class="divider">›</span>查看详情<span class="divider">›</span></li>
+            <li style="cursor:pointer;"  onclick="javascript:history.go(-1);">返回</li>
+        </ul>
+    </div>
+    <div class="card_pa40 clearfix">
+        <div class="mod-main">
+            <div class="form">
+                <div class="infoitem">
+                    <span class="label">码段：</span>
+                    <div class="fl">
+                        <span class="bold">@Model.StartCode~@Model.EndCode</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">二维码总数：</span>
+                    <div class="fl">
+                        <span>@Model.CodeCount</span>
+                    </div>
+                </div>
+        @*        <div class="infoitem">
+                    <span class="label">已用数量：</span>
+                    <div class="fl">
+                        <span>1000个</span>
+                    </div>
+                </div>*@
+      @*          <div class="infoitem">
+                    <span class="label">剩余数量：</span>
+                    <div class="fl">
+                        <span class="redtxt">700个</span>
+                    </div>
+                </div>*@
+            </div>
+            <div class="form borderTop pat15 mat15">
+                <div class="infoitem">
+                    <span class="label">活动名称：</span>
+                    <div class="fl">
+                        <span class="bold">@Model.ActivityTitle</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">活动类型：</span>
+                    <div class="fl">
+                        <span>@Common.EnumText.EnumToText(typeof(Common.EnumText.ActiveType), Model.ActivityType.Value)</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">使用码段：</span>
+                    <div class="fl">
+                        <span>@Model.StartCode~@Model.EndCode</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">二维码数：</span>
+                    <div class="fl">
+                        <span>@Model.CodeCount</span>个
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">活动有效期：</span>
+                    <div class="fl">
+                        <span>@Model.StartDate.Value.ToString("yyyy-MM-dd")<span>至</span>@Model.EndDate.Value.ToString("yyyy-MM-dd")</span></span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">活动创建时间：</span>
+                    <div class="fl">
+                        <span>@Model.CreateDate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->

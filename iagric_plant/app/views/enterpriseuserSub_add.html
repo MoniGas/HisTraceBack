@@ -1,0 +1,89 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加用户</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>产品：
+                        </label>
+                        <div class="col-md-5">
+                            <select class="form-control" style="width: 230px" id="Select1" data-bind="options:vmUserModels.userModelsArray,value:vmUserModels.selectedOption,optionsCaption:'选择产品',optionsText:'MaterialName',optionsValue:'Material_ID'">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="alert-danger" data-bind="visible:selRoleName">请选择产品！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="equpmentLi">
+                        <label class="col-md-2 control-label no-padding">
+                        </label>
+                        <div class="col-md-10 no-padding">
+                            <div class="main_gd clearfix">
+                                <div class="title">
+                                    <span class="alert-danger">*</span><strong>请选择DI</strong>
+                                </div>
+                                <div class="content clearfix"data-bind="checkBoxCascade:null">
+                                    <div class="col-md-2 no-padding">
+                                        <label>
+                                            <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="checked:flagC" />
+                                            全选
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <!-- ko foreach: EquipmentArray -->
+                                        <label class="inline">
+                                            <input type="checkbox" id="" name="cbx" class="cbx1" data-bind="value:$data.MaterialUDIDI,id:'cbx'+$data.ID" />&nbsp;
+                                            <span data-bind="text:$data.MaterialUDIDI"></span>
+                                        </label>
+                                        <!--/ko-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            用户名称：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="用户名称..." class="col-md-9" data-bind="value:userName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>登录名：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="登录名..." class="col-md-9" data-bind="value:loginName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>登录密码：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="password" placeholder="登录密码..." maxlength="20" class="col-md-9" data-bind="value:loginPass" />
+                        </div>
+                    </div>
+                    <div class="space-4">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Register">
+                保存</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

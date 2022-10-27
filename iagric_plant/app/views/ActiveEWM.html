@@ -1,0 +1,140 @@
+﻿<div class="page-content">
+    <div class="row">
+        <!--      <div class="col-md-12">
+            <label class="col-md-1 control-label no-padding" for="name">
+                形式：</label>
+            <div class="col-md-2 no-padding">
+                <select id="type" data-bind="value:type">
+                    <option value="0">请选择</option>
+                    <option value="1">后台</option>
+                    <option value="2">流水线</option>
+                </select>
+            </div>
+            <label class="col-md-1 control-label no-padding">
+                操作时间：</label>
+            <div class="col-md-4 no-padding">
+                <input placeholder="开始时间" class="input-small" id="date1" type="text" data-date-format="yyyy-mm-dd"
+                    data-bind="value:beginDate" />
+                -
+                <input placeholder="结束时间" class="input-small" id="date2" type="text" data-date-format="yyyy-mm-dd"
+                    data-bind="value:endDate" />
+                    <input type="button" value="查询" data-bind="click:searchStore" class="btn  btn-lg btn-success"  style=" vertical-align:top; margin-left:10px;" />
+            </div>
+           
+        </div>-->
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-inline">
+                    <span class="lbl">形式：</span>
+                    <select id="type" data-bind="value:type">
+                        <option value="0">请选择</option>
+                        <option value="1">后台</option>
+                        <option value="2">流水线</option>
+                    </select>
+                    <input placeholder="开始时间" class="input-small" id="date1" type="text" data-date-format="yyyy-mm-dd"
+                        data-bind="value:beginDate" />
+                    -
+                    <input placeholder="结束时间" class="input-small" id="date2" type="text" data-date-format="yyyy-mm-dd"
+                        data-bind="value:endDate" />
+                    <span>
+                        <button type="submit" data-bind="click:searchStore" class="btn btn-lg btn-success"
+                            style="margin-bottom: 5px;">
+                            查询</button></span> <span>
+                                <button type="submit" data-bind="click:activeBatch" class="btn btn-lg btn-success"
+                                    style="margin-bottom: 5px;">
+                                    激活</button></span> <span>
+                                        <button type="submit" data-bind="click:activeUploadFile" class="btn btn-lg btn-success"
+                                            style="margin-bottom: 5px;">
+                                            激活上传文件</button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            操作人
+                        </th>
+                        <th>
+                            操作时间
+                        </th>
+                        <th>
+                            形式
+                        </th>
+                        <th>
+                            批次
+                        </th>
+                        <th>
+                            文件
+                        </th>
+                        <th>
+                            经销商
+                        </th>
+                        <th>
+                            产品数量
+                        </th>
+                        <th>
+                            明细
+                        </th>
+                        <!-- <th>
+                            操作
+                        </th>-->
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmStore.ObjList">
+                    <tr>
+                        <td>
+                            <p class="" data-bind="text:$data.AddUserName,attr:{title:$data.AddUserName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width70" data-bind="text:$data.StrAddTime">
+                            </p>
+                        </td>
+                        <td>
+                            <p data-bind="text:$parent.OpType($data.OperationType)">
+                            </p>
+                        </td>
+                        <td>
+                            <p data-bind="text:$data.BatchName">
+                            </p>
+                        </td>
+                        <td>
+                            <a target="_blank" data-bind="attr:{href:$data.URL()}" class="blue"><span
+                                data-bind="text:$data.PackName"></span></a>
+                            <!-- <td>
+                                <a data-bind="attr:{href:'http://s.idcode.org.cn/m?code='+$data.EWM()}" target="_blank">
+                                    查看</a>
+                            </td>-->
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.DealerName"></span>
+                        </td>
+                        <td>
+                            <p data-bind="text:$data.MateialCount,attr:{title:$data.MateialCount}">
+                            </p>
+                        </td>
+                        <td>
+                            <p data-bind="text:$data.Detail,attr:{title:$data.Detail}">
+                            </p>
+                        </td>
+                        <!--  <td>
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a href="#" data-bind="" title="查看">
+                                查看
+                                </a>
+                            </div>
+                        </td>-->
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="dealerPager" data-bind="dealerPager:vmStore.pageSize,totalCounts:vmStore.totalCounts,pageIndex:vmStore.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

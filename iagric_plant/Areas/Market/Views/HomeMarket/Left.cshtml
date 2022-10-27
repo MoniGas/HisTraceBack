@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<div class="col_side">
+    <div class="menu_box">
+        @*        <dl class="menu_fenlei">
+            <div class="m-line">
+            </div>
+            <div class="m-label">
+                <span>用户功能</span>
+            </div>
+        </dl>*@
+        <dl class="menu">
+            <dt class="menu_title"><i class="icon_menu">
+                <img src="@Url.Content("~/Areas/Market/images/ico-hb.png")">
+            </i><i class="icon_menu_switch"></i>活动管理 </dt>
+            <ul class="submenu nav-show" style="display: block;">
+                <li class=""><a href="@Url.Action("Index", "WxEnAccount")" target="mainFrame">微信红包账户设置
+                </a></li>
+                <li class=""><a href="@Url.Action("Index", "WxGZH")" target="mainFrame">微信公众号设置 </a>
+                </li>
+                @*                <li class=""><a href="@Url.Action("Add", "Packet")" target="mainFrame">新建红包活动 </a>
+                </li>
+                <li class=""><a href="@Url.Action("AddOrEdit", "Coupon")" target="mainFrame">新建优惠券活动</a>
+                </li>*@
+                <li class=""><a href="@Url.Action("Index", "ActivityManager")" target="mainFrame">活动管理</a>
+                </li>
+                <li class=""><a href="@Url.Action("RechangeRecord", "ActivityManager")" target="mainFrame">
+                    红包充值记录</a> </li>
+                <li class=""><a href="@Url.Action("SendRecord", "ActivityManager")" target="mainFrame">
+                    红包发送记录</a> </li>
+            </ul>
+            <dt class="menu_title"><i class="icon_menu">
+                <img src="@Url.Content("~/Areas/Market/images/ico-ewm.png")">
+            </i><i class="icon_menu_switch"></i>用码情况 </dt>
+            <ul class="submenu nav-show" style="display: block;">
+                <li class=""><a href="@Url.Action("GetEnContinneCodeRecord", "CompanyIDcode")" target="mainFrame">
+                    续码记录</a> </li>
+                <li class=""><a href="@Url.Action("GetEnUsedCode", "CompanyIDcode")" target="mainFrame">
+                    用码情况</a> </li>
+            </ul>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.log {
+    width: 100%;
+    img {
+        width: 100%;
+    }
+}
+
+.txt {
+    width: 70%;
+    height: 262px;
+    margin: 0 auto;
+    line-height: 30px;
+    background-image: url(../img/jia.png);
+    background-position: center center;
+    background-size: cover;
+    p{
+        font-size: 14px;
+        font-weight: 600;
+    }
+    div{
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+
+.yizhangtu {
+    width: 100%;
+    position: absolute;
+    bottom: 1px;
+    img {
+        width: 100%;
+    }
+}

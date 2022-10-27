@@ -1,0 +1,257 @@
+﻿<div class="page-content">
+    <!--<div class="row alert alert-success">-->
+    <div class="row alert alert-success linear-green">
+        <div class="col-sm-12">
+            <span class="data-tit" style="padding-top: 25px">宣传</span>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10600'),click: function(data, event) {navigateTo('showcompany',data,event);}">
+                <i class="fa icon-btn-new newicon-about"></i>
+                <br />
+                我的介绍
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10900'),click: function(data, event) {navigateTo('brand',data,event);}">
+                <i class="fa icon-btn-new newicon-brand"></i>
+                <br />
+                我的品牌
+            </button>
+            <button href="#" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('12001'),click: function(data, event) {navigateTo('regionalbrand',data,event);}">
+                <i class="fa icon-btn-new newicon-addbrand"></i>
+                <br />
+                区域品牌
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10800'),click: function(data, event) {navigateTo('shownews',data,event);}">
+                <i class="fa icon-btn-new newicon-info"></i>
+                <br />
+                资讯信息
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11000'),click: function(data, event) {navigateTo('showuser',data,event);}">
+                <i class="fa icon-btn-new newicon-card"></i>
+                <br />
+                员工名片
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('24001'),click: function(data,event) {navigateTo('configure',data,event);}">
+                <i class="fa icon-btn-new newicon-propa"></i>
+                <br />
+                宣传码配置
+            </button>
+        </div>
+    </div>
+    <!--<div class="row alert alert-info">-->
+    <div class="row alert alert-info linear-blue">
+        <div class="col-md-12">
+            <span class="data-tit" style="padding-top: 25px">商城</span>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10200'),click: function(data, event) {navigateTo('material',data,event);}">
+                <i class="fa icon-btn-new newicon-produ"></i>
+                <br />
+                我的产品
+            </button>
+            <button href="javascript:void(0);" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('19000'),click: function(data, event) {navigateTo('material_spec',data,event);}">
+                <i class="fa icon-btn-new newicon-produ-ud"></i>
+                <br />
+                商品上下架
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('23000'),click: function(data, event) {navigateTo('openshop',data,event);}">
+                <i class="fa icon-btn-new newicon-shop"></i>
+                <br />
+                <span data-bind="text:searchTitle"></span>
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('20000'),click: function(data, event) {navigateTo('material_order',data,event);}">
+                <i class="fa icon-btn-new newicon-order"></i>
+                <br />
+                订单
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('29000'),click: function(data, event) {navigateTo('material_return',data,event);}">
+                <i class="fa icon-btn-new newicon-return"></i>
+                <br />
+                退货订单
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('30000'),click: function(data, event) {navigateTo('material_balance',data,event);}">
+                <i class="fa icon-btn-new newicon-balance"></i>
+                <br />
+                对账单
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('31000'),click: function(data, event) {navigateTo('comment',data,event);}">
+                <i class="fa icon-btn-new newicon-comment"></i>
+                <br />
+                评论管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('17000'),click: function(data, event) {navigateTo('complaint',data,event);}">
+                <i class="fa icon-btn-new newicon-complain"></i>
+                <br />
+                投诉管理
+            </button>
+            <!--<button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-online"></i>
+                <br />
+                线上营销
+            </button>-->
+        </div>
+    </div>
+    <!--<div class="row alert alert-warning">-->
+    <div class="row alert alert-info linear-green">
+        <div class="col-md-12">
+            <span class="data-tit" style="padding-top: 10px">生产管理</span>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10080'),click: function(data, event) {navigateTo('greenhouse',data,event);}">
+                <i class="fa icon-btn-new newicon-unit"></i>
+                <br />
+                生产单元
+            </button>
+            <button href="#" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('18000'),click: function(data, event) {navigateTo('greenhouse_probe',data,event);}">
+                <i class="fa icon-btn-new newicon-monitor"></i>
+                <br />
+                远程监控
+            </button>
+            <!--<button class="btn btn-sq-lg btn-gray mar12">
+                <i class="fa icon-btn-new newicon-equip"></i>
+                <br />
+                设备对接
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12">
+                <i class="fa icon-btn-new newicon-equipshow"></i>
+                <br />
+                设备展示
+            </button>-->
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10100'),click: function(data, event) {navigateTo('operationtype',data,event);}">
+                <i class="fa icon-btn-new newicon-process"></i>
+                <br />
+                生产环节
+            </button>
+             <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('35000'),click: function(data, event) {navigateTo('process',data,event);}">
+                <!-- <i class="fa icon-btn-new-meat newicon-meat-ycl"></i>-->
+                <i class="fa icon-btn-new newicon-process"></i>
+                <br />
+                生产流程
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('34000'),click: function(data, event) {navigateTo('origin',data,event);}">
+                <!-- <i class="fa icon-btn-new-meat newicon-meat-ycl"></i>-->
+                <i class="fa icon-btn-new newicon-process"></i>
+                <br />
+                原料管理
+            </button>
+            <!--<button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-task"></i>
+                <br />
+                日常作业
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-work"></i>
+                <br />
+                考勤
+            </button>-->
+        </div>
+    </div>
+    <div class="row alert alert-info linear-blue">
+        <div class="col-md-12">
+            <span class="data-tit" style="padding-top: 18px">产品码</span>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('23000'),click: function(data, event) {navigateTo('GenerateCode',data,event);}">
+                <i class="fa icon-btn-new newicon-make"></i>
+                <br />
+                生成产品码
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('32000'),click: function(data, event) {navigateTo('genboxcode',data,event);}">
+                <i class="fa icon-btn-new newicon-make"></i>
+                <br />
+                生成包材码
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('23001'),click: function(data, event) {navigateTo('DownloadCode',data,event);}">
+                <i class="fa icon-btn-new newicon-download"></i>
+                <br />
+                下载
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable: loginInfo.checkPower('10070'),click: function(data, event) {navigateTo('sellcode','10070',data,event);}">
+                <i class="fa icon-btn-new newicon-sale"></i>
+                <br />
+                激活追溯
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10062'),click: function(data, event) {navigateTo('ewmspecificationmanage',data,event);}">
+                <i class="fa icon-btn-new newicon-spec"></i>
+                <br />
+                套标规格
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('44000'),click: function(data, event) {navigateTo('usagerecordcount',data,event);}">
+                <i class="fa icon-btn-new newicon-make"></i>
+                <br />
+                二维码统计
+            </button>
+            <!--<button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-count"></i>
+                <br />
+                拍码统计
+            </button>-->
+        </div>
+    </div>
+    <div class="row alert alert-success linear-green">
+        <div class="col-md-12">
+            <span class="data-tit" style="padding-top: 25px">追溯</span>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('21000'),click: function(data, event) {navigateTo('ProductInfo',data,event);}">
+                <i class="fa icon-btn-new newicon-proinfo"></i>
+                <br />
+                配置产品信息
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('22000'),click: function(data, event) {navigateTo('PageNavigation',data,event);}">
+                <i class="fa icon-btn-new newicon-nav"></i>
+                <br />
+                配置导航页
+            </button>
+        </div>
+    </div>
+    <div class="row alert alert-info linear-blue">
+        <div class="col-md-12">
+            <span class="data-tit" style="padding-top: 10px">仓储物流</span>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10090'),click: function(data, event) {navigateTo('dealer',data,event);}">
+                <i class="fa icon-btn-new newicon-dealer"></i>
+                <br />
+                经销商管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('33000'),click: function(data, event) {navigateTo('store',data,event);}">
+                <i class="fa icon-btn-new newicon-dealer"></i>
+                <br />
+                仓库管理
+            </button>
+            <!--<button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-putin"></i>
+                <br />
+                入库记录
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-putoff"></i>
+                <br />
+                出库记录
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-stock"></i>
+                <br />
+                库存
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-logistics"></i>
+                <br />
+                物流
+            </button>-->
+        </div>
+    </div>
+    <div class="row alert alert-success linear-green">
+        <div class="col-md-12">
+            <span class="data-tit" style="padding-top: 25px">账户</span>
+            <!--<button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-home"></i>
+                <br />
+                我的账户
+            </button>-->
+            <button href="#" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10300'),click: function(data, event) {navigateTo('enterpriserole',data,event);}">
+                <i class="fa icon-btn-new newicon-role"></i>
+                <br />
+                角色
+            </button>
+            <button href="#" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('10500'),click: function(data, event) {navigateTo('enterpriseuser',data,event);}">
+                <i class="fa icon-btn-new newicon-loginname"></i>
+                <br />
+                添加登录名
+            </button>
+            <!--<button class="btn btn-sq-lg btn-gray mar12" disabled="disabled">
+                <i class="fa icon-btn-new newicon-bankcard"></i>
+                <br />
+                开通银行卡
+            </button>-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "医疗器械（UDI）服务云平台";
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>首页</title>
+    <link href="../../wapstyle/wap3/css/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="footer">
+        <div class="footer_left">
+            <img src="../../wapstyle/wap3/img/logo.png" />
+        </div>
+        @{
+            LinqModel.View_Order_Consumers consumers = Common.Argument.SessCokieOrder.Get;
+            if (consumers == null)
+            {
+            <div class="footer_right">
+                <a href="/Wap_Order/Login">
+                    <img src="../../wapstyle/wap3/img/denglu.png" /></a>
+            </div>
+            }
+            else
+            {
+            <div class="footer_right">
+                <a href="/Wap_Consumers/Index">
+                    <img src="../../wapstyle/wap3/img/denglu.png" /></a>
+            </div>
+            }
+        }
+    </div>
+    @if (ViewBag.Enterprise != null)
+    {
+        LinqModel.Enterprise_Info enterprise = ViewBag.Enterprise as LinqModel.Enterprise_Info;
+        <div class="sy_nr">
+            <div class="sy_box">
+                <div class="sytouxiang">
+                    <img src="@ViewBag.WXLogo" />
+                </div>
+                @if (!string.IsNullOrEmpty(enterprise.EnterpriseName))
+                {
+                    <div class="sygst">
+                        @enterprise.EnterpriseName
+                    </div>
+                }
+                <div class="syyiduanneirong">
+                    @enterprise.WXInfo
+                </div>
+                @*         <div class="syduoshaopian">
+                    65篇原创文章
+                </div>*@
+                <div style="width: 60%" class="syerweima">
+                    @*<img src="/Market/Packet/CenterEwmImg?id=@ViewBag.url&w=150&h=150" />*@
+                    <img src="/ShowImage/ShowImgGZH?url=@ViewBag.url&w=300&h=300" />
+                    @*<img src="/Market/Packet/CreateImage?tradeNo=@ViewBag.url&jg=2" />*@
+                </div>
+            </div>
+        </div>
+    }
+    <div class="bottoms">
+        <ul>
+            <li><a href="/Wap_Index3/Material">产品信息</a></li>
+            <li><a href="/Wap_Index3/Sy">溯源信息</a></li>
+            <li><a href="/Wap_Index3/Enterprise">企业信息</a></li>
+        </ul>
+    </div>
+</body>
+<script src="../../wapstyle/wap3/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //响应式自适应100px==1rem
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function () {
+				    var clientWidth = docEl.clientWidth
+				    if (!clientWidth) return
+				    if (clientWidth > 750) clientWidth = 750
+				    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+				}
+        if (!doc.addEventListener) return
+        win.addEventListener(resizeEvt, recalc, false)
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+</script>
+<style>
+    .packet
+    {
+        position: fixed;
+        bottom: 60px;
+        right: 0;
+        z-index: 9999;
+    }
+    .packet img
+    {
+        width: 80px;
+    }
+</style>
+@if (ViewBag.IsDiplayPacket != null && ViewBag.IsDiplayPacket == true)
+{
+    <div class="packet">
+        <a href="@ViewBag.PacketUrl">
+            <img src="@Url.Content("~/images/wap/redPacket.png")"></a>
+    </div>
+}
+</html>

@@ -1,0 +1,59 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 700px;
+    height: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看出库详情</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <table id="newsList" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    二维码
+                                </th>
+                                <th>
+                                    产品名称
+                                </th>
+                                <th>
+                                    数量
+                                </th>
+                                <th>
+                                    规格
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:vmDataList.ObjList">
+                            <tr>
+                                <td>
+                                    <span eleflag="ShowCode" data-bind="text:$data.EWMCode"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.MaterialName"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.MaCount"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.Value"></span><span data-bind="text:$data.MaterialSpecification"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer no-margin-top no-t-border">
+                        <ul class="pagination" id="ewmPager" data-bind="ewmPagerBH:vmDataList.pageSize,totalCounts:vmDataList.totalCounts,pageIndex:vmDataList.pageIndex">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

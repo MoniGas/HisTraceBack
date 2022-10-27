@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+/*------------公共样式---------------*/
+body{font-size:26px; background-color:#fff; color:#333; font-family:"微软雅黑";}
+*{margin:0;padding:0;}
+div{overflow:hidden;}
+p{line-height:2.2em; letter-spacing:0.1em;}
+ul{list-style:none;}
+img{border:none;}
+a{text-decoration:none; color:#000;}
+a:hover{text-decoration:none; color:#990000;}
+input,textarea{background-color:#fff;}
+span{color:#990000;}
+.alignC{text-align:center;}
+
+/*------------标题样式---------------*/
+h2{font-size:32px; color:#ca0000; }
+h3{font-size:32px; color:#fff;  }
+h4{font-size:32px; color:#007059; }
+
+/**/
+.warp{width:640px; margin:0 auto;}
+
+
+/*------------头部样式---------------*/
+.header{background:url(/images/wap/topBg.jpg) no-repeat; height:146px;}
+
+/*------------主要内容样式---------------*/
+.mainContent{min-height:710px;}
+.fwyz{font-size:28px; margin-bottom:20px; }
+.color1{color:#007059; background:url(/images/wap/titleBg.jpg) repeat-x; height:60px; padding-top:10px; text-indent:0.5em;}
+.form1{margin:10px 0 0 10px; height:70px; }
+.fwch{border:1px solid #037d64;  height:40px; background-color:#fff; font-size:28px; }
+.form1 img{position:relative; top:6px; top:12px; margin-left:5px;}
+
+.title{background-color:#aee5da; }
+.titleA{width:220px; height:61px; background:url(/images/wap/titlebg2.jpg) repeat-x; float:left; display:inline; padding-left:15px; line-height:61px;}
+.titleB{float:left; display:inline; }
+.titleC{float:right; display:inline; padding-right:15px; padding-top:8px;}
+.content{font-size:28px; margin-left:8px; margin-top:10px; margin-bottom:20px; overflow:hidden; }
+.content p{border-bottom:1px dashed #ccc;}
+.content span{padding-left:22px; font-size:26px; text-decoration:underline; background:url(/images/wap/icon1.gif) no-repeat 6px 20px; text-decoration:none;}
+.content ul li{margin-top:10px;}
+.guanwang a{color:#0444ad; text-decoration:underline;}
+
+
+.content2{ margin:15px auto;padding:0 10px;}
+.content2 img{border:1px solid #11846d; margin-top:20px;}
+.content2 ul li{font-size:28px; margin-bottom:10px;}
+.content2 ul li a{color:#007059;}
+
+.form2{ margin:10px 0 15px 8px; font-size:28px;}
+#form3 label{width:120px; display:inline-block; text-align:right; border:1px solid #000;}
+.form2 label{margin-right:10px; width:30%; margin-right:10px; display:inline-block;}
+.tousu{border:1px solid #037d64; font-size:28px; height:40px;  width:60%;}
+.tousuT{border:1px solid #037d64; font-size:28px;  height:150px; width:60%; }
+.form2 img{margin:15px 0 0 10px; }
+.summit{ text-align:center;}
+.geshi{font-size:28px; color:#990000; margin-left:20px;}
+.success{text-align:center; margin:10px 0; line-height:50px;}
+.tpsp span{float:right; display:inline; padding-right:10px;}
+.bgx{ border:1px solid #000;}
+
+
+/*------------底部样式---------------*/
+.footer{height:62px; background:url(/images/wap/footer.gif) repeat-x; text-align:center; padding-top:20px; color:#00755d;}

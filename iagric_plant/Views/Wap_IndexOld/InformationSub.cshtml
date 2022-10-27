@@ -1,0 +1,79 @@
+﻿@using LinqModel;
+@model ScanInfo
+@{
+    ViewBag.Title = "InformationSub";
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- 页头 -->
+    <section>
+        <header class="headerbox">
+            <a href="javascript:history.go(-1);" class="art-back">返回</a>
+            <h1 title="医疗器械（UDI）服务云平台">@Model.title</h1>
+        </header>
+    </section>
+    <!--联系-->
+    <section class="section-module">
+        <section class="pic">
+            @if (Model.imgs != null)
+            {
+                foreach (var item in Model.imgs)
+                {
+                <img src="@item.fileUrl"/>    
+                }
+            }
+            @if (Model.videos != null)
+            {
+                foreach (var item in Model.videos)
+                {
+                <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" poster="@item.fileUrls" data-setup="{}" width="320">
+                    <source src="@item.fileUrl" type='video/mp4' />
+                </video>
+                }
+            }
+        </section>
+        <section>
+            @if (!string.IsNullOrEmpty(Model.user))
+            {
+                <dl class="contact-dl">
+                    <dt class="dtwidth">
+                        @(Model.type)人员：</dt>
+                    <dd>
+                        @Model.user</dd>
+                </dl>
+            }
+            <dl class="contact-dl">
+                <dt class="dtwidth">@(Model.type)日期：</dt>
+                <dd>@Model.time</dd>
+            </dl>
+            @if (!string.IsNullOrEmpty(Model.content))
+            {
+                <dl class="contact-dl">
+                    <dt class="dtwidth">@(Model.type)内容：</dt>
+                    <dd>@Model.content</dd>
+                </dl>
+            }
+        </section>
+    </section>
+    <!--投诉建议-->
+    <section class="section-module">
+        <input type="button" class="orange-btn-l" onclick="window.location.href = '/Wap_Index/Index?uppage=Roots'"
+            value="返回">
+    </section>
+    <div class="juchou-footer">
+        <footer>
+            <p>
+                医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

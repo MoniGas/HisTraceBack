@@ -1,0 +1,49 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<LinqModel.View_Greenhouses_Probe>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutWap.cshtml";
+}
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var sub in Model)
+    {
+    <a href="/Wap_Probe/Info?gpid=@sub.Greenhouses_Probe_ID">
+        <section class="section-module">
+	<section>
+    		<dl class="contact-dl">
+                <dt>
+                    生产单元：</dt>
+                <dd>
+                    @sub.GreenhousesName</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>下位机地址：</dt>
+                <dd>@sub.LoweMachineAddress</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>采集时间：</dt>
+                <dd>@sub.AddTime</dd>
+            </dl>
+            <p class="align-right look-green">查看详情</p>
+	</section>
+	</section>
+    </a>
+    }    
+    <div class="linle-pag0">
+        <div class="linle-pag">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", NumericPagerItemWrapperFormatString = "{0}", ShowDisabledPagerItems = false, AlwaysShowFirstLastPageNumber = true })
+        </div>
+    </div>
+}
+else
+{
+    <section class="section-module">
+	<section>
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    暂无数据</dt>
+            </dl>
+	</section>
+	</section>
+}

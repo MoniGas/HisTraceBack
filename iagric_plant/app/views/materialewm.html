@@ -1,0 +1,26 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 650px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    产品码信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <div class="thumbnail">
+                        <img data-bind="attr:{src:path}" width="300px" />
+                    </div>
+                </div>
+                <div class="col-md-9 form-horizontal">
+                    <div class="form-group">
+                        <p style=" font-size:14px; font-weight:bold;">该产品的测试码号为：
+                        <!--<span data-bind="text:ewm"></span><span data-bind="text:AddDate"></span><span>.00000001</span></p>-->
+                        <span data-bind="text:ewm"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

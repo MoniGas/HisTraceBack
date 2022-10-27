@@ -1,0 +1,60 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:addOperationType">
+                    添加生产环节</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入生产环节名称..." data-bind="value:name,valueUpdate:'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button data-bind="click:searchOperationType">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="newsList" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="300">
+                            生产环节名称
+                        </th>
+                        <th width="220">
+                            生产环节描述
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmOperationType.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.OperationTypeName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.Memo"></span>
+                        </td>
+                        <td>
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="green" data-bind="visible:false,attr:{id:'btnEdit_'+$data.Batch_ZuoYeType_ID()},click: function(data, event) {$parent.editOperationType($data.Batch_ZuoYeType_ID,data,event);}"
+                                    title="编辑"><i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" data-bind="visible:false,attr:{id:'btnDel_'+$data.Batch_ZuoYeType_ID()},click: function(data, event) {$parent.delOperationType($data.Batch_ZuoYeType_ID,data,event);}"
+                                        title="删除"><i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="operationTypePager" data-bind="operationTypePager:vmOperationType.pageSize,totalCounts:vmOperationType.totalCounts,pageIndex:vmOperationType.pageIndex">
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "AddActivity";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<!-------------------main start---------------------------------->
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>活动管理<span class="divider">›</span></li>
+        <li>新建活动</li>
+    </ul>
+</div>
+<div class="card_pa40 clearfix">
+    <div class="yx">
+        @if (ViewBag.User == null)
+        {
+            <a href="/Market/Coupon/AddOrEdit" class="addyx addcoupon" style="margin-right: 20px;">
+                <div class="name">
+                    优惠券</div>
+                <div class="sub">
+                    向客户发放优惠券<br>
+                    帮您得到客户的更多青睐</div>
+            </a><a href="/Market/Packet/Add" class="addyx addhonbao">
+                <div class="name">
+                    微信红包</div>
+                <div class="sub">
+                    可以通过微信给您的客户<br>
+                    直接发放现金红包</div>
+            </a>
+  @*          <a href="/Market/YXLottery/Add" class="addyx addhonbao" style="margin-top: 10px;">
+                <div class="name">
+                    大转盘</div>
+                <div class="sub">
+                    用户通过大转盘进行抽<br>
+                    奖参与活动</div>
+            </a>*@
+        }
+        else
+        {
+            <a href="/Market/Coupon/AddOrEdit?trace=1&mainCode=@ViewBag.User.MainCode&settingId=@ViewBag.User.SetingID&enterpriseID=@ViewBag.User.EnterpriseID" class="addyx addcoupon" style="margin-right: 20px;">
+                <div class="name">
+                    优惠券</div>
+                <div class="sub">
+                    向客户发放优惠券<br>
+                    帮您得到客户的更多青睐</div>
+            </a><a href="/Market/Packet/Add?trace=1&mainCode=@ViewBag.User.MainCode&settingId=@ViewBag.User.SetingID&enterpriseID=@ViewBag.User.EnterpriseID" class="addyx addhonbao">
+                <div class="name">
+                    微信红包</div>
+                <div class="sub">
+                    可以通过微信给您的客户<br>
+                    直接发放现金红包</div>
+            </a>
+     @*       <a href="/Market/YXLottery/Add?trace=1&mainCode=@ViewBag.User.MainCode&settingId=@ViewBag.User.SetingID&enterpriseID=@ViewBag.User.EnterpriseID" class="addyx addhonbao" style="margin-top: 10px;">
+                <div class="name">
+                    大转盘</div>
+                <div class="sub">
+                    用户通过大转盘进行抽<br>
+                    奖参与活动</div>
+            </a>*@
+        }
+    </div>
+</div>
+<!-------------------main end---------------------------------->

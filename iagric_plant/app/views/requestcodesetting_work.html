@@ -1,0 +1,179 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    生产信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row no-margin">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name" style="display:none;">
+                            <span class="alert-danger">*</span>生产类型：</label>
+                        <div class="col-md-4 no-padding" style="display:none;">
+                            <select id="type" data-bind="value:Worktype">
+                                <option value="0">种植</option>
+                                <option value="2">养殖</option>
+                                <option value="1">加工</option>
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>生产环节：</label>
+                        <div class="col-md-4 no-padding">
+                            <select class="form-control" style="width: 240px; display: inline-block;" id="Select1"
+                                data-bind="options:WorkList.WorkArray,optionsCaption:'选择生产环节',value:WorkList.SelectedId,optionsText:'OperationTypeName',optionsValue:'Batch_ZuoYeType_ID'">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selWorkList">请选择生产环节！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>选择班组：
+                        </label>
+                        <div class="col-md-4 no-padding">
+                            <select class="control-input" id="selectTeam" data-bind="options:TeamArray.TeamArray,optionsCaption:'选择班组',optionsText:'TeamName',optionsValue:'TeamID',value:TeamArray.SelectedId">
+                            </select>
+                            <span class="middle light-red" data-bind="visible:SelTeam">请选择班组！</span>
+                        </div>
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>操作时间：
+                        </label>
+                        <div class="col-md-4 no-padding">
+                            <input type="text" placeholder="操作时间..." readonly="readonly" class="form-control"
+                                id="txtWorkTime" data-date-format="yyyy-mm-dd" data-bind="value:WorkTime">
+                        </div>
+                    </div>
+                    <!--      <div class="form-group" id="table1">
+                        <div class="title">
+                            <span class="alert-danger">*</span><strong>请选择工作人员</strong> <span class="middle light-red"
+                                data-bind="visible:SelPerson">请选择工作人员！</span>
+                        </div>
+                        <div class="content clearfix" data-bind="checkBoxCascade:null">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' id="allCheck" data-bind="checked:flag"/>
+                                全选
+                            </label>
+                            <div class="col-md-4 no-padding">-->
+                    <!-- ko foreach: TeamUserArray -->
+                    <!--        <label class="inline">
+                                    <input type="checkbox" name="cbx" class="cbx1" data-bind="checked:$parent.isChecked($data.TeamUsersID),value:$data.TeamUsersID,id:'cbx'+$data.TeamUsersID" />&nbsp;
+                                    <span data-bind="text:$data.UserName"></span>
+                                </label>-->
+                    <!--/ko-->
+                    <!--            </div>
+                        </div>
+                    </div>-->
+                    <div class="form-group" id="table1">
+                        <label class="col-md-2 control-label no-padding">
+                        </label>
+                        <div class="col-md-10 no-padding">
+                            <div class="main_gd clearfix">
+                                <div class="title">
+                                    <span class="alert-danger">*</span><strong>请选择工作人员</strong> <span class="middle light-red"
+                                        data-bind="visible:SelPerson">请选择工作人员！</span>
+                                </div>
+                                <div class="content clearfix" data-bind="checkBoxCascade:null">
+                                    <div class="col-md-2 no-padding">
+                                        <label>
+                                            <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' id="allCheck"
+                                                data-bind="checked:flag" />
+                                            全选
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <!-- ko foreach: TeamUserArray -->
+                                        <label class="inline">
+                                            <input type="checkbox" name="cbx" class="cbx1" data-bind="checked:$parent.isChecked($data.TeamUsersID),value:$data.TeamUsersID,id:'cbx'+$data.TeamUsersID" />&nbsp;
+                                            <span data-bind="text:$data.UserName"></span>
+                                        </label>
+                                        <!--/ko-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        生产描述：</label>
+                    <div class="col-md-10 no-padding">
+                        <textarea name="comment" placeholder="请输入生产描述..." id="comment" style="width: 100%;"
+                            class="height90" data-bind="value:WorkContent"></textarea>
+                    </div>
+                </div>
+                <div class="form-group  no-margin">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        图片：</label>
+                    <div class="col-md-10 no-padding">
+                        <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <div class="pic-item clearfix">
+                            <ul>
+                                <!-- ko foreach:WorkImgs -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delWorkImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a></li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="A1"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group  no-margin">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        视频：</label>
+                    <div class="col-md-10 no-padding">
+                        <span class="alert-danger-new">支持格式.mp4,大小限制为200MB。</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <div class="pic-item clearfix">
+                            <ul>
+                                <!-- ko foreach:WorkVideos -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img id="Videos" data-bind="attr:{src:$data.videoUrls}" onerror="this.src='/images/video-def.jpg'">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delWorkVideo(data, event);}}">
+                                        <i class="hide_clip">移除</i></a> </li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="video_upload">
+                                            <!--<img src="../../images/video-upload.jpg" />-->
+                                            </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:AddWork">
+            确定</button>
+        <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+            取消</button>
+    </div>
+</div>

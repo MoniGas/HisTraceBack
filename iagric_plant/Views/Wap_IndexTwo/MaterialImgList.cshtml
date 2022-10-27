@@ -1,0 +1,44 @@
+﻿@model LinqModel.Material
+@{
+    ViewBag.Title = "MaterialImgList";
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- 页头 -->
+    <section>
+	<header class="headerbox">
+    <a href="javascript:history.go(-1);" class="art-back">返回</a>
+		<h1 title="医疗器械（UDI）服务云平台">@Model.MaterialFullName</h1>
+	</header>
+</section>
+    <!--联系-->
+    <section class="section-module">
+	<section class="pic">
+    @if (Model.imgs != null)
+    {
+        foreach (var item in Model.imgs)
+        {
+    <img src="@item.fileUrl"/>    
+        }
+    }
+    </section>
+</section>
+    <section class="section-module">
+          <input type="button" class="orange-btn-l" onclick="history.go(-1)" value="返回">
+</section>
+    <div class="juchou-footer">
+        <footer>
+        <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

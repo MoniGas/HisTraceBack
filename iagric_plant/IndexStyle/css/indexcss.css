@@ -1,0 +1,390 @@
+.w-part,.g-part{
+	width: 100%;
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+.w-part{
+    background: #fff;
+}
+.g-part{
+    background: #f3f3f3;
+}
+.search-part{
+	width: 100%;
+	height: 160px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background: url(../images/sec-bg.jpg) no-repeat center;
+}
+.main-body{
+	width: 1000px;
+	margin: 0 auto;
+}
+.main-body>h2{
+	font-size: 30px;
+	color: #04a756;
+	font-weight:bold;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.activity{
+	
+}
+.activity li{
+	display: inline-block;
+	width: 163px;
+	text-align: center;
+	
+}
+.activity li p{
+	line-height: 48px;
+	font-size: 22px;
+	font-weight: bold;
+	color: #04a756;
+}
+
+/********首页***********/
+.second_theme {
+	width: 1000px;
+    margin: 20px auto 0;
+    font-size: 16px;
+}
+.second_theme .o-content2 {
+	float: left;
+	width: 600px;
+    padding-top: 42px;
+    margin-right:40px;
+}
+.second_theme .o-content2 p{
+	text-indent: 2em;
+	color: #333;
+	margin-bottom: 10px;
+}
+.second_theme .pic {
+    float: right;
+    width: 332px;
+    height: 332px;
+}
+.hangye-list{
+	font-size: 0;
+	
+}
+.hangye-list li{
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+	margin-bottom:40px
+}
+.hangye-list li p{
+	margin-top: 20px;
+	font-size: 18px;
+	color: #333333;
+}
+.good {
+    margin-top: 15px;
+    font-size: 0;
+}
+.good > li {
+    width: 333px;
+    display: inline-block;
+    vertical-align: top;
+}
+.good > li .g-icon {
+    width: 270px;
+    margin: 0 auto;
+    text-align: center;
+}
+.g-icon-t {
+    width: 104px;
+    height: 104px;
+    display:inline-block;
+    background: url(../images/icon-bg-t.png) no-repeat;
+}
+.g-pink-icon {
+    background-position: 0 0;
+}
+.g-green-icon {
+    background-position: 0 -104px;
+}
+.g-blue-icon {
+    background-position: 0 -208px;
+}
+.good > li .g-icon p {
+    text-align: center;
+    color: #04a756;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 28px;
+}
+.good > li .txt {
+    width: 270px;
+    margin: 30px auto 0;
+}
+.good > li .txt li {
+    font-size: 16px;
+    background: url(../images/dian.jpg) no-repeat left 15px;
+    padding-left: 10px;
+    color: #646464;
+    line-height: 30px;
+}
+
+
+.about-fontsize p{
+	font-size: 16px;
+	text-indent: 32px;
+	color: #333333;
+}
+.about-fontsize h3{
+	font-size: 24px;
+	color: #04a756;
+	margin:10px 0;
+}
+.about-fontsize p span{
+	font-weight: bold;
+	color: #04a756;
+}
+.text-l{
+	float: left;
+	width: 560px;
+}
+.case-list{
+	
+}
+.case-list li{
+	width: 50%;
+	float: left;
+	margin-bottom: 20px;
+}
+.case-list li:after {
+	clear: both;
+}
+.case-list li:before, .case-list li:after {
+	display: table;
+	content: " ";
+}
+.case-list li .item{
+	width: 405px;
+	border: 1px solid #d7d7d7;
+	border-radius: 5px;
+	padding: 40px;
+}
+.case-list li .item:after {
+	clear: both;
+}
+.case-list li .item:before, .case-list li .item:after {
+	display: table;
+	content: " ";
+}
+.case-list li .item .itempic{
+	float: left;
+	width: 220px;
+	height: 220px;
+	border: 1px solid #edeaea;
+	overflow: hidden;
+}
+.case-list li .item .itempic img{
+	max-width: 220px;
+	max-height: 220px;
+	vertical-align: middle;
+	text-align: center;
+}
+.case-list li .item .itemma{
+	float: right;
+	width: 146px;
+	text-align: center;
+	margin-top: 20px;
+}
+.case-list li .item .itemma p{
+	font-size: 16px;
+	color: #323232;
+}
+
+
+/*****2017-5-15帮助中心****/
+.no-padding-top{
+	padding-top: 0 !important;
+}
+.help-body{
+	background: #fff;
+	width: 1000px;
+	margin:0 auto;
+	padding: 20px;
+    border: 1px solid #eee;
+}
+.sub-tab{
+	display: inline-block;
+    margin-left: 20px;
+    height: 65px;
+    margin-top: 10px;
+}
+.sub-tab .sub-text {
+    display: inline-block;
+    margin-left: 13px;
+    margin-right: 13px;
+}
+.sub-tab .sub-text a {
+	display: inline-block;
+    font-size: 16px;
+    color: #555555;
+    line-height: 65px;
+}
+.sub-tab .sub-text-selected a {
+    color: #0f7b1e;
+    border-bottom: 2px solid #0f7b1e;
+}
+.subside-box {
+    float: left;
+    width: 210px;
+    margin-right: 10px;
+}
+.subside-box .h3-title {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
+    height: 40px;
+    background-color: #7dd589;
+    font-family: "microsoft yahei";
+    font-weight: normal;
+}
+.subside-box .subside-mod .title {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 45px;
+    background-color: #eaeaea;
+    border-bottom: 1px solid #fff;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    position: relative;
+    color: #666666;
+}
+
+.help-content{
+	width: 740px;
+    float: left;
+    background-color: #fff;
+    min-height: 500px;
+    padding: 0 20px;
+}
+.help-issue-list {
+}
+.help-issue-list li {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.help-issue-list li a {
+    display: inline-block;
+    width: 660px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.help-issue-list li span {
+    color: #aaa;
+    font-style: normal;
+    font-size: 12px;
+    text-align: right;
+    vertical-align: top;
+    line-height: 30px;
+}
+.markdown-body {
+    font-size: 14px;
+    line-height: 24px;
+    min-height: 400px;
+    color: #666;
+    padding:20px 30px 30px;
+}
+.markdown-body .title {
+    font-size: 20px;
+    min-height: 50px;
+    color: #333;
+    border-bottom: 1px solid #ebebeb;
+    line-height: 55px;
+    padding: 0;
+    margin: 0;
+}
+.markdown-body .article-date {
+    margin-top: 6px;
+}
+.article-date {
+    font-size: 12px;
+    color: #999;
+}
+.article-text {
+    margin-top: 10px;
+}
+.markdown-body p {
+    margin: 14px 0;
+    word-wrap: break-word;
+}
+
+.help-video ul{
+	font-size: 0;
+}
+.help-video ul li{
+	display: inline-block;
+	width: 246px;
+	text-align: center;
+	margin-bottom: 20px;
+	
+}
+.help-video ul li a{
+	display: inline-block;
+	width: 226px;
+	border: 1px solid #e2eced;
+	text-align: center;
+	overflow: hidden;
+}
+.help-video ul li img{
+	width: 224px;
+	height: 102px;
+}
+.help-video ul li p{
+	height: 32px;
+	line-height: 32px;
+	color: #666666;
+	font-size: 14px;
+}
+
+
+/****top*****/
+.shortcut {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: #F4F4F4;
+    position: relative;
+    z-index: 9999;
+    font-size: 12px;
+}
+.shortcut .w {
+    width: 1000px;
+    margin: 0 auto;
+}
+.shortcut .w ul{
+	margin-right: -8px;
+	
+}
+.fr {
+    float: right;
+}
+.dorpdown {
+    position: relative;
+}
+.shortcut li {
+    float: left;
+    height: 30px;
+    padding: 0 8px;
+}
+.shortcut li.spacer {
+    width: 1px;
+    height: 12px;
+    margin-top: 9px;
+    padding: 0;
+    background: #ddd;
+    overflow: hidden;
+}
+.shortcut li a {
+    color: #666;
+}

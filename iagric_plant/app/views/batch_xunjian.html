@@ -1,0 +1,70 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看巡检信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-allbordered table-hover">
+                        <tbody data-bind="foreach:vmBatch_XunJian.ObjList">
+                            <tr>
+                                <td width="175">
+                                    <div class="view-operation">
+                                        <div class="form-inline">
+                                         <p class="lbl cut width150" data-bind="text:'巡检内容：'+$data.Content()"></p>
+                                        <!--    <span class="lbl">巡检内容：</span> <span class="lbl" data-bind="text:$data.Content">
+                                            </span>-->
+                                        </div>
+                                        <div class="form-inline">
+                                            <span class="lbl">巡检人员：</span> <span class="lbl" data-bind="text:$data.UserName"></span>
+                                        </div>
+                                        <div class="form-inline">
+                                            <span class="lbl">日期：</span> <span class="lbl" data-bind="text:$data.XJAddDate"></span>
+                                        </div>
+                                        <div class="form-inline mat10">
+                                            <button type="button" class="btn  btn-xs btn-cancel" data-bind="click: function(data, event) {$root.editXunJian($data.Batch_XunJian_ID,data,event);}">
+                                                修 改</button>
+                                            <button type="button" class="btn  btn-xs btn-cancel mal15" data-bind="click: function(data, event) {$root.delXunJian($data.Batch_XunJian_ID,data,event);}">
+                                                删 除</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="view-operation">
+                                        <div class="form-inline">
+                                            <div class="pic-item list clearfix">
+                                                <ul>
+                                                    <!-- ko foreach:$data.imgs -->
+                                                    <li>
+                                                        <div class="thumbnail">
+                                                            <img data-bind="attr:{src:$data.fileUrls}" width="84">
+                                                        </div>
+                                                    </li>
+                                                    <!-- /ko -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
+                    <ul class="pagination" id="batch_XunJianPager" data-bind="batch_XunJianPager:vmBatch_XunJian.pageSize,totalCounts:vmBatch_XunJian.totalCounts,pageIndex:vmBatch_XunJian.pageIndex">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

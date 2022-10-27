@@ -1,0 +1,190 @@
+﻿@model LinqModel.Enterprise_Info
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var dlName = $.trim($("#dlName").val());
+            if (dlName.length == 0) {
+                alert("请输入企业名称！");
+                $("#dlName").focus();
+                return false;
+            }
+            var Province = $('#Province').val();
+            var selCity = $('#selCity').val();
+            var selArea = $('#selArea').val();
+            if (Province == "710000" || Province == "810000" || Province == "820000" || Province == "110000" || Province == "310000" || Province == "120000" || Province == "500000") {
+                if (!(Province == "710000" || Province == "810000" || Province == "820000")) {
+                    if (selCity == "-2") {
+                        alert("请选择所在区域！");
+                        return false;
+                    }
+                }
+            }
+            else {
+                if (selArea == "-2") {
+                    alert("请选择所在区域！");
+                    return false;
+                }
+            }
+            var linkMan = $.trim($("#linkMan").val());
+            if (linkMan.length == 0) {
+                alert('请输入联系人');
+                $("#linkMan").focus();
+                return;
+            }
+            var linkPhone = $.trim($("#linkPhone").val());
+            if (linkPhone.length == 0) {
+                alert('请输入联系电话');
+                return;
+            }
+            else if (!checkMobileEx(linkPhone)) {
+                alert("请您填写有效的联系电话！");
+                $("#linkPhone").focus();
+                return false;
+            }
+            var endDate = $.trim($("#endDate").val());
+            if (endDate.length == 0) {
+                alert('请选择企业有效期');
+                $("#endDate").focus();
+                return;
+            }
+            var tyCode = $.trim($("#tyCode").val());
+            if (tyCode.length == 0) {
+                alert('请输入统一社会代码');
+                $("#tyCode").focus();
+                return;
+            }
+            var sendData = {
+                eId: $.trim($("#eId").val()),
+                companyName: dlName,
+                province: Province,
+                city: selCity,
+                area: selArea,
+                centerAddress: $.trim($("#detailAddress").val()),
+                linkMan: linkMan,
+                linkPhone: linkPhone,
+                youxiaoDate: endDate,
+                tyCode: tyCode
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/ManEnterpriseManage/AddGS',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == 1) {
+                        alert(data.info);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("GSIndex")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    @if (Model != null)
+                    {
+                        <div class="user-set userset-lcol">
+                            <input type="hidden" value="@Model.Enterprise_Info_ID" id="eId" name="eId" />
+                            <div class="form hd-manage-det">
+                                <div class="infoitem">
+                                    <span class="label width130"><em>*</em>企业名称：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;" value="@Model.EnterpriseName" id="dlName" name="dlName" maxlength="25" /><span
+                                            style="color: #ed7049"> 输入企业全称</span>
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label width130"><em>*</em>所在区域：</span>
+                                    <div class="fl">
+                                        @Html.Action("Address", "SysSupervision",
+                             new { shengid = Model.Dictionary_AddressSheng_ID, shiid = Model.Dictionary_AddressShi_ID, quid = Model.Dictionary_AddressQu_ID })
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label width130">详细地址：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;" id="detailAddress" name="detailAddress" value="@Model.Address"
+                                            maxlength="50" />
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label width130"><em>*</em>联系人：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;" id="linkMan" name="linkMan" value="@Model.LinkMan" maxlength="10" />
+                                        @* <span style="color: #ed7049"> 请输入联系人</span>*@
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label width130"><em>*</em>联系电话：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;" id="linkPhone" name="linkPhone" value="@Model.LinkPhone" maxlength="11" />
+                                        @* <span style="color: #ed7049"> 请输入联系电话</span>*@
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label" style="width: 130px"><em>*</em>有效日期：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 120px;" id="endDate" name="endDate" value="@Model.LicenseEndDate"  cssclass="Wdate"
+                                            onclick="WdatePicker()" readonly="readonly">
+                                        @*<span style="color: #ed7049">请选择企业有效日期</span>*@
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label width130"><em>*</em>统一社会信用代码：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;" id="tyCode" name="tyCode" value="@Model.BusinessLicence" />
+                                    </div>
+                                </div>
+                                <div class="infoitem"  style="display:none">
+                                    <span class="label width130"><em>*</em>功能权限：</span>
+                                    <div class="fl">
+                                        @if (Model.SetSy == (int)Common.EnumFile.ShopVerify.Close)
+                                        {
+                                            <input type="checkbox" name="qx" id="zs" /><label for="zs">追溯系统</label>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="qx" id="zs" checked="checked" /><label for="zs">追溯系统</label>
+                                        }
+                                        @if (Model.SetClient == (int)Common.EnumFile.ShopVerify.Close)
+                                        {
+                                            <input type="checkbox" name="qx" id="dm" /><label for="dm">打码客户端</label>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="qx" id="dm" /><label for="dm">打码客户端</label>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <p class="center mat20">
+                                        <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                        <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

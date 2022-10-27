@@ -1,0 +1,389 @@
+﻿<div class="page-content">
+    <div class="row border-bottom">
+        <div class="col-md-9">
+            <p>
+                <button class="btn btn-sq-lg btn-gray mar8" data-bind="enable: loginInfo.checkPower('33000'),click: function(data, event) {navigateTo('batch_add','33000',data,event);}">
+                    <i class="fa icon-btn icon-btn-add"></i>
+                    <br />
+                    增加批次
+                </button>
+                <!--<button class="btn btn-sq-lg btn-gray mar8" data-bind="enable: loginInfo.checkPower('10060'),click: function(data, event) {navigateTo('requestcode','10060',data,event);}">
+                    <i class="fa icon-btn icon-btn-code"></i>
+                    <br />
+                    二维码管理
+                </button>-->
+                <!--<button class="btn btn-sq-lg btn-gray mar8" data-bind="enable: loginInfo.checkPower('10070'),click: function(data, event) {navigateTo('sellcode','10070',data,event);}">
+                    <i class="fa icon-btn icon-btn-sales"></i>
+                    <br />
+                    销售管理
+                </button>-->
+                <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable: loginInfo.checkPower('36000'),click: function(data, event) {navigateTo('sellcode','36000',data,event);}">
+                    <i class="fa icon-btn-new newicon-sale"></i>
+                    <br />
+                    激活追溯
+                </button>
+                <button class="btn btn-sq-lg btn-gray mar8" data-bind="enable: loginInfo.checkPower('32000'),click: function(data, event) {navigateTo('greenhouse','32000',data,event);}">
+                    <i class="fa icon-btn-new newicon-unit"></i>
+                    <br />
+                    生产单元
+                </button>
+                <button class="btn btn-sq-lg btn-gray mar8" data-bind="enable: loginInfo.checkPower('65000'),click: function(data, event) {navigateTo('dealer','65000',data,event);}">
+                    <i class="fa icon-btn-new newicon-dealer"></i>
+                    <br />
+                    经销商管理
+                </button>
+                <button class="btn btn-sq-lg btn-gray mar8" data-bind="enable: loginInfo.checkPower('42300'),click: function(data, event) {navigateTo('brand','42300',data,event);}">
+                    <i class="fa icon-btn-new newicon-brand"></i>
+                    <br />
+                    我的品牌
+                </button>
+            </p>
+        </div>
+        <div class="col-md-3">
+            <div class="mat20">
+                <!------当弹出层显示时加载 open 类------>
+                <div id="divComplaint" class="btn btn-sq-sm btn-green pull-right">
+                    <i class="fa icon-tips icon-tips-complaint"></i><span class="badge badge-important"
+                        data-bind="text:getcomplaintCount()"></span>
+                </div>
+                <div style="display: none;">
+                    <div id="div1">
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                            <li class="dropdown-header"><i class="ace-icon fa fa-users"></i>投诉管理 </li>
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-content">
+                                    <ul id="viewComplaintTipe" class="dropdown-menu dropdown-navbar">
+                                        <li class="clearfix">
+                                            <p class="light-grey smaller-90 center mat10">
+                                                暂无投诉</p>
+                                        </li>
+                                    </ul>
+                                    <ul id="viewComplaint" class="dropdown-menu dropdown-navbar" data-bind="foreach:vmComplaintList.ObjList">
+                                        <li><a href="javascript:void(0);" data-bind="click: function(data, event) {$parent.navigateTo('complaint','76100',data,event),$parent.updateComplaint($data.Complaint_ID)}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.ComplaintContent">
+                                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                                data-bind="text:$parent.newDate($data.StrComplaintDate)"></span></span></span>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="theViewMore" class="dropdown-footer"><a href="#" data-bind="click: function(data, event) {navigateTo('complaint',data,event);}">
+                                查看更多 </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="divMessage" class="btn btn-sq-sm btn-info mar18 pull-right ">
+                    <i class="fa icon-tips icon-tips-message"></i><span class="badge badge-important"
+                        data-bind="text:newsCount"></span>
+                </div>
+                <div style="display: none;">
+                    <div id="div2">
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                            <li class="dropdown-header"><i class="ace-icon fa fa-bell-o"></i>消息 </li>
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-content">
+                                    <ul id="viewNews" class="dropdown-menu dropdown-navbar" data-bind="foreach:vmEwmNewsList.ObjList">
+                                        <li><a href="javascript:void(0);" data-bind="click: function(data, event) {$parent.navigateTo('DownloadCode','41300',data,event),$parent.updateEwmStatus($data.RequestCode_ID)}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.MaterialFullName() + '：二维码生成成功！'">
+                                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                                data-bind="text:$parent.newDate($data.Strlastdate())"></span></span></span></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmBrandNewsList.ObjList">
+                                        <li><a href="javascript:void(0);" data-bind="click: function(data, event) {$parent.navigateTo('regionalbrand','42400',data,event),$parent.updateBrandStatus($data.Brand_Enterprise_ID)}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.MaterialFullName() + '：申请加入区域品牌成功！'">
+                                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                                data-bind="text:$parent.newDate($data.Strlastdate())"></span></span></span></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmEnterpriseVerify.ObjList">
+                                        <li><span class="msg-body"><span class="msg-title" data-bind="text:$data.VerifyContent()">
+                                        </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                            data-bind="text:$parent.newDate($data.StrAddDate())"></span></span></span></li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmCodeRecord.ObjList">
+                                        <li><span class="msg-body"><span class="msg-title" data-bind="text:$data.VerifyContent()">
+                                        </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                            data-bind="text:$parent.newDate($data.StrAddDate())"></span></span></span></li>
+                                    </ul>
+                                    <ul id="viewNewsTipe">
+                                        <li>
+                                            <p class="light-grey smaller-90 center mat10">
+                                                暂无消息</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="Li1" class="dropdown-footer"><a href="#" data-bind="click: function(data, event) {ignoreAll(data,event);}">
+                                全部忽略</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="divTip" class="btn btn-sq-sm btn-warning mar18 pull-right">
+                    <i class="fa icon-tips icon-tips-prompt"></i><span class="badge badge-important"
+                        data-bind="text:getReminderCount()"></span>
+                </div>
+                <div style="display: none;">
+                    <div id="div3">
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                            <li class="dropdown-header"><i class="ace-icon fa  fa-lightbulb-o"></i>温馨提示</li>
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-content">
+                                    <ul class="dropdown-menu dropdown-navbar" id="viewReminder">
+                                        <li id="li_enterpriseInfo"><a href="#" data-bind="click: function(data, event) {navigateTo('enterpriseInfo','76100',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没进行企业认证</span><span
+                                                class="msg-time text-right"><span class="msg-btn">企业认证</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Brand"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('brand','42300',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有品牌</span><span
+                                                class="msg-time text-right"><span class="msg-btn">品牌管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Material"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('material','21000',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有产品 </span><span
+                                                class="msg-time text-right"><span class="msg-btn">产品管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_GongXu"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('operationtype','23100',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有生产环节</span><span
+                                                class="msg-time text-right"><span class="msg-btn">生产环节管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Greenhouses"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('greenhouse','32000',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有生产单元</span><span
+                                                class="msg-time text-right"><span class="msg-btn">生产单元管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Dealer"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('dealer','65000',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有经销商</span><span
+                                                class="msg-time text-right"><span class="msg-btn">经销商管理</span> </span></span>
+                                        </a></li>
+                                    </ul>
+                                    <ul id="viewReminderTipe">
+                                        <li>
+                                            <p class="light-grey smaller-90 center mat10">
+                                                暂无提示</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+        <div class="form-group mab0 clearfix">
+            <div class="col-md-8">
+                <div class="col-md-3 no-padding">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control" placeholder="请输入检索信息..." data-bind="value: searchName">
+                        <span class="input-group-addon btn-success">
+                            <button type="submit" data-bind="click:searchBatch">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-inline">
+                        <span class="lbl">筛选：</span>
+                        <input type="text" class="input-md" placeholder="产品名称" data-bind="value: mName,valueUpdate: 'afterkeydown'">
+                        <input type="text" class="input-small" placeholder="批次号" data-bind="value: bName,valueUpdate: 'afterkeydown'">
+                        <input placeholder="开始时间" class="input-small" id="date1" type="text" data-date-format="yyyy-mm-dd"
+                            data-bind="value:beginDate" />
+                        -
+                        <input placeholder="结束时间" class="input-small" id="date2" type="text" data-date-format="yyyy-mm-dd"
+                            data-bind="value:endDate" />
+                        <!--  <input id="date1" type="text" class="input-large" placeholder="">-->
+                    </div>
+                </div>
+            </div>
+            <!--            <div class="col-sm-4 align-r">
+                <div class="form-inline">
+                    <span class="lbl">排序：</span>
+                    <select class="form-control">
+                        <option value=""></option>
+                        <option value="AL">Alabama</option>
+                    </select>
+                </div>
+            </div>-->
+        </div>
+        <div class="space-4">
+        </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th>
+                            批次号
+                        </th>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            品牌名称
+                        </th>
+                        <th>
+                            生产单元
+                        </th>
+                        <th width="110">
+                            子批次
+                        </th>
+                        <th width="150">
+                            最近作业
+                        </th>
+                        <th width="100">
+                            巡检
+                        </th>
+                        <th width="100">
+                            检验检测
+                        </th>
+                        <th>
+                            创建时间
+                        </th>
+                        <th width="80">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmBatch.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td class="center">
+                            <div class="pic">
+                                <img data-bind="attr:{src:$data.img}" onerror="this.src='/images/pic-def.jpg'" /></div>
+                        </td>
+                        <td>
+                            <i id="iShowSub" title="点击展开/折叠子批次" class="ace-icon spr5 fa fa-caret-right green bigger-140"
+                                style="float: left" data-bind="click: function( data, event) {$parent.showSubBatch($data.Batch_ID, data, event);}">
+                            </i>
+                            <p class="cut width50" style="float: left" data-bind="text:$data.BatchName,attr:{title:$data.BatchName}">
+                            </p>
+                            <!--   <span data-bind="text:$data.BatchName"></span>-->
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.MaterialFullName,attr:{title:$data.MaterialFullName}">
+                            </p>
+                            <!--<span data-bind="text:$data.MaterialFullName"></span>-->
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.BrandName,attr:{title:$data.BrandName}">
+                            </p>
+                            <!--<span data-bind="text:$data.BrandName"></span>-->
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.Greenhouseslist,attr:{title:$data.Greenhouseslist}">
+                            </p>
+                            <!--<span data-bind="text:$data.Greenhouseslist"></span>-->
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.ExtCount"></span>
+                            <button style="display: none;" class="btn btn-xs btn-success" data-bind="enable: $parent.loginInfo.checkPower('10021'),click: function(data, event) {$parent.navigateTo('AddSubBatch','10021',data,event);}"
+                                eleflag="AddSubBatch">
+                                添加</button>
+                        </td>
+                        <td>
+                            <a data-bind="click: function(data, event) {$parent.navigateTo('ZuoYeList','15000',data,event);}"
+                                href="#"><span data-bind="text:$data.nearType" class="cut width70" style="display: inline-block;
+                                    float: left;"></span></a>
+                            <button style="display: none; float: left;" class="btn btn-xs btn-success" data-bind="enable: $parent.loginInfo.checkPower('15001'),click: function(data, event) {$parent.navigateTo('AddGongXu','15001',data,event);}"
+                                eleflag="AddGongXu">
+                                添加</button>
+                        </td>
+                        <td>
+                            <a data-bind="click: function(data, event) {$parent.navigateTo('XunJianList','10030',data,event);}"
+                                href="#"><span data-bind="text:$data.xjcount"></span></a>
+                            <button style="display: none;" class="btn btn-xs btn-success" data-bind="enable: $parent.loginInfo.checkPower('10031'),click: function(data, event) {$parent.navigateTo('AddXunJian','10031',data,event);}"
+                                eleflag="AddXunJian">
+                                添加</button>
+                        </td>
+                        <td>
+                            <a data-bind="click: function(data, event) {$parent.navigateTo('JianCeList','10050',data,event);}"
+                                href="#"><span data-bind="text:$data.jyjccount"></span></a>
+                            <button style="display: none;" class="btn btn-xs btn-success" data-bind="enable: $parent.loginInfo.checkPower('10040'),click: function(data, event) {$parent.navigateTo('AddJianCe','10040',data,event);}"
+                                eleflag="AddJianCe">
+                                添加</button>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.Stradddate"></span>
+                        </td>
+                        <td class="hidden-480">
+                            <div class="hidden-sm hidden-xs action-buttons" style="display: none" eleflag="ShowHand">
+                                <a class="green" href="#" data-bind="click: function(data, event) {$parent.editBatch($data.Batch_ID,'10013',data,event);}">
+                                    <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" data-bind="click: function(data, event) {$parent.delBatch($data.Batch_ID,'10012',data,event);}">
+                                        <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- ko foreach: $data.subBatchObj -->
+                    <tr style="display: none; background: #efffd8; height: 50px;" data-bind="attr:{subflag:'subBatchObj_'+$parent.Batch_ID()},event: { mouseover: $root.mouseoverFun, mouseout: $root.mouseoutFun }">
+                        <td class="center">
+                            <!--<a href="#" class="pic">
+                                <img src="" /></a>-->
+                            <!--   <a href="#" class="pic">
+                                <img src="../../images/pic-def.jpg" /></a>-->
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.BatchExtName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.BrandName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.Greenhouseslist"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.ExtCount"></span>
+                        </td>
+                        <td>
+                            <a href="#" data-bind="click: function(data, event) {$root.zuoyelistBE($data.Batch_ID,$data.BatchExt_ID,'15000',data,event);}">
+                                <span data-bind="text:$data.nearOTName"></span></a>
+                            <button style="display: none;" class="btn btn-xs btn-success" data-bind="enable: $root.loginInfo.checkPower('15001'),click: function(data, event) {$root.subAddZuoYe($data.Batch_ID,$data.BatchExt_ID,data,event);}"
+                                eleflag="AddGongXu">
+                                添加</button>
+                        </td>
+                        <td>
+                            <a href="#" data-bind="click: function(data, event) {$root.xunjianlistBE($data.Batch_ID,$data.BatchExt_ID,'10030',data,event);}">
+                                <span data-bind="text:$data.xjcount"></span></a>
+                            <button style="display: none;" class="btn btn-xs btn-success" data-bind="enable: $root.loginInfo.checkPower('10031'),click: function(data, event) {$root.subAddXunJian($data.Batch_ID,$data.BatchExt_ID,data,event);}"
+                                eleflag="AddXunJian">
+                                添加</button>
+                        </td>
+                        <td>
+                            <a href="#" data-bind="click: function(data, event) {$root.jiancelistBE($data.Batch_ID,$data.BatchExt_ID,'10050',data,event);}">
+                                <span data-bind="text:$data.jyjccount"></span></a>
+                            <button style="display: none;" class="btn btn-xs btn-success" data-bind="enable: $root.loginInfo.checkPower('10040'),click: function(data, event) {$root.subAddJianCe($data.Batch_ID,$data.BatchExt_ID,data,event);}"
+                                eleflag="AddJianCe">
+                                添加</button>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.AddDate"></span>
+                        </td>
+                        <td class="hidden-480">
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="green" href="#" data-bind="click: function(data, event) {$root.editBatchExt($data.BatchExt_ID,$data.Batch_ID,'10022',data,event);}">
+                                    <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" data-bind="click: function(data, event) {$root.delBatchExt($data.BatchExt_ID,'10023',data,event);}">
+                                        <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
+                <ul class="pagination" id="batchPager" data-bind="batchPager:vmBatch.pageSize,totalCounts:vmBatch.totalCounts,pageIndex:vmBatch.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

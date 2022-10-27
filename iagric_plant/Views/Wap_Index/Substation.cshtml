@@ -1,0 +1,50 @@
+﻿@model LinqModel.ScanSubstation
+@{
+    ViewBag.Title = "班组信息";
+    Layout = null;
+}
+@if (Model != null && Model.liSubstation != null && Model.liSubstation.Count > 0 && ViewBag.Work==true)
+{
+    <div class="list clearfix">
+        <div class="list-title">
+            生产班组
+        </div>
+        <div class="banzu">
+            <div class="assess-top">
+                <span class="user-portrait">
+                    <img src="/wapstyle/images/banzu-icon.png">
+                </span><span class="user-name">@Model.SubstationName</span>
+            </div>
+            <div class="banzu-proces" id="wrapper">
+                <ul>
+                    @for (int i = 0; i < Model.liSubstation.Count; i++)
+                    {
+                        <li>
+                            <div class="pro_box">
+                               <a href="@Url.Action("MoreSubstation", new { batchZyId = Model.liSubstation[i].BatchZyId })"> <div class="proces">
+                                 @Model.liSubstation[i].ProcessName
+                                </div></a> 
+                                @if (Model.liSubstation[i].PersonName != null && Model.liSubstation[i].PersonName.Count > 0)
+                                {
+                                    <ul class="member">
+                                        @foreach (var sub in Model.liSubstation[i].PersonName)
+                                        {
+                                            <li>@sub</li>   
+                                    }
+                                    </ul>
+                            }
+                            </div>
+                        </li>
+@*                    if (Model.liSubstation.Count > i + 1)
+                    {
+                        <li>
+                            <div class="line">
+                            </div>
+                        </li>
+                            }*@
+                }
+                </ul>
+            </div>
+        </div>
+    </div>
+}

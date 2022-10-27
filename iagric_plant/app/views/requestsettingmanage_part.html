@@ -1,0 +1,75 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 580px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    拆分批次</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                <div class="form-group">
+                    <!--<div class="col-md-10" style=" color:#000; text-align:center;">-->
+                    <label class="col-md-4 control-label" for="name">
+                        产品：</label>
+                    <div class="col-md-6 no-padding" style="line-height: 34px;">
+                        <span data-bind="text:MaterialName"></span>，追溯码主批次号为：<span data-bind="text:BatchName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="name" id="Label1">
+                        码数量：</label>
+                    <div class="col-md-4 no-padding" style="line-height: 34px;">
+                        <span data-bind="text:CodeCount"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="name">
+                        <span class="alert-danger">*</span>子批次号：</label>
+                    <div class="col-md-4 no-padding">
+                        <input type="text" class="col-xs-10 col-sm-5" style="width: 150px" data-bind="value:SunBatchName" />
+                    </div>
+                </div>
+                <div class="form-group" id="divSplit" name="divSplit" style="display:none">
+                    <label class="col-md-4 control-label" for="name" id="Label2">
+                        <span class="alert-danger">*</span>使用码数量：</label>
+                    <div class="col-md-4 no-padding">
+                        <input type="text" class="col-xs-10 col-sm-5" style="width: 150px" data-bind="value:SubCodeCount" />
+                    </div>
+                </div>
+                <div class="form-group" id="divCustom" name="divCustom">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="name" id="Label3">
+                            <span class="alert-danger">*</span>请输入起始码：</label>
+                        <div class="col-md-4 no-padding">
+                            <input type="text" class="col-xs-10 col-sm-5" style="width: 200px" data-bind="value:StartCode" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="name" id="Label4">
+                            <span class="alert-danger">*</span>请输入结束码：</label>
+                        <div class="col-md-4 no-padding">
+                            <input type="text" class="col-xs-10 col-sm-5" style="width: 200px" data-bind="value:EndCode" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row pat10 no-margin" style="padding-left:30%; display:none;">
+                    <div class="" id="divRSplit" name="divRSplit" style="display:inline-block ">
+                        <input id="Radio1" name="CodeTypeCheck" type="radio" value="1" class="ui-checkbox" /><label for="Radio1">顺序拆分</label>
+                        </div>
+                        <div id="divRCustom" name="divRCustom" style="display:inline-block ">
+                        <input id="Radio2" name="CodeTypeCheck" type="radio" value="2" class="ui-checkbox" /><label for="Radio2">自定义拆分</label>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:AddSetting">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancel">
+                取消</button>
+        </div>
+    </div>
+</div>

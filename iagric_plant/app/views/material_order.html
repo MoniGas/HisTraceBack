@@ -1,0 +1,144 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:exportExcel">
+                    导出Excel</button>
+            </div>
+            <div class="col-md-4 no-padding-right">
+                <div class="form-inline">
+                    <span class="lbl">筛选：</span>
+                    <select data-bind="options: statusArray.statuss,optionsText: 'name',optionsCaption: '全部',value:statusArray.selectstatus">
+                    </select>
+                    <input placeholder="开始时间" class="input-small" readonly="readonly" id="bDate" type="text"
+                        data-date-format="yyyy-mm-dd" data-bind="value:bDate" />
+                    -
+                    <input placeholder="结束时间" class="input-small" readonly="readonly" id="eDate" type="text"
+                        data-date-format="yyyy-mm-dd" data-bind="value:eDate" />
+                </div>
+            </div>
+            <div class="col-md-3  no-padding">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入相关信息搜索" id="searchName" data-bind="value:name,valueUpdate: 'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchOrder">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            订单编号
+                        </th>
+                        <th>
+                            产品
+                        </th>
+                        <th>
+                            规格
+                        </th>
+                        <th>
+                            联系人
+                        </th>
+                        <th>
+                            联系电话
+                        </th>
+                        <th>
+                            地址
+                        </th>
+                        <th>
+                            邮编
+                        </th>
+                        <th>
+                            数量
+                        </th>
+                        <th>
+                            单价
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            时间
+                        </th>
+                        <th width="300">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmOrder.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.OrderNum,attr:{title:$data.OrderNum}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width70" data-bind="text:$data.MaterialName,attr:{title:$data.MaterialName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width50" data-bind="text:$data.MaterialSpec,attr:{title:$data.MaterialSpec}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width50" data-bind="text:$data.Consumers_Name,attr:{title:$data.Consumers_Name}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.Consumers_Phone,attr:{title:$data.Consumers_Phone}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.Consumers_Address,attr:{title:$data.Consumers_Address}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width50" data-bind="text:$data.Consumers_Postcode,attr:{title:$data.Consumers_Postcode}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width50" data-bind="text:$data.MaterialCount,attr:{title:$data.MaterialCount}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width50" data-bind="text:$data.MaterialPrice,attr:{title:$data.MaterialPrice}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width50" data-bind="text:$data.textStatus,attr:{title:$data.textStatus}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width70" data-bind="text:$data.AddTime,attr:{title:$data.AddTime}">
+                            </p>
+                        </td>
+                        <td>
+                            <!--<button class="btn btn-xs btn-success mal10" data-bind="click: function(data, event) {$parent.infoOrder($data.id,data,event);}">
+                                    查看</button>-->
+                            <div style="display: none;" class="hidden-sm hidden-xs action-buttons" eleflag="ShowSend">
+                                <button class="btn btn-xs btn-success mal10" data-bind="click: function(data, event) {$parent.editOrder($data.id,data,event);}">
+                                    发货</button>
+                            </div>
+                            <!--<button class="btn btn-xs btn-success mal10" data-bind="click: function(data, event) {$parent.delOrder($data.id,data,event);}">
+                                    隐藏</button>-->
+                            <div style="display: none;" class="hidden-sm hidden-xs action-buttons" eleflag="ShowDel">
+                                <button class="btn btn-xs btn-success mal10" data-bind="click: function(data, event) {$parent.trueDelOrder($data.id,data,event);}">
+                                    删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="orderPager" data-bind="orderPager:vmOrder.pageSize,totalCounts:vmOrder.totalCounts,pageIndex:vmOrder.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

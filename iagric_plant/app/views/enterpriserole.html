@@ -1,0 +1,54 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:addRole">
+                    添加角色</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入角色名称搜索" data-bind="value:name">
+                    <span class="input-group-addon btn-success">
+                        <button data-bind="click:seleteRole">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="350">
+                            角色名称
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:enterpriseRole.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.RoleName"></span>
+                        </td>
+                        <td>
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="green" data-bind="visible:false,attr:{id:'btnEdit_'+$data.Enterprise_Role_ID()},click: function() {$parent.editRole($data.Enterprise_Role_ID);}"
+                                    title="编辑"><i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" data-bind="visible:false,attr:{id:'btnDel_'+$data.Enterprise_Role_ID()},click: function() {$parent.deleteRole($data.Enterprise_Role_ID);}"
+                                        title="删除"><i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="enterpriseRolePager" data-bind="enterpriseRolePager:enterpriseRole.pageSize,totalCounts:enterpriseRole.totalCounts,pageIndex:enterpriseRole.pageIndex">
+        </ul>
+    </div>
+</div>

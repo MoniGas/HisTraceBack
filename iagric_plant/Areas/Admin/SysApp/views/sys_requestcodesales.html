@@ -1,0 +1,84 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000;width:600px; height: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看销售记录</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-7 no-padding">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" data-bind="value:ewm" placeholder="输入相关信息搜索" />
+                                <span class="input-group-addon btn-success">
+                                    <!--<button type="submit" data-bind="click:searchInfo">-->
+                                    <button type="submit" data-bind="click:SearchData">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style=" margin-top:20px;">
+            <div class="col-md-12">
+                <table id="newsList" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <!-- <th>
+                            产品全称
+                        </th>
+                        <th>
+                            经销商
+                        </th>-->
+                            <th>
+                                销售时间
+                            </th>
+                            <th>
+                                二维码
+                            </th>
+                            <th>
+                                预览效果
+                            </th>
+                            <th>
+                                标签效果
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:vmDataList.ObjList">
+                        <tr>
+                            <!-- <td>
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.Enterprise_InfoName"></span>
+                        </td>-->
+                            <td>
+                                <span data-bind="text:$parent.subDate($data.StrSalesTime)"></span>
+                            </td>
+                            <td>
+                                <a data-bind="attr:{href:'/Wap_Preview/index?ewm='+$data.EWM()}" target="_blank"><span
+                                    data-bind="text:$data.EWM"></span></a>
+                            </td>
+                            <td>
+                                <a data-bind="attr:{href:'/Wap_Preview/index?ewm='+$data.EWM()}" target="_blank">查看</a>
+                            </td>
+                            <td>
+                                <a data-bind="attr:{href:'http://s.idcode.org.cn/m?code='+$data.EWM()}" target="_blank">查看</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="modal-footer no-margin-top no-t-border">
+                    <ul class="pagination" id="salePager" data-bind="salePagerBH:vmDataList.pageSize,totalCounts:vmDataList.totalCounts,pageIndex:vmDataList.pageIndex">
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

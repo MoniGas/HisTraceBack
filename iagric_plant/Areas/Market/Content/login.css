@@ -1,0 +1,481 @@
+
+.clearfix:before,.clearfix:after{
+	display:table;content:" "
+}
+.clearfix:after{clear:both}
+
+.clearfix{*zoom: 1; }
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: 14px/1.8 "Microsoft Yahei", verdana;
+}
+a {
+    text-decoration: none;
+    color: #666;
+}
+.fr {
+    float: right;
+}
+/******全屏新导航******/
+
+.loginhead {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 80px;
+    background: #fff;
+    z-index: 999;
+}
+.loginhead.head_fixed {
+    background: #fff;
+    height: 70px;
+    -moz-box-shadow: 0px 1px 20px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 1px 20px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 20px rgba(0,0,0,0.2);
+}
+.ease-1 {
+    -webkit-transition: all 0.1s;
+    -khtml-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
+}
+.ease-3 {
+    -webkit-transition: all 0.3s;
+    -khtml-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.loginhead .inner {
+	width: 1000px;
+	margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+.mar0 {
+    margin: 0 auto;
+}
+.logo {
+    height: 43px;
+}
+.loginhead .logo {
+    margin-top: 25px;
+}
+.logo a {
+    display: block;
+    height: 100%;
+}
+.logo a img {
+    height: 100%;
+    width: auto;
+}
+.loginhead.head_fixed .logo {
+    margin-top: 15px;
+    /*transform: scale(0.8,0.8);
+    -webkit-transform: scale(0.8,0.8);
+    -o-webkit-transform: scale(0.8,0.8);
+    -moz-webkit-transform: scale(0.8,0.8);*/
+}
+.loginhead.head_fixed .logo img {
+    /*height: 50px;*/
+}
+.loginhead .nav {
+    position: absolute;
+    top: 20px;
+    right: 180px;
+}
+.loginhead.head_fixed .nav {
+    top: 10px;
+}
+.nav {
+    height: 58px;
+    line-height: 58px;
+}
+.nav li {
+    float: left;
+    display: inline;
+    margin: 0 6px;
+}
+
+.nav .item {
+    display: block;
+    padding: 0 7px;
+    letter-spacing: 1px;
+    color: #333333;
+    font-size: 16px;
+    text-align: center;
+}
+.nav a.item:hover,.nav .active a,.head.head_fixed .nav a.item:hover,.head.head_fixed .nav .active a{
+    color: #48cab2;
+}
+.nav .item .line {
+    background: #28b59b;
+    height: 2px;
+    width: 0;
+    margin: 0 auto;
+}
+.loginhead.head_fixed .nav .item {
+    color: #333;
+}
+
+.nav .item:hover .line,.nav .active .item .line{ 
+	width:100%;
+}
+
+.fixed_box_r {
+    right: 5px;
+}
+.fixed_box {
+    bottom: 5px;
+    display: block;
+    width: 50px;
+    z-index: 9999;
+    color: #FFF;
+}
+.fixed {
+    position: fixed;
+}
+
+.fixed_box .item {
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin-top: 0px;
+}
+.fixed_box .item_top {
+    display: none;
+}
+.fixed_box .item_a {
+    display: block;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+.fixed_box.orange .item_a {
+    border: 1px solid;
+    border-color: transparent;
+    background: url(../images/alpha_black50.png) repeat;
+    color: #ccc;
+}
+.fixed_box .item_a>.icon {
+    font-size: 20px;
+    position: absolute;
+    left: 13px;
+    top: 13px;
+}
+.fixed_box .item_a p {
+    padding-top: 4px;
+    line-height: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+.fixed_box .item_a .hover {
+    display: none;
+}
+.fixed_box.orange .item_a:hover {
+    background: #007cc3;
+    color: #fff;
+    border-color: #007cc3;
+}
+.fixed_box .item_a:hover>.icon {
+    display: none;
+}
+.fixed_box .item_a:hover .hover {
+    display: block;
+}
+
+.loginhead .login {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px;
+    color: #ccc;
+}
+.loginhead .login .login-btn,.loginhead .login .register-btn{
+	display: inline-block;
+	width: 80px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+}
+.loginhead .login .login-btn{
+	width: 70px;
+	color: #999999;
+}
+.loginhead .login .register-btn{
+	background: #36ccb0;
+	color: #fff;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	
+}
+.loginhead.head_fixed .login {
+	top: 20px;
+}
+.loginhead .login .login-info{
+    color: #999;
+}
+.loginhead .login .login-info .name{
+	display: inline-block;
+    max-width: 98px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align:left;
+}
+.loginhead .login .login-info .myhome{
+	display: inline-block;
+	vertical-align: top;
+	color: #48cab2;
+	margin-left: 10px;
+}
+@media only screen and (min-width: 1100px) and (max-width: 1280px) {
+	.loginhead .inner {
+    padding: 0 20px;
+}
+	.loginhead .nav {
+    right: 180px;
+}
+	.loginhead .login {
+		right: 20px;
+}
+}
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+	.loginhead .inner {
+    padding: 0 30px;
+}
+	.loginhead .nav {
+    right: 200px;
+}
+	.loginhead .login {
+		right: 30px;
+}
+}
+@media only screen and (min-width: 1441px) and (max-width: 1980px) {
+	.loginhead .inner {
+    padding: 0 40px;
+}
+	.loginhead .nav {
+    right: 280px;
+}
+	.loginhead .login {
+		right: 45px;
+}
+}
+
+.bce-login {
+    min-height: 500px;
+}
+.bce-login-wrap {
+    max-width: 1600px;
+    margin: 0 auto;
+    min-height: 500px;
+    background: url(../images/banner0-bg.png) -480px top no-repeat;
+}
+.bce-login-inner {
+    position: relative;
+    width: 1100px;
+    min-height: 500px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+.bce-login-inner img.banner {
+    width: 611px;
+    height: 415px;
+    background: url(../../../Areas/Admin/Images/experience.png) 0 0 no-repeat;
+    margin-left:0;
+    margin-top: 64px;
+}
+.login-box {
+    width: 38px;
+    margin-left: 620px;
+    margin-top: -405px;
+}
+.uc-common-login {
+    font: 14px/1.5 'Microsoft YaHei','微软雅黑',Helvetica,Sans-serif;
+    background: #fff;
+}
+.login-box {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.common-login {
+    width: 380px;
+    position: static;
+    border: 2px solid #e5e5e5;
+    box-shadow: none;
+    margin-top: 6px;
+}
+.login-box .tang-pass-login{
+	font: 14px/1.5 'Microsoft YaHei','微软雅黑',Helvetica,Sans-serif;
+    position: relative;
+    width: auto;
+    margin: 0;
+}
+.login-box form {
+    padding-top: 10px;
+    background: #FFF;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-left-radius: 3px;
+    margin: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    position: relative;
+}
+.pass-generalErrorWrapper {
+	position: absolute;
+    top: 75px;
+    left: 40px;
+    font-size: 12px;
+    color: #f28281;
+}
+.login-box .login-main{
+
+}
+
+.login-box .loginBox_ligin {
+    width: 340px;
+    padding: 20px;
+}
+.login-box .loginBox_ligin .tit{
+	font-size: 16px;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+.login-box .login-item{
+	width: 300px;
+	margin: 30px auto 10px auto;
+}
+.login-box .Area{
+    height: 55px;
+    position: relative;
+    z-index: 10;
+}
+
+.login-box .Area .input_tips{
+    position: absolute;
+    top: 9px;
+    left: 13px;
+    font-size: 14px;
+    color: #AAA;
+    cursor: text;
+}
+.login-box .Area .inputOuter{
+    width: 298px;
+    height: 38px;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+.login-box input {
+    border: 0;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+.inputstyle {
+    width: 268px;
+    position: relative;
+    top: 0px;
+    left: 12px;
+    height: 36px;
+    vertical-align: middle;
+    border: none;
+    background: none;
+    color: #333;
+    font-family: Verdana,Tahoma,Arial;
+    font-size: 16px;
+    ime-mode: disabled;
+}
+.login-box .Area .verifyinputArea {
+    height: 38px;
+    float: left;
+}
+.login-box .Area .inputOuter_yz {
+    width: 92px;
+}
+.inputstyle.verifycode{
+	width: 70px;
+}
+.login-box .Area .verifyimgArea {
+    float: left;
+    position: relative;
+    height: 38px;
+    cursor: pointer;
+}
+.login-box .Area .verifyimgArea .verifyimg {
+    height: 37px;
+    width: 70px;
+    top: 1px;
+    position: absolute;
+    left: 10px;
+}
+.login-box .Area .verifyimgArea .verifyimg_tips {
+    position: absolute;
+    left: 90px;
+    top: 10px;
+    width: 80px;
+    color: #999;
+}
+.login-box .Area .verifyimgArea .verifyimg_tips:hover{
+	text-decoration: underline;
+}
+a.register {
+    margin-top: 10px;
+    color: #999;
+}
+a.register:hover{
+	text-decoration: underline;
+}
+.copyright {
+    padding: 20px;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px solid #E5E5E5;
+}
+.container {
+    /*width: 1100px;*/
+    margin-top: 50px;
+}
+.btn_login_00 {
+	display: block;
+	width: 277px;
+	height: 38px;
+	background-color: #368fea;
+	margin-left: auto;
+	margin-right: auto;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+.btn_login_00:hover{
+	background: #338ae3;
+}

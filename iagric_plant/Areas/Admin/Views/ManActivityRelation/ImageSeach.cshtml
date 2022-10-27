@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "查看图片";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body
+    {
+        min-width:0;
+    }
+    .lookimage
+    {
+        text-align:center;
+        padding:20px;
+    }
+    .lookimage img
+    {
+        width:100%;
+    }
+</style>
+@*<div class="card_pa20 clearfix">
+    <div class="mod-main">
+        <div class="mc clearfix">
+            <div class="user-set userset-lcol mar40">
+                <div class="form hd-manage-det" >
+                <img src="@ViewBag.Url"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="lookimage">
+    <img src="@ViewBag.Url"/>
+</div>

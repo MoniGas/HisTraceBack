@@ -1,0 +1,81 @@
+﻿@model LinqModel.Complaint
+@{
+    ViewBag.Title = "ComplaintFangChuan";
+    Layout = null;
+
+    List<LinqModel.View_ProductInfoForMaterial> ProductList = ViewBag.PropertyList as List<LinqModel.View_ProductInfoForMaterial>;
+}
+<form action="/" method="post" id="form100" name="form100">
+<input type="hidden" name="MetailId" id="MetailId" value="@ViewBag.MaterialID" />
+<input type="hidden" name="Enterprise_Info_ID" id="Enterprise_Info_ID" value="@ViewBag.Enterprise_Info_ID" />
+<input type="hidden" name="ewm" id="ewm" value="@ViewBag.ewm" />
+<div class="content6" style="height: 700px;">
+    <div class="title" style="margin-bottom: 20px;">
+        <h2>
+            投诉</h2>
+    </div>
+    <p class="xinxi">
+        <span>投诉类型：</span>
+        <select id="ccctype" name="ccctype">
+            <option selected="selected" value="1">品牌投诉</option>
+            <option value="2">质量投诉</option>
+        </select>
+    </p>
+    @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewComplaintPhone.Value == true)
+    {
+        <p class="xinxi">
+            <span>投诉电话：</span>@ViewBag.Tel</p>
+    }
+    <p class="xinxi">
+        <span>产品名称：</span>@ViewBag.MaterialFullName</p>
+    <input type="hidden" name="Name" value="@ViewBag.MName" />
+    <p class="xinxi">
+        <span>投诉日期：</span>@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</p>
+    <p class="xinxi">
+        <span>投诉内容：</span>
+        <textarea class="input01" id="ComplaintContent" name="ComplaintContent"></textarea>
+    </p>
+    <p class="xinxi" style="margin-top: 20px; letter-spacing: 9px;">
+        <span class="tit">联系人：</span>
+        <input class="input02" name="LInkMan" id="LInkMan" type="text" />
+    </p>
+    <p class="xinxi" style="margin-top: 20px;">
+        <span>联系电话：</span>
+        <input class="input02" name="LinkPhone" id="LinkPhone" type="text" />
+    </p>
+    <div class="btn">
+        <input style="margin: 40px auto;" class="btn2" type="button" value="提交" onclick="check100()" />
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+    function check100() {
+
+        if (isNull($("#ComplaintContent").val())) {
+            alert("请输入投诉内容");
+            return false;
+        }
+        if (isNull($("#LInkMan").val())) {
+            alert("请输入联系人");
+            return false;
+        }
+        if (isNull($("#LinkPhone").val())) {
+            alert("请输入联系电话");
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/Wap_Index/AddComplaintFangChuan',
+            data: $("#form100").serialize(),
+            success: function (data) {
+                alert(data.info);
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        //window.location.href = data.url;
+                    }
+                }
+            }
+        });
+    }
+</script>

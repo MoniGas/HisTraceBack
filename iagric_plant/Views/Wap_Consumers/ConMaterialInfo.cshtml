@@ -1,0 +1,176 @@
+﻿@using LinqModel;
+@{
+    List<LinqModel.View_ProductInfoForMaterial> ProductList =
+        ViewBag.PropertyList as List<LinqModel.View_ProductInfoForMaterial>;
+
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
+    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    <script src="../../js/JScript1.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#divBody").height($(window).height() - $("#divFooter").height());
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="divBody">
+        <!-- 页头 -->
+        <section>
+            <header class="headerbox">
+                @{
+                    <a href="/Wap_Consumers/index" class="art-back">返回</a>
+                }
+                <h1 title="产品信息">
+                    产品信息</h1>
+                <a href="/Wap_Consumers/LogOut" class="art-login">退出</a>
+            </header>
+        </section>
+        <!--产品信息-->
+        @{
+    
+            Material material = ViewBag.material;
+
+            Brand brand = ViewBag.brand;
+
+            Brand areaBrand = ViewBag.areaBrand;
+
+            Enterprise_Info enterprise = ViewBag.enterprise;
+
+            DateTime saleTime = ViewBag.seleTime;
+
+            string firstImg = "";
+
+            if (material != null)
+            {
+            <section class="section-module">
+	<h2>@material.MaterialFullName</h2>
+
+    <div class="top_slide_pic mat10">
+    @foreach (var item in material.imgs)
+    {
+        firstImg = item.fileUrl;
+        <img src="@item.fileUrl"/>
+             break;
+    } 
+   </div>
+   <dl class="list list-in no-border" style=" margin-top:15px;">
+          @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewOrderHotline == true
+              && enterprise != null && !string.IsNullOrEmpty(enterprise.OrderingHotline))
+          {
+             <dd class="tit-xq no-border">
+            	<h1 class="title">订购热线：<strong class="strong-red-color">@enterprise.OrderingHotline</strong></h1>
+             </dd>
+          }
+
+          @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewMaterialPrice == true
+              && material != null && !string.IsNullOrEmpty(material.price.ToString())
+              && !string.IsNullOrEmpty(material.MaterialSpecification))
+          {
+              <dd class="buy-price no-border" style=" margin-top:10px;">
+                <div class="price">
+                    <span>单价:</span><strong class="J_pricetag strong-red-color">￥@material.price.Value.ToString("0.00")元</strong> <span>@material.MaterialSpecification</span>
+                </div>
+              </dd>
+          }
+    </dl>       
+</section>
+            }
+            <!--产品信息2-->
+            <section class="section-module">
+@if (material != null)
+{
+	<div class="product-info">
+    	<header class="title"><span class="bg-green">产品信息</span></header>
+        <section>
+            <dl class="contact-dl">
+                <dt>
+                    产品名称：</dt>
+                <dd>
+                    @material.MaterialFullName</dd>
+            </dl>
+            @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewProductionTime.Value == true)
+            {
+            <dl class="contact-dl">
+                <dt>生产日期：</dt>
+                <dd>@(saleTime.ToString("yyyy-MM-dd"))</dd>
+            </dl>
+            }
+            <dl class="contact-dl">
+                <dt>保质期：</dt>
+                <dd>@material.ShelfLife</dd>
+            </dl>
+             @if (material.propertys != null)
+             {
+                 foreach (var item in material.propertys)
+                 {
+            <dl class="contact-dl">
+                <dt>@item.pName：</dt>
+                <dd>@item.pValue</dd>
+            </dl>
+                 }
+             }
+        </section>
+    </div>
+    <div class="product-info">
+    	<header class="title"><span class="bg-blue">产品描述</span></header>
+        <section class="border-bottom">
+            <dl class="contact-dl brand-info">
+                <dt><img src="@firstImg"></dt>
+                <dd>@material.Memo</dd>
+            </dl>
+        </section>
+    </div>
+    
+}
+    @if (brand != null || areaBrand != null)
+    {
+	<div class="product-info">
+    	<header class="title"><span class="bg-yellow">品牌信息</span></header>
+        @if (areaBrand != null)
+        {
+        <section class="border-bottom">
+            <dl class="contact-dl brand-info">
+                <dt><img src="@areaBrand.Logo"></dt>
+                <dd>@areaBrand.Descriptions</dd>
+            </dl>
+        </section>
+        }
+        @if (brand != null)
+        {
+        <section class="border-bottom">
+            <dl class="contact-dl brand-info">
+                <dt><img src="@brand.Logo"></dt>
+                <dd>@brand.Descriptions</dd>
+            </dl>
+        </section>
+        }
+    </div>
+    }
+    </section>
+        }
+        <div id="divFooter" class="juchou-footer">
+                <footer id="footer">
+                <p>
+                    医疗器械（UDI）服务云平台</p>
+            </footer>
+        </div>
+</body>
+</html>

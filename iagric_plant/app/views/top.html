@@ -1,0 +1,33 @@
+﻿<div class="logo fl">
+    <a href="#">
+        <img src="/newmenu/images/bg_logo.png"></a>
+</div>
+<div class="navbar17 fl">
+    <ul data-bind="foreach: initMenus(0)">
+        <!-- ko if:isNavShow==1-->
+        <li data-bind="css: { active: isActive }"><a href="#" data-bind="click: function(data, event) {$parent.navigateTo(data,event);}">
+            <img data-bind="attr:{src:icon}" />
+            <p data-bind="html: title">
+            </p>
+        </a></li>
+        <!--/ko-->
+    </ul>
+</div>
+<div class="top-nav fr">
+    <!--  <span class="layer cw-icon" data-bind="event: { mouseover: mouseoverNameFun, mouseout: mouseoutNameFun }">
+        <span href="#" class="top-nav-item ellipsis" target="_blank" data-bind="text:loginInfo.ObjModel.EnterpriseName">
+        </span><i class="ci-right"><s>◇</s></i>
+        <ul class="content" style="display: none">-->
+    <!--<li><a href="#"><i class="ico-user ico-user-tips"></i><em class="W_new_count">9</em>
+                温馨提示 </a></li>
+            <li><a href="#"><i class="ico-user ico-user-msg"></i><em class="W_new_count">10</em>
+                消息 </a></li>
+            <li><a href="#"><i class="ico-user ico-user-complain"></i><em class="W_new_count">2</em>
+                投诉管理 </a></li>-->
+    <!--  <li><a href="javascript:void(0);" data-bind="click:exitsign"><i class="ico-user ico-user-out">
+            </i>退出 </a></li>-->
+    <!--       </ul>
+    </span>-->
+    <span class="layer cw-icon"><!--<span>您好：</span>--><!--<span href="#" target="_blank" data-bind="text:loginInfo.ObjModel.EnterpriseName">
+    </span> <span>|</span> -->  <a href="javascript:void(0);" data-bind="click:exitsign">退出 </a></span>
+</div>

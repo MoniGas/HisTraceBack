@@ -1,0 +1,873 @@
+﻿@{
+    ViewBag.Title = "新建红包活动";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+    var loginType = Common.Argument.CurrentUser.User == null ? 1 : Common.Argument.CurrentUser.User.LoginType;
+}
+<link rel="stylesheet" type="text/css" href="/lib/webuploader/css/webuploader.css" />
+<style>
+    .webuploader-pick
+    {
+        background: #555;
+        padding: 0;
+        border-radius: 0;
+    }
+    
+    .ke-container
+    {
+        float: left;
+    }
+    .imgdis
+    {
+        width: 130px;
+        height: 130px;
+    }
+    .imgdisLogo
+    {
+        width: 130px;
+        height: 130px;
+    }
+    .diviput
+    {
+        display: inline-block;
+        margin-left: 10px;
+        position: relative;
+    }
+    .upcss .webuploader-pick
+    {
+        width: 120px;
+        height: 30px;
+        line-height: 30px;
+        border: solid 1px #555555;
+        font-size: 13px;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        margin-right: 7px;
+        float: left;
+        display: block;
+        background: #555555;
+        color: #FFF;
+    }
+</style>
+<!-------------------main start---------------------------------->
+@*<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>活动管理<span class="divider">›</span>新建红包活动</li>
+    </ul>
+</div>*@
+<div class="card_pa40 clearfix">
+    <div class="index-part">
+        <div class="ncp-steps">
+            <ul>
+                <li class="active" id="li1"><i>1</i><span>设置活动信息</span></li>
+                <li id="li2"><i>2</i><span>设置红包信息</span></li>
+                <li id="li3"><i>3</i><span>扫码预览活动效果</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content clearfix" id="Step1">
+            <div class="workspace">
+                <div class="phone">
+                    <div class="nr">
+                        <img src="@Url.Content("~//Areas/Market/images/hbimg01.jpg")" id="activiImg" />
+                    </div>
+                </div>
+            </div>
+            <div class="mod-main wap-set">
+                <input type="hidden" value="@ViewBag.SetingID" id="SetingID" />
+                <div class="mc">
+                    <div class="user-set userset-lcol">
+                        <div class="form">
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动模版：</span>
+                                <div class="fl">
+                                    @Html.Action("Style", "Public", new { ParentID = 0, FirstDisplay = "请选择" })
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动名称：</span>
+                                <div class="fl">
+                                    <input type="text" maxlength="10" id="ActivityTitle" name="ActivityTitle" placeholder="不超过10个汉字，含标点符号" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">活动图片：</span>
+                                <div class="fl">
+                                    <div class="clearfix">
+                                        <div class="div_FilesBox">
+                                            <div style="display: block; width: 800px;">
+                                                <input type="hidden" id="ImagePath" value="" />
+                                                <div id="showimg" style="display: none;">
+                                                    <img id="imgsrc" style="max-height: 100px; max-width: 100px;" src="">
+                                                    <a id="delActivity" href="#">删除</a>
+                                                </div>
+                                            </div>
+                                            <div class="div_Handler" style="margin-top: 10px;">
+                                                <div id="uploadify" class="upcss">
+                                                    选择文件</div>
+                                                <a id="up" href="javascript:" style="float: left; height: 30px; width: 120px;">开始上传</a>
+                                                @*onclick="javascript:$('#uploadify').uploadifyUpload()"*@ @*  <input type="file" name="uploadify" id="uploadify">*@
+                                            </div>
+                                            <div id="fileQueue" class="uploadifyQueue">
+                                            </div>
+                                            <div id="div_Msg">
+                                            </div>
+                                        </div>
+                                        <p class="ftx03">
+                                            图片大小不超过1M，建议尺寸750px*1334px,图片格式为jpg，jpeg，png</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动有效期：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 190px;" id="StartTime" name="StartTime" cssclass="Wdate"
+                                        onclick="WdatePicker()" readonly="readonly" />
+                                    至
+                                    <input cssclass="Wdate" readonly="readonly" onclick="WdatePicker()" type="text" id="EndTime"
+                                        class="col-xs-3 col-sm-2" name="EndTime" style="width: 190px;" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动规则：</span>
+                                <div class="fl">
+                                    <textarea id="Content" name="Content" cols="100" rows="8" style="width: 400px; height: 80px;"
+                                        maxlength="500" placeholder="活动规则"></textarea>
+                                </div>
+                            </div>
+                            <div class="infoitem" style="display: none">
+                                <span class="label">活动类型：</span>
+                                <div class="fl interest-list">
+                                    <p class="hdlx">
+                                        <label>
+                                            <input type="radio" name="ActiveType" checked="checked" value="1">按码领取红包（一个码只能领取一次红包。设置多少个红包，则需要多少个二维码）
+                                        </label>
+                                    </p>
+                                    <p class="hdlx" style="display: none">
+                                        <label class="mar10">
+                                            <input type="radio" name="ActiveType" value="2" />按用户领取红包（一个用户只能领取一次，只需要一个码即可）</label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">参与方式：</span>
+                                <div class="fl interest-list">
+                                    @*<p class="hdlx">
+                                        <label>
+                                            <input type="radio" name="JoinMode" checked="checked" value="2" />微信扫码直接参与红包活动，无需授权登录</label></p>*@
+                                    <p class="hdlx">
+                                        <label class="mar10">
+                                            <input type="radio" name="JoinMode" value="1" checked="checked" />微信授权登录才能参加红包活动</label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">红包模式：</span>
+                                <div class="fl interest-list">
+                                    <p class="hdlx">
+                                        <label>
+                                            <input type="radio" id="RedStyle" name="RedStyle" checked="checked" value="1" />抢红包
+                                        </label>
+                                    </p>
+                                    <p class="hdlx">
+                                        <label class="mar10">
+                                            <input type="radio" id="RedStyle" name="RedStyle" value="2" />藏红包
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="infoitem" style="display: none">
+                                <span class="label">活动限制：</span>
+                                <div class="fl interest-list">
+                                    <p class="hdlx">
+                                        <label>
+                                            <input type="checkbox" id="ShareFriends" />用户把活动页分享到朋友圈后才能领取红包</label></p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">领取时输入手机号：</span>
+                                <div class="fl interest-list">
+                                    <p class="hdlx">
+                                        <label>
+                                            <input type="radio" id="IsYZCode" name="IsYZCode" checked="checked" value="1" />是
+                                        </label>
+                                        <label class="mar10">
+                                            <input type="radio" id="IsYZCode" name="IsYZCode" value="0" />否
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">&nbsp;</span>
+                                <div class="fl">
+                                    <input type="button" value="下一步" class="button-big" id="btnFirstStep" onclick="FirstStep()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ncp-content clearfix" id="Step2" style="display: none">
+            <div class="workspace">
+                <div class="phone">
+                    <div class="nr shopinfo">
+                        <div class="shoplogo">
+                            <img src="../../images/noewm.png">
+                        </div>
+                        <p class="shopname" id="ChangeTitle">
+                        </p>
+                        <p class="ys">
+                            给你发了一个红包</p>
+                        <p class="zfy" id="ChangeBlend">
+                            恭喜发财，大吉大利</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mod-main wap-set">
+                <div class="mc">
+                    <div class="user-set userset-lcol">
+                        <div class="form">
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>商户名称：</span>
+                                <div class="fl">
+                                    <input type="text" maxlength="10" id="SendCompany" name="SendCompany" onchange="ChangeTitle()"
+                                        placeholder="不超过10个汉字，含标点符号" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>祝福语：</span>
+                                <div class="fl">
+                                    <input type="text" maxlength="20" id="BlessingWords" name="BlessingWords" onchange="ChangeBlend()"
+                                        placeholder="不超过20个汉字，含标点符号" />
+                                </div>
+                            </div>
+                            <div class="infoitem" style="display: none">
+                                <span class="label">商户LOGO：</span>
+                                <div class="fl">
+                                    <div class="clearfix">
+                                        <div class="div_FilesBox">
+                                            <div id="showimgLogo" style="display: none">
+                                                <input type="hidden" id="ImagePathLogo" value="" />
+                                                <img id="imgsrcLogo" width="100px" height="100px" src="">
+                                                <a id="delLogo" href="#">删除</a>
+                                            </div>
+                                            <div class="div_Handler" style="margin-top: 10px;">
+                                                <div id="uploadifyLogo">
+                                                    选择文件</div>
+                                                <a href="javascript:" id="LogoBtnUp" style="float: right; margin-right: 140px;">开始上传</a>
+                                                @*  onclick="javascript:$('#uploadifyLogo').uploadifyUpload()"*@
+                                            </div>
+                                            <div id="fileQueuelogo" class="uploadifyQueue">
+                                            </div>
+                                            <div id="div_Msglogo">
+                                            </div>
+                                        </div>
+                                        <p class="ftx03">
+                                            图片大小不超过1M，建议尺寸296px*476px,图片格式为jpg，jpeg，png</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>红包设置：</span>
+                                <div class="fl">
+                                    <div class="hdlx">
+                                        <p>
+                                            <input type="button" value="添加" class="button-yellow" onclick="SetPacket()" /></p>
+                                        <div class="boxtable">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            金额（元）
+                                                        </th>
+                                                        <th>
+                                                            红包数量（个）
+                                                        </th>
+                                                        <th>
+                                                            小计（元）
+                                                        </th>
+                                                        <th>
+                                                            操作
+                                                        </th>
+                                                        <th>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="Packet">
+                                                </tbody>
+                                            </table>
+                                            <input type="hidden" id="SetSumDetail" />
+                                            <input type="hidden" id="SetAmountDetail" />
+                                        </div>
+                                        <div class="hb-order">
+                                            <div class="price">
+                                                红包总金额<span class="rmn-ico" id="Sum"><em>￥</em></span>
+                                            </div>
+                                            <div class="shu">
+                                                红包总数量 <span class="blacktxt" id="Amount"></span>个
+                                            </div>
+                                            @if (ViewBag.LoginType == (int)Common.EnumText.LoginType.common)
+                                            {
+                                                <div class="shu">
+                                                    生成码数量 <span class="blacktxt" id="CodeCount"></span>个
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem" id="tsxx">
+                                <span style="margin-left: 70px"><em>*</em>注：请确保您企业微信账户零钱充足！</span>
+                            </div>
+                            <div class="infoitem" style="width: 720px;" id="zffs">
+                                <span class="label">支付方式：</span>
+                                <div class="fl">
+                                    <ul class="payment_ul clearfix" style="padding-bottom: 0px;">
+                                        @*         <li>
+                                            <div class="bd_wrap">
+                                                <input type="radio" name="gateway" id="Alipay" value="1" checked="checked">
+                                                <label class="bg Alipay" for="Alipay">
+                                                </label>
+                                            </div>
+                                        </li>*@
+                                        <li>
+                                            <div class="bd_wrap">
+                                                <input type="radio" name="gateway" id="WeixinQRCodeWeb" value="2">
+                                                <label class="bg WeixinQRCodeWeb" for="WeixinQRCodeWeb">
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="bd_wrap">
+                                                <input type="radio" name="gateway" id="Offlinepayment" value="3">
+                                                <label class="bg Offlinepayment" for="Offlinepayment">
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="infoitem" id="divJs">
+                                <span class="label"></span>
+                                <div class="hb-order">
+                                    <div class="fl">
+                                        <div class="price">
+                                            手续费用<span class="rmn-ico" id="sxf"><em>￥</em></span>
+                                        </div>
+                                        <div class="price">
+                                            费用合计 <span class="rmn-ico" id="total"><em>￥</em></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem" style="margin-top: 20px;">
+                                <span class="label">&nbsp;</span>
+                                <div class="fl">
+                                    <input type="button" value="返   回" class="button-big-gray" onclick="GoBack()" />
+                                    <input type="button" value="下一步" class="button-big" onclick="SecondStep()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ncp-content clearfix" style="display: none" id="Step3">
+            <div class="lookewmbox">
+                <img id="Img" name="Img" src="" />
+                <p>
+                    用微信扫一扫，查看红包活动效果</p>
+                <p>
+                    <input type="button" value="完   成" class="button-big-gray" onclick="Complate()" /></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->
+<script type="text/javascript" src="/lib/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/lib/webuploader/js/webuploader.js"></script>
+<script type="text/javascript">
+    $(function () {
+        if ("@ViewBag.ActivityID" != 0) {
+            $("#Img").attr('src', '/Market/Packet/CenterEwmImg?id=' + "@ViewBag.ActivityID" + '&w=100&h=100');
+            $("#li2").removeClass('active');
+            $("#li1").removeClass('active');
+            $("#li3").addClass('active');
+            $("#Step2").css({ "display": "none" });
+            $("#Step1").css({ "display": "none" });
+            $("#Step3").css({ "display": "" });
+        }
+        //        if ("@ViewBag.Flag" == 1) {
+        //            $("#zffs").hide();
+        //            $("#divJs").hide();
+        //        }
+        if ("@ViewBag.Flag" == 0) {
+            $("#zffs").show();
+            $("#tsxx").hide();
+            $("#divJs").show();
+        }
+        else if ("@ViewBag.Flag" == 1) {
+            $("#zffs").hide();
+            $("#tsxx").show();
+            $("#divJs").hide();
+        }
+        //$("#up").unbind("hover");
+
+        var max = 0, count = 0;
+        var flag = true;
+        var uploader = WebUploader.create({
+
+            // swf文件路径
+            swf: '/lib/webuploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: "/Areas/Market/BLL/FilesUpLoad.ashx?type=1",
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: { id: '#uploadify', multiple: false },
+            auto: false,
+            formData: { folder: '/Areas/Market/Files/APIZShu/' },
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false,
+            //切片
+            chunked: false,
+            //每片的大小，C#接收文件也有默认大小，也可以自己在C#中修改
+            chunkSize: 5 * 1024,
+            fileSingleSizeLimit: 1 * 1024 * 1024, // 限制在1M
+            threads: 1,
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        uploader.on('beforeFileQueued', function (file) {
+            $(".fileName").text(file.fileName);
+            return true;
+        });
+        //当文件被加入队列以后触发。
+        uploader.on('fileQueued', function (file) {
+            count++;
+            $('.uploadifyProgressBar').css('width', "1px");
+            $('#uploadifyNIJGWI').css('display', "block");
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+            //删除上传的文件
+            $('#filedelete').on('click', function () {
+                uploader.removeFile(file);
+                $('#uploadifyNIJGWI').css('display', "none");
+            });
+        });
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on('uploadProgress', function (file, percentage) {
+            var perNumber = Math.floor(percentage * 100) + '%';
+            $('#uploadifyNIJGWIProgressBar').css({ 'width': perNumber, 'display': 'block' });
+        });
+        //当文件被移除队列后触发。
+        uploader.on('fileDequeued', function (a, b, c, d) {
+            //count--;
+            $("#fspan").text();
+            $("#ImagePath").val('');
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+        });
+
+        uploader.on('uploadError', function (file, percentage) {
+            console.log(1);
+        });
+        uploader.on('uploadSuccess', function (file, data, response) {
+            $("#div_Msg").addClass("div_Msg").text('上传成功');
+            $('#uploadifyNIJGWI').css('display', "none");
+            uploader.removeFile(file);
+            $("#ImagePath").val(data._raw);
+            $("#activiImg").attr("src", data._raw);
+            $("#imgsrc").attr("src",data._raw);
+            $("#showimg").css({ "display": "" });
+            $("#delActivity").click(function () {
+                $("#fspan").text(data._raw);
+                $("#ImagePathLogo").val('');
+                $("#ImagePath").attr("src", "/Areas/Market/images/hbimg01.jpg");
+                $("#activiImg").attr("src", "/Areas/Market/images/hbimg01.jpg");
+                $("#showimg").css({ "display": "none" });
+            });
+        });
+
+        //当所有文件上传结束时触发。
+        uploader.on('uploadfinished', function (a, b) {
+            $("#div_msg").addclass("div_msg").text("恭喜您 , 所选的 " + b.filesuploaded + " 个文件已成功上传 !");
+        });
+        //不管成功或者失败，文件上传完成时触发。
+        uploader.on('uploadComplete', function (a, b, c, d, e) {
+            count--;
+            $("#div_Msg").addClass("div_Msg").text("剩余 " + count + " 个文件正在上传 . . .");
+        });
+
+        $("#up").on('click', function () {
+            uploader.upload();
+        });
+        var maxl = 0, countl = 0;
+        var flagl = true;
+        var Logouploader = WebUploader.create({
+
+            // swf文件路径
+            swf: '/lib/webuploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: "/Areas/Market/BLL/FilesUpLoad.ashx?type=1",
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            //pick: '#uploadifyLogo',
+            pick: { id: '#uploadifyLogo', multiple: false },
+            auto: false,
+            formData: { folder: '/Areas/Market/Files/APIZShu/' },
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false,
+            //切片
+            chunked: true,
+            //每片的大小，C#接收文件也有默认大小，也可以自己在C#中修改
+            chunkSize: 5 * 1024,
+            fileSingleSizeLimit: 5 * 1024 * 1024, // 限制在5M
+            threads: 1,
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        Logouploader.on('beforeFileQueued', function (file) {
+            $(".fileName").text(file.fileName);
+            return true;
+        });
+        //当文件被加入队列以后触发。
+        uploader.on('fileQueued', function (file) {
+
+            countl++;
+            $('.uploadifyProgressBar').css('width', "1px");
+            $('#uploadifyNIJGWI').css('display', "block");
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+            //删除上传的文件
+            $('#filedelete').on('click', function () {
+                uploader.removeFile(file);
+                $('#uploadifyNIJGWI').css('display', "none");
+                //                    $(this).parent().remove();
+            });
+        });
+        // 文件上传过程中创建进度条实时显示。
+        Logouploader.on('uploadProgress', function (file, percentage) {
+            var perNumber = Math.floor(percentage * 100) + '%';
+            $('#uploadifyNIJGWIProgressBar').css({ 'width': perNumber, 'display': 'block' });
+        });
+        //当文件被移除队列后触发。
+        Logouploader.on('fileDequeued', function (a, b, c, d) {
+            $("#fspan").text();
+            $("#ImagePath").val('');
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+        });
+        Logouploader.on('uploadSuccess', function (file, data, response) {
+            $("#div_Msg").addClass("div_Msg").text('上传成功');
+            $('#uploadifyNIJGWI').css('display', "none");
+            uploader.removeFile(file);
+            $("#ImagePath").val(data._raw);
+            $("#showimg").css({ "display": "" });
+            $("#delActivity").click(function () {
+                $("#fspan").text(data._raw);
+                $("#ImagePathLogo").val('');
+                $("#showimg").css({ "display": "none" });
+            });
+        });
+        //当所有文件上传结束时触发。
+        Logouploader.on('uploadfinished', function (a, b) {
+            $("#div_msg").addclass("div_msg").text("恭喜您 , 所选的 " + b.filesuploaded + " 个文件已成功上传 !");
+        });
+        //不管成功或者失败，文件上传完成时触发。
+        Logouploader.on('uploadComplete', function (a, b, c, d, e) {
+            countl--;
+            $("#div_Msg").addClass("div_Msg").text("剩余 " + count + " 个文件正在上传 . . .");
+        });
+
+        $("#LogoBtnUp").on('click', function () {
+            Logouploader.upload();
+        });
+    });
+</script>
+<script type="text/jscript">
+    function FirstStep() {
+        if ($("#Style").val() == "-1") {
+            alert("请选择活动模板！");
+            $("#Style").focus();
+            return false;
+        }
+        if (isNull($("#ActivityTitle").val())) {
+            alert("请输入活动名称！");
+            $("#ActivityTitle").focus();
+            return false;
+        }
+        if (isNull($("#StartTime").val())) {
+            alert("请输入活动开始时间");
+            return false;
+        }
+        if (isNull($("#EndTime").val())) {
+            alert("请输入活动结束时间");
+            return false;
+        }
+        if (!checkTwoDate($("#StartTime").val(), $("#EndTime").val(), "yyyy-MM-dd")) {
+            return false;
+        }
+        if (isNull($("#Content").val())) {
+            alert("请输入活动规则！");
+            $("#Content").focus();
+            return false;
+        }
+        $("#li1").removeClass('active');
+        $("#li2").addClass('active');
+        $("#Step1").css({ "display": "none" });
+        $("#Step2").css({ "display": "" });
+
+    }
+    function SecondStep() {
+        if (isNull($("#SendCompany").val())) {
+            alert("请填写商户名称！");
+            $("#SendCompany").focus();
+            return false;
+        }
+        if (isNull($("#BlessingWords").val())) {
+            alert("请填写祝福语！");
+            $("#BlessingWords").focus();
+            return false;
+        }
+        if (isNull($("#SetSumDetail").text())) {
+            alert('请配置红包');
+            return false;
+        }
+        if (isNull($("#SetAmountDetail").text())) {
+            alert('请配置红包');
+            return false;
+        }
+        if ("@ViewBag.Flag" == 1) {
+            var sendData = {
+                SendCompany: $("#SendCompany").val(),
+                BlessingWords: $("#BlessingWords").val(),
+                CompanyLogoURL: $("#ImagePathLogo").val(),
+                ActivityStyleID: $("#Style").val(),
+                ActivityTitle: $("#ActivityTitle").val(),
+                AtivityImageURL: $("#ImagePath").val(),
+                Content: $("#Content").val(),
+                ActivityType: $('input:radio[name="ActiveType"]:checked').val(),
+                StartDate: $("#StartTime").val(),
+                EndDate: $("#EndTime").val(),
+                JoinMode: $('input:radio[name="JoinMode"]:checked').val(),
+                ShareFriends: $("#ShareFriends").is(":checked"),
+                setDetail: $("#SetSumDetail").text() + ';' + $("#SetAmountDetail").text(),
+                sumM: $("#Sum").text().replace("￥", ""),
+                payMethod: 4,
+                sxf: 0.0,
+                RedStyle: $('input:radio[name="RedStyle"]:checked').val(),
+                total: $("#Sum").text().replace("￥", ""),
+                IsYZCode: $('input:radio[name="IsYZCode"]:checked').val(),
+                SetingID: $("#SetingID").val()
+            }
+        }
+        else {
+            var sendData = {
+                SendCompany: $("#SendCompany").val(),
+                BlessingWords: $("#BlessingWords").val(),
+                CompanyLogoURL: $("#ImagePathLogo").val(),
+                ActivityStyleID: $("#Style").val(),
+                ActivityTitle: $("#ActivityTitle").val(),
+                AtivityImageURL: $("#ImagePath").val(),
+                Content: $("#Content").val(),
+                ActivityType: $('input:radio[name="ActiveType"]:checked').val(),
+                StartDate: $("#StartTime").val(),
+                EndDate: $("#EndTime").val(),
+                JoinMode: $('input:radio[name="JoinMode"]:checked').val(),
+                ShareFriends: $("#ShareFriends").is(":checked"),
+                setDetail: $("#SetSumDetail").text() + ';' + $("#SetAmountDetail").text(),
+                sumM: $("#Sum").text().replace("￥", ""),
+                payMethod: $(".payment_ul :radio:checked").val(),
+                sxf: $("#sxf").text().replace("￥", ""),
+                RedStyle: $('input:radio[name="RedStyle"]:checked').val(),
+                total: $("#total").text().replace("￥", ""),
+                IsYZCode: $('input:radio[name="IsYZCode"]:checked').val(),
+                SetingID: $("#SetingID").val()
+            }
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Market/Packet/AddActivity",
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                if (data.res == true) {
+                    alert(data.info);
+                    if (data.flag == "wx") {
+                        openwinEwm('@Url.Action("LookEwm")?tradeNo=' + data.tradeNo + "&jg=" + data.sumMoney, '微信支付', 370, 390, data.tradeNo, data.id, "");
+                        return;
+                    }
+                    if (data.flag == "zfb") {
+                        if (data.url != null && data.url != "") {
+                            //                        top.location.href = data.url;
+                            window.open(data.url, "_top", "");
+                            return;
+                        }
+                    }
+                    if (data.flag = "xx") {
+                        $("#Img").attr('src', '/Market/Packet/CenterEwmImg?id=' + data.id + '&w=100&h=100');
+                        $("#li2").removeClass('active');
+                        $("#li3").addClass('active');
+                        $("#Step2").css({ "display": "none" });
+                        $("#Step3").css({ "display": "" });
+                    }
+                }
+                else {
+                    alert(data.info);
+                }
+
+            }
+        })
+    }
+    //红包设置窗口
+    function SetPacket() {
+        openwin('/Market/Packet/SetPacket', '红包设置', 520, 350);
+    }
+    //弹窗回调函数
+    function AfterSet(amount, sum, total) {
+        $("#Packet").empty();
+        var sumDetailarr = ($("#SetSumDetail").text()).split(',');
+        var countDetailarr = ($("#SetAmountDetail").text()).split(',');
+        var copy = false;
+        $.each(sumDetailarr, function (index, value) {
+            if ($.trim(sumDetailarr[index]) == sum) {
+                copy = true;
+                var sumTemp = Number(sumDetailarr[index]);
+                var countTemp = Number(countDetailarr[index]) + amount * 1;
+                var totalTemp = (sumTemp * countTemp).toFixed(2);
+                $("#Packet").append("<tr><td class='divSum'>" + sumTemp + "</td><td class='divAmount'>" + countTemp + "</td><td><span class='red'>" +
+         totalTemp + " </span> </td><td style='cursor:pointer;color: #66a7e8;' class='delPacket'>删除</td></tr>");
+            }
+            else if (sumDetailarr[index].length > 0) {
+                $("#Packet").append("<tr><td class='divSum'>" + sumDetailarr[index] + "</td><td class='divAmount'>" + countDetailarr[index] + "</td><td><span class='red'>" +
+         (countDetailarr[index] * sumDetailarr[index]).toFixed(2) + " </span> </td><td style='cursor:pointer;color: #66a7e8;' class='delPacket'>删除</td></tr>");
+            }
+        });
+        if (copy == false) {
+            var totalcopy = (sum * amount).toFixed(2);
+            $("#Packet").append("<tr><td class='divSum'>" + sum + "</td><td class='divAmount'>" + amount + "</td><td><span class='red'>" +
+         totalcopy + " </span> </td><td style='cursor:pointer;color: #66a7e8;' class='delPacket'>删除</td></tr>");
+        }
+        $(".delPacket").click(function () {
+            var $this = $(this);
+            $this.parent().remove();
+            SetPacketData();
+        });
+        SetPacketData();
+    }
+    //赋值
+    function SetPacketData() {
+        var amountValue = 0;
+        var setAmountDetail = "";
+        $.each($(".divAmount"), function (index, item) {
+            if (amountValue == "") {
+                amountValue = Number($(this).text()) * 1;
+            }
+            else {
+                amountValue = amountValue * 1 + Number($(this).text()) * 1;
+            }
+            if (setAmountDetail == "") {
+                setAmountDetail = $.trim($(this).text());
+            }
+            else {
+                setAmountDetail = $.trim(setAmountDetail) + "," + $.trim($(this).text());
+            }
+        });
+        var sumValue = 0;
+        $.each($(".red"), function (index, item) {
+            if (sumValue == "") {
+                sumValue = Number($(this).text());
+            }
+            else {
+                sumValue = sumValue * 1 + Number($(this).text());
+            }
+        });
+        var setSumDetail = "";
+        $.each($(".divSum"), function (index, item) {
+            if (setSumDetail == "") {
+                setSumDetail = $(this).text();
+            }
+            else {
+                setSumDetail = setSumDetail + "," + $(this).text();
+            }
+        });
+        $("#Sum").text('￥' + sumValue.toFixed(2));
+        $("#Amount").text(amountValue);
+        if ($("#CodeCount").length > 0) {
+            $("#CodeCount").text(amountValue);
+        }
+        $("#SetSumDetail").text(setSumDetail);
+        $("#SetAmountDetail").text(setAmountDetail);
+        var $this = $(".payment_ul :radio:checked");
+        if ($this.val() == "3") {
+            $("#divJs").hide();
+        }
+        else {
+            if ("@ViewBag.Flag" == 1) {
+                $("#divJs").hide();
+            }
+            else {
+                $("#divJs").show();
+                Js($(".payment_ul :radio:checked"));
+            }
+        }
+    }
+    function Js($this) {
+        var sum = $("#Sum").text().replace("￥", "");
+        var lv = $this.val() == "1" ? 0.006 : 0.01;
+        var c = (sum * lv).toString();
+        var b = sum * lv;
+        if (c.length > 4) {
+            b = Number(c.substring(0, 4)) + 0.01;
+        }
+        $("#sxf").text('￥' + b.toFixed(2));
+        $("#total").text('￥' + (b + Number(sum)).toFixed(2));
+    }
+</script>
+<script type="text/jscript">
+    $(function () {
+        $(".payment_ul :radio").click(function () {
+            if ($(this).val() == "3") {
+                $("#divJs").hide();
+            }
+            else {
+                $("#divJs").show();
+                try {
+                    Js($(this));
+                } catch (err) {
+
+                }
+            }
+        });
+    })
+    function GoBack() {
+        $("#li2").removeClass('active');
+        $("#li1").addClass('active');
+        $("#Step2").css({ "display": "none" });
+        $("#Step1").css({ "display": "" });
+    }
+    function Complate() {
+        if ("@loginType" == "0") {
+            //            history.go(-1);
+            top.location.href = "/Home/Index?hash=#requestsettingmanage";
+        }
+        else {
+            window.location.href = "/Market/ActivityManager/Index";
+        }
+    }
+    function ChangeTitle() {
+        $("#ChangeTitle").text($("#SendCompany").val());
+    }
+    function ChangeBlend() {
+        $("#ChangeBlend").text($("#BlessingWords").val());
+    }
+</script>

@@ -1,0 +1,345 @@
+﻿@model LinqModel.ScanMaterial
+@{
+    ViewBag.Title = "";
+    Layout = null;
+}
+@if (Model != null)
+{
+    if (Model.picUrl == null || Model.picUrl.Count == 0)
+    {
+            <div class="main_image" style="margin-top:0.88rem;">
+                <ul style="width: 375px; overflow: visible;">
+                    <li style="float: none; display: block; position: absolute; top: 0px; left: 0px; width: 375px;">
+                        <img src="../../wapstyle/images/bg_img_sm.png">
+                    </li>
+                </ul>
+            </div>
+    }
+    if (Model.picUrl != null && Model.picUrl.Count > 0)
+    {
+    <div class="main_visual fixed-matop">
+        @if (Model.picUrl.Count == 1)
+        {
+            <div class="main_image">
+                <ul style="width: 375px; overflow: visible;">
+                    <li style="float: none; display: block; position: absolute; top: 0px; left: 0px;
+                        width: 375px;">
+                        <img src="@Model.picUrl[0].fileUrl">
+                    </li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="flicking_con">
+                <div class="flicking_inner">
+                    @for (int i = 0; i < Model.picUrl.Count; i++)
+                    {
+                        <a href="#">@(i + 1)</a>
+                    }
+                </div>
+            </div>
+            <div class="main_image">
+                <ul>
+                    @foreach (var item in Model.picUrl)
+                    {
+                        if (!string.IsNullOrEmpty(item.fileUrl))
+                        {
+                        <li>
+                            <img src="@item.fileUrl"></li>   
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    }
+    <div class="list list-in" style="margin-top:0.88rem;">
+        <div class="basic-info">
+            <div class="prod-main">
+                <!--名称-->
+                <div class="prod-title">
+                    <a href="#">
+                        @if (!string.IsNullOrEmpty(Model.MaterialAliasName))
+                        {
+                            <span class="title-text">@Model.MaterialAliasName </span> }
+                        else
+                        {
+                            <span class="title-text">@Model.MaterialName </span>
+                        }
+                    </a>
+                </div>
+                <!--关键词-->
+                <div class="prod-act">
+                    <span>@Html.Raw(Model.ShortMemo)</span>
+                </div>
+            </div>
+            @*<a style="margin-top:-20px" class="share" href="#" onclick="toshare()"><i></i>分享</a>*@
+        </div>
+        <!--领券-->
+        @if (ViewBag.TitleCoupon != "")
+        {
+            <div class="common_block">
+                <div class="promotionList_box ">
+                    <span class="promotionList_title">优惠券</span>
+                    <ul class="promotionList">
+                        <li><a href="@Url.Action("Index", "Wap_Coupon", new { area = "Market", ewm = ViewBag.AllCode, settingId = ViewBag.SettingId })">@ViewBag.TitleCoupon</a></li>
+                        @*                    <li>支付优惠</li>
+                    <li>点评返现</li>*@
+                    </ul>
+                    <span class="promotionList_num">1个</span> <i class="icon-down4 arrow"></i>
+                </div>
+            </div>
+        }
+        <div class="prod-spec">
+            @if (!string.IsNullOrEmpty(Model.MaterialPlace))
+            {
+                <div class="spec-desc">
+                    <span class="part-note-msg">产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地</span>
+                    <div class="base-txt">
+                        @Model.MaterialPlace
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Taste))
+            {
+                <div class="spec-desc">
+                    <span class="part-note-msg">口&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;味</span>
+                    <div class="base-txt">
+                        @Model.Taste
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Speciton))
+            {
+                <div class="spec-desc">
+                    <span class="part-note-msg">规格型号</span>
+                    <div class="base-txt">
+                        @Model.Speciton
+                    </div>
+                </div>
+            }
+                <input type="hidden" value="@ViewBag.Spection" />
+            <div class="spec-desc">
+                <span class="part-note-msg">拍码次数</span>
+                <div class="base-txt">
+                    @Model.ScanCount
+                    @if (!string.IsNullOrEmpty(Model.TaoBaoLink))
+                    {
+                        <span class="mall-logo" style="margin-left: 10px"><a href="@Model.TaoBaoLink">
+                            <img src="/wapstyle/images/icon_taobao.png"></a></span>
+                    }
+@*else
+                    { 
+                        <span class="mall-logo" style="margin-left: 10px">
+                            <img src="/wapstyle/images/icon_taobao.png"></span>
+                    }*@
+                    @if (!string.IsNullOrEmpty(Model.TianMaoLink))
+                    {
+                        <span class="mall-logo"><a href="@Model.TianMaoLink">
+                            <img src="/wapstyle/images/icon_tmall.png"></a></span>
+                    }
+@*else
+                    {
+                        <span class="mall-logo">
+                            <img src="/wapstyle/images/icon_tmall.png"></span> 
+                    }*@
+                    @if (!string.IsNullOrEmpty(Model.JingDongLink))
+                    {
+                        <span class="mall-logo"><a href="@Model.JingDongLink">
+                            <img src="/wapstyle/images/icon_JD.png"></a></span>
+                    }
+@*else
+                    {<span class="mall-logo"><img src="/wapstyle/images/icon_JD.png"></span> }*@
+@*                    <span class="mall-logo">
+                        <img src="/wapstyle/images/icon_huod.png"></span>*@
+                </div>
+            </div>
+            <div class="prod-spec">
+                <div class="product-date">
+    @*                @if (!string.IsNullOrEmpty(Model.ProductDate))
+                    {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">生产日期</span>
+                            <div class="base-txt">
+                                @Model.ProductDate
+                            </div>
+                        </div>
+                    }*@
+                    @if (!string.IsNullOrEmpty(Model.ShengChanPH))
+                    {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">生产编号</span>
+                            <div class="base-txt">
+                                @Model.ShengChanPH
+                            </div>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.YouXiaoDate))
+                    {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">有效日期</span>
+                            <div class="base-txt">
+                                @Model.YouXiaoDate
+                            </div>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.ShiXiaoDate))
+                    {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">失效日期</span>
+                            <div class="base-txt">
+                                @Model.ShiXiaoDate
+                            </div>
+                        </div>
+                    }
+                      @if (ViewBag.IsShengChanDate == true)
+                      {
+                          if (!string.IsNullOrEmpty(Model.ShengChanDate))
+                          {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">生产日期</span>
+                            <div class="base-txt">
+                                @Model.ShengChanDate
+                            </div>
+                        </div>
+                          }
+                      }
+                      @if (!string.IsNullOrEmpty(Model.MieJunNo))
+                      {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">灭菌批号</span>
+                            <div class="base-txt">
+                                @Model.MieJunNo
+                            </div>
+                        </div>
+                      }
+                       @if (!string.IsNullOrEmpty(Model.XuLieNo))
+                       {
+                        <div class="spec-desc">
+                            <span class="part-note-msg">序列号</span>
+                            <div class="base-txt">
+                                @Model.XuLieNo
+                            </div>
+                        </div>
+                       }
+@*  @if (!string.IsNullOrEmpty(Model.ShelfLife))
+                    {
+                        var flag = 1;
+                        var days = 0;
+                        DateTime datetime = DateTime.Now;
+                        if (Model.ShelfLife.Trim() == "视存储环境" || Model.ShelfLife.Trim() == "长期")
+                        {
+                            flag = 1;
+                        }
+                        if (string.IsNullOrEmpty(Model.ProductDate))
+                        {
+                            flag = 1;
+                        }
+                        else if (Model.ShelfLife.Trim().Contains("年"))
+                        {
+                            datetime = Convert.ToDateTime(Model.ProductDate).AddYears(Convert.ToInt16(Model.ShelfLife.Trim().Replace("年", "")));
+                            if (datetime < DateTime.Now)
+                            {
+                                flag = 2;
+                            }
+                            else
+                            {
+                                days = (datetime - Convert.ToDateTime(Model.ProductDate)).Days - (DateTime.Now - Convert.ToDateTime(Model.ProductDate)).Days;
+                                flag = 3;
+                            }
+                        }
+                        else if (Model.ShelfLife.Trim().Contains("月"))
+                        {
+                            datetime = Convert.ToDateTime(Model.ProductDate).AddMonths(Convert.ToInt16(Model.ShelfLife.Trim().Replace("月", "")));
+                            if (datetime < DateTime.Now)
+                            {
+                                flag = 2;
+                            }
+                            else
+                            {
+                                days = (datetime - Convert.ToDateTime(Model.ProductDate)).Days - (DateTime.Now - Convert.ToDateTime(Model.ProductDate)).Days;
+                                flag = 3;
+                            }
+                        }
+                        else if (Model.ShelfLife.Trim().Contains("天"))
+                        {
+                            datetime = Convert.ToDateTime(Model.ProductDate).AddDays(Convert.ToInt16(Model.ShelfLife.Trim().Replace("天", "")));
+                            if (datetime < DateTime.Now)
+                            {
+                                flag = 2;
+                            }
+                            else
+                            {
+                                days = (datetime - Convert.ToDateTime(Model.ProductDate)).Days - (DateTime.Now - Convert.ToDateTime(Model.ProductDate)).Days;
+                                flag = 3;
+                            }
+                        }
+                        switch (flag)
+                        {
+                            case 1:   <div class="spec-desc">
+                                <span class="part-note-msg">保质期</span>
+                                <div class="base-txt">
+                                    <span class="date-item-fresh"><ins class="horn"></ins>@Model.ShelfLife</span>
+                                </div>
+                            </div>; break;
+                            case 2:   <div class="spec-desc">
+                                <span class="part-note-msg">保质期</span>
+                                <div class="base-txt">
+                                    <span class="date-item-overdue"><ins class="horn"></ins>已过期</span>
+                                </div>
+                            </div>; break;
+                            case 3: <div class="spec-desc">
+                                <span class="part-note-msg">保质期</span>
+                                <div class="base-txt">
+                                    至@(datetime.ToString("yyyy-MM-dd"))<span>还剩<i>@days</i>天</span><span class="date-item-fresh"><ins
+                                        class="horn"></ins>新鲜</span>
+                                </div>
+                            </div>; break;
+                        }
+                    }*@
+                </div>
+            </div>
+        </div>
+        <div class="querycode-part">
+            <p class="tit">
+            </p>
+            <p class="code">
+                @ViewBag.AllCode</p>
+            <p class="tips">
+                您扫描的二维码为正确的编码</p>
+        </div>
+        @if (Model.MaterialInfo != null && Model.MaterialInfo.Count > 0)
+        {
+            <div class="prod-spec">
+                @for (int i = 0; i < Model.MaterialInfo.Count; i++)
+                {
+                    if (i < 3)
+                    {
+                    <div class="spec-desc">
+                        <span class="part-note-msg">@Model.MaterialInfo[i].pName</span>
+                        <div class="base-txt">
+                            @Model.MaterialInfo[i].pValue
+                        </div>
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="spec-desc" style="display: none" id="MoreValue">
+                        <span class="part-note-msg">@Model.MaterialInfo[i].pName</span>
+                        <div class="base-txt">
+                            @Model.MaterialInfo[i].pValue
+                        </div>
+                    </div>
+                    }
+                }
+                @if (Model.MaterialInfo.Count > 3)
+                {
+                    <div class="spec-desc">
+                        <a class="more seven-back" id="btnMore" onclick="showOrHide()">查看更多产品参数</a>
+                    </div> 
+                }
+            </div>
+        }
+    </div>
+}

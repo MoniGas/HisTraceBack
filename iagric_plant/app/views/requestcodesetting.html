@@ -1,0 +1,767 @@
+﻿<div class="page-content">
+    <div class="part-index clearfix" style="width: 95%">
+        <div class="ncp-steps" id="topPage">
+            <ul>
+                <li class="active" style="cursor: pointer" id="li1"><span data-bind="click:function(data, event) {TopSubPageClick(1,'First',data,event);}">
+                    确定用于产品</span></li>
+                <li id="li2" style="cursor: pointer"><span data-bind="click:function(data, event) {TopSubPageClick(2,'Second',data,event);}">
+                    追溯项配置</span></li>
+                <li id="li3" style="cursor: pointer"><span data-bind="click:function(data, event) {TopSubPageClick(3,'Third',data,event);}">
+                    追溯页风格设置</span></li>
+                <!-- <li id="li4"><i>4</i><span>追溯信息</span></li>-->
+            </ul>
+        </div>
+        <div class="ncp-content" style="margin-top: 20px;">
+            <div class="configuret" id="First">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                <span class="alert-danger">*</span>产品信息：
+                            </label>
+                            <div class="col-md-9">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="selectFirstMaterial"
+                                    data-bind="options:MaterialList.MaterialArray,value:MaterialList.SelectedId,optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                                </select>
+                                <!--        <button class="btn btn-lg-s btn-success mal10" data-bind="click:AddMaterial">
+                                    添加产品</button>-->
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 50px;">
+                            <label class="col-md-2 no-padding-right">
+                            </label>
+                            <div class="col-md-4">
+                                <button type="button" class="btn  btn-lg btn-success" data-bind="click:MaterialSetting">
+                                    保存</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="configure" id="Second" style="display: none">
+                <form>
+                <div class="field-group">
+                    <label class="tit">
+                        页面配置：</label>
+                    <div class="refund-reason">
+                        <p>
+                            请配置页面展示项目 <span class="remarks">（至少选一项）</span>
+                        </p>
+                        <ul class="reason-list cf">
+                            <li style="width: 100%;">
+                                <input type="checkbox" class="ui-checkbox" value="全选" id="selectAll">
+                                <label for="selectAll">
+                                    全选</label>
+                            </li>
+                            <!-- ko foreach:showArray-->
+                            <li>
+                                <input name="allCheck" type="checkbox" class="ui-checkbox" data-bind="value:$data.text,attr: { id: $data.value,checked:$data.ischeck }">
+                                <label data-bind="text:$data.text,attr: { for: $data.value }">
+                                </label>
+                            </li>
+                            <!--/ko-->
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-left: 90px; margin-top: 20px;">
+                    <button class="btn btn-lg btn-success" data-bind="click:EditStyle">
+                        保存</button>
+                </p>
+                </form>
+            </div>
+            <div class="configure" id="Third" style="display: none">
+                <form>
+                <div class="field-group">
+                    <label class="tit">
+                        模板样式：</label>
+                    <div class="refund-reason">
+                        <p>
+                            请对该批二维码选择样式模板 <span class="remarks">（默认为模板一）</span>
+                        </p>
+                        <div class="mobanlist clearfix" id="radio_wrap">
+                            <ul style="width: 780px;" data-bind="foreach:styleArray">
+                                <li class="meun" data-bind="value:$data.value,event: { click: $parent.ulClick.bind(this)}">
+                                    <div>
+                                        <input type="radio" id="radio_a_01" name="radio_a">
+                                        <label for="radio_a_01">
+                                            <img id="imgQR" data-bind="attr:{src:$data.mubanimg}">
+                                        </label>
+                                        <i></i>
+                                    </div>
+                                    <p data-bind="html:$data.text">
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="muban4" style="display: none; width:100%;">
+
+
+                    <div class="form-group no-margin">
+                        <label style=" width:18.4%;" class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>模板图片：</label>
+                        <div class="col-md-9">
+                            <span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB(建议上传图片宽750px)。</span><span
+                                class="alert-danger" data-bind="visible:selmbImgInfo">请上传模板图片！</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                        </label>
+                        <div class="col-md-9">
+                            <div class="pic-item  clearfix">
+                                <ul>
+                                    <!-- ko foreach:mbfiles -->
+                                    <li>
+                                        <div class="thumbnail">
+                                            <img data-bind="attr:{src:$data.fileUrls}">
+                                        </div>
+                                        <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delmbImage(data, event);}}">
+                                            <i class="hide_clip">移除</i></a> </li>
+                                    <!-- /ko -->
+                                    <li>
+                                        <div class="thumbnail">
+                                            <a id="uploadmbImg"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>图片链接：</label>
+                        <div class="col-md-10 no-padding">
+                            <input type="text" placeholder="图片链接" data-bind="value:mubanImgUrl" />
+                            <p>
+                                <span class="alert-danger" data-bind="visible:selmubanImgUrl">请输入图片链接！</span></p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="isShow">
+                        <label style=" margin-left:48px;" class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>是否显示底部按钮：
+                        </label>
+                        <div style=" width:62.33333%;" class="col-md-10" style="margin-top: 6px;">
+                            <input id="yes" name="shifou" type="radio" value="1" class="ui-checkbox" data-bind=""
+                                checked="checked" /><label>是</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="no" name="shifou" type="radio" value="0" class="ui-checkbox" data-bind="" /><label>否</label>
+                        </div>
+                    </div>
+                </div>
+ 
+
+
+
+                <div style="margin-left: 100px; margin-top: 95px; width:18%;">
+                    <button style="margin-left: 25px;" class="btn btn-lg btn-success" data-bind="click:EditShow">
+                        保存</button>
+                </div>
+
+
+                </form>
+            </div>
+        </div>
+        <div id="Fourth" style="display: none">
+            <div class="row clearfix no-margin">
+                <div class="yuanliao_pro">
+                    <ul>
+                        <li name="menuLi" class="current" data-bind="click:EditNewShow">产品信息</li>
+                        <!-- ko foreach: selectOption -->
+                        <li name="menuLi" data-bind="html:$data.name,attr:{id:$data.id},click:$parent.menuClick">
+                        </li>
+                        <!--/ko-->
+                        <li name="menuLi" data-bind="click:PreviewCode" id="9">追溯效果浏览</li>
+                    </ul>
+                    <div class="previewbox" id="Div1">
+                        <div class="ewm">
+                            <!--<img src="/newmenu/images/noewm.png">-->
+                            <img data-bind="attr:{src:codePath}">
+                        </div>
+                        <p>
+                            扫描查看预览</p>
+                    </div>
+                </div>
+                <div class="yuanliao-content">
+                    <div id="MaterialInfo" style="margin-top: 20px;">
+                        <div class="row no-margin">
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    <span class="alert-danger">*</span>产品名称：
+                                </label>
+                                <div class="col-md-3">
+                                    <select class="form-control" style="width: 195px; display: inline-block;" id="SelectMaterial"
+                                        data-bind="options:MaterialList.MaterialArray,value:MaterialList.SelectedId,optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                                    </select>
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    <!--<span class="alert-danger">*</span>-->
+                                    选择品牌：
+                                </label>
+                                <div class="col-md-3">
+                                    <select class="form-control" style="width: 195px; display: inline-block;" id="SelectAddMaterilaBrand"
+                                        data-bind="options:BrandList.BrandArray,value:BrandList.AddMaterialSelectedId,optionsText:'BrandName',optionsValue:'Brand_ID',optionsCaption: '选择品牌'">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    规格：</label>
+                                <div class="col-md-3">
+                                    <div class="col-md-3 no-padding">
+                                        <select class="form-control" id="Select4" style="width: 195px" data-bind="options: VmMeatSpec.MeatSpecArray,optionsText: 'MaterialSpcificationName',optionsValue:'MaterialSpcificationID',optionsCaption: '选择产品规格',value:VmMeatSpec.SelectedId">
+                                        </select>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    价格：</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" data-bind="value: materialPrice">
+                                </div>
+                                <span class="control-label no-padding">元</span>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    保质期：</label>
+                                <div class="col-md-1">
+                                    <input type="text" style="width: 50px" class="form-control" data-bind="value: materialShelfLife">
+                                </div>
+                                <div class="col-md-2 no-padding">
+                                    <select class="form-control" style="width: 132px" data-bind="options: selectedShelfs,optionsText: 'shefsname',optionsValue:'shefsname',value:selectedShelf">
+                                    </select>
+                                    <span class="alert-danger" data-bind="visible:selMaterialShelfLife">保质时间不正确</span>
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    <!--<span class="alert-danger">*</span>-->
+                                    选择生产流程：</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="Select1" data-bind="options: ProcessList.ProcessArray,value:ProcessList.SelectedId,optionsValue: 'ProcessID',optionsText:'ProcessName',optionsCaption: '选择生产流程'">
+                                    </select>
+                                    <!--<span class="alert-danger" data-bind="visible:selProcess">请选择生产流程！</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    生产日期：</label>
+                                <div class="col-md-3">
+                                    <input style="width: 200px;" placeholder="生产日期" class="form-control date-picker"
+                                        id="productionDate" name="productionDate" type="text" data-date-format="yyyy-mm-dd"
+                                        data-bind="value:productionDate" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    自定义属性：</label>
+                                <div class="col-md-10">
+                                    <div class="fake_input S_line">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    属性名：
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="regular" style="width: 100px;" data-bind="value:propertyName" />
+                                                </td>
+                                                <td>
+                                                    属性值：
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="regular" style="width: 100px;" data-bind="value:propertyValue" />
+                                                </td>
+                                                <td>
+                                                    <input type="button" value="添 加" class="btn btn-xs btn-success" data-bind="click:AddProperty">
+                                                </td>
+                                                <td>
+                                                    <span class="alert-danger-new">例:(参数名:颜色,参数值:红色)</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <span class="alert-danger" data-bind="visible:selPrototype">请填写完整的属性信息</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- ko foreach:property-->
+                                        <div class="W_btn_arrow tag">
+                                            <span class="S_func1"><font data-bind="text:$data.allprototype"></font><a href="javascript:void(0)"
+                                                class="W_ico12 icon_close" data-bind="event: { click: function( data, event) {$root.delProperty(data, event);}}">
+                                            </a></span>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix no-margin-bottom">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    <span class="alert-danger">*</span>图片：
+                                </label>
+                                <div class="col-md-10">
+                                    <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB，建议上传图片尺寸750*400。</span><span
+                                        class="alert-danger" data-bind="visible:selMaterialImgInfo">至少上传一张照片</span>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                </label>
+                                <div class="col-md-10">
+                                    <div class="pic-item  clearfix">
+                                        <ul>
+                                            <!-- ko foreach:files -->
+                                            <li>
+                                                <div class="thumbnail">
+                                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                                </div>
+                                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                                    <i class="hide_clip">移除</i></a> </li>
+                                            <!-- /ko -->
+                                            <li>
+                                                <div class="thumbnail">
+                                                    <a id="image_upload"></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    <span class="alert-danger">*</span>产品描述：
+                                </label>
+                                <div class="col-md-10">
+                                    <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                        visibility: hidden;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row no-margin">
+                    <div class="material-edit">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                <span class="alert-danger">*</span>品牌信息：
+                            </label>
+                            <div class="col-md-9">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="SelectBrand"
+                                    data-bind="options:BrandList.BrandArray,value:BrandList.SelectedId,optionsText:'BrandName',optionsValue:'Brand_ID'">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                        <div class="row no-margin">
+                            <div class="material-edit">
+                                <div class="form-group clearfix" style="margin-bottom: 30px;">
+                                    <label class="col-md-5 control-label no-padding-right">
+                                    </label>
+                                    <div class="col-md-5">
+                                        <button class="btn btn-success btn-lg" data-bind="click:EditMaterial">
+                                            下一步</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="OriginInfo" style="display: none">
+                        <div class="row pat10 no-margin">
+                            <div class="col-md-12">
+                                <button class="btn btn-lg btn-success" data-bind="click:AddOrigin">
+                                    添加原材料</button>
+                                <button class="btn btn-lg btn-success" data-bind="click:GetOrigin">
+                                    从配方获取</button>
+                            </div>
+                        </div>
+                        <div class="row pat10  mat10 no-margin">
+                            <div class="col-md-12">
+                                <table id="Table1" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                原材料
+                                            </th>
+                                            <th>
+                                                供应商
+                                            </th>
+                                            <th>
+                                                入库时间
+                                            </th>
+                                            <th>
+                                                等级
+                                            </th>
+                                            <th>
+                                                产地
+                                            </th>
+                                            <th>
+                                                批次
+                                            </th>
+                                            <th>
+                                                检验员
+                                            </th>
+                                            <th width="80">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:SettingOriginList">
+                                        <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.OriginName">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.Supplier">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.StrInDate">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.Level">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.Factory">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.BatchNum">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.CheckUser">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                                    <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editOrigin($data.ID,data,event);}">
+                                                        <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                            data-bind="click: function(data, event) {$parent.delOrigin($data.ID,data,event);}">
+                                                            <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                            <button class="btn btn-success btn-lg" data-bind="click:function(data, event) {nextButton(3,data,event);}">
+                                下一步</button>
+                        </div>
+                    </div>
+                    <div id="WorkInfo" style="display: none">
+                        <div class="row pat10 no-margin">
+                            <div class="col-md-12">
+                                <button class="btn btn-lg btn-success" data-bind="click:AddWork">
+                                    添加生产信息</button>
+                            </div>
+                        </div>
+                        <div class="row pat10  mat10 no-margin">
+                            <div class="col-md-12">
+                                <table id="Table2" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                           <!-- <th>
+                                                生产类型
+                                            </th>-->
+                                            <th>
+                                                生产环节
+                                            </th>
+                                            <!--           <th>
+                                                操作人员
+                                            </th>-->
+                                            <th>
+                                                操作时间
+                                            </th>
+                                            <th width="80">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:SettingWorkList">
+                                        <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                     <!--       <td>
+                                                <p class="cut" data-bind="text:$data.TypeName">
+                                                </p>
+                                            </td>-->
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.OperationTypeName">
+                                                </p>
+                                            </td>
+                                            <!--         <td>
+                                                <p class="cut" data-bind="text:$data.UserName">
+                                                </p>
+                                            </td>-->
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.StrAddDate">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                                    <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editWork($data.Batch_ZuoYe_ID,data,event);}">
+                                                        <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                            data-bind="click: function(data, event) {$parent.delWork($data.Batch_ZuoYe_ID,data,event);}">
+                                                            <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                            <button class="btn btn-success btn-lg" data-bind="click:function(data, event) {nextButton(4,data,event);}">
+                                下一步</button>
+                        </div>
+                    </div>
+                    <div id="CheckInfo" style="display: none">
+                        <div class="row  no-margin pat10">
+                            <div class="col-md-12">
+                                <button class="btn btn-lg btn-success" data-bind="click:AddCheck">
+                                    添加巡检</button>
+                            </div>
+                        </div>
+                        <div class="row pat10  mat10 no-margin">
+                            <div class="col-md-12">
+                                <table id="Table3" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                操作人员
+                                            </th>
+                                            <th>
+                                                操作时间
+                                            </th>
+                                            <th width="80">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:SettingCheckList">
+                                        <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.UserName">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.StrAddDate">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                                    <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editCheck($data.Batch_XunJian_ID,data,event);}">
+                                                        <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                            data-bind="click: function(data, event) {$parent.delCheck($data.Batch_XunJian_ID,data,event);}">
+                                                            <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                            <button class="btn btn-success btn-lg" data-bind="click:function(data, event) {nextButton(5,data,event);}">
+                                下一步</button>
+                        </div>
+                    </div>
+                    <div id="ReportInfo" style="display: none">
+                        <div class="row  no-margin pat10">
+                            <div class="col-md-12">
+                                <button class="btn btn-lg btn-success" data-bind="click:AddReport">
+                                    添加检测报告</button>
+                            </div>
+                        </div>
+                        <div class="row pat10  mat10 no-margin">
+                            <div class="col-md-12">
+                                <table id="Table4" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                检测标题
+                                            </th>
+                                            <th>
+                                                操作人员
+                                            </th>
+                                            <th>
+                                                操作时间
+                                            </th>
+                                            <th width="80">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:SettingReportList">
+                                        <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.Content">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.UserName">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="cut" data-bind="text:$data.StrAddDate">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                                    <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editReport($data.Batch_JianYanJianYi_ID,data,event);}">
+                                                        <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                            data-bind="click: function(data, event) {$parent.delReport($data.Batch_JianYanJianYi_ID,data,event);}">
+                                                            <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                            <button class="btn btn-success btn-lg" data-bind="click:function(data, event) {nextButton(6,data,event);}">
+                                下一步</button>
+                        </div>
+                    </div>
+                    <div id="AmbientInfo" style="display: none">
+                        <div class="row  no-margin pat10">
+                        </div>
+                        <div class="row no-margin">
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    存贮温度：
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" placeholder="存贮温度..." maxlength="50" class="control-input" data-bind="value:temperature">
+                                    <!-- <span class="middle light-red" data-bind="visible:SelTemperature">请填写存贮温度！</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    存贮时间：</label>
+                                <div class="col-md-3">
+                                    <input style="width: 150px;" placeholder="入库时间" class="form-control date-picker"
+                                        id="inWareDate" type="text" data-date-format="yyyy-mm-dd" readonly="readonly"
+                                        data-bind="value:inWareDate" />
+                                </div>
+                                <label class="col-md-1 control-label no-padding-right" for="form-field-1">
+                                    至</label>
+                                <div class="col-md-3">
+                                    <input style="width: 150px;" placeholder="出库时间" class="form-control date-picker"
+                                        id="outWareDate" type="text" data-date-format="yyyy-mm-dd" readonly="readonly"
+                                        data-bind="value:outWareDate" />
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    备注：</label>
+                                <div class="col-md-3">
+                                    <textarea style="width: 500px" rows="8" class="control-input" data-bind="value:ambientRemark"></textarea>
+                                </div>
+                            </div>
+                            <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                                <button class="btn btn-success btn-lg" data-bind="click:EditAmbient">
+                                    下一步</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="LogisticsInfo" style="display: none">
+                        <div class="row  no-margin pat10">
+                        </div>
+                        <div class="row no-margin">
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    物流单号：
+                                </label>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="物流单号..." class="control-input" data-bind="value:logisticsNum">
+                                    <!--<span class="middle light-red" data-bind="visible:SelLogisticsNum">请填写物流单号！</span>-->
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    物流追溯网址：
+                                </label>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="物流追溯网址..." class="control-input" data-bind="value:logisticsUrl">
+                                    <!--<span class="middle light-red" data-bind="visible:SelLogisticsUrl">请填写物流追溯网址！</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    物流车辆：</label>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="物流车辆..." class="control-input" data-bind="value:logisticsCarNum">
+                                    <!--<span class="middle light-red" data-bind="visible:SelLogisticsCarNum">请填写物流车辆！</span>-->
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    车辆情况：</label>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="车辆情况..." class="control-input" data-bind="value:carAmbient">
+                                    <!--<span class="middle light-red" data-bind="visible:SelCarAmbient">请填写车辆环境！</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    起始地：
+                                </label>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="起始地..." class="control-input" data-bind="value:startAddress">
+                                    <!--<span class="middle light-red" data-bind="visible:SelStartAddress">请填写起始地！</span>-->
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    起始时间：
+                                </label>
+                                <div class="col-md-3">
+                                    <input style="width: 170px;" placeholder="操作时间" class="form-control date-picker"
+                                        id="startDate" type="text" data-date-format="yyyy-mm-dd" readonly="readonly"
+                                        data-bind="value:startDate" />
+                                    <!--<span class="middle light-red" data-bind="visible:SelStartDate">请填写起始时间！</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    目的地：
+                                </label>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="目的地..." class="control-input" data-bind="value:endAddress">
+                                    <!--<span class="middle light-red" data-bind="visible:SelEndAddress">请填写目的地！</span>-->
+                                </div>
+                                <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                    到达时间：
+                                </label>
+                                <div class="col-md-3">
+                                    <input style="width: 170px;" placeholder="操作时间" class="form-control date-picker"
+                                        id="endDate" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" data-bind="value:endDate" />
+                                    <!--<span class="middle light-red" data-bind="visible:SelEndDate">请填写到达时间！</span>-->
+                                </div>
+                            </div>
+                            <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                                <button class="btn btn-success btn-lg" data-bind="click:SaveLogistics">
+                                    下一步</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="PreviewCode" style="display: none">
+                        <div class="previewewm">
+                            <img data-bind="attr:{src:codePath}">
+                            <p>
+                                扫描查看预览</p>
+                        </div>
+                        <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                            <button class="btn btn-success btn-lg" onclick="javascript:location.href='#requestsettingmanage'">
+                                完成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

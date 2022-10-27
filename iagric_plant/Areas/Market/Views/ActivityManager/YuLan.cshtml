@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>YuLan</title>
+</head>
+<body>
+    <div class="ncp-content clearfix">
+        <div class="lookewmbox">
+        @if (ViewBag.Method=="coupon")
+        {
+            <img src="@Url.Action("GetSrc", "Coupon", new { activityId=ViewBag.id})" />
+                    <p style="padding-left: 50px;">用手机扫一扫，查看活动效果</p>
+        }
+        else{
+            <img src="/Market/Packet/CenterEwmImg?id=@ViewBag.id&w=150&h=150&settingId=@ViewBag.SettingId" />
+            <p style="padding-left: 50px;">
+                用微信扫一扫，查看活动效果</p>
+                }
+        </div>
+    </div>
+</body>
+</html>

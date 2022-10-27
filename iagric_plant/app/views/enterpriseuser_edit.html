@@ -1,0 +1,86 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width:600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    编辑用户</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>角色：
+                        </label>
+                        <div class="col-md-5">
+                            <select class="form-control" data-placeholder="选择角色..." id="Select1" data-bind="options:vmUserModels.userModelsArray,value:vmUserModels.selectedOption,optionsCaption:'选择角色',optionsText:'RoleName',optionsValue:'Enterprise_Role_ID'">
+                </select>
+                        </div>
+                        <span class="alert-danger" data-bind="visible:selRoleName">请选择角色！</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>用户名称：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="用户名称..." class="col-md-9" data-bind="value:userName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>用户编号：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="用户编号..." class="col-md-9" data-bind="value:userCode" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>登录名：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="登录名..." class="col-md-9" data-bind="value:loginName" />
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>登录密码：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="登录密码..." class="col-md-9" data-bind="value:loginPass" />
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>电话：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="电话..." class="col-md-9" data-bind="value:telephone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>地址：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="地址..." maxlength="200" class="col-md-9" data-bind="value:address" />
+                        </div>
+                    </div>
+                    <div class="space-4">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+             <button type="button" class="btn  btn-lg btn-success" data-bind="click:Save">保存</button>
+             <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">取消</button>
+        </div>
+    </div>
+</div>

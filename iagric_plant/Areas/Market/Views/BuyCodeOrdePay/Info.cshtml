@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Info";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<html style="overflow-x: hidden">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="mc clearfix">
+        <div class="user-set userset-lcol">
+            <div class="form hd-manage-det">
+                <div class="infoitem">
+                    <span class="label">支付方式：</span>
+                    <div class="fl">
+                        <span class="yellow">@Common.EnumText.EnumToText(typeof(Common.EnumText.PayType), Model.PayMode)</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">支付账号：</span>
+                    <div class="fl">
+                        <span>@Model.PayAccount</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">支付金额：</span>
+                    <div class="fl">
+                        <span>@Model.RealPrice 元</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label">支付日期：</span>
+                    <div class="fl">
+                        <span>@Model.PayDate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

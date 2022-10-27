@@ -1,0 +1,154 @@
+﻿@model List<LinqModel.View_RequestOrigin>
+@{
+    ViewBag.Title = "MoreRaw";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/wapstyle/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="/wapstyle/css/style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .m_header_mask
+        {
+            display: none;
+            position: fixed;
+            width: 100%;
+            z-index: 11;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            opacity: 0.8;
+        }
+        #divImg
+        {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            z-index: 225;
+            display: none;
+            margin: 0px auto;
+            top: 50%;
+        }
+        #divImg img
+        {
+            width: 100%;
+        }
+    </style>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+        $(function () {
+            $(".bigImg").click(function () {
+                $("#divImg").find("img").attr("src", $(this).attr("big"));
+                $(".m_header_mask").show();
+                $("#divImg").show();
+                $("#divImg").css("margin-top", "-" + $("#divImg").find("img").height() / 2 + "px");
+                $("body").scrollTop(0);
+            });
+            $("#divImg").find("img").click(function () {
+                $("#divImg").hide();
+                $(".m_header_mask").hide();
+            });
+            $(".m_header_mask").click(function () {
+                $("#divImg").hide();
+                $(".m_header_mask").hide();
+            });
+            $("#divImg").click(function () {
+                $("#divImg").hide();
+                $(".m_header_mask").hide();
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        function SHowRaw(btn) {
+            var btnMore = $("#lookmore" + btn);
+            if (btnMore.text().trim() == "查看更多") {
+                $("#MoreRaw" + btn).css({ "overflow": "auto", "height": "auto" });
+                $("#lookmore" + btn).css({ "display": "none" });
+            }
+        }   
+    </script>
+</head>
+<body>
+    <header class="OriginHead bar-green">
+        <a href="/Wap_Index/Index" class="bar-item pull-left"><i class="icon bar-arrow-left">
+        </i><span>首页</span></a>
+        <h1 class="bar-title">
+            原材料详情</h1>
+    </header>
+    <div class="main">
+        @if (Model != null && Model.Count > 0)
+        {
+            int i = 1;
+            foreach (var item in Model)
+            {
+            <div class="list ycl-item clearfix" id="@string.Format("MoreRaw{0}", i)">
+                <div class="list-title border-bom">
+                    @item.OriginName
+                </div>
+                <div class="m_article mat10 clearfix">
+                    <div class="item-img">
+                        <a href="#">
+                            @if (item.imgs != null)
+                            {
+                                foreach (var sub1 in item.imgs)
+                                {
+                                @:<img src="@sub1.fileUrls">
+                                                                                                                    }
+                            }
+                        </a>
+                    </div>
+                    <div class="m_article_info">
+                        <div class="m_article_title">
+                            <span>@item.OriginName</span>
+                        </div>
+                        <p>@(item.InDate + "入场")</p>
+                        <div class="m_article_desc clearfix">
+                            经<span class="m_article_channel">@item.CheckUser</span>检疫
+                        </div>
+                    </div>
+                </div>
+                <div class="det-content no-padding-top desOpen">
+                    <h2>
+                        检验检疫</h2>
+                    @if (!string.IsNullOrEmpty(item.TagContent))
+                    { 
+                        <p>
+                            @Html.Raw(item.TagContent)</p>
+                    }
+                    @if (item.imgs != null)
+                    {
+                        foreach (var sub in item.imgs)
+                        {
+                        @:<img class="bigImg" src="@sub.fileUrls" big="@sub.fileUrl">
+                                   }
+                    }
+                    @if (item.jcimgs != null)
+                    {
+                        foreach (var sub in item.jcimgs)
+                        {
+                        @:<img class="bigImg" src="@sub.jcfileUrls" big="@sub.jcfileUrl">
+                                                                 }
+                    }
+                </div>
+                <a class="y-mod-more" id="@string.Format("lookmore{0}", i)" onclick="SHowRaw(@i)">
+                <span>查看更多</span></a>
+            </div>
+                    i++;
+            }
+        }
+    </div>
+    <div class="m_header_mask" style="display: none;">
+    </div>
+    <div id="divImg">
+        <img src="" />
+    </div>
+</body>
+</html>

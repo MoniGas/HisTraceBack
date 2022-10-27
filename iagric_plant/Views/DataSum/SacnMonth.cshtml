@@ -1,0 +1,196 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>月扫码量分析</title>
+    <link href="/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="/css/main.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/highcharts/highcharts.js"  type="text/javascript"></script>
+    <script type="text/javascript">
+        /*****************报表*************************/
+        function GetChartData() {
+            var container = 'chartDIV';
+            var title = '消费者拍码情况';
+            var units = '拍码次数';
+            var lineName = '月拍码情况';
+            var time = $("#timeInfo").val().split(",");
+            var data = [];
+            $.each($("#countInfo").val().split(","), function (i, v) {
+                data.push(Number(v));
+            });
+
+            var chart = {
+                type: 'column'
+            };
+            var title = {
+                text: '月拍码情况'
+            };
+            var subtitle = {
+                text: ''
+            };
+            var xAxis = {
+                categories: time,
+                crosshair: true
+            };
+            var yAxis = {
+                min: 0,
+                title: {
+                    text: '拍码情况 (次数)'
+                }
+            };
+            var tooltip = {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} 次</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            };
+            var plotOptions = {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            };
+            var credits = {
+                enabled: false
+            };
+
+            var series = [{
+                name: '拍码情况',
+                data: data
+            }];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.subtitle = subtitle;
+            json.tooltip = tooltip;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.series = series;
+            json.plotOptions = plotOptions;
+            json.credits = credits;
+            $('#chartDIV').highcharts(json);
+        }
+
+        function GetChartDataPie() {
+
+            var chart = {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            };
+            var title = {
+                text: '消费者拍码区域分析'
+            };
+            var tooltip = {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            };
+            var plotOptions = {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            };
+            var series = [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+                ['Firefox', 45.0],
+                ['IE', 26.8],
+                {
+                    name: 'Chrome',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['Safari', 8.5],
+                ['Opera', 6.2],
+                ['Others', 0.7]
+            ]
+            }];
+            var categories = $("#areaInfo").val().split(",");
+            var piedata = [];
+            $.each($("#areacount").val().split(","), function (i, v) {
+                var tmp = [];
+                tmp.push(categories[i], Number(v));
+                piedata.push(tmp);
+            });
+            var seriesPie = [{
+                type: 'pie',
+                name: '',
+                data: piedata
+            }];
+
+            var container = 'chartDIVPie';
+            var colors = Highcharts.getOptions().colors;
+
+            var data = [];
+            $.each($("#areacount").val().split(","), function (i, v) {
+                data.push(Number(v));
+            });
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.tooltip = tooltip;
+            json.series = seriesPie;
+            json.plotOptions = plotOptions;
+            $('#chartDIVPie').highcharts(json);
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetChartData();
+            GetChartDataPie();
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <form id="form1" method="get" action="/DataSum/SacnMonth">
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li>二维码应用<span class="divider">›</span>月扫码量分析</li>
+            </ul>
+        </div>
+        <div class="card_pa40 clearfix">
+            <input hidden id="timeInfo" value="@ViewBag.Time" />
+            <input hidden id="countInfo" value="@ViewBag.Count" />
+            <input hidden id="areaInfo" value="@ViewBag.Area" />
+            <input hidden id="areacount" value="@ViewBag.AreaCount" />
+            <div class="mod-main">
+                <div class="table-filter borderLeft borderRight clearfix">
+                    <div class="sitem">
+                        扫描时间：
+                        <input type="text" placeholder="年份" style="width: 120px;" id="year" name="year" value="@ViewBag.year" readonly="readonly"
+                               cssclass="Wdate" onclick="WdatePicker({ isShowClear: false, isShowToday: false, dateFmt: 'yyyy' })">
+                    </div>
+                    <div class="sitem">
+                        <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button">
+                    </div>
+                </div>
+                <div class="trend-detail clearfix" id="ulid">
+                    <div id="chartDIV" style="float: left">
+                    </div>
+                    <div id="chartDIVPie" style="float: left">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

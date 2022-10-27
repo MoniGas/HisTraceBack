@@ -1,0 +1,71 @@
+﻿@model List<LinqModel.YX_ActivityLottery>
+@{
+    ViewBag.Title = "PrizeDetail";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>活动管理<span class="divider">›</span>活动管理<span class="divider">›</span>奖项明细<span class="divider">›</span><a style="cursor: pointer; line-height: 20px; color: #989898;" href="/Market/ActivityManager/Index?activityStatus=-1">
+                            返回</a></li>
+    </ul>
+</div>
+<div>
+    <form id="form1" method="get" action="/Market/ActivityManager/PrizeDetail">
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                <div class="trend-detail clearfix" id="ulid">
+                    <div class="trend-main">
+                        <div class="boxtable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            奖项名称
+                                        </th>
+                                        <th>
+                                            奖项图片
+                                        </th>
+                                        <th>
+                                            奖项文件
+                                        </th>
+                                       @* <th>
+                                            操作
+                                        </th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (Model != null)
+                                        {
+                                            foreach (var sub in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                       @sub.LotteryName
+                                                    </td>
+                                                    <td>
+                                                        <img src="@sub.LotteryPic" style="width:50px;height:50px;" />
+                                                    </td>
+                                                    <td>
+                                                        @*<a href="">@sub.LotteryFile</a>*@
+                                                        <a target="_blank" href="@sub.LotteryFileURL">@sub.LotteryFile</a>
+                                                    </td>
+                                                  @*  <td>
+                                                        <a href="/YXALLActivity/Conditions?activityLotteryId=@sub.ActivitylotteryID&activityId=@sub.ActivityID" class="lnk mar10">发放情况</a>
+                                                    </td>*@
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

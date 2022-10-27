@@ -1,0 +1,33 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="Div1">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">主页</a> </li>
+            <li class="active">企业认证</li>
+        </ul>
+        <!-- /.breadcrumb -->
+        <span><a href="javascript:void(0);" data-bind="click:goBack"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="col-md-6">
+        <h6 class="header bigger no-padding clearfix">
+            上传图片</h6>
+        <div class="pic-item clearfix">
+            <a id="file_upload"></a>
+            <div id="uploadfileQueue">
+            </div>
+            <div class="thumbnail col-sm-6 col-md-3" style="margin-top: 2px;" id="divPreImage">
+                <img style="" id="preImage" src="">
+            </div>
+        </div>
+        <input type="button" class="button_x" style="margin-left: 200px; margin-top: 10px;
+            margin-bottom: 10px;" id="btnAdd" name="btnAdd" value="添加" data-bind="click:vmVerify.Verify" />
+    </div>
+    <!--    <div class="row"> 
+        <form  id="form1" name="form1"  method="post" enctype="multipart/form-data">
+        <input type="file" name="file1" id="file1"data-bind="value: vmVerify.file" />
+        <input type="text" name="Organizationcode" id="Organizationcode" />
+        <input type="button" class="button_x" style="margin-left: 200px; margin-top: 10px;
+            margin-bottom: 10px;" id="btnAdd" name="btnAdd" value="添加" data-bind="click:vmVerify.Verify" />
+        </form>
+    </div>-->
+</div>

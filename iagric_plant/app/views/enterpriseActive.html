@@ -1,0 +1,40 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="row clearfix">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            激活设置：</label>
+                        <div class="col-md-10 no-padding">
+                            <div class="fake_input S_line">
+                                <input type="checkbox" id="activeStatus" name="activeStatus" checked="checked" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row hr pat10 clearfix">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-lg btn-success" data-bind="click:vmShowActiveStatus.SaveInfo">
+                        保存</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="dis2">
+            <div class="col-md-8">
+                <div class="col-md-9 mat10">
+                    <div class="form-inline">
+                        <span>到期日期：</span><span class="lbl" data-bind="text:vmShowActiveStatus.setDate"></span>
+                    </div>
+                </div>
+                <div class="col-md-9 mat10">
+                    <div class="form-inline">
+                        <span>授权码：</span><span class="lbl" data-bind="text:vmShowActiveStatus.LicenseCode"></span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

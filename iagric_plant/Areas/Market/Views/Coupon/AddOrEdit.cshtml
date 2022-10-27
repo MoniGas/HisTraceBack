@@ -1,0 +1,453 @@
+﻿@{
+    ViewBag.Title = "新建优惠券活动";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+    var loginType = Common.Argument.CurrentUser.User == null ? 1 : Common.Argument.CurrentUser.User.LoginType;
+}
+@model LinqModel.View_ActivityCoupon
+<style type="text/css">
+    .ke-container
+    {
+        float: left;
+    }
+    .imgdis
+    {
+        width: 130px;
+        height: 130px;
+    }
+    .imgdisLogo
+    {
+        width: 130px;
+        height: 130px;
+    }
+    .diviput
+    {
+        display: inline-block;
+        margin-left: 10px;
+        position: relative;
+    }
+</style>
+@*<script src="@Url.Content("~/Scripts/kindeditor/kindeditor.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    var editor1;
+    KindEditor.ready(function (K) {
+        editor1 = K.create('#Content', {
+            uploadJson: '/App/UploadImage',
+            fileManagerJson: '/App/FileManager',
+            allowUpload: true,
+            allowFileManager: true,
+            items: [
+						'fontname', 'fontsize', '|', 'forecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'image']
+        });
+    });
+</script>*@
+<script type="text/javascript">
+    $(function () {
+  $("#xj,#zk,#lp").keyup(function(){
+
+      var dw="";
+      var content=""
+         switch ($(":checked[name=CouponType]").val()) {
+                case "1":content="现金券";dw="元" ; break;
+                case "2":content="折扣券";dw="%" ;  break;
+                case "3":content="礼品券"; break;
+
+            }
+             if($(":checked[name=CouponType]").val()==3)
+            {
+            $("#py").css({fontSize:"22px"});
+            $("#pytext").css({'margin-top':"12px"});
+            }
+            else
+            {
+             $("#py").css({fontSize:"28px"});
+             $("#pytext").css({'margin-top':"0px"});
+            }
+            $("#syhq").text(content);
+            $("#pdw").text(dw);
+            $("#py").text($(this).val());
+  });
+    $("#ActivityTitle").keyup(function(){
+    $("#htitle").text($(this).val());
+    });
+//     $("#CouponCount").keyup(function(){
+//    $("#psl").text($(this).val());
+//    });
+     $("#Content").keyup(function(){
+    $("#gz").text($(this).val());
+    });
+    $("#Content").focus(function(){
+    $("#sj").html("有效期："+$("#StartTime").val()+"至"+$("#EndTime").val());
+    });
+        $("#btnStep1").click(function () {
+            if (isNull($("#ActivityTitle").val())) {
+                alert("请输入优惠券名称！");
+                $("#ActivityTitle").focus();
+                return false;
+            }
+            if (isNull($("#CouponCount").val())) {
+                alert("请输入发放量");
+                $("#CouponCount").focus();
+                return false;
+            }
+            var rex = new RegExp("^[1-9]{1,}[0-9]{0,}$");
+            if (!rex.test($("#CouponCount").val())) {
+                alert("发放数量请输入正整数");
+                $("#CouponCount").focus();
+                return false;
+            }
+            if (parseInt($("#CouponCount").val()) > 10000) {
+                alert("发放数量必须小于10000");
+                $("#CouponCount").focus();
+                return false;
+            }
+            var optionValue = $(":checked[name=CouponType]").val();
+            switch (optionValue) {
+                case "1": if (isNull($("#xj").val())) 
+                { 
+                alert("请输入面值"); $("#xj").focus();
+                 return false;
+                  }
+                 else if (!rex.test($("#xj").val())) { alert("面值必须是正整数"); $("#xj").focus(); return false; }; break;
+                case "2": if (isNull($("#zk").val())) { alert("请输入折扣"); $("#zk").focus(); return false; } else if (!new RegExp("^[0-9]{1,2}$").test($("#zk").val())) { alert("请输入有效的折扣值！"); $("#zk").focus(); return false; }; break;
+                case "3": if (isNull($("#lp").val())) { alert("请输入礼品"); $("#lp").focus(); return false; }; break;
+
+            }
+            if (parseInt($("#xj").val()) > 1000) {
+                alert("面值必须小于1000");
+                $("#xj").focus();
+                return false;
+            }
+            if (isNull($("#StartTime").val())) {
+                alert("请输入活动开始时间");
+                $("#StartTime").focus();
+                return false;
+            }
+            if (isNull($("#EndTime").val())) {
+                alert("请输入活动结束时间");
+                $("#EndTime").focus();
+                return false;
+            }
+            if (!checkTwoDate($("#StartTime").val(), $("#EndTime").val(), "yyyy-MM-dd")) {
+                $("#EndTime").focus();
+                return false;
+            }
+            if (isNull($("#Content").val())) {
+                alert("请输入活动规则！");
+                $("#Content").focus();
+                return false;
+            }
+             if (isNull($("#CouponAddress").val())) {
+                alert("请输入领取地址！");
+                $("#CouponAddress").focus();
+                return false;
+            }
+            var couponContent="";
+            switch (optionValue) {
+                case "1":couponContent=$("#xj").val() ; break;
+                case "2":couponContent=$("#zk").val(); break;
+                case "3":couponContent=$("#lp").val(); break;
+
+            }
+            var sendData =
+            {
+                ActivityTitle: $("#ActivityTitle").val(),
+                ActivityType: $(":checked[name=ActivityType]").val(),
+                CouponCount: $("#CouponCount").val(),
+                CouponLastCount:$("#CouponLastCount").val(),
+                CouponType: $(":checked[name=CouponType]").val(),
+                StartDate: $("#StartTime").val(),
+                EndDate: $("#EndTime").val(),
+                ActivityID: $("#ActivityID").val(),
+                Content: $("#Content").val(),
+//                Content:editor1.html(),
+                CouponContent: couponContent,
+                CouponAddress: $("#CouponAddress").val(),
+                RedStyle: $('input:radio[name="RedStyle"]:checked').val(),
+                SetingID:$("#SetingID").val()
+            }
+            $.post("@Url.Action("AddOrEdit")", sendData, function (data) {
+            alert(data.msg);
+            if(data.flag){
+            $("#li1").removeClass('active');
+            $("#li2").addClass('active');
+            $("#Step1").css({ "display": "none" });
+            $("#Step2").css({ "display": "" });
+            }
+            $("#Img").attr("src","@Url.Action("GetSrc")?activityId="+data.activityId);
+            },"json");
+        });
+        $("#btnFinish").click(function(){
+        if ("@loginType"==1) {
+    location.href="@Url.Action("Index", "ActivityManager")";
+}else{
+top.location.href = "/Home/Index?hash=#requestsettingmanage";
+}
+        });
+        if ("@Model.ActivityID" != "0") {
+            $(".yt input[type=radio][value=@Model.CouponType]").prop("checked", true);
+            $(".lq input[type=radio][value=@Model.ActivityType]").prop("checked", true);
+            $("p.yt").hide();
+            $("p.yt[yt=@Model.CouponType]").show();
+            $("#xj,#zk,#lp").keyup();
+        }
+        $(".yt input[type=radio]").click(function () {
+            $("p.yt").hide();
+            var ms = $(this).val();
+            $("p[yt='" + ms + "']").show();
+        });
+        $("#uploadify").uploadify({
+            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf',    // 做上传的Flash插件
+            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=1',   //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif',  // 关闭按钮的图片地址
+            'folder': '/Areas/Market/Files/Activity/', // 保存文件的文件夹
+            'queueID': 'fileQueue',
+            'fileDesc': '请选择你电脑里格式为*.jpg;*.jpeg;*.png的文件',  // 描述（必须和fileExt一起使用）
+            'fileExt': '*.jpg;*.jpeg;*.png',   // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+            'sizeLimit': 1048576, // 文件大小限制100M（注意，在ASP.NET中Web.Config也要配置）
+            'auto': false,
+            'multi': false,  // 是否支持多文件上传
+            //'buttonText': '浏览',    // 按钮上的文本
+            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+            'onError': function (a, b, c, d) {
+                if (d.status == 404)
+                    alert('Could not find upload script.');
+                else if (d.type === "HTTP")
+                    alert('error ' + d.type + ": " + d.status);
+                else if (d.type === "File Size")
+                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+                else
+                    alert('error ' + d.type + ": " + d.info);
+            },
+            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+                $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+                $("#imgsrc").attr("src", d);
+                $("#ImagePath").val(d);
+                $("#showimg").css({ "display": "" });
+                //                $("#activiImg").attr("src", d);
+                $("#delActivity").click(function () {
+                    $("#imgsrc").attr("src", '');
+                    $("#ImagePathLogo").val('');
+                    $("#showimg").css({ "display": "none" });
+                });
+            },
+            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+                $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+            },
+            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+            },
+            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+            }
+        });
+    });
+</script>
+<!-------------------main start---------------------------------->
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>活动管理<span class="divider">›</span>新建/编辑优惠券活动</li>
+    </ul>
+</div>
+<div class="card_pa40 clearfix">
+    <div class="index-part">
+    <input type="hidden" value="@ViewBag.SetingID" id="SetingID" />
+        <div class="ncp-steps">
+            <ul>
+                <li class="active" id="li1"><i>1</i><span>设置活动信息</span></li>
+                <li id="li2"><i>2</i><span>扫码预览活动效果</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content clearfix" id="Step1">
+            <div class="workspace">
+                <div class="phone">
+                    <div class="nr couponinfo">
+                        <h3 class="ctit ellipsis" id="htitle">
+                            优惠券名称</h3>
+                        <div class="yhq clearfix">
+                            <div class="price">
+                                <div class="clearfix">
+                                    <div class="special" id="py">
+                                    </div>
+                                    <div class="text" id="pytext">
+                                        <p id="pdw">
+                                        </p>
+                                        <p>
+                                            <span class="yhqico" id="syhq"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="width: 200px" class="condition" id="sj">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <p class="name">
+                                </p>
+                                @*    <p class="catgory" id="psl">
+                                    @Model.CouponCount
+                                </p>*@
+                            </div>
+                        </div>
+                        <div class="sygz">
+                            <p class="gui-title">
+                                活动规则</p>
+                            <div class="gui-text" id="gz">
+                                @Model.Content
+                                @*											<P>1. 使用优惠券时的下单手机号需为领取优惠券时使用的手机号。</P>
+											<p>2. 发放至手机号的优惠券需在平台注册，或将手机号绑定至账户后才可使用。</p>
+											<P>3. 平台保留法律范围内允许的对活动的解释权。</P>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mod-main wap-set">
+                <div class="mc">
+                    <div class="user-set userset-lcol">
+                        <div class="form">
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>优惠券名称：</span>
+                                <div class="fl">
+                                    <input type="hidden" value="@Model.ActivityID" id="ActivityID" />
+                                    <input type="text" maxlength="10" id="ActivityTitle"  value="@Model.ActivityTitle" placeholder="不超过10个汉字，含标点符号" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>发放数量：</span>
+                                <div class="fl">
+                                    <input type="text" maxlength="5" value="@Model.CouponCount" placeholder="最大为10000张" id="CouponCount" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">优惠券类型：</span>
+                                <div class="fl interest-list yt">
+                                    <p class="hdlx">
+                                        <label class="mar10">
+                                            <input type="radio" name="CouponType" checked="checked" value="1" />现金券
+                                        </label>
+                                        <label class="mar10">
+                                            <input type="radio" name="CouponType" value="2" />折扣券
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="CouponType" value="3" />礼品券
+                                        </label>
+                                    </p>
+                                    <p class="hdlx yt" yt="1">
+                                        <label class="mar10">
+                                            面值</label><input class="mar10" maxlength="4" id="xj" type="text" value="@Model.CouponContent" placeholder="最大为1000元" style=" width:200px;" /><label>元</label></p>
+                                    <p class="hdlx yt" yt="2" style="display: none;">
+                                        <label class="mar10">
+                                            折扣</label><input class="mar10" maxlength="4" value="@Model.CouponContent" type="text"  id="zk" style=" width:200px;" /><label>%</label></p>
+                                    <p class="hdlx yt" yt="3" style="display: none;">
+                                        <label class="mar10">
+                                            礼品</label><input class="mar10"  maxlength="8" value="@Model.CouponContent" type="text" id="lp" style=" width:300px;" /><label></label></p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动有效期：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 190px;" id="StartTime" value="@(Model.StartDate == null ? "" : Model.StartDate.Value.ToString("yyyy-MM-dd"))" name="StartTime" cssclass="Wdate"
+                                        onclick="WdatePicker()" readonly="readonly" />
+                                    至
+                                    <input cssclass="Wdate" readonly="readonly" onclick="WdatePicker()" value="@(Model.EndDate == null ? "" : Model.EndDate.Value.ToString("yyyy-MM-dd"))"  type="text" id="EndTime"
+                                        class="col-xs-3 col-sm-2" name="EndTime" style="width: 190px;" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动规则：</span>
+                                <div class="fl">
+                                    <textarea id="Content" name="Content" cols="100" rows="8" style="width: 400px; height: 80px;"
+                                        maxlength="500" placeholder="活动规则">@Model.Content</textarea>
+                                    @*    <textarea id="Content" name="Content" cols="100" rows="8" style="width: 100%; height: 200px"
+                                        placeholder="活动规则" maxlength="500">@Model.Content</textarea>*@
+                                </div>
+                            </div>
+                            <div class="infoitem"style="display:none">
+                                <span class="label">领取方式：</span>
+                                <div class="fl interest-list lq">
+                                    <p class="hdlx">
+                                        <label>
+                                            <input type="radio" name="ActivityType" checked="checked" value="1" />按码设置优惠券（一个码只能领取一次优惠券。设置多少个发放总量，则需要多少个二维码）
+                                        </label>
+                                    </p>
+                                    <p class="hdlx" >
+                                        <label class="mar10">
+                                            <input type="radio" name="ActivityType" value="2" />按活动设置优惠券(一个活动只有一个二维码，可以领取多次)</label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">优惠券模式：</span>
+                                <div class="fl interest-list">
+                                    @if (Model.RedStyle == 1)
+                                    {
+                                        <p class="hdlx">
+                                            <label>
+                                                <input type="radio" id="RedStyle" name="RedStyle" checked="checked" value="1" />抢优惠券
+                                            </label>
+                                        </p>
+                                        <p class="hdlx">
+                                            <label class="mar10">
+                                                <input type="radio" id="RedStyle" name="RedStyle" value="2" />藏优惠券
+                                            </label>
+                                        </p>
+                                    }
+                                    else if (Model.RedStyle == 2)
+                                    {
+                                        <p class="hdlx">
+                                            <label>
+                                                <input type="radio" id="RedStyle" name="RedStyle" value="1" />抢优惠券
+                                            </label>
+                                        </p>
+                                        <p class="hdlx">
+                                            <label class="mar10">
+                                                <input type="radio" id="RedStyle" name="RedStyle" checked="checked" value="2" />藏优惠券
+                                            </label>
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="hdlx">
+                                            <label>
+                                                <input type="radio" id="RedStyle" name="RedStyle" checked="checked" value="1" />抢优惠券
+                                            </label>
+                                        </p>
+                                        <p class="hdlx">
+                                            <label class="mar10">
+                                                <input type="radio" id="RedStyle" name="RedStyle" value="2" />藏优惠券
+                                            </label>
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>领取地址：</span>
+                                <div class="fl">
+                                    <input type="text" value="@Model.CouponAddress"  maxlength="50" id="CouponAddress" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">&nbsp;</span>
+                                <div class="fl">
+                                    <input type="button" value="下一步" class="button-big" id="btnStep1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ncp-content clearfix" style="display: none" id="Step2">
+            <div class="lookewmbox">
+                <img id="Img" name="Img" src="" />
+                <p>
+                    扫一扫，查看优惠券活动效果</p>
+                <p>
+                    <input type="button" value="完   成" class="button-big-gray" id="btnFinish" onclick="Complate()" /></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->

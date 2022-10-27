@@ -1,0 +1,433 @@
+@charset "utf-8";
+/* CSS Document */
+*
+{ margin:0 auto;
+   padding:0;
+   
+     }
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin: 0;
+	padding: 0
+}
+input,
+textarea{/*********移动端清除输入框内阴影*************/
+	border: 0;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgb(0,0,0,0);
+	outline: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+fieldset,
+img {
+	border: 0
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+	font-style: normal;
+	font-weight: normal
+}
+
+ol,
+ul,
+li {
+	list-style: none
+}
+
+caption,
+th {
+	text-align: left
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+	font-weight: normal
+}
+
+q:before,
+q:after {
+	content: ''
+}
+i{
+	font-style: normal;
+}
+abbr,
+acronym {
+	border: 0
+}
+
+a {
+	color: #222222;
+	text-decoration: none
+}
+
+a:active {
+	color: #000
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+
+
+html {
+	font-family: "Helvetica" !important;
+	font-size:100px;
+	height: 100%;
+}
+
+body {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	background: #820f00;
+	font-size: .3rem;
+	height: 100%;
+}
+
+/****************/
+.coupon-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.y-body-wrap {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    background: url(../Content/images/redbg.png) top no-repeat;
+    background-size: 100% auto;
+}
+.y-body-wrap .shop-info {
+    padding-top: 7rem;
+}
+.y-body-wrap .coupons-wrap.noFollow {
+    margin-top: .5rem;
+}
+.coupons-wrap .coupons-container {
+    margin: 0 auto;
+    width: 6.7rem;
+    height: 5.9rem;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+.coupons-wrap .yhq-lq {
+    text-align: center;
+    color: #fff;
+    margin-top: .2rem;
+    padding: 0 .8rem;
+}
+.coupons-wrap .yhq-lq p {
+    font-size: .26rem;
+    margin-bottom: .2rem;
+}
+.coupons-wrap .yhq-lq .lq-phone .lq-phone-input {
+    width: 100%;
+    border: 1px solid #eaeaea;
+    outline: 0;
+    font-size: 20px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: .1rem;
+    color: #222;
+    padding: .2rem;
+    background: #fff;
+}
+.coupons-btn {
+    width: 3.5rem;
+    height: .88rem;
+    display: inline-block;
+    margin: .2rem auto 0;
+    color: #ffffff;
+    font-size: 0.4rem;
+    background: #ec7551;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.coupons-btn-reset {
+    width: 3.5rem;
+    height: .88rem;
+    display: inline-block;
+    margin: .2rem auto 0;
+    color: #9e9e9e;
+    font-size: 0.4rem;
+    background: #d8d8d8;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.coupons-btn-guize {
+    width: 3.5rem;
+    height: .88rem;
+    display: inline-block;
+    margin: .1rem auto 0;
+    background: url(../Content/images/active.png) no-repeat;
+    background-size: 3.5rem .88rem;
+}
+.coupons-container .yhq-success {
+    text-align: center;
+    margin-top: .1rem;
+    padding: 0 1.2rem;
+}
+.coupons-container .yhq-success h3 {
+    font-size: .42rem;
+    color: #fff;
+}
+.coupons-container .yhq-success p {
+    margin-top: .4rem;
+    height: .6rem;
+    background: #fff;
+    line-height: .6rem;
+    color: #666666;
+    border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+*{
+	 margin:0 auto;
+	  padding:0;
+	   list-style: none;
+	   font-size: 12px;
+
+}
+/**
+取消在webkit内核下 a链接点击所产生的阴影
+
+**/
+a{
+border:none;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+-webkit-tap-highlight-color:transparent;
+outline:none£»
+}
+html,body{
+	 width: 100%;
+	  height: 100%;
+	   background-color: #d65645;
+   }
+
+	#banner {
+    width: 5.97rem;
+    height: 3.63rem;
+    margin-top: 0.78rem;
+    text-align: center;
+    top: 55px;
+    position: relative;
+    margin:0 auto;
+}
+
+#banner img{
+	 max-width: 100%;
+}
+#sendpeople{
+	 width: 100%;
+	  height: 0.36rem;
+	 
+	   margin-top: 0.53rem;
+}
+#sendpeople p{
+	 text-align: center;
+	 color: white;
+	  font-size: 0.36rem;
+	  margin-top: 1.24rem;
+          position: relative;
+          top:-13px;
+}
+#main{
+	width: 6.72rem;
+    height: 4.86rem;
+    background: rgb(255,227,221);
+    /* margin-top: 1.59rem; */
+    border-radius: 0.2rem;
+    margin: auto;
+    margin-top: 1.59rem;
+
+}
+#main p{
+	
+	 color:red;
+	 font-size: 0.6rem;
+	 text-align: center;
+	 padding-top: 0.57rem;
+}
+.background{ width: 6.20rem;
+    height: 1.78rem;
+    background: url(images/background.png) no-repeat center center;
+    background-size: cover;
+    margin-top: 0.62rem;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 0.32rem;
+
+}
+.background #idcode{ font-size: 0.36rem;
+	              color: #787473;
+	            text-align: center;
+	            margin-top: -0.04rem;
+	            position: absolute;
+	            left:1.04rem;
+	            top: -0.2rem;
+
+}
+.background a{
+	color:red;
+	display: block;
+	 position: absolute;
+	 bottom: 0.25rem;
+	 text-decoration: none;
+	   left:2.34rem;
+	   font-size:0.36rem;}
+	   
+.index {
+    color: #787473;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin-left: -0.32rem;
+    margin-top: 0.25rem;
+    font-size: 0.36rem;
+    }
+	   #twomain{     width: 6.72rem;
+    height: 17.2rem;
+    background: rgb(255,227,221);
+    margin-top: 0.18rem;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    margin-bottom: 0.7rem;
+    margin: 0 auto;
+    margin-top: 0.18rem;
+
+
+	   }
+	    #twomain p{
+            float: left;
+             font-size: 0.3rem;
+             color: #787473;
+             margin-top: 0.43rem;
+             margin-left: 0.37rem;
+
+  }
+  #line{ width: 6.15rem;
+  	    height: 0.01rem;
+  	     overflow: visible;
+  	    
+  	      clear: both;
+
+  }
+  #here{
+  	 padding-left: 0.09rem;
+  	  padding-right: 0.07rem;
+  	  margin-top: 0.5rem;
+
+  }
+  .one{
+  	 width: 5.76rem;
+  	 height: 0.65rem;
+  	 line-height: 0.56rem;
+  	 font-size: 0.24rem;
+  }
+  .frist{
+  	    width: 5.94rem;
+    height: 1.84rem;
+  
+    margin: 0 auto;
+    margin-top: 1.80rem;
+  }
+.frist img{
+	 width: 5.94rem;
+  	  height: 1.84rem;
+	}
+#many{
+	    width: 5.90rem;
+    height: 8.28rem;
+    /* margin-top: 1.84rem; */
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 1.84rem;
+}
+#many img{
+	 width: 5.90rem;
+	  height: 8.28rem;
+	   
+}
+.i {
+    color: #787473;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin-left:0.1rem;
+    margin-top: 0.6rem;
+    font-size: 0.36rem;
+}
+#maine{
+	
+}
+#ma{
+	width: 6.72rem;
+    height: 3.99rem;
+    background: rgb(255,227,221);
+    margin-top: 1.59rem;
+    border-radius: 0.2rem;
+    margin: 0 auto;
+    margin-top: 0.55rem;
+
+}
+#ma p{
+	
+	 color:red;
+	 
+	 text-align: center;
+	 padding-top: 0.55rem;
+}
+#ma .text{
+	 font-size: 0.36rem;
+	 
+}
+#turemany{
+	font-size: 0.38rem;
+	 margin-left: -18px;
+}

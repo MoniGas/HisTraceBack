@@ -1,0 +1,182 @@
+﻿@model LinqModel.View_EnterprisePlatForm
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="../../css/home.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- 页头 -->
+    <div class="headerbox">
+        <h1 title="医疗器械（UDI）服务云平台">
+            医疗器械（UDI）服务云平台</h1>
+    </div>
+    <!--banner图-->
+    <div class="top_slide_pic self">
+        <div class="info">
+            <a class="avatar J-avatar" href="javascript:;">
+                <img src="@ViewBag.headimg"  width="83" height="83">
+            </a>
+            <div class="name">
+                <span>@ViewBag.name</span><span class="zw">@ViewBag.position</span>
+            </div>
+            <div class="gr_info">
+                @if (!string.IsNullOrEmpty(ViewBag.telPhone))
+                {
+                    <p class="ph">
+                        <a href="#">@ViewBag.telPhone</a></p>
+                }
+                else
+                {
+                    <p class="ph">
+                        <a href="#">未填写</a></p>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.mail))
+                {
+                    <p class="em">@ViewBag.mail</p>
+                }
+                else
+                {
+                    <p class="em">
+                        未填写</p>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.qq))
+                {
+                    <p class="qq">@ViewBag.qq</p>
+                }
+                else
+                {
+                    <p class="qq">
+                        未填写</p>
+                }
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div class="section-module">
+        @if (!string.IsNullOrEmpty(Model.EnterpriseName))
+        {
+            <dl class="contact-dl">
+                <dt>公司名称：</dt>
+                <dd>
+                    @Model.EnterpriseName</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.LinkPhone))
+        {
+            <dl class="contact-dl">
+                <dt>电话：</dt>
+                <dd>
+                    @Model.LinkPhone</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.Address))
+        {
+            <dl class="contact-dl">
+                <dt>地址：</dt>
+                <dd>
+                    @Model.Address</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.WebURL))
+        {
+            <dl class="contact-dl">
+                <dt>网站：</dt>
+                <dd>
+                    @Model.WebURL</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.Fax))
+        {
+            <dl class="contact-dl">
+                <dt>传真：</dt>
+                <dd>
+                    @Model.Fax</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.PostalCode))
+        {
+            <dl class="contact-dl">
+                <dt>邮政编码：</dt>
+                <dd>
+                    @Model.PostalCode</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.Email))
+        {
+            <dl class="contact-dl">
+                <dt>公司邮箱：</dt>
+                <dd>
+                    @Model.Email</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.hometown))
+        {
+            <dl class="contact-dl">
+                <dt>故乡：</dt>
+                <dd>
+                    @ViewBag.hometown</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.location))
+        {
+            <dl class="contact-dl">
+                <dt>所在地：</dt>
+                <dd>
+                    @ViewBag.location</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.memo))
+        {
+            <dl class="contact-dl">
+                <dt>个人说明：</dt>
+                <dd>
+                    @ViewBag.memo</dd>
+            </dl>
+        }
+    </div>
+    <div class="section-module">
+        <div class="product-info">
+            <div class="title">
+                <span class="bg-green">企业联系方式</span></div>
+            <dl class="contact-dl">
+                <dt>企业名称：</dt>
+                <dd>
+                    @Model.EnterpriseName</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>联系人：</dt>
+                <dd>
+                    @Model.LinkMan</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>联系电话：</dt>
+                <dd>
+                    @Model.LinkPhone</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>企业地址：</dt>
+                <dd>
+                    @Model.Address</dd>
+            </dl>
+            <dl class="contact-dl center" style="width: 100%;">
+                @{
+                   
+                    string eurl = Model.MainCode + ".1." + Model.Enterprise_Info_ID;
+                }
+                <a href="/Wap_Com/Company?ewm=@eurl" class="blue underline">点击进入企业官网</a>
+            </dl>
+        </div>
+    </div>
+    <div class="juchou-footer">
+        <footer>
+            <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000;width: 425px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    编辑子批次</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="name">
+                            <span class="alert-danger">*</span>子批次号：</label>
+                        <div class="col-md-5">
+                            <input type="text" placeholder="子批次号..." class="col-xs-10 col-sm-5" style="width: 150px"
+                                data-bind="value:BatchExtName,validationElement:BatchExtName,hasfocus:selTitle" />
+                            <span data-bind="visible:!selTitle"><span class="alert-danger" style="height: 30px;
+                                line-height: 30px;" data-bind="validationMessage:BatchExtName"></span></span>
+                            <!--  <input type="text" class="form-control" data-bind="value: BatchExtName">
+                            <span class="alert-danger">请输入子批次号</span>-->
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Save">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

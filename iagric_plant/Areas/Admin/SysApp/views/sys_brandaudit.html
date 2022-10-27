@@ -1,0 +1,90 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#home" title="返回到首页">首页</a>
+            </li>
+            <li class="active">加入区域品牌审核</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack" title="返回到上一页"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="请输入检索信息" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'" />
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:searchBrand">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 mat10">
+            <label class="col-md-2 control-label no-padding" for="name">
+                状态：</label>
+            <!--            <div class="col-md-10 no-padding">-->
+            <select id="type" data-bind="value:brandEnterpriseStatus,event:{onchange:onchange()}">
+                <option value="-1">全部</option>
+                <option value="0">未审核</option>
+                <option value="1">审核通过</option>
+            </select>
+            <!--   </div>-->
+        </div>
+    </div>
+    <div class="row pat10">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            企业名称
+                        </th>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            申请加入的区域品牌
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th width="120">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmBrand.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.EnterpriseName,attr:{title:$data.EnterpriseName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.MaterialFullName,attr:{title:$data.MaterialFullName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.BrandName,attr:{title:$data.BrandName}">
+                            </p>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.replace($data.BrandEnterpriseStatus)"></span>
+                            <!-- <span data-bind="text:$data.BrandEnterpriseStatus"></span>-->
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnReset_'+$data.Brand_Enterprise_ID()} ,click: function() {$parent.resetPass($data.Brand_Enterprise_ID);}">
+                                审核通过
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer no-margin-top no-t-border">
+            <ul class="pagination" id="brandPager" data-bind="brandPager:vmBrand.pageSize,totalCounts:vmBrand.totalCounts,pageIndex:vmBrand.pageIndex">
+            </ul>
+        </div>
+    </div>
+</div>

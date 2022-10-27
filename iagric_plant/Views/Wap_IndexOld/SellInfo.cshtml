@@ -1,0 +1,87 @@
+﻿@using LinqModel;
+<!--联系-->
+@{
+    Enterprise_Info enterprise = ViewBag.enterprise;
+
+    Dealer dealer = ViewBag.dealer;
+
+    LinqModel.ShowCompany ShowCompanyModel = ViewBag.ShowCompanyModel as LinqModel.ShowCompany;
+}
+@if (enterprise != null)
+{
+    <section class="section-module">
+	<section>
+    		<dl class="contact-dl">
+                <dt>
+                    企业名称：</dt>
+                <dd>
+                    @enterprise.EnterpriseName</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>联系人：</dt>
+                <dd>@enterprise.LinkMan</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>联系电话：</dt>
+                <dd>@enterprise.LinkPhone</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>企业地址：</dt>
+                <dd>@enterprise.Address</dd>
+            </dl>
+              <dl class="contact-dl center" style="width:100%; margin-top: 20px;">
+             @if (ShowCompanyModel != null && !string.IsNullOrEmpty(ShowCompanyModel.Url))
+            {
+                <span class="djjr"><a href="@ShowCompanyModel.Url" class="blue">点击进入企业官网</a></span>
+            }
+             @if (!string.IsNullOrEmpty(enterprise.VideoUrl))
+             {
+                 <span class="djjr line"><a href="@enterprise.VideoUrl" class="blue">点击进入查看</a></span>
+             }
+            </dl>
+     </section>
+</section>
+}
+<!--销售-->
+@if (dealer != null)
+{
+    <section class="section-module">
+	<section>
+    		<dl class="contact-dl">
+                <dt>
+                    经销商名称：</dt>
+                <dd>
+                    @dealer.DealerName</dd>
+            </dl>
+            <dl class="contact-dl">
+                <dt>经销商地址：</dt>
+                <dd>@dealer.Address</dd>
+            </dl>
+	</section>
+    @{
+               if (!string.IsNullOrEmpty(dealer.location))
+               {
+
+                   string[] location = dealer.location.Split(',');
+                   if (location.Length == 2)
+                   {
+            <div id="map-canvas" class="map">
+            </div>
+            <script type="text/javascript">
+                setTimeout(function () {
+                    var map= new BMap.Map("map-canvas");
+                    var pt = new BMap.Point(@location[0], @location[1]);
+                    map.centerAndZoom(pt, 15);
+                    map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+                    map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+                    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用        
+                    var marker = new BMap.Marker(pt);
+                    map.addOverlay(marker);
+                }, 300);
+            </script> 
+                   }
+               }
+}        
+</section>
+}
+

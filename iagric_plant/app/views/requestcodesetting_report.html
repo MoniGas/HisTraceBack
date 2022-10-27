@@ -1,0 +1,75 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    检测报告信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row no-margin">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>检测标题：
+                        </label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" placeholder="检测标题..." class="form-control" data-bind="value:ReportTitle">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>检测日期：
+                        </label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" placeholder="操作时间..." readonly="readonly" class="form-control"
+                                id="txtReportTime" data-date-format="yyyy-mm-dd" data-bind="value:ReportTime">
+                        </div>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>图片：
+                        </label>
+                        <div class="col-md-8 no-padding">
+                            <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span><span
+                        class="alert-danger" data-bind="visible:hasReportImgs">至少上传一张照片</span>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            
+                        </label>
+                        <div class="col-md-8 no-padding">
+                            <div class="pic-item  clearfix">
+                        <ul>
+                            <!-- ko foreach:ReportImgs -->
+                            <li>
+                                <div class="thumbnail">
+                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delReportImage(data, event);}}">
+                                    <i class="hide_clip">移除</i></a></li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="A4"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+           
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:AddReport">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+                取消</button>
+        </div>
+    </div>
+</div>

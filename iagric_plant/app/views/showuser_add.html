@@ -1,0 +1,122 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width:600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加名片宣传码</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>上传头像：
+                        </label>
+                        <div class="col-md-9 pic-item  clearfix">
+                        <ul>
+                            <!-- ko foreach:files -->
+                            <li>
+                                <div class="thumbnail">
+                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                    <i class="hide_clip">移除</i></a> </li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="image_upload"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    <span class="alert-danger" data-bind="visible:touxiangimg">请上传头像！</span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>真实姓名：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="真实姓名..." class="col-xs-10 col-sm-5" data-bind="value:name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>职位：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="职位..." class="col-xs-10 col-sm-5" data-bind="value:position" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>联系电话：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="联系电话..." class="col-xs-10 col-sm-5" data-bind="value:telPhone" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>邮箱地址：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="邮箱地址..." class="col-xs-10 col-sm-5" data-bind="value:mail" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            QQ：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="QQ..." class="col-xs-10 col-sm-5" data-bind="value:qq" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            故乡：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="故乡..." class="col-xs-10 col-sm-5" data-bind="value:hometown" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                            所在地：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="所在地..." class="col-xs-10 col-sm-5" data-bind="value:location" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            个人说明：
+                        </label>
+                        <div class="col-sm-9">
+                            <!--<input type="text" placeholder="个人说明..." class="col-xs-10 col-sm-5" data-bind="value:memo" />-->
+                            <textarea name="comment" placeholder="个人说明..." id="comment" style="width: 100%;" class="height90" data-bind="value:memo"></textarea>
+                        </div>
+                    </div>
+                    <div class="space-4">
+                    </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+                            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Save">
+                                保存</button>
+                            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                                取消</button>
+        </div>
+    </div>
+</div>

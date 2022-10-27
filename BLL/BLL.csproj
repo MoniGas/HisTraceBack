@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7BA6FDD2-5B63-4F51-ACEA-614CA1C5F6CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\iagric_plant\bll\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MvcPager">
+      <HintPath>..\iagric_plant\bll\MvcPager.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Aspose.Cells\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActinvEwmBLL.cs" />
+    <Compile Include="ActivityBLL.cs" />
+    <Compile Include="ActivityManagerBLL.cs" />
+    <Compile Include="ActivityRelationCodeBLL.cs" />
+    <Compile Include="ApiBLL.cs" />
+    <Compile Include="BackListBLL.cs" />
+    <Compile Include="BatchBLL.cs" />
+    <Compile Include="BatchExtBLL.cs" />
+    <Compile Include="Batch_JianYanJianYiBLL.cs" />
+    <Compile Include="Batch_XunJianBLL.cs" />
+    <Compile Include="Batch_ZuoYeBLL.cs" />
+    <Compile Include="BrandBLL.cs" />
+    <Compile Include="BuyCodeOrdePayBLL.cs" />
+    <Compile Include="BuyCodeOrderBLL.cs" />
+    <Compile Include="CategoryBLL.cs" />
+    <Compile Include="CheckBLL.cs" />
+    <Compile Include="CollectCodeBLL.cs" />
+    <Compile Include="CompanyIDcodeBLL.cs" />
+    <Compile Include="ComplaintBLL.cs" />
+    <Compile Include="ConfigureBLL.cs" />
+    <Compile Include="CouponBLL.cs" />
+    <Compile Include="DataBLL.cs" />
+    <Compile Include="DataScanSumBLL.cs" />
+    <Compile Include="DealerBLL.cs" />
+    <Compile Include="EnterpriseAccountBLL.cs" />
+    <Compile Include="EnterpriseInfoBLL.cs" />
+    <Compile Include="EnterpriseMuBanThreeImgBLL.cs" />
+    <Compile Include="EnterpriseSwitchBLL.cs" />
+    <Compile Include="Enterprise_ShowBLL.cs" />
+    <Compile Include="FormulaBLL.cs" />
+    <Compile Include="GreenhouseBLL.cs" />
+    <Compile Include="HelpBLL.cs" />
+    <Compile Include="IntStorageBLL.cs" />
+    <Compile Include="LoginBLL.cs" />
+    <Compile Include="LoginMarketBLL.cs" />
+    <Compile Include="MaterialBLL.cs" />
+    <Compile Include="MaterialDIBLL.cs" />
+    <Compile Include="MaterialPropertyBLL.cs" />
+    <Compile Include="MaterialReturnOrderBLL.cs" />
+    <Compile Include="MaterialSpcificationBLL.cs" />
+    <Compile Include="MaterialTypeBLL.cs" />
+    <Compile Include="Material_OnlineOrderBLL.cs" />
+    <Compile Include="Material_SpecBLL.cs" />
+    <Compile Include="NewsBLL.cs" />
+    <Compile Include="OperationTypeBLL.cs" />
+    <Compile Include="OrderCommentBLL.cs" />
+    <Compile Include="OrderConsumersBLL.cs" />
+    <Compile Include="OrderIntegralBLL.cs" />
+    <Compile Include="Order_Consumers_AddressBLL.cs" />
+    <Compile Include="OriginBLL.cs" />
+    <Compile Include="OutStorageBLL.cs" />
+    <Compile Include="PackageBLL.cs" />
+    <Compile Include="PageNavigationBLL.cs" />
+    <Compile Include="ProcessBLL.cs" />
+    <Compile Include="ProductInfoBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PRRU_PlatFormLevelBLL.cs" />
+    <Compile Include="Enterprise_RoleBLL.cs" />
+    <Compile Include="Enterprise_UserBLL.cs" />
+    <Compile Include="PublicBLL.cs" />
+    <Compile Include="RecommendBLL.cs" />
+    <Compile Include="RedRechargeBLL.cs" />
+    <Compile Include="RegistBLL.cs" />
+    <Compile Include="ReminderBLL.cs" />
+    <Compile Include="RequestCodeBLL.cs" />
+    <Compile Include="RequestCodeMaBLL.cs" />
+    <Compile Include="RequestCodeSettingAddBLL.cs" />
+    <Compile Include="RequestCodeSettingBLL.cs" />
+    <Compile Include="ScanCodeBLL.cs" />
+    <Compile Include="ScanCodeMarketBLL.cs" />
+    <Compile Include="SetAuditCountBLL.cs" />
+    <Compile Include="ShowChannelBLL.cs" />
+    <Compile Include="ShowCompanyBLL.cs" />
+    <Compile Include="ShowDeptBLL.cs" />
+    <Compile Include="ShowMaterialBLL.cs" />
+    <Compile Include="ShowNewsBLL.cs" />
+    <Compile Include="ShowTemplateBLL.cs" />
+    <Compile Include="ShowUserBLL.cs" />
+    <Compile Include="SpecificationBLL.cs" />
+    <Compile Include="StoreBLL.cs" />
+    <Compile Include="SysAnalysisBLL.cs" />
+    <Compile Include="SysEnLicenseBLL.cs" />
+    <Compile Include="SysEnterpriseManageBLL.cs" />
+    <Compile Include="SysJYEnterpriseBLL.cs" />
+    <Compile Include="SysLabelTemBLL.cs" />
+    <Compile Include="SysPlatFormManageBLL.cs" />
+    <Compile Include="SysServiceCenterBLL.cs" />
+    <Compile Include="SysSetAnalysisBLL.cs" />
+    <Compile Include="SysSupervisionBLL.cs" />
+    <Compile Include="TeamBLL.cs" />
+    <Compile Include="TeamUsersBLL.cs" />
+    <Compile Include="UDIAnalyseBLL.cs" />
+    <Compile Include="UdiBLL.cs" />
+    <Compile Include="UDIMaterialBLL.cs" />
+    <Compile Include="UploadsBLL.cs" />
+    <Compile Include="UsageRecordCountBLL.cs" />
+    <Compile Include="ViewCodeStatisBLL.cs" />
+    <Compile Include="WapDepartBLL.cs" />
+    <Compile Include="WxEnAccountBLL.cs" />
+    <Compile Include="WxGZHBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{DBC88FCF-F13F-4A61-8780-DBA1B3FA0308}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{1E23942B-7FCE-4BA3-9B5A-DD4DB61537B1}</Project>
+      <Name>Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceWeb\InterfaceWeb.csproj">
+      <Project>{5F781B95-98B3-4A19-B1B3-88AAF115FD7C}</Project>
+      <Name>InterfaceWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LinqModel\LinqModel.csproj">
+      <Project>{C5078DAE-EBDF-4EAA-85DF-DEDCB0A1F0F4}</Project>
+      <Name>LinqModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

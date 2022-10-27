@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "抢红包";
+    Layout = "~/Areas/Market/Views/Shared/_WapLayout.cshtml";
+}
+@model LinqModel.View_Activity
+<link href="@Url.Content("~/Areas/Market/Content/lingHB.css")" rel="stylesheet" type="text/css" /><script
+    src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="../../Scripts/glvalidate.js" type="text/javascript"></script>
+<style>
+    .sjp
+    {
+        display: none;
+    }
+</style>
+<script type="text/jscript">
+    $(function () {
+        $("#btnOpen").click(function () {
+            if ($("#PreView").val() == "1") {
+                alert("预览效果！");
+                return;
+            }
+            if ($("#yzm").val() == "1" && !checkMobileEx($("#tel").val())) {
+                alert("请输入正确的手机号领取红包");
+                $("#tel").focus();
+                return;
+            }
+            else {
+                $("#btnOpen").attr('disabled', 'disabled');
+                $("#btnOpen").attr('class', 'coupons-btn-reset');
+                location.href = "/Market/Wap_IndexMarket/ActivitySuccess?activityId=@Model.ActivityID" + "&tel=" + $("#tel").val();
+            }
+        });
+    })
+</script>
+<input type="hidden" value="@ViewBag.PreView" id="PreView" />
+<input type="hidden" value="@ViewBag.IsYZTel" id="yzm" />
+@if (!string.IsNullOrEmpty(Model.AtivityImageURL))
+{
+    <div class="y-body-wrap" style=" background-image:url(@Model.AtivityImageURL)">
+        <div class="shop-info">
+            <div class="coupons-wrap noFollow">
+                <div class="coupons-container js-can js-ready">
+                    <div class="yhq-lq">
+                        @if (ViewBag.IsYZTel == "1")
+                        {
+                            <p class="sjp" style="display: block;">
+                                请输入手机号码领取红包</p>
+                            <div class="lq-phone sjp " style="display: block;">
+                                <input type="text" id="tel" name="phone" class="lq-phone-input" placeholder="请输入手机号" />
+                            </div>
+                        }
+                        <input type="button" id="btnOpen" class="coupons-btn" value="立即领取" />
+                        <a href="@Url.Action("ActivityRule", new { activityId = Model.ActivityID })" class="coupons-btn-guize">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="y-body-wrap">
+        <div class="shop-info">
+            <div class="coupons-wrap noFollow">
+                <div class="coupons-container js-can js-ready">
+                    <div class="yhq-lq">
+                        @if (ViewBag.IsYZTel == "1")
+                        {
+                            <p class="sjp" style="display: block;">
+                                请输入手机号码领取红包</p>
+                            <div class="lq-phone sjp " style="display: block;">
+                                <input type="text" id="tel" name="phone" class="lq-phone-input" placeholder="请输入手机号">
+                            </div>
+                        }
+                        <input type="button" id="btnOpen" class="coupons-btn" value="立即领取" />
+                        <a href="@Url.Action("ActivityRule", new { activityId = Model.ActivityID })" class="coupons-btn-guize">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<input type="hidden" value="" id="hidMoney" />
+<input type="hidden" value="" id="hidid" />

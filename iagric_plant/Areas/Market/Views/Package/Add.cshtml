@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+<script src="@Url.Content("~/Areas/Market/Scripts/artDialog4.1.7/plugins/iframeTools.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/glvalidate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/jquery.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Areas/Market/Content/base.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Areas/Market/Content/greenskin.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Areas/Market/Content/main.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            if ($("#tcName").val() == 0) {
+                alert("请输入套餐名称！");
+                return false;
+            }
+            var amount = $("#amount").val();
+            if (!isNumber(amount)) {
+                alert('二维码数量请输入整数！');
+                return;
+            }
+            var sum = $("#sum").val();
+            if (!isMoney(sum)) {
+                alert('请输入有效的套餐价格');
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Package/Add',
+                data: $("#form1").serialize(),
+                success: function (data) {
+                    if (data.info != null && data.info != "") {
+                        alert(data.info);
+                    }
+                    if (data.res) {
+                        if (data.url != null && data.url != "") {
+                            parent.location.href = data.url;
+                        }
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0; width: 550px;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label">套餐名称：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="tcName" name="tcName" maxlength="25" /><span
+                        style="color: #ed7049">*输入最大长度不超过25个汉字</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">二维码数量：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="amount" name="amount" maxlength="5" />
+                                    个<span
+                        style="color: #ed7049">*请输入正整数</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">套餐价格：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="sum" name="sum" maxlength="6" />
+                                    元<span
+                        style="color: #ed7049">*请输入有效的价格</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

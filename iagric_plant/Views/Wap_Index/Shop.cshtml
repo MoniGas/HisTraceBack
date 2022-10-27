@@ -1,0 +1,47 @@
+﻿@model LinqModel.ShopInfo
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<div class="list">
+    <div class="shop-part" id="jshopkefu" style=" margin-left:10px; margin-right:10px;">
+    @if(Model!=null )
+    {
+        <div class="shop-href">
+            <div class="shop-row1">
+                <span class="shop-row">
+                    <div class="shop-icon">
+                    @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                    { 
+                        <img src="@Model.LogoUrl" />
+                        }
+                    else
+                    {
+                        <img src="../../wapstyle/images/shoplogo.jpg" />
+                    }
+                    </div>
+                    <div class="shop-slogan">
+                        <p class="shop-name">@Model.EnterpriseName
+                        </p>
+                    </div>
+                </span>
+            </div>
+        </div>
+            <div class="shop-footer">
+                @if (!string.IsNullOrEmpty(Model.HotLine))
+                {
+                    <div class="shop-dong">
+                        <a class="shop-btn" href="tel:@Model.HotLine"><i class="icon-dong icon-dong-phone"></i>
+                            <span class="dong-text J_ping">联系我们 </span></a>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.EnterpriseUrl))
+                {
+                    <div class="shop-go">
+                        <a class="shop-btn" href="@Model.EnterpriseUrl"><i class="icon-dong icon-dong-gohome">
+                        </i><span class="go-text">进入官网 </span></a>
+                    </div>
+                }
+            </div>  }
+    </div>
+</div>

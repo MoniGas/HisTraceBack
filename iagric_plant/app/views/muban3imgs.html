@@ -1,0 +1,90 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="row clearfix">
+                <div class="ma15" style="width: 960px; margin: 15px auto;">
+                    <div class="code-text">
+                        <div style="margin-left:25px" class="row mat10">
+                            <h4 class="tit-modal">
+                                <span class="alert-danger">*</span>首次拍码图片 <span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB，建议上传图片尺寸360px * 320px。</span>
+                                <span class="alert-danger" data-bind="visible:vmShowMuBan3Img.selfirstImg">请上传首次拍码图片！</span></h4>
+                            <div class="padlr15">
+                                <div class="pic-item  clearfix">
+                                    <ul>
+                                    <!-- ko if:vmShowMuBan3Img.firstImg!=null -->
+                                        <!-- ko foreach:vmShowMuBan3Img.firstImg -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <img data-bind="attr:{src:$data.fileUrls}">
+                                            </div>
+                                            <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.vmShowMuBan3Img.delImage(data, event);}}">
+                                                <i class="hide_clip">移除</i></a> </li>
+                                        <!-- /ko -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a id="image_upload"></a>
+                                            </div>
+                                        </li> 
+                                       <!-- /ko -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left:25px" class="row mat10">
+                            <h4 class="tit-modal">
+                                2、3、4次进入图片<span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB，建议上传图片尺寸360px * 320px。</span></h4>
+                            <div class="padlr15">
+                                <div class="pic-item  clearfix">
+                                    <ul>
+                                        <!-- ko foreach:vmShowMuBan3Img.centerImg -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <img data-bind="attr:{src:$data.fileUrls}">
+                                            </div>
+                                            <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.vmShowMuBan3Img.delImageCenter(data, event);}}">
+                                                <i class="hide_clip">移除</i></a> </li>
+                                        <!-- /ko -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a id="uploadCenterImg"></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left:25px" class="row mat10">
+                            <h4 class="tit-modal">
+                                5次及5次以上进入图片<span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB，建议上传图片尺寸360px * 320px。</span></h4>
+                            <div class="padlr15">
+                                <div class="pic-item  clearfix">
+                                    <ul>
+                                        <!-- ko foreach:vmShowMuBan3Img.fiveImg -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <img data-bind="attr:{src:$data.fileUrls}"/>
+                                            </div>
+                                            <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.vmShowMuBan3Img.delImageFive(data, event);}}">
+                                                <i class="hide_clip">移除</i></a> </li>
+                                        <!-- /ko -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a id="uploadFiveImg"></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row hr pat10 clearfix">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-lg btn-success" data-bind="click:vmShowMuBan3Img.SaveInfo">
+                        保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model List<SelectListItem>
+@{
+    Layout = null;
+}
+<select name="enterpriseid" id="enterpriseid"class="form-control" style="width: 195px; display: inline-block;" >
+    <option value='0' selected="selected">请选择</option>
+    @{
+        foreach (var sub in Model)
+        {
+            if (sub.Selected)
+            {
+                <option value='@sub.Value' selected="selected">@Html.Raw(sub.Text)</option>
+            }
+            else
+            {
+                <option value='@sub.Value'>@Html.Raw(sub.Text)</option>
+            }
+        }
+    }
+</select>

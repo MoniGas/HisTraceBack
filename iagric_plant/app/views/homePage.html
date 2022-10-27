@@ -1,0 +1,234 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                        <span><a href="javascript:void(0);" target="_blank"  data-bind="text:$data.Update,attr:{href:'/Default/HelpList?typeId=0&id=1'}"
+            title=""></a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border-bottom">
+        <div class="col-md-3">
+            <div class="mat20">
+                <!------当弹出层显示时加载 open 类------>
+                <div id="divComplaint" class="btn btn-sq-sm btn-green pull-right">
+                    <i class="fa icon-tips icon-tips-complaint"></i><span class="badge badge-important"
+                        data-bind="text:getcomplaintCount()"></span>
+                </div>
+                <div style="display: none;">
+                    <div id="div1">
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                            <li class="dropdown-header"><i class="ace-icon fa fa-users"></i>投诉管理 </li>
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-content">
+                                    <ul id="viewComplaintTipe" class="dropdown-menu dropdown-navbar">
+                                        <li class="clearfix">
+                                            <p class="light-grey smaller-90 center mat10">
+                                                暂无投诉</p>
+                                        </li>
+                                    </ul>
+                                    <ul id="viewComplaint" class="dropdown-menu dropdown-navbar" data-bind="foreach:vmComplaintList.ObjList">
+                                        <li><a href="javascript:void(0);" data-bind="click: function(data, event) {$parent.navigateTo('complaint','76100',data,event),$parent.updateComplaint($data.Complaint_ID)}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.ComplaintContent">
+                                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                                data-bind="text:$parent.newDate($data.StrComplaintDate)"></span></span></span>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="theViewMore" class="dropdown-footer"><a href="#" data-bind="click: function(data, event) {navigateTo('complaint',data,event);}">
+                                查看更多 </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="divMessage" class="btn btn-sq-sm btn-info mar18 pull-right ">
+                    <i class="fa icon-tips icon-tips-message"></i><span class="badge badge-important"
+                        data-bind="text:newsCount"></span>
+                </div>
+                <div style="display: none;">
+                    <div id="div2">
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                            <li class="dropdown-header"><i class="ace-icon fa fa-bell-o"></i>消息 </li>
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-content">
+                                    <ul id="viewNews" class="dropdown-menu dropdown-navbar" data-bind="foreach:vmEwmNewsList.ObjList">
+                                        <li><a href="javascript:void(0);" data-bind="click: function(data, event) {$parent.navigateTo('DownloadCode','41300',data,event),$parent.updateEwmStatus($data.RequestCode_ID)}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.MaterialFullName() + '：二维码生成成功！'">
+                                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                                data-bind="text:$parent.newDate($data.Strlastdate())"></span></span></span></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmEnterpriseVerify.ObjList">
+                                        <li><span class="msg-body"><span class="msg-title" data-bind="text:$data.VerifyContent()">
+                                        </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                            data-bind="text:$parent.newDate($data.StrAddDate())"></span></span></span></li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmCodeRecord.ObjList">
+                                        <li><span class="msg-body"><span class="msg-title" data-bind="text:$data.VerifyContent()">
+                                        </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                            data-bind="text:$parent.newDate($data.StrAddDate())"></span></span></span></li>
+                                    </ul>
+                                    <ul id="viewNewsTipe">
+                                        <li>
+                                            <p class="light-grey smaller-90 center mat10">
+                                                暂无消息</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="Li1" class="dropdown-footer"><a href="#" data-bind="click: function(data, event) {ignoreAll(data,event);}">
+                                全部忽略</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="divTip" class="btn btn-sq-sm btn-warning mar18 pull-right">
+                    <i class="fa icon-tips icon-tips-prompt"></i><span class="badge badge-important"
+                        data-bind="text:getReminderCount()"></span>
+                </div>
+                <div style="display: none;">
+                    <div id="div3">
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                            <li class="dropdown-header"><i class="ace-icon fa  fa-lightbulb-o"></i>温馨提示</li>
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-content">
+                                    <ul class="dropdown-menu dropdown-navbar" id="viewReminder">
+                                        <li id="li_enterpriseInfo"><a href="#" data-bind="click: function(data, event) {navigateTo('enterpriseInfo','76100',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没进行企业认证</span><span
+                                                class="msg-time text-right"><span class="msg-btn">企业认证</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Brand"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('brand','42300',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有品牌</span><span
+                                                class="msg-time text-right"><span class="msg-btn">品牌管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Material"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('material','21000',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有产品 </span><span
+                                                class="msg-time text-right"><span class="msg-btn">产品管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_GongXu"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('operationtype','23100',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有生产环节</span><span
+                                                class="msg-time text-right"><span class="msg-btn">生产环节管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Greenhouses"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('greenhouse','32000',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有生产单元</span><span
+                                                class="msg-time text-right"><span class="msg-btn">生产单元管理</span> </span></span>
+                                        </a></li>
+                                        <li id="li_Dealer"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateTo('dealer','65000',data,event);}"
+                                            class="clearfix"><span class="msg-body"><span class="msg-title">您还没有经销商</span><span
+                                                class="msg-time text-right"><span class="msg-btn">经销商管理</span> </span></span>
+                                        </a></li>
+                                    </ul>
+                                    <ul id="viewReminderTipe">
+                                        <li>
+                                            <p class="light-grey smaller-90 center mat10">
+                                                暂无提示</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您的生成码总数为：</span>
+                     <span data-bind="text:$data.RequestCodeCount"></span><span>个码</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您的生成码次数为：</span>
+                     <span data-bind="text:$data.RequestCodeTimes"></span><span>个码</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您的二维码解析次数为：</span>
+                     <span data-bind="text:$data.ScanCodeTimes"></span><span>次</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您已有</span>
+                     <span data-bind="text:$data.BrancCount"></span><span>个品牌数据</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您已有</span>
+                     <span data-bind="text:$data.MaterialCount"></span><span>个产品数据</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您已有</span>
+                     <span data-bind="text:$data.OriginCount"></span><span>种原料数据</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-9 mat10">
+                <div class="form-inline">
+                     <span>您已有</span>
+                     <span data-bind="text:$data.ProcessCount"></span><span>种生产流程数据</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div>
+        <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('brand','42300',data,event);}"
+            title="品牌管理"><i class="ace-icon fa fa-angle-double-left"></i>品牌管理></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('material','42300',data,event);}"
+            title="产品信息"><i class="ace-icon fa fa-angle-double-left"></i>产品信息></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('process','42300',data,event);}"
+            title="产品生产流程"><i class="ace-icon fa fa-angle-double-left"></i>产品生产流程></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('enterpriseinfo','42300',data,event);}"
+            title="企业信息"><i class="ace-icon fa fa-angle-double-left"></i>企业信息></a> </span>
+    </div>
+    <div>
+        <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('brand','42300',data,event);}"
+            title="生成追溯码"><i class="ace-icon fa fa-angle-double-left"></i>生成追溯码></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('material','42300',data,event);}"
+            title="追溯码信息管理"><i class="ace-icon fa fa-angle-double-left"></i>追溯码信息管理></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('process','42300',data,event);}"
+            title="销售追溯码"><i class="ace-icon fa fa-angle-double-left"></i>销售追溯码></a> </span>
+    </div>
+    <div>
+        <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('brand','42300',data,event);}"
+            title="平台使用说明"><i class="ace-icon fa fa-angle-double-left"></i>平台使用说明></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('material','42300',data,event);}"
+            title="手持客户端"><i class="ace-icon fa fa-angle-double-left"></i>手持客户端></a> </span>
+                    <span><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateTo('process','42300',data,event);}"
+            title="客户端使用说明"><i class="ace-icon fa fa-angle-double-left"></i>客户端使用说明></a> </span>
+    </div>
+</div>

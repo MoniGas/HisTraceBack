@@ -1,0 +1,19 @@
+﻿<div class="logo fl">
+    <a href="#">
+        <img src="/newmenu/images/bg_logo.png"></a>
+</div>
+<div class="navbar17 fl">
+    <ul data-bind="foreach: initMenus(0)">
+        <!-- ko if:isNavShow==1-->
+        <li data-bind="css: { active: isActive }"><a href="#" data-bind="click: function(data, event) {$parent.navigateTo(data,event);}">
+            <img data-bind="attr:{src:icon}" />
+            <p data-bind="html: title">
+            </p>
+        </a></li>
+        <!--/ko-->
+    </ul>
+</div>
+<div class="top-nav fr">
+    <span class="layer cw-icon"><span>您好：</span><span href="#" target="_blank" data-bind="text:loginInfo.ObjModel.EnterpriseName">
+    </span> <span>|</span>   <a href="javascript:void(0);" data-bind="click:exitsign">退出 </a></span>
+</div>

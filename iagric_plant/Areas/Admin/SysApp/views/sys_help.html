@@ -1,0 +1,73 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#home" title="返回到首页">首页</a>
+            </li>
+            <li class="active">帮助管理</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack" title="返回到上一页"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="输入相关信息搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'">
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:searchHelp">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+            <button class="btn btn-lg btn-success" data-bind="click:addHelp">
+                添加帮助</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            帮助名称
+                        </th>
+                        <th width="300">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmHelp.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.HelpTitle,attr:{title:$data.HelpTitle}">
+                            </p>
+                        </td>
+                        <td>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.editHelp($data.HelpId,data,event);}">
+                                编辑
+                            </button>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.delHelp($data.HelpId,data,event);}">
+                                删除
+                            </button>
+                            <!--       <button style="display: none" eleflag="ShowAll"data-bind="click:$parent.btnUpEvent"  class="btn btn-xs btn-success mal20" target="_blank">上移</button>
+                                 <button style="display: none" eleflag="ShowAll" data-bind="click:$parent.btnDownEvent"  class="btn btn-xs btn-success mal20" target="_blank">下移</button>-->
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.topHelp($data.HelpId,$data.Sort,data,event);}">
+                                置顶
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="helpPager" data-bind="helpPager:vmHelp.pageSize,totalCounts:vmHelp.totalCounts,pageIndex:vmHelp.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

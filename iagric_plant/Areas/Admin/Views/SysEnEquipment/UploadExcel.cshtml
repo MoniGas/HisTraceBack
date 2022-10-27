@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "UploadExcel";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $.post("@Url.Action("UploadExcelUp")",
+             {
+                 excelurl:$("#ImagePath").val()
+            }, function (data) {
+            alert(data.Msg);
+            if (data.code==0) {
+                   var parentwin = artDialog.open.origin;
+                   parentwin.CloseWindow('@Url.Action("EnEquipmentList")');
+                   art.dialog.close();
+        }
+            });
+        });
+        $("#uploadify").uploadify({
+            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf',    // 做上传的Flash插件
+            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=5',   //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif',  // 关闭按钮的图片地址
+            'folder': '/Areas/Admin/Files/Excel/', // 保存文件的文件夹
+            'queueID': 'fileQueue',
+            'fileDesc': '请选择你电脑里格式为*.xls;*.xlsx的文件',  // 描述（必须和fileExt一起使用）
+            'fileExt': '*.xls;*.xlsx',   // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+            'sizeLimit': 1048576, // 文件大小限制100M（注意，在ASP.NET中Web.Config也要配置）
+            'auto': false,
+            'multi': false,  // 是否支持多文件上传
+            //'buttonText': '浏览',    // 按钮上的文本
+            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+            'onError': function (a, b, c, d) {
+                if (d.status == 404)
+                    alert('Could not find upload script.');
+                else if (d.type === "HTTP")
+                    alert('error ' + d.type + ": " + d.status);
+                else if (d.type === "File Size")
+                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+                else
+                    alert('error ' + d.type + ": " + d.info);
+            },
+            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+                 $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+                $("#ImagePath").val(d);
+                $("#fspan").text($("#ffspan").text(d).Substring($("#ffspan").text().LastIndexOf('/')).Replace('/', ' '));
+                $("#showimg").css({ "display": "" });
+                 $("#delActivity").click(function () {
+                    $("#fspan").text(d);
+                    $("#ImagePathLogo").val('');
+                    $("#showimg").css({ "display": "none" });
+                });
+            },
+            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+                $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+            },
+            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+            },
+            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+                $("#fspan").text();
+                $("#ImagePath").val('');
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+            }
+        });
+            $("#delActivity").click(function () {
+            $("#imgsrc").attr("src", '');
+            $("#ImagePath").val('');
+            $("#showimg").css({ "display": "none" });
+        });
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label">Excel上传：</span>
+                                <div class="fl">
+                                    <div class="clearfix">
+                                        <div class="div_FilesBox">
+                                            <div style="display: block; width: 800px;">
+                                                <input type="hidden" id="ImagePath" value="" />
+                                                <div id="showimg" style="display: none;">
+                                                    @* <img id="imgsrc" style="max-height: 100px; max-width: 100px;" src="">*@
+                                                    <input type="hidden" id="imgsrc" name="imgsrc" />
+                                                    <a id="delActivity" href="#">删除</a>
+                                                </div>
+                                            </div>
+                                            <div class="div_Handler" style="margin-top: 10px;">
+                                                <a href="javascript:" style="float: right; margin-right: 140px;" onclick="javascript:$('#uploadify').uploadifyUpload()">
+                                                    开始上传</a>
+                                                <input type="file" name="uploadify" id="uploadify">
+                                            </div>
+                                            <div id="fileQueue" class="uploadifyQueue">
+                                            </div>
+                                            <div id="div_Msg">
+                                            </div>
+                                        </div>
+                                        <p class="ftx03">
+                                            上传Excel格式为xls,xlsx</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

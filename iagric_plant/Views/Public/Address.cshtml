@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Address</title>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function GetShi(obj) {
+            if (obj.value == -2) {
+                var optionStr = "<option selected=\"selected\" value=\"-2\">请选择</option>";
+                $("#selCity").html(optionStr);
+                $("#selArea").html(optionStr);
+            } else {
+                $.get("/Public/GetShi?id=" + obj.value, function (data, textStatus) {
+                    $("#selCity").html(data);
+                    var optionStr = "<option selected=\"selected\" value=\"-2\">请选择</option>";
+                    $("#selArea").html(optionStr);
+                });
+            }
+        }
+        function GetQuXian(obj) {
+            if (obj.value == -2) {
+                var optionStr = "<option selected=\"selected\" value=\"-2\">请选择</option>";
+                $("#selArea").html(optionStr);
+            } else {
+                $.get("/Public/GetQu?id=" + obj.value, function (data, textStatus) {
+                    $("#selArea").html(data);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <select id="Province" name="Province" onchange="GetShi(this)" style="width: 123px;
+            height: 28px; font-size: 14px; padding-left: 10px;">
+            <option selected="selected" value="-2">请选择</option>
+            @if (ViewBag.itemSheng != null)
+            {
+                List<SelectListItem> itemList = ViewBag.itemSheng as List<SelectListItem>;
+                foreach (SelectListItem item in itemList)
+                {
+                <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+        <select id="selCity" name="selCity" onchange="GetQuXian(this)" style="width: 123px;
+            height: 28px; font-size: 14px; padding-left: 10px;">
+            <option selected="selected" value="-2">请选择</option>
+        </select>
+        <select id="selArea" name="selArea" style="width: 123px; height: 28px; font-size: 14px;
+            padding-left: 10px;">
+            <option selected="selected" value="-2">请选择</option>
+        </select>
+    </div>
+</body>
+</html>

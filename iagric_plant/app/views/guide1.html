@@ -1,0 +1,100 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="guide">
+                <div class="guide-title">
+                    <ul>
+                        <li class="active"><i>1</i> <span>创建生产批次</span> </li>
+                        <li><i>2</i> <span>采集作业信息</span> </li>
+                        <li><i>3</i> <span>申请单品产品码</span> </li>
+                        <li><i>4</i> <span>销售产品</span> </li>
+                        <li><i>5</i> <span>我要看效果</span> </li>
+                    </ul>
+                </div>
+                <div class="guide-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    选择品牌：</label>
+                                <div class="col-md-5">
+                                    <div class="clearfix">
+                                      <!--  <select id="slBrandList" data-bind="options: vmguide.brandArry,optionsText: 'BrandName',optionsValue:'Brand_ID',optionsCaption: '选择产品品牌',value:vmguide.brand">
+                                        </select>-->
+                                         <select id="slBrandList" class="col-md-9 no-padding" data-bind="options: vmguide.brands,optionsText: 'BrandName',optionsValue:'Brand_ID',optionsCaption: '选择品牌',value:vmguide.brand">
+                                </select>
+                                        <button class="btn btn-lg-s btn-success mal10" data-bind="click:addbrand">
+                                            添加品牌</button>
+                                    </div>
+                                </div>
+                                <span class="col-md-6 help-inline pad5"><span class="middle grey"> 产品品牌：为您企业的产品选择品牌，如果没有可选的品牌，则点“添加品牌”进行添加，然后再选择。
+                                </span></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    <span class="alert-danger">*</span>选择产品：</label>
+                                <div class="col-md-5">
+                                    <div class="clearfix">
+                                        <!--<select class="col-md-9 no-padding" data-bind="options: vmguide.materialArry,optionsText: 'MaterialFullName',optionsValue:'Material_ID',optionsCaption: '选择产品',value:vmguide.material">
+                                        </select>-->
+                                        <select class="col-md-9 no-padding" data-bind="options:vmguide.materials,optionsText: 'MaterialFullName',optionsValue:'Material_ID',optionsCaption: '选择产品',value:vmguide.material">
+                                </select>
+                                        <button class="btn btn-lg-s btn-success mal10" data-bind="click:addmaterial">
+                                            添加产品</button>
+                                    </div>
+                                </div>
+                                <span class="col-md-6 help-inline pad5"><span class="middle grey"><span class="alert-danger"
+                                    data-bind="visible:vmguide.selMaterial">请选择产品！</span> 产品：选择您的产品，如果没有可选的产品，则点“添加产品”进行添加，然后再选择。
+                                </span></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    <span class="alert-danger">*</span>批次号：</label>
+                                <div class="col-md-5">
+                                    <div class="clearfix">
+                                        <input type="text" class="col-md-9" data-bind="value:vmguide.batch,validationElement:vmguide.batch,hasfocus:vmguide.selBatch">
+                                        <!--<input type="text" class="col-md-9" data-bind="value:vmguide.batch">-->
+                                    </div>
+                                </div>
+                                <span class="col-md-6 help-inline pad5"><span data-bind="visible:!vmguide.selBatch()">
+                                    <span class="alert-danger" style="height: 30px; line-height: 30px;" data-bind="validationMessage:vmguide.batch">
+                                    </span></span><span class="middle grey">批次号：是指产品在某生产单元的批次编号。</span> </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    <span class="alert-danger">*</span>绑定生产单元：</label>
+                                <div class="col-md-5">
+                                    <div class="clearfix">
+                                        <select class="col-md-9 no-padding" data-bind="options: vmguide.greenHouseArry,optionsText: 'GreenhousesName',optionsValue:'Greenhouses_ID',optionsCaption: '选择生产单元',value:vmguide.greenhouse">
+                                        </select>
+                                        <button class="btn btn-lg-s btn-success mal10" data-bind="click:addgreenhouse">
+                                            添加生产单元</button>
+                                    </div>
+                                </div>
+                                <span class="col-md-6 help-inline pad5"><span class="middle grey"><span class="alert-danger"
+                                    data-bind="visible:vmguide.selGreenhouse">请选择生产单元！</span>生产单元：选择您要种植的产品所在的生产单元，如果没有可选的生产单元，则点“添加生产单元
+                                    ”进行添加，然后再选择。</span> </span>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-content clearfix">
+                    <div class="form-group">
+                        <label class="control-label col-md-1 no-padding">
+                        </label>
+                        <div class="col-md-4">
+                            <!--<button class="btn btn-lg btn-nygrey" href="javascript:void(0);" data-bind="click:vmguide.Register">
+                                确定</button>
+                            <button class="btn btn-lg btn-nyyellow" data-bind="click:next">
+                                下一步</button>-->
+                            <button class="btn btn-lg btn-nyyellow" data-bind="click:vmguide.Register">
+                                下一步</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

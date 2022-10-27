@@ -1,0 +1,147 @@
+.app {
+    display: inline-block;
+    //  border: solid red 1px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 1rem;
+    .head {
+       box-sizing: border-box;
+        .sign {
+            overflow: hidden;
+            //          img {
+            //              display: inline-block;
+            //              vertical-align: middle;
+            //          }
+            .cut {
+                float: right;
+                //              display: inline-block;
+//              vertical-align: middle;
+                 font-size: 120%;
+                  
+                display: inline-block;
+                line-height: 1;
+                white-space: nowrap;
+                cursor: pointer;
+                background: #fff;
+                border: 1px solid #dcdfe6;
+                color: #606266;
+                -webkit-appearance: none;
+                text-align: center;
+                box-sizing: border-box;
+                outline: none;
+                margin: 0;
+                margin-right: .2rem;
+                margin-top: .35rem;
+                transition: .1s;
+               font-family: "微软雅黑";
+                font-weight: 500;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+//              padding: 12px 20px;
+padding: .22rem .4rem;
+//              font-size: 14px;
+                border-radius: 4px;
+            }
+        }
+        .exhibition {
+            width: 100%;
+        }
+    }
+    .body {
+        padding: 0 .7rem;
+        .border {
+            &:after {
+                position: absolute;
+                content: "";
+                left: 0;
+                width: 100%;
+                bottom: -.15rem;
+                border-bottom: solid #e0651a 3px;
+            }
+        }
+        .LightDescription {
+            .tit {
+                color: #000 !important;
+                font-weight: 600;
+                font-size: 120%;
+                margin-top: .2rem;
+                position: relative;
+                color: #000 !important;
+            }
+            .conL {
+                width: 100%;
+                font-size: 120%;
+                margin-top: .2rem;
+                color: #555555;
+                // border: solid red 1px;
+                height: auto;
+                word-break: break-all;
+            }
+        }
+        .introduction {
+            overflow: hidden;
+            .fr {
+                float: right;
+                width: 6.4rem;
+                .tit {
+                    font-weight: 500;
+                    span {
+                        font-weight: 500;
+                        position: relative;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+        .template {
+            padding-bottom: .6rem;
+            .tit {
+                padding: .2rem 0;
+                //    border: solid red 1px;
+                span {
+                    font-size: 150%;
+                    font-weight: 600;
+                    position: relative;
+                }
+            }
+            .con {
+                margin-top: .6rem;
+                .row {
+                    margin-top: 20px;
+                    font-size: 100%;
+                    overflow: hidden;
+                    .fl {
+                        width: 4.5rem;
+                        color: #000 !important;
+                        font-weight: 600;
+                        display: inline-block;
+                        vertical-align: middle;
+                        //    float: left;
+                    }
+                    .fr {
+                        width: 4rem;
+                        // border: solid red 1px;
+                        vertical-align: middle;
+                        float: right;
+                        display: inline-block;
+                        span {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                        img {
+                            display: inline-block;
+                            margin-left: .2rem;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+            .describe {
+                margin-top: .5rem;
+                width: 3rem;
+                border: solid #000000 2px;
+            }
+        }
+    }
+}

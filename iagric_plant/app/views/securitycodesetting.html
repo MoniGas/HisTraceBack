@@ -1,0 +1,138 @@
+﻿<div class="page-content" id="First">
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="active" style="cursor: pointer"><span>码用途</span></li>
+                <li style="cursor: pointer"><span data-bind="click:function(data, event) {TopSubPageClick(2,'Second',data,event);}">页面风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>产品名称：
+                        </label>
+                        <div class="col-md-10">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select3"
+                                data-bind="options:VmMaterial.MaterialArray,value:VmMaterial.SelectedId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                            </select>
+<!--                            <button class="btn btn-lg-s btn-success mal10" data-bind="click:addmaterial">
+                                添加产品</button>-->
+                            <span class="alert-danger" data-bind="visible:SelMaterial">请选择产品！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>码用途：
+                        </label>
+                        <div class="col-md-10" style="margin-top: 6px;">
+                            <input name="Check1" type="checkbox" class="ui-checkbox" data-bind="" /><label>防伪</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="Check2" type="checkbox" class="ui-checkbox"
+                                data-bind="" /><label>追溯</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 no-padding-right">
+                        </label>
+                        <div class="col-md-10">
+                            <button type="button" class="btn  btn-lg btn-success" data-bind="click:GenerateOne">
+                                保存</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Second" style="display: none">
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="visited" style="cursor: pointer"><a href=""><span data-bind="click:function(data, event) {TopSubPageClick2(1,'First',data,event);}">码用途</span></a></li>
+                <li class="active" style="cursor: pointer"><span data-bind="click:function(data, event) {TopSubPageClick(2,'Second',data,event);}">页面风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row clearfix" style="margin: 40px 0 0;">
+                <div class="configure">
+                    <div class="field-group">
+                        <label class="tit">
+                            模板样式：</label>
+                        <div class="refund-reason">
+                            <p>
+                                请对该批二维码选择模板样式 <!--<span class="remarks">（默认为经典）</span>-->
+                            </p>
+                            <div class="mobanlist clearfix" id="radio_wrap">
+                                <ul data-bind="foreach:styleArray">
+                                    <li class="checked" title="经典">
+                                        <div>
+                                            <input type="radio" id="radio_a_01" name="radio_a">
+                                            <label for="radio_a_01">
+                                                <img id="imgQR" src="/newmenu/images/moban1.jpg">
+                                            </label>
+                                            <i></i>
+                                        </div>
+                                        <p data-bind="html:$data.text">
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-left: 90px; margin-top: 20px;">
+                    <button class="btn btn-lg btn-success" data-bind="click:Generate">
+                        保存</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Third" style="display: none">
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="visited" style="cursor: pointer"><a href=""><span data-bind="click:function(data, event) {TopSubPageClick2(1,'First',data,event);}">码用途</span></a></li>
+               <!-- <li class="active" style="cursor: pointer"><span data-bind="click:function(data, event) {TopSubPageClick(2,'Second',data,event);}">页面风格设置</span></li>-->
+                <li class="active" style="cursor: pointer"><span>页面风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row clearfix" style="margin: 40px 0 0;">
+                <div class="configure">
+                    <div class="field-group">
+                        <label class="tit">
+                            模板样式：</label>
+                        <div class="refund-reason">
+                            <p>
+                                请对该批二维码选择模板样式<!-- <span class="remarks">（默认为经典3）</span>-->
+                            </p>
+                            <div class="mobanlist clearfix" id="radio_wrap">
+                                <ul data-bind="foreach:styleArray2">
+                                    <li class="checked" title="经典">
+                                        <div>
+                                            <input type="radio" id="radio_a_01" name="radio_a">
+                                            <label for="radio_a_01">
+                                                <img id="imgQR" src="/newmenu/images/secCode.png">
+                                            </label>
+                                            <i></i>
+                                        </div>
+                                        <p data-bind="html:$data.text">
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-left: 90px; margin-top: 20px;">
+                    <button class="btn btn-lg btn-success" data-bind="click:GenerateTwo">
+                        保存</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

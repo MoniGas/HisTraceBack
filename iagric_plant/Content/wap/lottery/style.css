@@ -1,0 +1,197 @@
+﻿/* 大转盘样式 */
+.turnplate-title{
+	text-align: center;
+	position: relative;
+	top: 3rem;
+	/*margin-top: 2.5rem;*/
+}
+.turnplate-title img{
+	width: 9.15rem;
+	height: 1.725rem;
+}
+.turnplate-title p{
+	margin-top: 0.5rem;
+	font-size: 0.6rem;
+	color: #fff;
+}
+
+.turnplate-img img{
+	display: none;
+	/*width:0.25rem;*/
+}
+/*.turnplate-img img:nth-child(1){width: 1.125rem;}
+.turnplate-img img:nth-child(2){width: 1.125rem;}*/
+
+.banner{
+	display:block;
+	width:15.35rem;
+	height: 15.3rem;
+	/*margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 20px;*/
+	margin: 4.2rem auto 0;
+}
+    .banner .turnplate {
+        display: block;
+        width: 100%;
+        position: relative;
+        background-image: url('../../../images/wapImages/turnplate-bg.png');
+        background-size: 100% 100%;
+    }
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate img.pointer{
+	position:absolute;
+	width:2.8rem;
+	height:4.775rem;
+	left:6.275rem;
+	top:4.325rem;
+}
+
+.turnplate-btn{
+	text-align: center;
+}
+    .turnplate-btn a {
+        display: inline-block;
+        width: 4.425rem;
+        height: 1.175rem;
+        line-height: 1.175rem;
+        background: url('../../../images/wapImages/turnplate-btn-btn.png') no-repeat center/cover;
+        color: #fff;
+        font-size: 0.5rem;
+        text-align: center;
+    }
+.turnplate-btn a:nth-child(2){
+	margin-left: 1.8rem;
+}
+
+body{
+	width: 16rem;
+	height: 100%;
+	overflow: hidden;
+}
+/*活动规则*/
+.rule{
+	margin: 1.25rem 1.675rem 0 1.25rem;
+	color: #3e3a39;
+}
+.rule-title{
+	/*color: #3e3a39;*/
+	font-size: 0.5rem;
+	/*line-height: 1rem;*/
+}
+.rule-time{
+	/*color: #3e3a39;*/
+	font-size: 0.45rem;
+	/*line-height: 1rem;*/
+	margin-top: 0.75rem;
+}
+.hr{
+	margin-top: 0.875rem;
+	margin-bottom: 1rem;
+}
+.rule-list{
+
+}
+.rule-list li{
+	font-size: 0.45rem;
+	margin-top: 0.75rem;
+	line-height:0.875rem;
+}
+.rule-btn{
+	text-align: center;
+	margin-top: 1.975rem;
+}
+.rule-btn a{
+	display: inline-block;
+	background-color: #e60012;
+	outline: none;
+	width: 7.125rem;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	color: #fff;
+	font-size: 0.5rem;
+	border-radius: 0.5rem;
+}
+/*我的奖品*/
+.prize{
+	margin: 0 1.4rem;
+	overflow: hidden;
+}
+.prize-title{
+	margin: 0.5rem 0;
+}
+    .prize-title span {
+        display: inline-block;
+        width: 0.35rem;
+        height: 0.5rem;
+        background: url('../../../images/wapImages/back.png') no-repeat center/cover;
+        position: relative;
+        top: 0.2rem;
+    }
+.prize-title h1{
+	color: #3e3a39;
+	font-size: 0.5rem;
+	text-align: center;
+}
+
+.prize-info{
+	
+}
+.prize-info li{
+	border-bottom: 1px solid #7d7d7d;
+	padding: 0.7rem 0;
+}
+.prize-info li:last-child{
+	border-bottom: none;
+}
+.prize-info li p{
+	line-height: 0.625rem;
+}
+.prize-info li p label{
+	color: #3e3a39;
+	font-size: 0.45rem;
+	display: inline-block;
+	width: 2.25rem;
+	text-align: right;
+}
+.prize-info li p span{
+	color: #595757;
+	font-size: 0.45rem;
+	margin-left: 0.25rem;
+}
+
+/*提示框*/
+.tips{
+	width: 12.5rem;
+	height: 8.75rem;
+	background: #fdfffe;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -6.25rem;
+	margin-top: -3.75rem;
+	border-radius: 0.5rem;
+	text-align: center;
+	display: none;
+}
+.tips div{
+	text-align: right;
+	margin: 0.75rem 0.75rem 0 0;
+	 color: #b1afb2;
+}
+.tips h1{
+	font-size: 1rem;
+}
+.tips p{
+	font-size: 0.75rem;
+	margin: 0.5rem 0;
+	color: #949494;
+}
+.tips input{
+	width: 7.5rem;
+	height: 1.5rem;
+	margin-top: 1rem;
+	background-color: #e84144;
+	border-radius: 1rem;
+	color: #fff;
+}

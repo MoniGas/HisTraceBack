@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "优惠券详情";
+}
+@model LinqModel.View_ActivityCoupon
+<h2>@Model.ActivityTitle</h2>
+<p>@Model.Content</p>
+<p>@Common.EnumText.EnumToText(typeof(Common.EnumText.CodeType),Model.CouponType.Value)</p>
+<p>@Model.CouponContent</p>
+
+<p>@Model.StartDate - @Model.EndDate</p>
+

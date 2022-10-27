@@ -1,0 +1,66 @@
+﻿@model List<LinqModel.PRRU_NewModual>
+@{
+    //Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link href="@Url.Content("~/newmenu/css/common.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/newmenu/css/style.css")" rel="stylesheet" type="text/css" />
+    <title>医疗器械（UDI）服务云平台</title>
+    <script type="text/jscript">
+        function Exit() {
+            if (confirm("确认要退出吗？")) {
+                parent.location.href = "/Home/Index";
+            }
+        }
+    </script>
+    <style>
+        .header-wrapper a
+        {
+            text-decoration:none;
+        }
+         .header-wrapper p
+         {
+             font:12px/1.5 "Microsoft Yahei",Tahoma,Verdana;
+            margin:0 0 10px;
+         }
+    </style>
+</head>
+<div class="header-wrapper" id="topheader">
+			<div class="header17 clearfix">
+				<div class="logo fl">
+					<a href="#"><img src="@Url.Content("~/newmenu/images/bg_logo.png")"></a>
+				</div>
+				<div class="navbar17 fl">
+					<ul>
+                     @{
+                        if (Model != null)
+                        {
+                            foreach (var sub in Model)
+                            {
+                                if (sub.PRRU_Modual_ID==200000)
+                                {
+                                      <li><a href="@Url.Action("Index", "HomeMarket")" target="mainFrame">
+                            <img src="@sub.Img" />
+                            <p>@sub.Title</p>
+                        </a></li>
+                                }
+                                else
+                                {
+                        <li><a href="/Home/Index?hash=@sub.hash" target="_top">
+                            <img src="@sub.Img" />
+                            <p>@sub.Title</p>
+                        </a></li>
+                                }
+                            }
+                        }
+                    }
+					</ul>
+				</div>
+			</div>
+            <div class="top-nav fr">
+    <span class="layer cw-icon"> <a href="@Url.Action("Index", "HomeMarket")" target="mainFrame">主页</a><span>|</span>   <a href="@Url.Action("Exit")">退出</a></span>
+</div>
+		</div>

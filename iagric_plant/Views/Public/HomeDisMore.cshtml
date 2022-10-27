@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "HomeDisMore";
+}
+<div class="mainWarp">
+    @{
+        if (Model != null)
+        {
+            
+        <div class="warpN1 marT15">
+            <h3 class="h3Style">
+                <span></span>【企业概述】</h3>
+       <div style="padding-left:10px; padding-right:10px; margin-top:10px;">
+                @{
+            string content = ViewBag.Infos ?? "";
+            if (Common.Tools.Public.HtmlClear(ViewBag.Infos ?? "").Length > 300)
+            {
+                string img = "";
+                if (content.IndexOf("<img") >= 0)
+                {
+                    img = content.Substring(content.IndexOf("<img"));
+                    img = img.Substring(0, img.IndexOf(">") + 1);
+                }
+                content = Common.Tools.Public.HtmlClear(ViewBag.Infos ?? "");
+                content = content.Substring(0, 295);
+                content = "<center>" + img + "</center>" + content + "... <a href=\"/Wap_Com/info?ewm=" + ViewBag.ewm + "\">更多</a>";
+            }
+                }
+                @Html.Raw(content)
+            </div>
+        </div>
+       
+           foreach (var item in Model)
+           {
+        @Html.Action("HomeChannelThere", "Public", new { id = item.ID });
+           }
+        }
+    }
+</div>
+
+

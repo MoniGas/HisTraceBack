@@ -1,0 +1,67 @@
+﻿@model LinqModel.ScanEnterprise
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@if (Model != null)
+{
+    if (ViewBag.EnterpriseID != null && ViewBag.EnterpriseID == 37)
+    {
+        <div class="list clearfix">
+        <div class="prod-spec">
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">经销商：</span>
+                <div class="base-txt">
+                   香港荣誉红花贸易有限公司
+                </div>
+            </div>
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">生产厂家：</span>
+                <div class="base-txt">
+                   老挝寮中红塔好运烟草有限公司
+                </div>
+            </div>
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">厂址：</span>
+                <div class="base-txt">
+                    老挝沙湾拿吉省，乌通鹏县，那塔村，9号公里，26公里
+                </div>
+            </div>
+        </div>
+        </div>
+    }
+    else
+    {
+    <div class="list clearfix">
+        <div class="list-title">
+            企业基本信息
+        </div>
+        <div class="prod-spec">
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">生产企业名称</span>
+                <div class="base-txt">
+                    @Model.EnterpriseName
+                </div>
+            </div>
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">营业执照号</span>
+                <div class="base-txt">
+                    @Model.License
+                </div>
+            </div>
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">客服电话</span>
+                <div class="base-txt">
+                    @Model.TelPhone
+                </div>
+            </div>
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">详细地址</span>
+                <div class="base-txt">
+                    @Model.Address
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+}

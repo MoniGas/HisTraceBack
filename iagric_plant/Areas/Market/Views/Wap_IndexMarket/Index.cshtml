@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "抢红包";
+    Layout = "~/Areas/Market/Views/Shared/_WapLayout.cshtml";
+}
+<link href="@Url.Content("~/Areas/Market/Content/lingHB.css")" rel="stylesheet" type="text/css" />
+    <div class="y-body-wrap">
+        <div class="shop-info">
+            <div class="coupons-wrap noFollow">
+                <div class="coupons-container js-can js-ready">
+                    <div class="yhq-lq">
+                         <p class="sjp"style="display: block;">
+                            请输入手机号码领取红包</p>
+                        <div class="lq-phone sjpstyle="display: block;"">
+                            <input type="number" id="tel" name="phone" class="lq-phone-input" placeholder="请输入手机号">
+                        </div>
+                        <a style="cursor: pointer;" id="btnOpen" class="coupons-btn">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,31 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width:650px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看码信息</h4>
+        </div>
+        <div class="modal-body">
+            <table width="100%" class="table_new align-center">
+                <tbody>
+                    <tr>
+                        <td>
+                            扫一扫，看效果
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img data-bind="attr:{src:path}" width="300px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a style="color: #09c481;" data-bind="attr:{href:href}">在线下载码图</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

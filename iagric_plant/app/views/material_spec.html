@@ -1,0 +1,70 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:addMaterialSpec">
+                    商品上架</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入产品名称搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchMaterialSpec">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            规格
+                        </th>
+                        <th>
+                            价格
+                        </th>
+                        <th width="120">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmMaterialSpec.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width150" data-bind="text:$data.MaterialFullName,attr:{title:$data.MaterialFullName}">
+                            </p>
+                        </td>
+                        <td class="width-60">
+                            <p class="cut width270" data-bind="text:$data.MaterialSpecification,attr:{title:$data.MaterialSpecification}">
+                            </p>
+                            <!--<span data-bind="text:$data.Descriptions"></span>-->
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.Price"></span><b>元</b>
+                        </td>
+                        <td>
+                            <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowHand">
+                                <a class="green" href="#" data-bind="click: function(data, event) {$parent.editMaterialSpec($data.ID,data,event);}"
+                                    title="编辑"><i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#"
+                                        data-bind="click: function(data, event) {$parent.delMaterialSpec($data.ID,data,event);}"
+                                        title="删除"><i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer no-margin-top no-t-border">
+            <ul class="pagination" id="materialSpecPager" data-bind="materialSpecPager:vmMaterialSpec.pageSize,totalCounts:vmMaterialSpec.totalCounts,pageIndex:vmMaterialSpec.pageIndex">
+            </ul>
+        </div>
+    </div>
+</div>

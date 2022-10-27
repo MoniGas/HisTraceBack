@@ -1,0 +1,159 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    编辑产品</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>产品名称：</label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" class="form-control" data-bind="value: materialName,validationElement:materialName,hasfocus:selMaterialName">
+                            <!--<span class="alert-danger" data-bind="visible:selMaterialName"></span>-->
+                        </div>
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            产品品牌：</label>
+                        <div class="col-md-3 no-padding">
+                            <select data-bind="options: materialBrands,optionsText: 'BrandName',optionsValue:'Brand_ID',optionsCaption: '选择产品品牌',value:selectedBrand">
+                            </select>
+                            <span class="alert-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            规格：</label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" class="form-control" data-bind="value: materialSpec,validationElement:materialSpec,hasfocus:selMaterialSpec">
+                            <!--<span class="alert-danger" data-bind="visible:selMaterialSpec"></span>-->
+                            <div class="alert-danger-new" style="margin-left: 5px;">
+                                例：（50kg/箱）</div>
+                        </div>
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            价格：</label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" class="form-control" data-bind="value: materialPrice,validationElement:materialPrice,hasfocus:selMaterialPrice">
+                            <!--<span class="alert-danger" data-bind="visible:selMaterialmaterialPrice">请输入价格</span>-->
+                        </div>
+                        <span class="control-label no-padding" style="margin-left: 5px;">元</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            保质期：</label>
+                        <div class="col-md-3 no-padding form-inline">
+                            <input type="text" style="width: 60px" class="form-control" data-bind="value: materialShelfLife">
+                            <select class="form-control" style="width: 120px" data-bind="options: selectedShelfs,optionsText: 'shefsname',optionsValue:'shefsname',value:selectedShelf">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selMaterialShelfLife">保质时间不正确</span>
+                        </div>
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            生产流程：</label>
+                        <div class="col-md-3 no-padding">
+                            <select class="form-control" id="Select1" data-bind="options: processArray,optionsText: 'ProcessName',optionsValue:'ProcessID',optionsCaption: '选择生产流程',value:selectedprocess">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                自定义属性：</label>
+                            <div class="col-md-10 no-padding">
+                                <div class="fake_input S_line">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                属性名：
+                                            </td>
+                                            <td>
+                                                <input type="text" name="regular" style="width: 100px;" data-bind="value:propertyName" />
+                                            </td>
+                                            <td>
+                                                属性值：
+                                            </td>
+                                            <td>
+                                                <input type="text" name="regular" style="width: 100px;" data-bind="value:propertyValue" />
+                                            </td>
+                                            <td>
+                                                <input type="button" value="添 加" class="btn btn-xs btn-success" data-bind="click:AddProperty">
+                                            </td>
+                                            <td>
+                                                <span class="alert-danger-new">例:(参数名:颜色,参数值:红色)</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <span class="alert-danger" data-bind="visible:selPrototype">请填写完整的属性信息</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- ko foreach:property-->
+                                    <div class="W_btn_arrow tag">
+                                        <span class="S_func1"><font data-bind="text:$data.allprototype"></font><a href="javascript:void(0)"
+                                            class="W_ico12 icon_close" data-bind="event: { click: function( data, event) {$root.delProperty(data, event);}}">
+                                        </a></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix no-margin-bottom">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>图片：
+                        </label>
+                        <div class="col-md-10 no-padding">
+                            <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span><span
+                                class="alert-danger" data-bind="visible:selMaterialImgInfo">至少上传一张照片</span>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                        </label>
+                        <div class="col-md-10 no-padding">
+                            <div class="pic-item clearfix">
+                                <ul>
+                                    <!-- ko foreach:files -->
+                                    <li>
+                                        <div class="thumbnail">
+                                            <img data-bind="attr:{src:$data.fileUrls}">
+                                        </div>
+                                        <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                            <i class="hide_clip">移除</i></a> </li>
+                                    <!-- /ko -->
+                                    <li>
+                                        <div class="thumbnail">
+                                            <a id="image_upload"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>产品描述：</label>
+                        <div class="col-md-10 no-padding">
+                            <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                visibility: hidden;"></textarea>
+                            <!--                       <textarea class="form-control" cols="5" data-bind="value: materialMemo,validationElement:materialMemo,hasfocus:selMaterialMemo"></textarea>-->
+                            <!--<input type="text" class="form-control" data-bind="value: materialMemo,validationElement:materialMemo,hasfocus:selMaterialMemo">-->
+                            <!--<span class="alert-danger" data-bind="visible:selMaterialMemo"></span>-->
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:SaveMaterial">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

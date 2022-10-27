@@ -1,0 +1,138 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.SysSetAnalysis>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    //添加代理窗口
+    function AddMacAddress() {
+        openwin('Add', '添加Mac地址', 500, 300);
+    }
+</script>
+<body>
+    <!-------------------main start---------------------------------->
+    <div>
+        <form id="form1" method="get" action="/Admin/SysSetAnalysis/Index">
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li class="dqwz">企业管理<span class="divider">›</span>Mac授权解析</li>
+            </ul>
+        </div>
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                <div class="table-filter borderLeft borderRight clearfix">
+                    <div class="sitem">
+                        筛选：
+                        <input placeholder="开始时间" type="text" style="width: 120px;" id="sDate" name="sDate" value="@ViewBag.sDate"
+        cssclass="Wdate" onclick="WdatePicker()" readonly="readonly">
+                        至
+                        <input placeholder="结束时间" type="text"
+        style="width: 120px;" readonly="readonly" onclick="WdatePicker()" id="eDate" name="eDate"
+        value="@ViewBag.eDate" cssclass="Wdate">
+                    </div>
+                    <div class="sitem">
+                        Mac地址：
+                        <input
+        type="text" id="mac" name="mac" value="@ViewBag.Mac">
+                    </div>
+                    <div class="sitem">
+                        <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button">
+                    </div>
+                    <div class="sitem">
+                        <input type="button" id="btnAdd" name="btnAdd" value="添加Mac地址" onclick="AddMacAddress()"
+                            class="button">
+                    </div>
+                </div>
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Mac地址
+                                </th>
+                                <th>
+                                    授权到期日期
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.MacAddress
+                                    </td>
+                                    <td>
+                                        @sub.EndDate.Value.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+                                        @if (sub.Status == (int)Common.EnumFile.Status.used)
+                                        {
+                                            <span>正常</span>
+                                        }
+                                        else
+                                        {
+                                            <span>禁用</span>
+                                        }
+                                    </td>
+                                     <td>
+                                        <a href="javascript:openwin('@Url.Action("Edit", new { Id = @sub.ID })','修改Mac地址',500,300)" class="lnk mar10" style=" margin-left:20px;">
+                                            修改</a>
+                                        @if (sub.Status == (int)Common.EnumFile.Status.used)
+                                        {
+                                            <a href="javascript:AjaxUrl('/Admin/SysSetAnalysis/EditStatus?id=@sub.ID&type=2','您确定要禁用此Mac地址吗？')" class="lnk mar10">
+                                                禁用</a>
+                                        }
+                                        else if (sub.Status == (int)Common.EnumFile.Status.delete)
+                                        {
+                                            <a href="javascript:AjaxUrl('/Admin/SysSetAnalysis/EditStatus?id=@sub.ID&type=1','您确定要启用此Mac地址吗？')" class="lnk mar10">
+                                                启用</a>
+                                        }
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.TotalItemCount > 0)
+                {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-------------------main end---------------------------------->
+</body>

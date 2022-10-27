@@ -1,0 +1,44 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    下载设置</h4>
+        </div>
+        <div class="modal-body">
+                <h4 class="tit-modal">
+                    选项</h4>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxEwm" id="CbxEwm" class="cbx1" data-bind="checked:CbxEwm" />&nbsp;<span data-bind="text:'内容加密'"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mat10">
+                <div class="form-group">
+                    <div class="col-md-2 mat10" data-bind="checkBoxCascade:null">
+                        <input type="checkbox" name="CbxFile" id="CbxFile" class="cbx1" data-bind="checked:CbxFile" />&nbsp;<span data-bind="text:'文件加密'"></span>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="FilePassword" id="FilePassword" class="col-md-5" data-bind="value:FilePassword"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mat10">
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxImage" id="CbxImage" class="cbx1" data-bind="checked:CbxImage" />&nbsp;<span data-bind="text:'图像防伪'"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="visible:VisibleType,attr:{id:'btnSaveAndDownload'},click:Package">
+                确定并下载</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:Save">
+                确定</button>
+        </div>
+    </div>
+</div>

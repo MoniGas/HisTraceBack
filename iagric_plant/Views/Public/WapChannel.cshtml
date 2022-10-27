@@ -1,0 +1,21 @@
+﻿@model List<LinqModel.ShowChannel>
+@{
+    Layout = null;
+}
+<!--网站导航-->
+<div class="b-main-nav">
+    <ul class="b-main-nav-list">
+        <li><a href="/Wap_Com/index?ewm=@ViewBag.ewm">站点首页</a></li>
+        <li><a href="/Wap_Com/info?ewm=@ViewBag.ewm&channelName=企业概述">企业概述</a></li>
+        @{
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <li><a href="/Wap_News/NewsList?channelId=@item.ID&channelName=@item.ChannelName&ewm=@ViewBag.ewm">@item.ChannelName</a></li>
+                }
+            }
+        }
+    </ul>
+</div>
+<!--网站导航 end-->

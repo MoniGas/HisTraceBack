@@ -1,0 +1,222 @@
+﻿@model LinqModel.View_EnterpriseInfoUser
+@{
+    ViewBag.Title = "GetEnInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-------------------main start---------------------------------->
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li><a class="dqwz" href="/Admin/ManEnterpriseManage/Index">我的企业</a><span class="divider">›</span></li>
+        <li><span class="dqwz">详情</span></li>
+    </ul>
+</div>
+@if (Model != null)
+{
+    <div class="card_pa40 clearfix">
+        <div class="details-main">
+            <div class="position-head">
+                <div class="position-content">
+                    <h3 class="gs-name">
+                        @Model.EnterpriseName</h3>
+                    <ul class="baseInfo">
+                        <li><span class="project_key">联系人：</span><span>@Model.LinkMan</span></li>
+                        <li><span class="project_key">联系电话：</span><span>@Model.LinkPhone</span></li>
+                        <li><span class="project_key">注册时间：</span><span>@Model.AddTime</span></li>
+                        <li><span class="project_key">地址：</span><span>@Model.Address</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project_list clearfix">
+                <ul>
+                    <li>
+                        <div class="project_type develop">
+                            <i class="icons">
+                                <img src="/images/ico-shenhe.png"></i>审核</div>
+                        <div class="project_main">
+                            <div class="bottom_data clearfix">
+                                <div>
+                                    <div class="title">
+                                        企业状态</div>
+                                    <div class="txt">
+                                        @if (Model.Verify == (int)Common.EnumFile.EnterpriseVerify.passVerify)
+                                        {
+                                            <strong>正常</strong>
+                                        }
+                                        else if (Model.Verify == (int)Common.EnumFile.EnterpriseVerify.pauseVerify)
+                                        {
+                                            <strong>停用</strong> 
+                                        }
+                                        else if (Model.Verify == (int)Common.EnumFile.EnterpriseVerify.Try)
+                                        {
+                                            <strong>试用</strong> 
+                                        }
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="title">
+                                        合同到期</div>
+                                    <div class="txt">
+                                        <strong>@ViewBag.HTDate</strong></div>
+                                    <div class="category_list">
+                                        > <a href="javascript:openclose('@Url.Action("AuthorizationCode", new { eid = Model.Enterprise_Info_ID, ename = Model.EnterpriseName })','企业授权码设置',650,400,@Model.Enterprise_Info_ID)">
+                                            授权码设置</a></div>
+                                </div>
+                            </div>
+                            <div class="category_list">
+                                @if (Model.Verify == (int)Common.EnumFile.EnterpriseVerify.passVerify)
+                                {
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/TingYong?eid=@Model.Enterprise_Info_ID','您确定要该企业停用吗？')" class="red">
+                                        停用</a> 
+                                }
+                                else if (Model.Verify == (int)Common.EnumFile.EnterpriseVerify.pauseVerify)
+                                {
+                                    <a href="javascript:openclose('@Url.Action("Audit", new { eid = Model.Enterprise_Info_ID })','审核',500,300,@Model.Enterprise_Info_ID)">
+                                        审核</a>
+                                }
+                                else if (Model.Verify == (int)Common.EnumFile.EnterpriseVerify.Try)
+                                {
+                                    <a href="javascript:openclose('@Url.Action("Audit", new { eid = Model.Enterprise_Info_ID })','审核',500,300,@Model.Enterprise_Info_ID)">
+                                        审核</a>
+                                }
+@*<a href="#" class="red">停用</a>*@
+                                <a href="/Admin/ManEnterpriseManage/Contract?eid=@Model.Enterprise_Info_ID">合同管理</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="project_type develop">
+                            <i class="icons">
+                                <img src="/images/ico-ewm2.png"></i>二维码</div>
+                        <div class="project_main">
+                            <div class="bottom_data clearfix">
+                                <div>
+                                    <div class="title">
+                                        已用码量</div>
+                                    <div class="txt">
+                                        <strong>@Model.UsedCodeCount</strong></div>
+                                </div>
+                                <div>
+                                    <div class="title">
+                                        可用码量</div>
+                                    <div class="txt">
+                                        @if (Model.OverDraftCount == -1)
+                                        {
+                                            <strong>无限制</strong>
+                                        }
+                                        else
+                                        {
+                                            <strong>@(Model.RequestCodeCount - Model.UsedCodeCount + Model.OverDraftCount)</strong>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category_list">
+                                <a href="javascript:openclose('@Url.Action("SetAmountCode", new { eid = Model.Enterprise_Info_ID })','企业用码量设置',450,300,@Model.Enterprise_Info_ID)">
+                                    用码量设置</a> <a href="javascript:openclose('@Url.Action("ContinneCode", new { eid = Model.Enterprise_Info_ID })','续码',450,300,@Model.Enterprise_Info_ID)">
+                                        续码</a> <a href="/Admin/ManEnterpriseManage/GetContinneCodeRecord?eid=@Model.Enterprise_Info_ID">
+                                            续码记录</a> <a href="/Admin/ManEnterpriseManage/GetUsedCodeSituation?eid=@Model.Enterprise_Info_ID">
+                                                用码情况</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="project_type develop">
+                            <i class="icons">
+                                <img src="/images/ico-zhanghu.png"></i>账户</div>
+                        <div class="project_main">
+                            <div class="bottom_data clearfix">
+                                <div>
+                                    <div class="title">
+                                        管理账户</div>
+                                    <div class="txt">
+                                        <strong>@Model.LoginName</strong></div>
+                                </div>
+                                <div>
+                                    <div class="title">
+                                        打码客户端</div>
+                                    <div class="txt">
+                                        @if (ViewBag.KHDType == (int)Common.EnumFile.EnKHDType.Simple)
+                                        {
+                                            <strong>简版</strong>
+                                        }
+                                        else if (ViewBag.KHDType == (int)Common.EnumFile.EnKHDType.Standard)
+                                        {
+                                            <strong>标准版</strong> 
+                                        }
+                                        else if (ViewBag.KHDType == (int)Common.EnumFile.EnKHDType.Complete)
+                                        {
+                                            <strong>高级版</strong> 
+                                        }
+                                        else
+                                        {
+                                            <strong>经营企业版</strong>  
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category_list">
+                                <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/ResetPassword?eid=@Model.Enterprise_Info_ID','您确定要重置密码吗？')">
+                                    重置密码</a>
+                                @if (ViewBag.KHDType == (int)Common.EnumFile.EnKHDType.Simple)
+                                {
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=3','您确定要该企业打码客户端用标准版吗？')">
+                                        标准版</a> 
+                                    <a href="javascript:openclose('@Url.Action("SetJKToken", new { eid = Model.Enterprise_Info_ID })','Token配置',450,300,@Model.Enterprise_Info_ID)">
+                                        Token配置</a> 
+                                    <a  href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=2','您确定要该企业打码客户端用完整版吗？')">
+                                        高级版</a> 
+                                    <a href="javascript:openclose('@Url.Action("SetCodeType", new { eid = Model.Enterprise_Info_ID })','码制设置',350,250,@Model.Enterprise_Info_ID)">
+                                        码制设置</a>
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=4','您确定要该企业打码客户端用经营企业版吗？')">
+                                        经营企业版</a> 
+                                     
+                                }
+                                else if (ViewBag.KHDType == (int)Common.EnumFile.EnKHDType.Standard)
+                                {
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=1','您确定要该企业打码客户端用简版吗？')">
+                                        简版</a>
+                                    <a href="javascript:openclose('@Url.Action("SetJKToken", new { eid = Model.Enterprise_Info_ID })','Token配置',450,300,@Model.Enterprise_Info_ID)">
+                                        Token配置</a> 
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=2','您确定要该企业打码客户端用完整版吗？')">
+                                        高级版</a>
+                                    <a href="javascript:openclose('@Url.Action("SetCodeType", new { eid = Model.Enterprise_Info_ID })','码制设置',350,250,@Model.Enterprise_Info_ID)">
+                                        码制设置</a>
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=4','您确定要该企业打码客户端用经营企业版吗？')">
+                                        经营企业版</a> 
+                                }
+                                else if (ViewBag.KHDType == (int)Common.EnumFile.EnKHDType.Complete)
+                                {
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=1','您确定要该企业打码客户端用简版吗？')">
+                                        简版</a>
+                                    <a href="javascript:openclose('@Url.Action("SetJKToken", new { eid = Model.Enterprise_Info_ID })','Token配置',450,300,@Model.Enterprise_Info_ID)">
+                                        Token配置</a> 
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=3','您确定要该企业打码客户端用标准版吗？')">
+                                        标准版</a>
+                                    <a href="javascript:openclose('@Url.Action("SetCodeType", new { eid = Model.Enterprise_Info_ID })','码制设置',350,250,@Model.Enterprise_Info_ID)">
+                                        码制设置</a>
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=4','您确定要该企业打码客户端用经营企业版吗？')">
+                                        经营企业版</a>  
+                                }
+                                else
+                                {
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=1','您确定要该企业打码客户端用简版吗？')">
+                                        简版</a>
+                                    <a href="javascript:openclose('@Url.Action("SetJKToken", new { eid = Model.Enterprise_Info_ID })','Token配置',450,300,@Model.Enterprise_Info_ID)">
+                                        Token配置</a> 
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=3','您确定要该企业打码客户端用标准版吗？')">
+                                        标准版</a>
+                                   <a href="javascript:openclose('@Url.Action("SetCodeType", new { eid = Model.Enterprise_Info_ID })','码制设置',350,250,@Model.Enterprise_Info_ID)">
+                                        码制设置</a>
+                                    <a href="javascript:AjaxUrl('/Admin/ManEnterpriseManage/SetKHDType?eid=@Model.Enterprise_Info_ID&type=2','您确定要该企业打码客户端用完整版吗？')">
+                                        高级版</a> 
+                                }
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+<!-------------------main end---------------------------------->

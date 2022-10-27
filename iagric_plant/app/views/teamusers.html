@@ -1,0 +1,113 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 850px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加人员</h4>
+        </div>
+        <div class="row no-margin">
+            <div class="col-md-12">
+                <div class="panel-body form-horizontal payment-form">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            <span class="alert-danger">*</span>人员名称：
+                        </label>
+                        <div class="col-md-7 no-padding">
+                            <input type="text" placeholder="人员名称" style="width: 200px;" data-bind="value:userName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body form-horizontal payment-form no-padding">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            <span class="alert-danger"></span>电话号码：
+                        </label>
+                        <div class="col-md-7 no-padding">
+                            <input type="text" placeholder="电话号码" style="width: 200px;" data-bind="value:userPhone" />
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body form-horizontal payment-form no-padding">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            <span class="alert-danger"></span>工牌号：
+                        </label>
+                        <div class="col-md-7 no-padding">
+                            <input type="text" placeholder="工牌号" style="width: 200px;" data-bind="value:userNumber" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body form-horizontal payment-form no-padding">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                        </label>
+                        <div class="col-md-7 no-padding">
+                            <button type="button" class="btn  btn-lg btn-success" id="Button1" data-bind="click:adduser">
+                                确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pat10 no-margin" style="border-top: 1px solid #e5e5e5; margin-top: 10px;">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <div class="modal-body no-padding-top">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                        <table id="simple-table" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        人员名称
+                                    </th>
+                                    <th>
+                                        电话号码
+                                    </th>
+                                    <th>
+                                        工牌号
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:vmTeamUsers.ObjList">
+                                <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.UserName,attr:{title:$data.UserName}">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.UserPhone,attr:{title:$data.UserPhone}">
+                                        </p>
+                                    </td>
+                                    <td>
+                            <!--            <span class="pic">
+                                            <img data-bind="attr:{src:$data.ImgInfo}" onerror="this.src='/images/pic-def.jpg'" /></span>-->
+                                        <p class="cut width70" data-bind="text:$data.UserNumber,attr:{title:$data.UserNumber}">
+                                    </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width270">
+                                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success" data-bind="click: function(data, event) {$root.editteamuser($data.TeamUsersID,data,event);}">
+                                                修改</button>
+                                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success" data-bind="click: function(data, event) {$root.deleteteamuser($data.TeamUsersID,data,event);}">
+                                                删除 </button> 
+                                                </p>
+                   
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer no-margin-top no-t-border">
+                            <ul class="pagination" id="TeamUsersPager" data-bind="TeamUsersPager:vmTeamUsers.pageSize,totalCounts:vmTeamUsers.totalCounts,pageIndex:vmTeamUsers.pageIndex">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

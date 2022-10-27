@@ -1,0 +1,69 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:addDealer">
+                    添加经销商</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入相关信息搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchDealer">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:interExcel">
+                    导入经销商信息</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="300">
+                            经销商名称
+                        </th>
+                        <th width="450">
+                            地址
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmDealer.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.DealerName,attr:{title:$data.DealerName}">
+                            </p>
+                        </td>
+                        <td>
+                            <div style="display: inline" class="cut width270" data-bind="text:$data.Address,attr:{title:$data.Address}">
+                            </div>
+                            <button style="display: none;" class="btn btn-xs btn-success" eleflag="ShowMap" data-bind="click: function(data, event) {$parent.showMap($data.location,data,event);}">
+                                地图查看</button>
+                        </td>
+                        <td>
+                            <div style="display: none;" class="hidden-sm hidden-xs action-buttons" eleflag="ShowHand">
+                                <a class="green" href="#" data-bind="click: function(data, event) {$parent.editDealer($data.Dealer_ID,data,event);}"
+                                    title="编辑"><i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#"
+                                        data-bind="click: function(data, event) {$parent.delDealer($data.Dealer_ID,data,event);}"
+                                        title="删除"><i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="dealerPager" data-bind="dealerPager:vmDealer.pageSize,totalCounts:vmDealer.totalCounts,pageIndex:vmDealer.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

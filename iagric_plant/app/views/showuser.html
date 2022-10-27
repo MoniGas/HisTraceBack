@@ -1,0 +1,61 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:addUser">
+                    添加名片宣传码</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入员工名称..." data-bind="value:name,valueUpdate:'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button data-bind="click:searchUser">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="newsList" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="500">
+                            员工名称
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmUser.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.Infos"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnSee_'+$data.UserID()},click: function() {$parent.showInfo($data.UserID);}">
+                                查看
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnEdit_'+$data.UserID()},click: function() {$parent.editInfo($data.UserID);}">
+                                修改
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnDel_'+$data.UserID()},click: function() {$parent.deleteInfo($data.UserID);}">
+                                删除
+                            </button>
+                            <button class="btn btn-xs btn-success" data-bind="visible:false,attr:{id:'btnSeeCode_'+$data.UserID()},click: function() {$parent.showCodeInfo($data.EWM);}">
+                                码信息查看
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="userPager" data-bind="userPager:vmUser.pageSize,totalCounts:vmUser.totalCounts,pageIndex:vmUser.pageIndex">
+        </ul>
+    </div>
+</div>

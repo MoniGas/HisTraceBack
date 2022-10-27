@@ -1,0 +1,145 @@
+﻿@model LinqModel.ScanMaterial
+@{
+    ViewBag.Title = "OtherProductInfo";
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#divBody").height($(window).height() - $("#divFooter").height() - $("#divBodyTop").height());
+            }
+        });
+    </script>
+</head>
+<body>
+@if (Model != null)
+{
+    if (Model.picUrl != null && Model.picUrl.Count > 0)
+    {
+    <div class="main_visual fixed-matop">
+        @if (Model.picUrl.Count == 1)
+        {
+            <div class="oneImage">
+                <img src="@Model.picUrl[0].fileUrl">
+            </div>
+        }
+        else
+        {
+            <div class="flicking_con">
+                <div class="flicking_inner">
+                    @for (int i = 0; i < Model.picUrl.Count; i++)
+                    {
+                        <a href="#">@(i + 1)</a>
+                    }
+                </div>
+            </div>
+            <div class="main_image">
+                <ul>
+                    @foreach (var item in Model.picUrl)
+                    {
+                        if (!string.IsNullOrEmpty(item.fileUrl))
+                        {
+                        <li>
+                            <img src="@item.fileUrl"></li>   
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    }
+    <div class="list list-in">
+        <div class="basic-info">
+            <!--名称-->
+            <div class="prod-title">
+                <a href="#"><span class="title-text">@Model.MaterialName </span></a>
+            </div>
+            <!--关键词-->
+            <div class="prod-act">
+                <span>@Model.ShortMemo</span> 
+            </div>
+        </div>
+        <div class="prod-spec">
+            @if (!string.IsNullOrEmpty(Model.BrandName))
+            {
+                <div class="spec-desc">
+                    <span class="part-note-msg">品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌</span>
+                    <div class="base-txt">
+                        @Model.BrandName
+                        <span class="complogo">
+                            <img src="@Model.BrandImg"></span>
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Taste))
+            {
+                <div class="spec-desc">
+                    <span class="part-note-msg">口&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;味</span>
+                    <div class="base-txt">
+                        @Model.Taste
+                    </div>
+                </div>
+            }
+        </div>
+        @if (Model.MaterialInfo != null && Model.MaterialInfo.Count > 0)
+        {
+            <div class="prod-spec">
+                @foreach (var item in Model.MaterialInfo)
+                {
+                    <div class="spec-desc">
+                        <span class="part-note-msg">@item.pName</span>
+                        <div class="base-txt">
+                            @item.pValue
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <div class="cqc-part">
+            <div class="cqcad">
+                <a href="#">
+                    <img src="/wapstyle/images/ad01.png"></a>
+            </div>
+        </div>
+    </div>
+        if (Model.VideoUrl != null && !string.IsNullOrEmpty(Model.VideoUrl.videoUrl))
+        {
+    <div class="list clearfix">
+        <div class="list-title"> 
+            产品视频
+        </div>
+        <div class="media-graphic">
+            <video src="@Model.VideoUrl.videoUrl" poster="@Model.VideoUrl.videoUrls" controls="controls" width="100%" height="100%">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+    </div>
+        }
+    if (!string.IsNullOrEmpty(Model.Memo))
+        {
+    <div class="list clearfix">
+        <div class="list-title">
+            产品描述
+        </div>
+        <div class="product-des">
+            @Html.Raw(Model.Memo)
+        </div>
+    </div>
+        }
+}
+</body>
+</html>

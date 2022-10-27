@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>设置</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+		<link rel="stylesheet" type="text/css" href="../public_css/base.css">
+		<link rel="stylesheet" type="text/css" href="../public_css/public-style.css">
+		<link rel="stylesheet" type="text/css" href="../public_css/login.css">
+		<script type="text/javascript">
+		    document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+		</script>
+	</head>
+
+	<body>
+		<header class="OriginHead bar-green">
+			<a href="/Wap_Consumers/Index" class="bar-item pull-left"><i class="icon bar-arrow-left"></i></a>
+			<h1 class="bar-title">设置</h1>
+		</header>
+		<div class="coupon-content">
+		    <div class="weui-cells">
+		    	<a class="weui-cell weui-cell_access" href="/Wap_Order/Edit">
+	                <div class="weui-cell__bd">
+	                    <p>设置个人信息</p>
+	                </div>
+	                <div class="weui-cell__ft">
+	                </div>
+	            </a>
+	            <a class="weui-cell weui-cell_access" href="/Wap_Consumers/EditPwd?consumersId=@ViewBag.Order_Consumers_ID">
+	                <div class="weui-cell__bd">
+	                    <p>修改密码</p>
+	                </div>
+	                <div class="weui-cell__ft">
+	                </div>
+	            </a>
+	            <a class="weui-cell weui-cell_access" href="/Wap_Address/Index">
+	                <div class="weui-cell__bd">
+	                    <p>管理收货地址</p>
+	                </div>
+	                <div class="weui-cell__ft">
+	                </div>
+	            </a>
+	        </div>
+		</div>
+
+	</body>
+
+</html>

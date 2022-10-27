@@ -1,0 +1,140 @@
+a {
+	color: #2b80bc;
+}
+a:hover {
+	color: #ff7300;
+}
+.head_box {
+	background-color: #1b59a8;
+}
+.account li{
+	background:#fff;
+	background-color: rgba(255,255,255,0.2);/* IE9、标准浏览器、IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂 */
+}
+.account li a {
+	color: #fff;
+	
+}
+@media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+  .account li{
+    background-color:#fff;
+    filter:Alpha(opacity=20);
+    position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+    *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+  }
+  .account li a {
+    position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值 */
+  }  
+}
+.account li:hover {
+	background-color: rgba(255,255,255,0.3);
+}
+.menu_box .menu .submenu > li > a:hover{
+	color: #4b88b7;
+	background: #f1f9f6;
+}
+/*button*/
+
+.button,.button-s{
+	background-color: #4077be;
+	border: 1px solid #4077be;
+    color: white;
+}
+.button:hover,.button-s:hover{
+	background-color: #4e84c9;
+	border: 1px solid #4e84c9;
+}
+.button-big{
+	background-color: #4077be;
+	border: solid 1px #4077be;
+	color: #fff;
+}
+.button-big:hover{
+	background: #4e84c9;
+}
+.button-line{
+	background: #fff;
+	border: 1px solid #4077be;
+	color: #4077be;
+}
+.button-line:hover{
+	background: #4077be;
+	color: #fff;
+}
+/**/
+.setup li a{
+	background:#4077be;
+	color:#fff;
+}
+.setup li a:hover{	
+	background:#4e84c9;
+}
+.notice{
+	background:#e5f6fd;
+	border:1px solid #cdecf7;
+	color:#999999;
+}
+.tabs ul li.selected {
+    border-top: 3px solid #4e84c9;
+}
+.control-bar-wrapper .control-bar .date-select-bar .cur {
+	border: 1px solid #4e84c9;
+    background-color: #4e84c9;
+    color: #fff;
+}
+
+/*****steps******/
+.ncp-steps {
+	border-bottom: 2px solid #e6e6e6;
+}
+
+.ncp-steps ul li.active {
+	color: #3e3e3e;
+	border-bottom: 2px solid #f1b64c;
+}
+.ncp-steps ul li.visited{
+	color: #3eab6f;
+	border-bottom: 2px solid #3eab6f;
+}
+
+.ncp-steps ul li i {
+	color: #FFF;
+	background: url(../images/blueimages/ico-circle0.png) no-repeat 0 0;
+}
+.ncp-steps ul li.active i {
+	background-image: url(../images/blueimages/ico-circle1.png);
+}
+.ncp-steps ul li.visited i {
+	background-image: url(../images/blueimages/ico-circle0.png);
+}
+/*分页*/
+.mod-page-cur {
+	background-color: #5ca0d6;
+	border: 1px solid #4388CD;
+}
+.mod-page a:hover{
+	border: #5ca0d6 1px solid;
+	color: inherit;
+}
+.mod-page input[type=button]
+{
+    border: 1px solid #4388CD;
+    background: #5ca0d6;
+}
+
+
+.mod-main .mt .extra-l li.curr a {
+    color: #2b80bc;
+    border-bottom: 2px solid #2b80bc;
+}
+.mod-main .mt .extra-l li a:hover{
+	color: #2b80bc;
+}
+
+/*登录按钮*/
+.btn_login_00 {
+    background-color: #4077be;
+}
+.btn_login_00:hover{
+	background: #4e84c9;
+}

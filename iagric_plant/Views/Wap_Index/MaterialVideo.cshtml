@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "MaterialVideo";
+    Layout = null;
+}
+@model LinqModel.MaterialShopLink
+@if (Model != null)
+{
+    foreach (var item in Model.videos)
+    {
+        if (!string.IsNullOrEmpty(item.videoUrl))
+        {
+    <div class="list clearfix">
+        <div class="list-title">
+            吃法视频
+        </div>
+        <div class="media-graphic">
+            <video src="@item.videoUrl" poster="@Url.Content("~/images/video-def-app.jpg")" controls="controls" width="100%" height="100%">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+    </div>
+        }
+    }
+}

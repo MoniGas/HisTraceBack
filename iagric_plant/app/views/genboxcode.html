@@ -1,0 +1,156 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel-body form-horizontal payment-form">
+                <div class="panel-body form-horizontal payment-form">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <span class="alert-danger">*</span>二维码类型：
+                        </label>
+                        <div class="col-md-7 no-padding">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select1"
+                                data-bind="options:SelTypeModel.SelTypeArray,value:SelTypeModel.SelectedId,optionsText:'Text',optionsValue:'Value'">
+                            </select>
+                            <span class="middle light-red" data-bind="visible:SelType">请选择二维码类型！</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        <span class="alert-danger">*</span>产品名称：
+                    </label>
+                    <div class="col-md-7 no-padding">
+                        <select class="form-control" style="width: 200px; display: inline-block;" id="Select3"
+                            data-bind="options:VmMaterial.MaterialArray,value:VmMaterial.SelectedId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                        </select>
+                        <span class="middle light-red" data-bind="visible:SelMaterial">请选择产品！</span>
+                    </div>
+                </div>
+                <!--     <div class="form-group">
+                    <label class="col-md-3 control-label">
+                       包装数量：
+                    </label>
+                    <div class="col-md-9 no-padding">
+                        <input type="text" placeholder="计划装箱/装盒数量..." style="width: 200px;" data-bind="value:PackNumber" />
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel-body form-horizontal payment-form">
+                <!--        <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        套标规格：
+                    </label>
+                    <div class="col-md-7 no-padding">
+                        <select class="form-control" style="width: 200px; display: inline-block;" id="Select2"
+                            data-bind="options:SpecificationsModel.SpecificationsArray,value:SpecificationsModel.SelectedId,optionsCaption:'选择规格',optionsText:'GuiGe',optionsValue:'ID'">
+                        </select>
+                    </div>
+                </div>-->
+                <div class="form-group" id="codetype">
+                    <label class="col-md-3 control-label">
+                        <span class="alert-danger">*</span>码制：
+                    </label>
+                    <div class="col-md-7 no-padding">
+                        <input id="r1" name="CodeTypeCheck" type="radio" value="2" class="ui-checkbox" data-bind=""
+                            checked="checked" /><label>简码</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="r2" name="CodeTypeCheck" type="radio" value="1" class="ui-checkbox" data-bind="" /><label>IDCode码</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        <span class="alert-danger">*</span>数量：
+                    </label>
+                    <div class="col-md-9 no-padding">
+                        <input type="text" placeholder="数量..." style="width: 200px;" data-bind="value:Number" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                    </label>
+                    <div class="col-md-7 no-padding">
+                        <!-- ko if:$data.TraceEnMainCode()==null-->
+                        <button type="button" class="btn  btn-lg btn-success" data-bind="click:GetEntepriseMainJCode">
+                            获取企业简码</button>
+                        <!--/ko-->
+                        <button type="button" class="btn  btn-lg btn-success" data-bind="click:Generate">
+                            生成</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pat10 no-margin-top" style="border-top: 1px solid #e5e5e5;">
+        <div class="col-md-12">
+            <div class="form-inline ">
+                <span class="lbl">筛选：</span>
+                <input placeholder="开始时间" class="form-control date-picker" id="date1" type="text"
+                    data-date-format="yyyy-mm-dd" data-bind="value:beginDate,event:{onchange:onchangeData()}"
+                    readonly="readonly" />
+                &nbsp;&nbsp;-&nbsp;&nbsp;
+                <input placeholder="结束时间" class="form-control date-picker" id="date2" type="text"
+                    data-date-format="yyyy-mm-dd" data-bind="value:endDate,event:{onchange:onchangeData()}"
+                    readonly="readonly" />
+            </div>
+        </div>
+    </div>
+    <div class="row pat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            生成时间
+                        </th>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            类型
+                        </th>
+                        <th>
+                            规格
+                        </th>
+                        <th>
+                            申请数量
+                        </th>
+                        <th width="330">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:VmGenerateCode.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <span data-bind="text:$data.StrRequestDate"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewType($data.Type)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewSpecification($data.Specifications)"></span><span
+                                data-bind="text:$parent.ViewSpecification($data.GuiGe)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.TotalNum"></span><span data-bind="text:$parent.ViewUnit($data.Type)">
+                            </span>
+                        </td>
+                        <td>
+                            <a class="btn btn-xs btn-success mar8" data-bind="attr:{href:$parent.GetDownUrl($data.DownLoadURL)}">
+                                下载 </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="GenerateCodePager" data-bind="GenerateCodePagerBH:VmGenerateCode.pageSize,totalCounts:VmGenerateCode.totalCounts,pageIndex:VmGenerateCode.pageIndex">
+        </ul>
+    </div>
+</div>

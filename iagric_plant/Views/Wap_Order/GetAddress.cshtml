@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(function () {
+        var provinceCode=@ViewBag.provinceCode;
+        var cityCode=@ViewBag.cityCode;
+        var areaCode=@ViewBag.areaCode;
+        if(provinceCode!="-2")
+        {
+            $.get("/Public/GetShi?id=" + provinceCode+"&select="+cityCode, function (data, textStatus) {
+                $("#selCity").html(data);
+            });
+        }
+        if(cityCode!="-2")
+        {
+            $.get("/Public/GetQu?id=" + cityCode+"&select="+areaCode, function (data, textStatus) {
+                $("#selArea").html(data);
+            });
+        }
+    });
+    function GetShi(obj) {
+        if (obj.value == -2) {
+            var optionStr = "<option selected=\"selected\" value=\"-2\">请选择</option>";
+            $("#selCity").html(optionStr);
+            $("#selArea").html(optionStr);
+        } else {
+            $.get("/Public/GetShi?id=" + obj.value, function (data, textStatus) {
+                $("#selCity").html(data);
+                var optionStr = "<option selected=\"selected\" value=\"-2\">请选择</option>";
+                $("#selArea").html(optionStr);
+            });
+        }
+    }
+    function GetQuXian(obj) {
+        if (obj.value == -2) {
+            var optionStr = "<option selected=\"selected\" value=\"-2\">请选择</option>";
+            $("#selArea").html(optionStr);
+        } else {
+            $.get("/Public/GetQu?id=" + obj.value, function (data, textStatus) {
+                $("#selArea").html(data);
+            });
+        }
+    }
+</script>
+<dd class="dd-padding kv-line">
+    <h6>
+        省份：
+    </h6>
+    <label style="margin:-.0rem 0" class="select kv-v">
+        @Html.DropDownList("Province", ViewBag.itemSheng as List<SelectListItem>, new { name = "Province", onchange = "GetShi(this)" })
+    </label>
+</dd>
+<dd class="dd-padding kv-line">
+    <h6>
+        城市：
+    </h6>
+    <label style="margin:-.0rem 0" class="select kv-v">
+        <select id="selCity" name="selCity" onchange="GetQuXian(this)">
+            <option selected="selected" value="-2">请选择</option>
+        </select>
+    </label>
+</dd>
+<dd class="dd-padding kv-line">
+    <h6>
+        区县：
+    </h6>
+    <label style="margin:-.0rem 0" class="select kv-v">
+        <select id="selArea" name="selArea">
+            <option selected="selected" value="-2">请选择</option>
+        </select>
+    </label>
+</dd>

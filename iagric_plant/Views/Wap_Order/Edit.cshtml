@@ -1,0 +1,176 @@
+﻿@model LinqModel.View_Order_Consumers
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link rel="stylesheet" type="text/css" href="../public_css/public-style.css">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSave").click(function () {
+                if ($("#TxtPassWord").val().length < 6) {
+                    alert('请输入密码太短，至少6个字符！');
+                    return;
+                }
+                if ($("#TxtPassWord").val().length > 20) {
+                    alert('请输入密码太长，不能超过20个字符！');
+                    return;
+                }
+                if ($("#TxtPassWord").val() != $("#TxtPassWordConfirm").val()) {
+                    alert('两次输入的密码不一致！');
+                    return;
+                }
+                if (isNull($("#GetLinkMan").val())) {
+                    alert('请输入收货人姓名！');
+                    return;
+                }
+                if (isNull($("#LinkPhone").val())) {
+                    alert('请输入收货人电话！');
+                    return;
+                }
+                var isMobile = checkMobileEx($("#LinkPhone").val());
+                var isPhone = checkMobileEx($("#LinkPhone").val());
+                if (!(isMobile || isPhone)) {
+                    alert("您填写的收货人电话不正确！");
+                    return;
+                }
+                var Province = $('#Province').val();
+                var selCity = $('#selCity').val();
+                var selArea = $('#selArea').val();
+                if (Province == "710000" || Province == "810000" || Province == "820000" || Province == "110000" || Province == "310000" || Province == "120000" || Province == "500000") {
+                    if (!(Province == "710000" || Province == "810000" || Province == "820000")) {
+                        if (selCity == "-2") {
+                            alert("请选择收货地址所在区域！");
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    if (selArea == "-2") {
+                        alert("请选择收货地址所在区域！");
+                        return false;
+                    }
+                }
+                if (isNull($("#Address").val())) {
+                    alert('请输入地址！');
+                    return;
+                }
+                if (isNull($("#Postcode").val())) {
+                    alert('请输入邮编！');
+                    return;
+                }
+                if (!isPostalCode($("#Postcode").val())) {
+                    alert('您请输入的邮编不正确！');
+                    return;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: "/Wap_Order/Edit",
+                    data: $("#formEdit").serialize(),
+                    success: function (data) {
+                        if (data.res) {
+                            if (data.url != null && data.url != "") {
+                                window.location.href = data.url;
+                            }
+                        }
+                        else {
+                            if (data.info != null && data.info != "") {
+                                alert(data.info);
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#aa").click(function () {
+                alert("请输入收货地址！");
+            })
+        });
+    </script>
+</head>
+<body>
+    <header class="OriginHead bar-green">
+        @if (ViewBag.pageType == 3)
+        { 
+            <a id="aa" class="bar-item pull-left"><i class="icon bar-arrow-left">
+            </i></a>
+        }
+        else
+        {
+            <a href="/Wap_Consumers/SheZhi" class="bar-item pull-left"><i class="icon bar-arrow-left">
+            </i></a>
+        }
+        <h1 class="bar-title">
+            设置个人信息</h1>
+    </header>
+    <div class="coupon-content">
+        <form id="formEdit">
+        <input type="hidden" id="pageType" name="pageType" value="@ViewBag.pageType">
+        <dl class="list list-in">
+            <dd>
+                <dl>
+                    <dd class="dd-padding kv-line">
+                        <h6>
+                            初始密码：
+                        </h6>
+                        <input name="TxtPassWord" id="TxtPassWord" type="password" class="kv-v input-weak" />
+                    </dd>
+                    <dd class="dd-padding kv-line">
+                        <h6>
+                            确认密码：
+                        </h6>
+                        <input name="TxtPassWordConfirm" id="TxtPassWordConfirm" type="password" class="kv-v input-weak" />
+                    </dd>
+                    <dd class="dd-padding kv-line">
+                        <h6>
+                            收货人：
+                        </h6>
+                        @Html.TextBoxFor(m => m.GetLinkMan, new { @class = "kv-v input-weak", placeholder = "请输入收货人", maxLength = 10 })
+                    </dd>
+                    <dd class="dd-padding kv-line">
+                        <h6>
+                            收货人电话：
+                        </h6>
+                        @Html.TextBoxFor(m => m.LinkPhone, new { @class = "kv-v input-weak", placeholder = "请输入收货人电话", maxLength = 20 })
+                    </dd>
+                    @Html.Action("GetAddress", "Wap_Order", new { provinceCode = Model.ProvinceID, cityCode = Model.CityID, areaCode = Model.AreaID })
+                    <dd class="dd-padding kv-line">
+                        <h6>
+                            地址：
+                        </h6>
+                        @Html.TextAreaFor(m => m.Address, new { @class = "input-weak kv-v", placeholder = "请输入收货地址", maxLength = 500 })
+                    </dd>
+                    <dd class="dd-padding kv-line">
+                        <h6>
+                            邮编：
+                        </h6>
+                        @Html.TextBoxFor(m => m.Postcode, new { @class = "kv-v input-weak", placeholder = "6位邮政编码", maxLength = 6 })
+                    </dd>
+                </dl>
+            </dd>
+        </dl>
+        @*     <section class="section-module mat10">
+            <input type="button" class="orange-btn-l" value="保存" id="btnSave" name="btnSave" />
+        </section>*@
+        <div class="page__bd page__bd_spacing" style="margin-top: .4rem;">
+            <a href="#" class="syui-btn syui-btn_primary" id="btnSave" name="btnSave">保存</a>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

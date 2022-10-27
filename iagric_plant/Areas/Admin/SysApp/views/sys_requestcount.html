@@ -1,0 +1,81 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 650px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    主页>审核通过数量</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            企业名称：</label>
+                        <div class="col-md-9" style="line-height:32px;">
+                            <span data-bind="text:eName"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            产品名称：</label>
+                        <div class="col-md-9" style="line-height:32px;">
+                            <span data-bind="text:mName"></span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            类型：</label>
+                        <div class="col-md-9" style="line-height:32px;">
+                            <span data-bind="text:rType"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            产品规格：</label>
+                        <div class="col-md-9" style="line-height:32px;">
+                            <span data-bind="text:mSpec"></span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            申请数量：</label>
+                        <div class="col-md-9" style="line-height:32px;">
+                            <span data-bind="text:applyCount"></span>
+                        </div>
+                    </div>
+                    <!--                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            审核数量：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="审核数量..." class="col-xs-10 col-sm-5" style="width: 150px"
+                                data-bind="value:repuestCount,validationElement:repuestCount,hasfocus:selRepuestCount" />
+                            <span class="alert-danger" style="height: 50px; line-height: 50px;" data-bind="validationMessage:repuestCount">
+                            </span>
+                        </div>
+                    </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:Register">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

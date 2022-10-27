@@ -1,0 +1,122 @@
+﻿<div class="page-content">
+    <div class="part-index clearfix">
+        <div class="ncp-content">
+            <div class="row no-margin">
+                <div class="col-md-12">
+                    <div class="allborder pad15">
+                        <div class="form-group clearfix">
+                            <label class="col-md-1 control-label no-padding" for="form-field-1">
+                                <span class="alert-danger">*</span>产品名称：</label>
+                            <div class="col-md-6">
+                                <select class="form-control" style="display: inline-block; width: 170px;" id="selectMaterial"
+                                    data-bind="options:MaterialList.MaterialArray,value:MaterialList.SelectedId,optionsText:'MaterialFullName',optionsValue:'Material_ID',optionsCaption: '选择产品'">
+                                </select>
+                               <!-- <button class="btn btn-lg-s btn-success mal10" data-bind="click:AddMaterial">
+                                    添加产品</button>-->
+                                <span class="alert-danger" data-bind="visible:selMaterial">请选择产品！</span>
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="form-field-1">
+                                <span class="alert-danger">*</span>配方名称：</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="配方名称..." maxlength="10" style="width: 160px;" data-bind="value:FormulaName" />
+                                <span class="alert-danger" data-bind="visible:selFormulaName">请填写配方名称！</span>
+                            </div>
+                        </div>
+                        <div class="form-group no-margin clearfix">
+                            <label class="col-md-1 control-label no-padding" for="form-field-1">
+                                规格：</label>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="配方规格..." maxlength="10" style="width: 170px;" data-bind="value:FormulaSpec" />
+                                <span class="alert-danger-new">配方规格是指该配方的重量或者容量</span>
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="form-field-1">
+                                生成时间：</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="配方规格..." maxlength="10" style="width: 160px;" data-bind="value:AddDate"
+                                    readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pat10 mat10">
+                        <div class="col-md-12">
+                            <button class="btn btn-lg btn-success" data-bind="click:AddOrigin">
+                                添加原料</button>
+                            <span class="alert-danger" data-bind="visible:selHasOrigin">至少添加一个原料！</span>
+                        </div>
+                    </div>
+                    <div class="row pat10 mat10">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            原料名称
+                                        </th>
+                                        <th>
+                                            供应商
+                                        </th>
+                                        <th>
+                                            配比
+                                        </th>
+                                        <th>
+                                            等级
+                                        </th>
+                                        <th>
+                                            产地
+                                        </th>
+                                        <th>
+                                            批次
+                                        </th>
+                                        <th width="80">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:FormulaDetail">
+                                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                        <td>
+                                            <p data-bind="text:$data.OriginName">
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p data-bind="text:$data.Supplier">
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p data-bind="text:$data.Amount">
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p data-bind="text:$data.Level">
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p data-bind="text:$data.Factory">
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p data-bind="text:$data.Batch">
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                                <a class="green" href="#" data-bind="click: $parent.EditOrigin" title="编辑"><i class="ace-icon fa fa-pencil bigger-150">
+                                                </i></a><a class="red" href="#" title="删除" data-bind="click: $parent.DelOrigin"><i
+                                                    class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: center; margin-top: 30px;">
+                            <button type="button" class="btn  btn-lg btn-success" data-bind="click:AddFormula">
+                                保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

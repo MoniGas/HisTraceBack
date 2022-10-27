@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+@model LinqModel.View_ActivityCoupon
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>查看优惠券</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="../../../../public_css/base.css" rel="stylesheet" type="text/css" />
+    <link href="../../../../public_css/login.css" rel="stylesheet" type="text/css" />
+    <link href="../../../../public_css/public-style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+</head>
+<body style="background-color: #14112c;">
+    <header class="OriginHead" style="background-color: #fff;">
+        <div class="LBtn">
+            <a href="#" class="logo"></a>
+        </div>
+    </header>
+    <div class="coupon-content">
+        <div class="y-body-wrap">
+            <div class="shop-info">
+                <h2 class="shop-title">
+                    @Model.ActivityTitle
+                </h2>
+                <div class="coupons-wrap noFollow">
+                    <div class="coupons-container js-ready jptl">
+                        <div class="yhq-main">
+                            <div class="coupons-jp">
+                                @if (Model.CouponType == (int)Common.EnumText.CouponType.Cash)
+                                {
+                                    <span class="yh_p">@Model.CouponContent 元现金券</span>
+                                }
+                                else if (Model.CouponType == (int)Common.EnumText.CouponType.Discount)
+                                {
+                                    <span class="yh_p">@Model.CouponContent %折扣券</span>
+                                }
+                                else
+                                {
+
+                                    <span class="yh_p">@Model.CouponContent </span>
+                                }
+                                <span class="jp-data">有效期： @Model.StartDate.Value.ToString("yyyy-MM-dd") 至 @Model.EndDate.Value.ToString("yyyy-MM-dd")
+                                </span>
+                            </div>
+                            @*               <div class="coupons-tips">
+					                    <p>全场通用</p>
+					                    <P></P>
+					                </div>*@
+                        </div>
+                        <div class="yhq-lq">
+                            <p>
+                                优惠券将放入该手机号的账户中</p>
+                            <div class="lq-phone">
+                                <input type="number" id="phone" name="phone" class="lq-phone-input" placeholder="请输入手机号">
+                            </div>
+                            <a href="#" class="coupons-btn"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-rules">
+                    <div class="activity-title">
+                        <span class="title">活动说明</span>
+                    </div>
+                    @Model.Content
+                    @*				        	<span class="rule-line">1. 点击“立即领取”按钮，领取成功后购买商品时使用，即可享受优惠。</span> 
+				        	<span class="rule-line">2. 在手机淘宝-我的淘宝-卡券包-网店优惠券，可查询已发放到账户的优惠券。</span> 
+				        	<span class="rule-line">3. 因商品参与其它活动等原因，付款时优惠券可能无法使用，此时商品最终成交价以您实际付款时提示金额为准。</span> 
+				        	<span class="rule-line">4. 获取、使用优惠券时如存在违规行为（作弊领取、恶意套现、刷取信誉、虚假交易等），将取消用户领取资格、撤销违规交易且收回全部优惠券（含已使用及未使用的），必要时追究法律责任。</span>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

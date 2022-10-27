@@ -1,0 +1,90 @@
+﻿@model LinqModel.Enterprise_Info
+@{
+    ViewBag.Title = "SetCodeType";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<script>
+    $(function () {
+   $("#btnSave").click(function(){
+        if($("#CodeType").val()==0){
+        alert("请选择企业码制！");
+             return;
+        };
+            $.post("@Url.Action("SetCodeType")",
+            {
+            eid:$("#eid").val(),
+            CodeType:$("#CodeType").val()
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        art.dialog.close();
+                    }
+                }
+            })
+    });
+    });
+</script>
+<html style="overflow-x: hidden">
+<head>
+    <title>企业码制设置</title>
+</head>
+<body>
+    <div class="mc clearfix">
+        <div class="user-set userset-lcol">
+            <div class="form hd-manage-det">
+                <input id="eid" type="hidden"  value="@Model.Enterprise_Info_ID" />
+                <div class="infoitem">
+                    <span class="label" style="width: 120px">企业名称：</span>
+                    <div class="fl">
+                        <span class="yellow">@Model.EnterpriseName</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 130px"><em>*</em>企业码制：</span>
+                    <div class="fl">
+                        <select id="CodeType" name="CodeType" style="width: 123px; height: 28px; font-size: 14px;
+                            padding-left: 10px;">
+                            @if (Model.CodeType == 1)
+                            {
+                                <option value="0">请选择</option>
+                                <option value="1" selected="selected">MA码</option>
+                                <option value="2">GS1码</option>
+                                <option value="3">MA码+GS1码</option>  
+                            }
+                            else if (Model.CodeType == 2)
+                            {
+                                <option value="0">请选择</option>
+                                <option value="1">MA码</option>
+                                <option value="2" selected="selected">GS1码</option>
+                                <option value="3">MA码+GS1码</option>  
+                            }
+                            else if (Model.CodeType == 3)
+                            {
+                                <option value="0">请选择</option>
+                                <option value="1">MA码</option>
+                                <option value="2">GS1码</option>
+                                <option value="3" selected="selected">MA码+GS1码</option>  
+                            }
+                            else
+                            {
+                                <option value="0">请选择</option>
+                                <option value="1">MA码</option>
+                                <option value="2">GS1码</option>
+                                <option value="3">MA码+GS1码</option>  
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <p style="padding-left: 75px" class="center mat40">
+                <input type="button" id="btnSave" value="设置" class="button">
+                <input type="button" id="btnQuXiao" onclick="art.dialog.close();" value="取消" class="button"></p>
+        </div>
+    </div>
+</body>
+</html>

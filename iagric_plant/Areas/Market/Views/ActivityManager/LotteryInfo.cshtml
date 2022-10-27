@@ -1,0 +1,163 @@
+﻿@model LinqModel.YX_ActivitySub
+@{
+    ViewBag.Title = "LotteryInfo";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<!-------------------main start---------------------------------->
+<div>
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li>活动管理<span class="divider">›</span>活动管理<span class="divider">›</span>查看详情<span class="divider">›</span><a style="cursor: pointer; line-height: 20px; color: #989898;" href="/Market/ActivityManager/Index?activityStatus=1">
+                            返回</a></li>
+        </ul>
+    </div>
+    <div class="card_pa40 clearfix">
+        <div class="mod-main">
+            <div class="account-info">
+                <span class="mar20">活动名称：<span class="yellow">@Model.ActivityTitle</span></span>
+                <span class="mar20">活动有效期：<span>@Model.StartDate.Value.ToString("yyyy-MM-dd")<span>至</span>@Model.EndDate.Value.ToString("yyyy-MM-dd")</span></span>
+            </div>
+            <div class="mc clearfix">
+                <div class="user-set userset-lcol">
+                    <div class="form hd-manage-det">
+                        <div class="infoitem">
+                            <span class="label">参与方式：</span>
+                            <div class="fl">
+                                <span>@Common.EnumText.EnumToText(typeof(Common.EnumText.JoinMode), Model.JoinMode.Value)</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">奖项明细：</span>
+                            <div class="fl">
+                                <div class="hdlx" style="width: 500px;">
+                                    <div class="boxtable">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        奖项名称
+                                                    </th>
+                                                    <th>
+                                                        奖项图片
+                                                    </th>
+                                                    <th>
+                                                        奖项文件
+                                                    </th>
+                                                    <th>
+                                                        奖项数量
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    if (ViewBag.LotteryDetail.Count > 0)
+                                                    {
+                                                        foreach (var item in ViewBag.LotteryDetail)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @item.LotteryName
+                                                                </td>
+                                                                @if (item.LotteryPic != null)
+                                                                {
+                                                                    <td>
+                                                                        <img src="@item.LotteryPic" style="width:50px;height:50px;" />
+                                                                    </td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        <span>无</span>
+                                                                    </td>
+                                                                }
+                                                                @if (item.LotteryFile != null)
+                                                                {
+                                                                    <td>
+                                                                        <a target="_blank" href="@item.LotteryFileURL">@item.LotteryFile</a>
+                                                                    </td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        <span>无</span>
+                                                                    </td>
+                                                                }
+                                                                <td>
+                                                                    @item.LotteryCount
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+@*            <div class="boxtable mat20 clearfix">
+                <h3>
+                    发放信息
+                </h3>
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    时间
+                                </th>
+                                <th>
+                                    用户
+                                </th>
+                                <th>
+                                    奖项内容
+                                </th>
+                                <th>
+                                    奖项
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (ViewBag.GetDetail.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.GetDetail)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.GetTime
+                                            </td>
+                                            <td>
+                                                @item.userName
+                                            </td>
+                                            <td>
+                                                @item.LotteryValue
+                                            </td>
+                                            <td>
+                                                @item.LotteryName
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (ViewBag.GetDetail.Count == 0)
+                {
+                    <div class="mod-page fy">
+                        <div>暂无数据</div>
+                    </div>
+                }
+
+            </div>*@
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->
+

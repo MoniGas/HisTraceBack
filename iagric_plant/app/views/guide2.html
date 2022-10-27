@@ -1,0 +1,148 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="guide clearfix">
+                <div class="guide-title">
+                    <ul>
+                        <li class="visited"><i></i><span>建立种植批次</span> </li>
+                        <li class="active"><i>2</i> <span>采集种植信息</span> </li>
+                        <li><i>3</i> <span>申请单品产品码</span> </li>
+                        <li><i>4</i> <span>销售产品</span> </li>
+                        <li><i>5</i> <span>我要看效果</span> </li>
+                    </ul>
+                </div>
+                <div class="guide-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-1 control-label no-padding" for="name">
+                                    <span class="alert-danger">*</span>生产环节类型：</label>
+                                <div class="col-md-11">
+                                    <select id="type" data-bind="value:vmguide.type">
+                                        <option value="0">生产</option>
+                                        <option value="1">加工</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    <span class="alert-danger">*</span>选择生产环节：</label>
+                                <div class="col-md-4">
+                                    <div class="col-md-9  no-padding clearfix">
+                                        <select class="" data-bind="options: vmguide.operationArry,optionsText: 'OperationTypeName',optionsValue:'Batch_ZuoYeType_ID',optionsCaption: '选择生产环节',value:vmguide.typeid">
+                                        </select>
+                                        <button class="btn btn-lg-s btn-success mal10" data-bind="click:addOperationType">
+                                            添加生产环节</button>
+                                        <span class="alert-danger" data-bind="visible:vmguide.selZuoYe">请选择生产环节！</span>
+                                    </div>
+                                </div>
+                                <span class="col-md-7 help-inline pad5"><span class="middle grey">生产环节：指产品种植成长过程的各种农活分类，例如：浇水、施肥、除草、杀虫等。</span>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    <span class="alert-danger">*</span>作业内容：</label>
+                                <div class="col-md-4">
+                                    <div class="clearfix">
+                                        <!--<input type="text" class="">-->
+                                        <textarea name="comment" id="comment" class="width-100 height90" data-bind="value:vmguide.content,validationElement:vmguide.content,hasfocus:vmguide.selContent"></textarea>
+                                    </div>
+                                </div>
+                                <span class="col-md-7 help-inline pad5"><span class="middle grey">作业内容：种植过程中进行浇水、施肥、除草、杀虫等，生产环节的一些特殊说明</span>
+                                    <br />
+                                    <span data-bind="visible:!vmguide.selContent()"><span class="alert-danger" style="height: 30px;
+                                        line-height: 30px;" data-bind="validationMessage:vmguide.content"></span></span>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <div class="clearfix">
+                                    <label class="control-label col-md-1 no-padding">
+                                        作业：</label>
+                                    <div class="col-md-6">
+                                        <h6 class="header bigger no-padding clearfix">
+                                            图片 <span class="alert-danger-new">支持格式:.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB</span></h6>
+                                        <div class="pic-item clearfix">
+                                            <ul>
+                                                <!-- ko foreach:vmguide.files -->
+                                                <li>
+                                                    <div class="thumbnail">
+                                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                                    </div>
+                                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                                        <i class="hide_clip">移除</i></a> </li>
+                                                <!-- /ko -->
+                                                <li>
+                                                    <div class="thumbnail">
+                                                        <a id="image_upload"></a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6 class="header bigger no-padding clearfix">
+                                            视频 <span class="alert-danger-new">支持格式:.avi|.mp4,单个视频大小限制为200MB</span></h6>
+                                        <div class="pic-item clearfix">
+                                            <ul>
+                                                <!-- ko foreach:vmguide.videos -->
+                                                <li>
+                                                    <div class="thumbnail">
+                                                        <!--<img src="../../images/video.png" />-->
+                                                         <img data-bind="attr:{src:$data.videoUrls}" onerror="this.src='/images/video-def.jpg'">
+                                                    </div>
+                                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delVideo(data, event);}}">
+                                                        <i class="hide_clip">移除</i></a> </li>
+                                                <!-- /ko -->
+                                                <li>
+                                                    <div class="thumbnail">
+                                                        <a id="video_upload"></a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mal105">
+                                    <span class="help-inline pad5"><span class="middle grey">作业图片/视频：指种植过程进行的浇水、施肥、除草、杀虫等生产环节时候拍的一些照片、视频，以便于产品追溯可视化看产品的成长环境。
+                                    </span></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1 no-padding">
+                                    <span class="alert-danger">*</span>作业执行时间：</label>
+                                <div class="col-md-4">
+                                    <div class="clearfix">
+                                        <input placeholder="时间" class="col-md-9" id="date1" type="text" readonly="readonly"
+                                            data-date-format="yyyy-mm-dd" data-bind="value:vmguide.addDate,validationElement:vmguide.addDate,hasfocus:vmguide.selAddDate" />
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-content">
+                    <div class="form-group">
+                        <label class="control-label col-md-1 no-padding">
+                        </label>
+                        <div class="col-md-7">
+                            <button class="btn btn-lg btn-nygrey" data-bind="click:back">
+                                返回</button>
+                            <button class="btn btn-lg btn-nyyellow" href="javascript:void(0);" data-bind="click:vmguide.Register">
+                                下一步</button>
+                            <button class="btn btn-lg btn-nygrey" data-bind="click:next">
+                                跳过此步，以后用APP采集</button>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="code-pic">
+                                <img data-bind="attr:{src:vmguide.url}">
+                                <span>（扫二维码下载）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿<div class="page-content">
+    <div class="row pat10 no-margin-top" style="border-top: 1px solid #e5e5e5;">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <span class="lbl">筛选：</span>
+                <input placeholder="开始时间" class="form-control date-picker" id="date1" type="text"
+                    data-date-format="yyyy-mm-dd" data-bind="value:beginDate,event:{onchange:onchangeData()}" />
+                -
+                <input placeholder="结束时间" class="form-control date-picker" id="date2" type="text"
+                    data-date-format="yyyy-mm-dd" data-bind="value:endDate,event:{onchange:onchangeData()}" />
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            生成时间
+                        </th>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            生成数量
+                        </th>
+                        <th>
+                            销售数量
+                        </th>
+                        <th>
+                            码内容加密
+                        </th>
+                        <th>
+                            下载文件加密
+                        </th>
+                        <th>
+                            防伪码类型
+                        </th>
+                        <th>
+                            下载次数
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th width="330">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:VmGenerateCode.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.StrRequestDate"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.RequestCount"></span><span data-bind="text:$parent.ViewUnit($data.Type)">
+                            </span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.saleCount"></span><span data-bind="text:$parent.ViewUnit($data.Type)">
+                            </span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewEwmEncryption($data.EwmEncryption)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewFileEncryption($data.FileEncryption)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewImageCounterfeit($data.ImageCounterfeit)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewDownLoadNum($data.DownLoadNum)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.GetStatus($data.Status)"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnEwm_'+$data.RequestCode_ID()},click: function() {$parent.ProductEwm($data.RequestCode_ID);}">
+                                查看
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnDownloadSetting_'+$data.RequestCode_ID()},click: function() {$parent.Download($data.RequestCode_ID,2);}">
+                                下载设置
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnPackaging_'+$data.RequestCode_ID()},click: function() {$parent.Download($data.RequestCode_ID,1);}">
+                                下载
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnDownload_'+$data.RequestCode_ID()},click: function() {$parent.DownloadFile($data.RequestCode_ID,$data.DownLoadURL);}">
+                                下载
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnSellCode_'+$data.RequestCode_ID()},click: function() {$parent.navigateTo('sellcode',$data.RequestCode_ID);}">
+                                激活追溯
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="GenerateCodePager" data-bind="GenerateCodePagerBH:VmGenerateCode.pageSize,totalCounts:VmGenerateCode.totalCounts,pageIndex:VmGenerateCode.pageIndex">
+        </ul>
+    </div>
+</div>

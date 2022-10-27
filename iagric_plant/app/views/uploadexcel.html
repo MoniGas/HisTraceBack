@@ -1,0 +1,36 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    导入Excel</h4>
+        </div>
+        <div class="row no-margin">
+            <div class="col-md-12">
+                <div class="panel-body form-horizontal payment-form no-padding">
+                    <div class="row mat10">
+                        <h4 class="tit-modal">
+                            <span class="alert-danger">*</span>导入Excel<span class="alert-danger-new">支持格式.xls|.xlsx,大小限制为50MB。</span></h4>
+                        <div class="padlr15">
+                            <div class="pic-item  clearfix">
+                                <ul>
+                                    <li>
+                                        <div class="thumbnail">
+                                            <a id="excel_upload"></a>
+                                        </div>
+                                    </li>
+                                    <!-- ko foreach:files -->
+                                    <li style="padding-left:130px; padding-top:30px">
+                                        <img src="../../images/load.gif" />
+                                    </li>
+                                    <!-- /ko -->
+                                </ul>
+                                <!-- <span class="alert-danger" data-bind="visible:logo">请上传图片！</span>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

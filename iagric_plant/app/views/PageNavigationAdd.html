@@ -1,0 +1,60 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:Close">
+                ×</button><h4 class="modal-oldpwd">
+                    服务大厅>配置导航页>配置导航模块</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>产品名称：</label>
+                        <div class="col-md-8 no-padding">
+                            <select class="form-control" data-placeholder="选择产品..." id="Select1" data-bind="options:MaterialModels.ModelsArray,value:MaterialModels.SelectedMaterialId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                                </select>
+                        </div>
+                        <span class="alert-danger" data-bind="visible:SelMaterial">请选择产品!</span>
+                    </div>
+                    </form>
+            </div>
+            <div class="row">
+                <h4 class="tit-modal">
+                    导航模块列表</h4>
+                <div class="padlr15">
+                    <table id="table1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    导航模块
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ko foreach: dataList -->
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="checked:$parent.isChecked($data.Id),value:$data.Id" />&nbsp;<span
+                                        data-bind="text:$data.NavigationName"></span>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+
+                     <!-- ko foreach:dataList -->
+                            <span data-bind="value:$data.NavigationName"></span>
+                            <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Save">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:Close">
+                取消</button>
+        </div>
+    </div>
+</div>

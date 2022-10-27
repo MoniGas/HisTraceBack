@@ -1,0 +1,204 @@
+﻿@using LinqModel
+@model ShowNews   
+@{
+    ViewBag.Title = "Company";
+    Layout = null;
+    View_EnterpriseShow CompanyInfo = ViewBag.Company as View_EnterpriseShow;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    @*<link rel="stylesheet" type="text/css" href="/Content/wapShow/style.css" />*@
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <title>医疗器械（UDI）服务云平台</title>
+    <script type="text/javascript">
+        $(function () {
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#warp").height($(window).height() - $("#divFooter").height());
+            }
+        });
+    </script>
+    <style type="text/css">
+        .ind-main-body > p img
+        {
+            display: block;
+            width: 100%;
+        }
+        .underline
+        {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="warp">
+        <!--网站头部-->
+        <div class="headerbox">
+            <h1 title="医疗器械（UDI）服务云平台">
+                医疗器械（UDI）服务云平台</h1>
+            <h2>@ViewBag.CompanyName</h2>
+        </div>
+        <div class="top_slide_pic">
+            <img src="../images/banner.jpg" width="640" height="254" />
+        </div>
+        <!--企业名称及Logo-->
+        <section class="section-module">
+            <div class="scroll-content">
+                <div class="item-list o-t-item no-padding" style="background: #fff;">
+                    <div class="item-img" style="background: #f5f5f5;">
+                        <p>
+                            <img src="@ViewBag.Logo" onerror="this.src='/images/pic-def.jpg'"/></p>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="title mat10" style="font-size: 16px;">@CompanyInfo.CompanyName</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @if (CompanyInfo != null)
+        {
+            <section class="section-module">
+                <dl class="contact-dl">
+                    <dt>联系人：</dt>
+                    <dd>@CompanyInfo.LinkMan</dd>
+                </dl>
+                <dl class="contact-dl">
+                    <dt>联系电话：</dt>
+                    <dd>@CompanyInfo.LinkPhone</dd>
+                </dl>
+                <dl class="contact-dl">
+                    <dt>企业地址：</dt>
+                    <dd>@CompanyInfo.Address</dd>
+                </dl>
+            </section>
+        }
+        <section class="section-module">
+            <div class="module-t">
+                <h3>
+                    企业介绍</h3>
+            </div>
+            <div class="ind-main-body">
+                <p>@Html.Raw(CompanyInfo.Memo)</p>
+            </div>
+        </section>
+        <!--企业品牌列表-->
+        @{
+            List<Brand> brand = ViewBag.BrandList;
+            if (brand.Count > 0)
+            {
+            <section class="section-module">
+            <div id="Brand" class="module-t">
+                <h3>
+                    企业品牌</h3>
+            </div>
+            <div class="ind-main-body">
+                <ul class="list-book-3">
+                        @for (int i = 0; i < brand.Count; i++)
+                        {
+                            if (ViewBag.Brand != null)
+                            {
+                                foreach (var item in ViewBag.Brand)
+                                {
+                                    if (item == brand[i].Brand_ID.ToString())
+                                    {
+                        <li>
+                            <div class="img">
+                                <a href="/Wap_Com/BrandShow?BrandID=@brand[i].Brand_ID">
+                                    <img src="@brand[i].Logo" width="100%"/></a>
+                            </div>
+                            <p>
+                                <a href="/Wap_Com/BrandShow?BrandID=@brand[i].Brand_ID" class="blue underline">@brand[i].BrandName</a>
+                            </p>
+                        </li>
+                                    }
+                                }
+                            }
+                        }
+                </ul>
+            </div>
+        </section>
+            }
+        }
+        <!--企业员工列表-->
+        @{
+            List<ShowUser> user = ViewBag.UserList;
+            if (user.Count > 0)
+            {
+            <section class="section-module">
+            <div id="Brand" class="module-t">
+                <h3>
+                    企业员工</h3>
+            </div>
+            <div class="ind-main-body">
+                <ul class="list-book-3">
+                        @for (int i = 0; i < user.Count; i++)
+                        {
+                            if (ViewBag.User != null)
+                            {
+                                foreach (var item in ViewBag.User)
+                                {
+                                    if (item == user[i].UserID.ToString())
+                                    {
+                        <li>
+                            <div class="img">
+                                <a href="/Wap_Com/UserShow?UserID=@user[i].UserID">
+                                    <img src="@user[i].headimg" width="100%"/></a>
+                            </div>
+                            <p>
+                                <a href="/Wap_Com/UserShow?UserID=@user[i].UserID" class="blue underline">@user[i].Infos</a>
+                            </p>
+                        </li>
+                                    }
+                                }
+                            }
+                        }
+                </ul>
+            </div>
+        </section>
+            }
+        }
+        <!--企业新闻列表-->
+        @{
+            List<ShowNews> news = ViewBag.NewsList;
+            if (news.Count > 0)
+            {
+            <section class="section-module">
+            <div class="module-t">
+                <h3>
+                    <a href="#">企业资讯</a></h3>
+            </div>
+            <ul class="news_items morelistbox">
+                    @for (int i = 0; i < news.Count; i++)
+                    {
+                        if (ViewBag.News != null)
+                        {
+                            foreach (var item in ViewBag.News)
+                            {
+                                if (item == news[i].ID.ToString())
+                                {
+                    <li><a href="/Wap_Com/ShowNews?NewsID=@news[i].ID" class="blue underline">@news[i].Title</a></li>
+                                }
+                            }
+                        }
+                    }
+            </ul>
+        </section>
+            }
+        }
+    </div>
+    <div id="divFooter" class="juchou-footer">
+        <footer id="footer">
+            <p>
+                医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

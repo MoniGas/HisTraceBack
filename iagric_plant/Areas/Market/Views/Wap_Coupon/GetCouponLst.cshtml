@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+@model List<LinqModel.View_CouponGetRecord>
+           <!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>优惠券列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+		<link rel="stylesheet" type="text/css" href="/public_css/base.css">
+		<link rel="stylesheet" type="text/css" href="/public_css/public-style.css">
+		<link rel="stylesheet" type="text/css" href="/public_css/login.css">
+		<script type="text/javascript">
+		    document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+		</script>
+        
+	</head>
+
+	<body>
+		<header class="OriginHead bar-green">
+			<a href="javascript:history.go(-1)" class="bar-item pull-left"><i class="icon bar-arrow-left"></i></a>
+			<h1 class="bar-title">我的优惠券</h1>
+		</header>
+		<div class="coupon-content">
+			<div class="weui-panel weui-panel_access">
+	            <div class="weui-panel__hd">您的优惠券信息如下</div>
+	            <div class="weui-panel__bd">
+	                @if (Model!=null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="weui-media-box weui-media-box_text">
+	                    <h4 class="weui-media-box__title">您参与的 @item.ActivityTitle 优惠码号为 @item.CouponCode </h4>
+	                    <p class="weui-media-box__desc">优惠码有效期：@item.StartDate.Value.ToString("yyyy-MM-dd") 至 @item.EndDate.Value.ToString("yyyy-MM-dd")，请您在有效期内兑换！</p>
+	                </div>
+	                 
+                    }
+                }
+	            </div>
+	        </div>
+		</div>
+
+	</body>
+
+</html>
+

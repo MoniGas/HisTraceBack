@@ -1,0 +1,225 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="row clearfix">
+                <div class="ma15" style="width: 960px; margin: 15px auto;">
+                    <div class="code-img thumbnail" style="text-align: center;">
+                        <img data-bind="attr:{src:vmShowCompany.createUrl}" width="150" />
+                        <br />
+                        <a style="color: #1D9BD1;" href="javascript:void(0)" data-bind="event:{click:vmShowCompany.ImageSize}">
+                            下载宣传码</a>
+                    </div>
+                    <div class="code-text">
+                        <div class="row mat10">
+                            <span class="col-md-2 control-label no-padding">码号：</span> <span class="col-md-3 no-padding"
+                                style="line-height: 32px;"><font data-bind="text:vmShowCompany.ewm"></font></span>
+                            <span class="col-md-1 control-label no-padding">解析地址：</span> <span class="col-md-6 no-padding"
+                                style="line-height: 32px;"><a data-bind="attr:{href:vmShowCompany.url}" target="_blank">
+                                    <font class="blue underline" data-bind="text:vmShowCompany.url"></font></a>
+                            </span>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>邮箱：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.email">
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name" style="display:none">
+                                订购热线：</label>
+                            <div class="col-md-3 no-padding" style="display:none">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.orderingHotline">
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                视频网址：</label>
+                            <div class="col-md-5 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.videoUrl">
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>联系人：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.linkMan">
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>联系电话：</label>
+                            <div class="col-md-5 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.linkPhone">
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                企业网址：</label>
+                            <div class="col-md-5 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.webUrl">
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>营业执照号：</label>
+                            <div class="col-md-10 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.businessLicence,validationElement:vmShowCompany.businessLicence,hasfocus:vmShowCompany.selBusinessLicence">
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>地址：</label>
+                            <div class="col-md-10 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmShowCompany.address">
+                            </div>
+                        </div>
+                        <div class="row mat10"style="display:none">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                淘宝商城链接：</label>
+                            <div class="col-md-10 no-padding">
+                                <input type="text" class="form-control" maxlength="250" data-bind="value: vmShowCompany.taobaourl">
+                            </div>
+                        </div>
+                        <div class="row mat10"style="display:none">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                京东商城链接：</label>
+                            <div class="col-md-10 no-padding">
+                                <input type="text" class="form-control" maxlength="250" data-bind="value: vmShowCompany.jingdongurl">
+                            </div>
+                        </div>
+                        <div class="row mat10"style="display:none">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                天猫商城链接：</label>
+                            <div class="col-md-10 no-padding">
+                                <input type="text" class="form-control" maxlength="250" data-bind="value: vmShowCompany.tianmaourl">
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                实时视频地址：</label>
+                            <div class="col-md-10 no-padding">
+                                <div class="fake_input S_line">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id="Text2" style="width: 550px;" class="form-control" data-bind="value:vmShowCompany.newVideoUrl" />
+                                            </td>
+                                            <td>
+                                                <input type="button" value="添 加" class="btn btn-xs btn-success" data-bind="click:vmShowCompany.addNewVideoUrl" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="alert-danger-new">例:(http://www.taobao.com)</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <span class="alert-danger" data-bind="visible:vmShowCompany.selNewVideoUrl">请填写视频地址</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- ko foreach:vmShowCompany.newVideoUrls-->
+                                    <div class="W_btn_arrow tag">
+                                        <span class="S_func1"><font data-bind="text:$data.videoUrl"></font><a href="javascript:void(0)"
+                                            class="W_ico12 icon_close" data-bind="event: { click: function( data, event) {$root.vmShowCompany.delNewVideoUrl(data, event);}}">
+                                        </a></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 25px" class="row mat10">
+                            <h4 class="tit-modal">
+                                企业LOGO <span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB，建议上传图片尺寸78px
+                                    * 78px。</span></h4>
+                            <div class="padlr15">
+                                <div class="pic-item  clearfix">
+                                    <ul>
+                                        <!-- ko foreach:vmShowCompany.files -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <img data-bind="attr:{src:$data.fileUrls}">
+                                            </div>
+                                            <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.vmShowCompany.delImage(data, event);}}">
+                                                <i class="hide_clip">移除</i></a> </li>
+                                        <!-- /ko -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a id="image_upload"></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 25px" class="row mat10" style="display:none">
+                            <h4 class="tit-modal">
+                                广告图片<span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB，建议上传图片尺寸710*200。</span></h4>
+                            <div class="padlr15">
+                                <div class="pic-item  clearfix">
+                                    <ul>
+                                        <!-- ko foreach:vmShowCompany.ggaoimg -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <img data-bind="attr:{src:$data.jcfileUrls}">
+                                            </div>
+                                            <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.vmShowCompany.delImagegg(data, event);}}">
+                                                <i class="hide_clip">移除</i></a> </li>
+                                        <!-- /ko -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a id="JCA0"></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 25px" class="row mat10">
+                            <h4 class="tit-modal">
+                                微信LOGO<span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB，建议上传图片尺寸710*200。</span></h4>
+                            <div class="padlr15">
+                                <div class="pic-item  clearfix">
+                                    <ul>
+                                        <!-- ko foreach:vmShowCompany.wxlogo -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <img data-bind="attr:{src:$data.fileUrls}" />
+                                            </div>
+                                            <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.vmShowCompany.delImagewxlogo(data, event);}}">
+                                                <i class="hide_clip">移除</i></a> </li>
+                                        <!-- /ko -->
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a id="uploadwxlogo"></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding">
+                                微信简介：</label>
+                            <div class="col-md-10 no-padding">
+                                <textarea id="txtwxInfo" cols="100" rows="5" style="width: 100%;" data-bind="value:vmShowCompany.WxInfo"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mat10">
+                            <label class="col-md-2 control-label no-padding">
+                                <span class="alert-danger">*</span>企业介绍：</label>
+                            <div class="col-md-10 no-padding">
+                                <label style="margin-top: 7px">
+                                    文本编辑器中建议上传图片尺寸：710px * 200px</label>
+                                <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                    visibility: hidden;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row hr pat10 clearfix">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-lg btn-success" data-bind="click:vmShowCompany.SaveShowCompany">
+                        保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

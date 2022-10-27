@@ -1,0 +1,80 @@
+﻿
+
+
+
+
+
+                                            case (int)Common.EnumFile.PayStatus.ReturnRefuse:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                                评论</a> </li>
+                                                                                                                                                             if (item.DeliveryTime != null)
+                                                                                                                                                             {
+                                            <li class="btn-green"><a href="/Wap_Consumers/CheckExpress?orderNum=@item.OrderNum">
+                                                查看物流</a> </li>
+                                            <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Confirm)','@((int)Common.EnumFile.PayStatus.Confirm)')">
+                                                确认收货</a> </li>
+                                                                                                                                                             }
+                                            <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                                申请退货</a> </li>
+                                                                                                             break;
+                                            case (int)Common.EnumFile.PayStatus.Delivered:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2">
+                                                评论</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Consumers/CheckExpress?orderNum=@item.OrderNum">
+                                                查看物流</a> </li>
+                                            <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Confirm)','@((int)Common.EnumFile.PayStatus.Confirm)')">
+                                                确认收货</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                                申请退货</a> </li>
+                                                                                                             break;
+                                            case (int)Common.EnumFile.PayStatus.NotPay:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2">
+                                                评论</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Consumers/PayOrder?orderNum=@item.OrderNum">付款</a>
+                                            </li>
+                                            <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Trade_Closed)','@((int)Common.EnumFile.PayStatus.Trade_Closed)')">
+                                                取消订单</a> </li>
+                                                                                                                                                                                                            break;
+                                            case (int)Common.EnumFile.PayStatus.PayDelivery:
+                                            case (int)Common.EnumFile.PayStatus.Paid:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2">
+                                                评论</a> </li>
+                                            <li class="btn-green"><a href="javascript:alert('已提醒企业发货！')">提醒发货</a> </li>
+@*<li class="btn-green">
+                                                <a href="javascript:changeStatus('/Wap_Consumers/ChangeStatus?orderNum=@item.OrderNum&status=@((int)Common.EnumFile.PayStatus.Confirm)','@((int)Common.EnumFile.PayStatus.Confirm)')">确认收货</a>
+                                            </li>*@
+                                            <li class="btn-green"><a href="/Wap_Consumers/ReturnMaterial?OrderNum=@item.OrderNum">
+                                                申请退货</a> </li>
+                                                                                                             break;
+                                            case (int)Common.EnumFile.PayStatus.ReturnAgree:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                                评论</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Consumers/SetExpressInfo?orderNum=@item.OrderNum">
+                                                填写运单信息</a> </li>
+                                            <li class="btn-green"><a href="javascript:changeStatus('/Wap_Consumers/DotSend?OrderNum=@item.OrderNum','@((int)Common.EnumFile.PayStatus.Returned)')">
+                                                拒收商品</a> </li>
+                                                                                                                                                 break;
+                                            case (int)Common.EnumFile.PayStatus.Returned:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                                评论</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Consumers/CheckExpress?orderNum=@item.OrderNum">
+                                                查看物流</a> </li>
+                                                                                                           break;
+                                            default:
+                                            <li class="btn-green"><a href="/Wap_Consumers/AddComplaint?orderNum=@item.OrderNum">
+                                                投诉</a> </li>
+                                            <li class="btn-green"><a href="/Wap_Comment/Index?orderNum=@item.OrderNum&enterpriseId=@item.Enterprise_ID&materialId=@item.MateriaID&type=2&pl=1">
+                                                评论</a> </li>
+                                                                                                                                                             break;

@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "SetLottery";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Areas/Market/Scripts/glvalidate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/jquery.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Areas/Market/Content/base.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Areas/Market/Content/greenskin.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Areas/Market/Content/main.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.css")" rel="stylesheet"type="text/css" />
+<script src="@Url.Content("~/Areas/Market/upload/jquery.uploadify-v2.1.4/jquery-1.4.2.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/upload/swfobject.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/upload/jquery.uploadify-v2.1.4/jquery.uploadify.v2.1.4.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#up").unbind("hover");
+        $("#uploadify").uploadify({
+            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf',    // 做上传的Flash插件
+            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=1',   //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif',  // 关闭按钮的图片地址
+            'folder': '/Areas/Market/Files/Activity/', // 保存文件的文件夹
+            'queueID': 'fileQueue',
+            'fileDesc': '请选择你电脑里格式为*.jpg;*.jpeg;*.png的文件',  // 描述（必须和fileExt一起使用）
+            'fileExt': '*.jpg;*.jpeg;*.png',   // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+            'sizeLimit': 1048576, // 文件大小限制100M（注意，在ASP.NET中Web.Config也要配置）
+            'auto': false,
+            'multi': false,  // 是否支持多文件上传
+            //'buttonText': '浏览',    // 按钮上的文本
+            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+            'onError': function (a, b, c, d) {
+                if (d.status == 404)
+                    alert('Could not find upload script.');
+                else if (d.type === "HTTP")
+                    alert('error ' + d.type + ": " + d.status);
+                else if (d.type === "File Size")
+                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+                else
+                    alert('error ' + d.type + ": " + d.info);
+            },
+            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+                $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+                $("#imgsrc").attr("src", d);
+                $("#ImagePath").val(d);
+                $("#showimg").css({ "display": "" });
+                //                $("#activiImg").attr("src", d);
+                $("#delActivity").click(function () {
+                    $("#imgsrc").attr("src", '');
+                    $("#showimg").css({ "display": "none" });
+                });
+            },
+            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+                $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+            },
+            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+            },
+            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+            }
+        });
+
+        $("#uploadifyExcel").uploadify({
+            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf',    // 做上传的Flash插件
+            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=4',   //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif',  // 关闭按钮的图片地址
+            'folder': '/Areas/Market/Files/Activity/', // 保存文件的文件夹
+            'queueID': 'fileQueueExcel',
+            'fileDesc': '请选择你电脑里格式为*.xls;*.xlsx的文件',  // 描述（必须和fileExt一起使用）
+            'fileExt': '*.xls;*.xlsx',   // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+            'sizeLimit': 104857600, // 文件大小限制100M（注意，在ASP.NET中Web.Config也要配置）
+            'auto': false,
+            'multi': false,  // 是否支持多文件上传
+            //'buttonText': '浏览',    // 按钮上的文本
+            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+            'onError': function (a, b, c, d) {
+                if (d.status == 404)
+                    alert('Could not find upload script.');
+                else if (d.type === "HTTP")
+                    alert('error ' + d.type + ": " + d.status);
+                else if (d.type === "File Size")
+                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+                else
+                    alert('error ' + d.type + ": " + d.info);
+            },
+            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+                $("#div_MsgExcel").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+                $("#imgsrcExcel").attr("src", d);
+                $("#ExcelURL").val(d);
+                $("#ImagePathExcel").val(c.name);
+                $("#showimgExcel").css({ "display": "" });
+                $("#delExcel").click(function () {
+                    $("#imgsrcExcel").attr("src", '');
+                    $("#ExcelURL").val('');
+                    $("#ImagePathExcel").val('');
+                    $("#showimgExcel").css({ "display": "none" });
+                });
+            },
+            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+                $("#div_MsgExcel").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+            },
+            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+                $("#div_MsgExcel").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+            },
+            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+                $("#div_MsgExcel").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    function closeLayer() {
+        //        var index = parent.layer.getFrameIndex(window.name);
+        //        parent.layer.close(index);
+        art.dialog.close();
+    }
+    function Save() {
+        var parentwin = artDialog.open.origin;
+        var jName = $("#LotteryTitle").val();
+        if (isNull(jName)) {
+            alert("请输入奖项名称！");
+            $("#LotteryTitle").focus();
+            return false;
+        }
+        var imgpath = $("#ImagePath").val();
+        if (isNull(imgpath)) {
+            alert("请上传奖项图片！");
+            $("#ImagePath").focus();
+            return false;
+        }
+        var excelName = $("#ImagePathExcel").val();
+        if (isNull(excelName)) {
+            alert("请上传奖项文件！");
+            $("#ImagePath").focus();
+            return false;
+        }
+        var sendData = {
+            activeID: $("#ActiveID").val(),
+            lotteryName: jName,
+            lotteryPic: $("#ImagePath").val(),
+            fileName: excelName,
+            lotteryFilePath: $("#ExcelURL").val(),
+            lotteryFileURL: $("#ExcelURL").val(),
+            picHS: $('input:radio[name="PicHS"]:checked').val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Market/YXLottery/AddLottery",
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                if (data.res == true) {
+                    alert(data.info);
+                    parentwin.AfterSet($("#ActiveID").val());
+                    closeLayer();
+                }
+                else {
+                    alert(data.info);
+                }
+            }
+        })
+    }
+</script>
+<div>
+    <body style="min-width: 0; width: 400px;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <input type="hidden" id="ActiveID" value="@ViewBag.ActiveID" />
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>奖项名称：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="LotteryTitle" name="LotteryTitle" maxlength="15" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>奖项图片：</span>
+                                <div class="fl" style="margin-left: 90px;">
+                                    <div class="clearfix">
+                                        <div class="div_FilesBox" style="width: 395px;">
+                                            <div style="margin-left: -20px;">
+                                                <span class="label">图片方位：</span>
+                                                <p>
+                                                    <label>
+                                                        <input type="radio" id="PicHS" name="PicHS" checked="checked" value="1" />横向
+                                                    </label>
+                                                    <label class="mar10">
+                                                        <input type="radio" id="PicHS" name="PicHS" value="2" />竖向
+                                                    </label>
+                                                </p>
+                                            </div>
+                                            <div style="display: block; width: 800px;">
+                                                <input type="hidden" id="ImagePath" value="" />
+                                                <div id="showimg" style="display: none;">
+                                                    <img id="imgsrc" style="max-height: 100px; max-width: 100px;" src="">
+                                                    <a id="delActivity" href="#">删除</a>
+                                                </div>
+                                            </div>
+                                            <div class="div_Handler" style="margin-top: 10px;">
+                                                <a id="up" href="javascript:" style="float: right; margin-right: 140px; height: 30px;
+                                                    width: 120px;" onclick="javascript:$('#uploadify').uploadifyUpload()">开始上传</a>
+                                                <input type="file" name="uploadify" id="uploadify">
+                                            </div>
+                                            <div id="fileQueue" class="uploadifyQueue">
+                                            </div>
+                                            <div id="div_Msg">
+                                            </div>
+                                        </div>
+                                        <p class="ftx03">
+                                            图片大小不超过1M，建议尺寸750px*1334px,图片格式为jpg，jpeg，png
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>奖项文件：</span>
+                                <div class="fl" style="margin-left: 90px;">
+                                    <div class="clearfix">
+                                        <div class="div_FilesBox" style="width: 395px;">
+                                            <div id="showimgExcel" style="display: none">
+                                                <input type="hidden" id="ExcelURL" value="" />
+                                                <input id="ImagePathExcel" value="" />
+                                                @*<img id="imgsrcExcel" width="100px" height="100px" src="">*@ <a id="delExcel" href="#">
+                                                    删除</a>
+                                            </div>
+                                            <div class="div_Handler" style="margin-top: 10px;">
+                                                <a href="javascript:" style="float: right; margin-right: 140px;" onclick="javascript:$('#uploadifyExcel').uploadifyUpload()">
+                                                    开始上传 </a>
+                                                <input type="file" name="uploadifyExcel" id="uploadifyExcel">
+                                            </div>
+                                            <div id="fileQueueExcel" class="uploadifyQueue">
+                                            </div>
+                                            <div id="div_MsgExcel">
+                                            </div>
+                                        </div>
+                                        <p class="ftx03">
+                                            满足格式要求的Excel文件
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="确定" class="button" onclick="Save()">
+                                    <input type="button" value="取消" class="button" onclick="closeLayer()">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

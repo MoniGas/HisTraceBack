@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <meta name="keywords" content="二维码 溯源 追溯 防伪" />
+    <title>医疗器械（UDI）服务云平台</title>
+    <link href="/IndexStyle/Medical/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/IndexStyle/Medical/css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="/IndexStyle/Medical/css/style.css" type="text/css" />
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <script src="/IndexStyle/Medical/js/jquery.js" type="text/javascript"></script>
+</head>
+<body class="UDI">
+    <div class="container">
+        <header class="row">
+            <div class="header_Lt pull-left">
+                <img class="img-responsive" src="/IndexStyle/Medical/images/logo.png" alt="" />
+                <img class="img-responsive" src="/IndexStyle/Medical/images/title_logo.png" alt="" />
+            </div>
+            <div class="header_Rt pull-left">
+                <ul>
+                    <li class="pull-left" value="1"><a href="/">首页</a></li>
+                    <li class="pull-left" value="2"><a href="/Login/Architecture">UDI标识</a></li>
+                    <li class="pull-left" value="3"><a href="/Login/Function">平台功能</a></li>
+                    <li class="pull-left" value="4"><a href="/Login/Assignment">UDI赋码</a></li>
+                    <li class="pull-left" value="5"><a href="/Login/ScanCodeActivity">UDI采集</a></li>
+                    <li class="pull-left" value="7"><a href="/Login/DataDown">资料下载</a></li>
+                    <li class="pull-left" value="6"><a href="/Login/About">关于我们</a></li>
+                </ul>
+            </div>
+        </header>
+    </div>
+    @RenderBody()
+    <div class="container-fluid" id="footer">
+        <footer class="container">
+            <div class="footer_content row">
+              <p>
+                    主办单位：北京四聪科技发展有限公司
+                </p>
+                <p>
+                    指导单位：中关村工信二维码技术研究院 &nbsp;&nbsp;&nbsp;统一二维码标识注册管理中心
+                </p>
+              
+                <p>
+                    <a style="color:#fff;" href="https://beian.miit.gov.cn" target="_blank">京ICP备19010367号-2</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="/IndexStyle/Medical/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--菜单-->
+<script type="text/javascript">
+    $(function () {
+        $(".pull-left").removeClass("navActive");
+        $(".pull-left[value=@ViewBag.Value]").addClass("navActive");
+    });
+    $(".udi-lt li").click(function () {
+        var index = $(this).index();
+        // console.log(index);
+        $(this).addClass('active').siblings().removeClass('active');
+        $(".udi-rt").find("li").eq(index).show().siblings().hide();
+    });
+</script>

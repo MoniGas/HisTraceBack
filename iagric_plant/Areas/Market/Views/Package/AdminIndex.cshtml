@@ -1,0 +1,160 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.YX_Package>
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Areas/Market/Views/Shared/_AdminLayout.cshtml";
+}
+<script type="text/javascript">
+    //添加套餐窗口
+    function AddTaoCan() {
+        openwin('/Market/Package/Add', '添加套餐', 550, 350);
+    }
+</script>
+<html>
+<body>
+    <!-------------------main start---------------------------------->
+    <div>
+        <form id="form1" method="get" action="/Market/Package/AdminIndex">
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li>二维码订单<span class="divider">›</span>二维码套餐</li>
+            </ul>
+        </div>
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                <p>
+                    <input type="button" value="添加套餐" class="button-line" onclick="AddTaoCan()" /></p>
+                <div class="table-filter borderLeft borderRight clearfix">
+                    <div class="sitem" style=" width:100%">
+                        套餐名称：
+                        <input
+        type="text" id="tcName" name="tcName" value="@ViewBag.Name">
+                        <label>
+                            状态：</label>
+                            @*  <select id="status" name="status" value="@ViewBag.Status">
+                                <option value="0">全部</option>
+                                <option value="1">启用</option>
+                                <option value="-1">禁用</option>
+                            </select>*@
+                            <select id="status" name="status">
+                                @if (ViewBag.Status == "0")
+                                {
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="-1">禁用</option>
+                                }
+                                else if (ViewBag.Status == "1")
+                                {
+                                    <option value="0">全部</option>
+                                    <option value="1" selected="selected">启用</option>
+                                    <option value="-1">禁用</option>
+                                }
+                                else
+                                {
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="-1" selected="selected">禁用</option>
+                                }
+                            </select>
+                            <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button" style=" margin-left:15px">
+                    </div>
+                </div>
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    套餐
+                                </th>
+                                <th>
+                                    二维码数量（个）
+                                </th>
+                                <th>
+                                    价格（元）
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.PackbageName
+                                    </td>
+                                    <td>
+                                        @sub.PackbageCodeCount
+                                    </td>
+                                    <td>
+                                        @sub.PackagePrice
+                                    </td>
+                                    <td class="valign_m">
+                                        @if (sub.PackageStatus.Value == (int)Common.EnumText.PackageStatus.qiyong)
+                                        {
+                                            <span class="greenblock">启用</span>
+                                        }
+                                        else if (sub.PackageStatus.Value == (int)Common.EnumText.PackageStatus.jinyong)
+                                        {
+                                            <span class="greyblock">禁用</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (sub.PackageStatus.Value == (int)Common.EnumText.PackageStatus.qiyong)
+                                        {
+                                            <a href="javascript:openwin('/Market/Package/Edit?id=@sub.PackageID','修改二维码套餐',550,350);" class="lnk mar10">
+                                                修改</a><a href="javascript:AjaxUrl('/Market/Package/JinYong/@sub.PackageID','您确定要禁用吗？')" class="lnk mar10">
+                                                    禁用</a>
+                                        }
+                                        else if (sub.PackageStatus.Value == (int)Common.EnumText.PackageStatus.jinyong)
+                                        {
+                                            <a href="javascript:openwin('/Market/Package/Edit?id=@sub.PackageID','修改二维码套餐',550,350);" class="lnk mar10">
+                                                修改</a><a href="javascript:AjaxUrl('/Market/Package/QiYong/@sub.PackageID','您确定要启用吗？')" class="lnk mar10">
+                                                    启用</a>
+                                        }
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.TotalItemCount > 0)
+                {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-------------------main end---------------------------------->
+</body>
+</html>

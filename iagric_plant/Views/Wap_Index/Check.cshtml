@@ -1,0 +1,56 @@
+﻿@model LinqModel.ScanInfo
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@if (Model != null && ViewBag.Wuliu == true)
+{
+    try
+    {
+    <div class="list clearfix">
+        <div class="list-title">
+            检测报告
+        </div>
+        <div class="prod-spec">
+            @if (Model.imgs != null && Model.imgs.Count > 0)
+            {
+                <div class="jianyi_list">
+                    <div class="jianyi-pic">
+                        <a href="">
+                            <img src="@Model.imgs[0].fileUrl">
+                        </a>
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.user))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">@(Model.type)人员：</span>
+                    <div class="base-txt">
+                        @Model.user
+                    </div>
+                </div>
+            }
+             @if (!string.IsNullOrEmpty(Model.time))
+            {
+            <div class="spec-desc comp-des">
+                <span class="part-note-msg">@(Model.type)日期：</span>
+                <div class="base-txt">
+                    @Model.time
+                </div>
+            </div>
+                 }
+            @if (!string.IsNullOrEmpty(Model.content))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">@(Model.type)内容：</span>
+                    <div class="base-txt">
+                        @Model.content
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    }
+    catch { }
+}

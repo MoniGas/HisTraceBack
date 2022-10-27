@@ -1,0 +1,41 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    生产环节排序</h4>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-hover no-lr-border">
+                    <thead>
+                        <tr>
+                            <th>
+                                生产环节
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:selectprocessOps">
+                        <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                            <td>
+                                <span class="middle" data-bind="text:$data.opName"></span>
+                            </td>
+                            <td>
+                                <a data-bind="click:$parent.btnUpEvent" style="cursor: pointer" target="_blank">上移</a>
+                                <a data-bind="click:$parent.btnDownEvent" style="cursor: pointer" target="_blank">下移</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:closeOK">
+                确定</button>
+        </div>
+    </div>
+</div>

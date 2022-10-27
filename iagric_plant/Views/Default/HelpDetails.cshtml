@@ -1,0 +1,228 @@
+﻿@model PagedList<LinqModel.View_Help>
+@using Webdiyer.WebControls.Mvc
+@{
+    Layout = null;
+    LinqModel.View_Help Details = new LinqModel.View_Help();
+    Details = new BLL.HelpBLL().GetDetails((long)ViewData["HelpId"]);
+    new BLL.HelpBLL().UpdateCount(Details.HelpId);
+}
+<html>
+<head>
+    <title>帮助详情</title>
+    <link rel="shortcut icon" href="../../images/ncp.ico">
+    <script src="../../Scripts/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <link href="../../css/common.css" rel="stylesheet" type="text/css" />
+    <link href="../../newmenu/css/helpstyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+       //是
+           function btnSave(id) {
+               var list = {
+                   type: 1,
+                   helpId: id
+               }
+               $.ajax({
+                   type: "post",
+                   contentType: "application/json",
+                   url: "/Default/UpdateUsefulCount",
+                   data: JSON.stringify(list),
+                   success: function (data) {
+                       if (data.info != null && data.info != "") {
+                           alert(data.info);
+                       }
+                       if (data.res) {
+                           if (data.url != null && data.url != "") {
+                               window.location.href = data.url;
+                           }
+                           //点击是，是与否都禁用
+                           $("#btn1").attr({ "disabled": "disabled" });
+                           $("#btn2").attr({ "disabled": "disabled" });
+                       }
+                   }
+               })
+           }
+           //否
+           function btnNo(id) {
+               var list = {
+                   type: 0,
+                   helpId: id
+               }
+               $.ajax({
+                   type: "post",
+                   contentType: "application/json",
+                   url: "/Default/UpdateUsefulCount",
+                   data: JSON.stringify(list),
+                   success: function (data) {
+                       if (data.info != null && data.info != "") {
+                           alert(data.info);
+                       }
+                       if (data.res) {
+                           if (data.url != null && data.url != "") {
+                               window.location.href = data.url;
+                           }
+                           //点击否，是与否都禁用
+//                           $("#btn1").attr({ "disabled": "disabled" });
+                           $("#btn1").attr('disabled', false);
+                           $("#btn2").attr('disabled', false); 
+                       }
+                   }
+               })
+           }
+           //左边列表
+           function btnSpan(helpId) {
+               var list = {
+                   helpId: helpId
+               }
+               $.ajax({
+                   type: "post",
+                   contentType: "application/json",
+                   url: "/Default/GetDetails",
+                   data: JSON.stringify(list),
+                   success: function (data) {
+                       if (data != null) {
+                           $("#id1").html("<div id='id1'>" + data.HelpTitle + "</div>");
+                           $("#id2").html("<div id='id2' class='kb-help-more'>" + data.HelpDescriptions + "</div>");
+                           $("#btn1").remove();
+                           $("#btn2").remove();
+                           $("#p1").append("<button id='btn1'  class='btn btn-lg btn-success'  onclick='btnSave(" + data.HelpId + ")'>是</button>");
+                           $("#p1").append("<button id='btn2' class='btn btn-lg btn-default mal20'  onclick='btnSave(" + data.HelpId + ")'>否</button>");
+                       }
+                   }
+               })
+           }
+           //查看更多
+           function btnMore(typeid, id) {
+               var index = $("#input1").val();
+               var name = $("#txtSearch").val();
+               index++;
+               if (name != "")
+               {
+                   typeid = 0;
+               }
+               var list = {
+                   typeId: typeid,
+                   index: index,
+                   name: name,
+                   id: 1
+               }
+               $.ajax({
+                   type: "post",
+                   contentType: "application/json",
+                   url: "/Default/GetSearchList",
+                   data: JSON.stringify(list),
+                   success: function (data) {
+                       if (data != null) {
+                           $('#ul1').empty();   //清空resText里面的所有内容
+                           var html ="";
+                           $.each(data, function (Index, help) {
+                               html += "<li><a href='#' onclick='btnSpan(" + help.HelpId + ")'>" + help.HelpTitle + "</a></li>";
+                           });
+                           $('#ul1').html(html);
+                              $("#more").empty();
+                           if (data.length > 20) {
+                               $("#more").html("<p class='more'><a href='#' onclick='btnMore(@ViewData["TypeId"],1)'>查看更多</a></p>");
+                           }           
+                       }
+                   }
+               })
+               $("#input1").val(index);
+           }
+           //搜索
+           function btnSearch() {
+               var name = $("#txtSearch").val();
+               var list = {
+                   typeId: 0,
+                   index: 1,
+                   name: name,
+                   id: 1
+               }
+               $.ajax({
+                   type: "post",
+                   contentType: "application/json",
+                   url: "/Default/GetSearchList",
+                   data: JSON.stringify(list),
+                   success: function (data) {
+                       if (data != null) {
+                           $('#ul1').empty();   //清空resText里面的所有内容
+                           var html = "";
+                           $.each(data, function (Index, help) {
+                               html += "<li><a href='#' onclick='btnSpan(" + help.HelpId + ")'>" + help.HelpTitle + "</a></li>";
+                           });
+                           $('#ul1').html(html);
+                            $("#more").empty();
+                           if (data.length > 20) {
+                               $("#more").html("<p class='more'><a href='#' onclick='btnMore(@ViewData["TypeId"],1)'>查看更多</a></p>");
+                           }             
+                       }
+                   }
+               })
+           }
+    </script>
+</head>
+<body style="background-color: #f7f7f7;">
+    <div class="header-wrapper">
+        <div class="header width1100 clearfix">
+            <div class="logo fl">
+                <a href="/Home/Index">
+                    <img src="/newmenu/images/bg_logo.png"></a>
+            </div>
+        </div>
+    </div>
+    <!------------------left start-------------------------->
+    <!------------------left end-------------------------->
+    <div class="width1100 w-container bg-gray clearfix">
+        <div class="kb-help-nav">
+            <input id="input1" type="hidden" value="1" />@*查看更多*@
+            <h2 class="kb-help-nav-title">
+                支持中心</h2>
+            <h3 class="kb-help-nav-leibie">
+                关于<span>"@Details.HelpTitle"@*"入门类用户"*@</span>的热门问题</h3>
+            @if (Model.Count > 0)
+            {
+
+                <ul class="kb-help-content-ul" id="ul1">
+                    @{
+                foreach (var item in Model)
+                {
+                        <li><a href="#" onclick="btnSpan(@item.HelpId)">@item.HelpTitle</a> </li>
+                }
+                    }
+                </ul>
+                if (Model.Count > 20)
+                {
+
+                <div id="more">
+                    <p class="more">
+                        <a href="#" onclick='btnMore(@ViewData["TypeId"],1)'>查看更多</a></p>
+                </div>
+                }
+            }
+        </div>
+        <div class="kb-help-main">
+            <div class="search-container">
+                <input type="text" id="txtSearch" class="help-center-search-input" value="">
+                <div class="search-btn" onclick="btnSearch()">
+                </div>
+            </div>
+            <div class="kb-help-content">
+                <h4>
+                    <div id="id1">@Details.HelpTitle</div>
+                </h4>
+                <div id="id2" class="kb-help-more">
+                    @Html.Raw(Details.HelpDescriptions)
+                </div>
+                <div>
+                    <h4>
+                        联联是农业服务平台客服专家，同时也是本帮助页面的作者。请在下方提供反馈，以帮助它优化内容。<h4>
+                            <h4>
+                                以上信息是否解决了您的问题？<h4>
+                                    <p id="p1">
+                                        <button id="btn1" class="btn btn-lg btn-success" onclick="btnSave(@Details.HelpId)">
+                                            是</button><button id="btn2" class="btn btn-lg btn-default mal20" onclick="btnNo(@Details.HelpId)">
+                                                否</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

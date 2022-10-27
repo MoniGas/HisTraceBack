@@ -1,0 +1,57 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+        <div class="breadcrumbs" id="Div1">
+                <ul class="breadcrumb">
+                    <li><i class="ace-icon fa fa-home home-icon"></i><a href="#home" title="返回到首页">首页</a> </li>
+                    <li class="active">编辑帮助</li>
+                </ul>
+                <!-- /.breadcrumb -->
+                <span><a href="javascript:void(0);" data-bind="click:goBack" title="返回到上一页"><i class="ace-icon fa fa-angle-double-left"></i>返回</a>
+                </span>
+            </div>
+               <div class="row clearfix">
+                <div class="ma15" style="width: 960px; margin: 15px auto;">
+                             <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>帮助名称：</label>
+                        <div class="col-md-6 no-padding">
+                            <input type="text" id="txtStoreName" placeholder="帮助名称" class="form-control" data-bind="value: helpTitle" />
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>帮助类型：</label>
+                        <div class="col-md-6 no-padding">
+                             <select class="form-control" style="width: 500px; display: inline-block;" id="Select2"
+                            data-bind="
+                            options:HelpTypeModel.HelpTypeArray,
+                            value:HelpTypeModel.SelectedId,
+                            optionsText:'TypeName',
+                            optionsValue:'TypeId'">
+                        </select>
+                        <span class="alert-danger" data-bind="visible:SelType">请选择类型！
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <!--<span class="alert-danger">*</span>-->帮助内容：</label>
+                        <div class="col-md-6 no-padding">
+                              <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                    visibility: hidden;"></textarea>
+                          <!--  <input type="text" id="txtStoreCode" placeholder="帮助内容" class="form-control" data-bind="value: helpDescriptions" />-->
+                        </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+        <div class="row hr pat10 clearfix">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-lg btn-success" data-bind="click:EditHelp">
+                        保存</button>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>

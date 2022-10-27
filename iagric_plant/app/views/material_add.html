@@ -1,0 +1,402 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="row clearfix">
+                <form class="form-horizontal">
+                <div class="form-group">
+                    <!--            <label class="col-md-2 control-label no-padding" for="name">
+                        <span class="alert-danger">*</span>产品类别：</label>
+                    <div class="col-md-3 no-padding">
+                        <select class="form-control" id="Select3" data-bind="options: VmMeatProCategory.MeatProCategoryArray,optionsText: 'MaterialTypeName',optionsValue:'ID',optionsCaption: '选择产品类别',value:VmMeatProCategory.SelectedId">
+                        </select>
+                        <span class="alert-danger" data-bind="visible:selmaAttribute">请选择产品类别！</span>
+                    </div>-->
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产品品牌：</label>
+                    <div class="col-md-3 no-padding">
+                        <select class="form-control" id="slBrandList" data-bind="options:VmBrand.MaterialBrandArray,optionsCaption:'选择产品品牌',optionsText:'BrandName',optionsValue:'Brand_ID',value:VmBrand.SelectedId">
+                        </select>
+                    </div>
+                    <!--<label class="col-md-2 control-label no-padding" for="name">
+                        <span class="alert-danger">*</span>产品编码：</label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" maxlength="20" class="form-control" data-bind="value:materialCode,validationElement:materialCode,hasfocus:selmaterialCode">
+                    </div>
+                    <span class="alert-danger" data-bind="visible:selmaterialCode">请输入产品编码！</span>-->
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        <span class="alert-danger">*</span>产品名称：</label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" class="form-control" data-bind="value:materialName">
+                    </div>
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产品别名：</label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" class="form-control" data-bind="value:materialAliasName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产品规格：</label>
+                    <!--           <div class="col-md-4 no-padding">
+                            <input type="text" class="form-control" data-bind="value: materialSpec,validationElement:materialSpec,hasfocus:selMaterialSpec">
+                            <div class="alert-danger" style="margin-left: 5px;">
+                                例：（50kg/箱）</div>
+                        </div>-->
+                    <div class="col-md-3 no-padding">
+                        <select class="form-control" id="Select4" data-bind="options: VmMeatSpec.MeatSpecArray,optionsText: 'MaterialSpcificationName',optionsValue:'MaterialSpcificationID',optionsCaption: '选择产品规格',value:VmMeatSpec.SelectedId">
+                        </select>
+                    </div>
+                    <!--  <label class="col-md-2 control-label no-padding" for="name">
+                        规格：</label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" class="form-control" data-bind="value: materialSpec">
+                        <div class="alert-danger-new" style="margin-left: 5px;">
+                            例：（50kg/箱）</div>
+                    </div>-->
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        价格：</label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" class="form-control" data-bind="value:materialPrice">
+                    </div>
+                    <span class="control-label no-padding" style="margin-left: 5px;">元</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        保质期：</label>
+                    <div class="col-md-3 no-padding form-inline">
+                        <input type="text" style="width: 60px" class="form-control" data-bind="value: materialShelfLife">
+                        <select class="form-control" style="width: 120px" data-bind="options: selectedShelfs,optionsText: 'shefsname',optionsValue:'shefsname',value:selectedShelf">
+                        </select>
+                        <span class="alert-danger" data-bind="visible:selMaterialShelfLife">保质时间不正确</span>
+                    </div>
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        生产流程：</label>
+                    <div class="col-md-3 no-padding">
+                        <select class="form-control" id="Select1" data-bind="options: vmProcess.ProcessArray,optionsText: 'ProcessName',optionsValue:'ProcessID',optionsCaption: '选择生产流程',value:vmProcess.SelectedId">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" style="display:none">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        农药登记类别：</label>
+                    <div class="col-md-3 no-padding form-inline">
+                        <select id="nytype" data-bind="value:nytype">
+                            <option value="0">请选择</option>
+                            <option value="1">PD</option>
+                            <option value="2">WP</option>
+                            <option value="3">临时登记</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"  style="display:none">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        农药登记证号：</label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" class="form-control" data-bind="value:nyzhenghao" maxlength="20">
+                    </div>
+                    <label class="control-label no-padding" for="name">
+                        (请输入产品农药登记证号，不足六位数字可从农药信息网( http://www.chinapesticide.gov.cn)查询)</label>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            自定义属性：</label>
+                        <div class="col-md-10 no-padding">
+                            <div class="fake_input S_line">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            属性名：
+                                        </td>
+                                        <td>
+                                            <!--       <input type="text" name="regular" style="width: 100px;" data-bind="value:propertyName" />-->
+                                            <input type="text" id="Text1" class="form-control" data-bind="value:propertyName">
+                                        </td>
+                                        <td>
+                                            属性值：
+                                        </td>
+                                        <td>
+                                            <input type="text" name="regular" class="form-control" style="width: 100px;" data-bind="value:propertyValue" />
+                                        </td>
+                                        <td>
+                                            <input type="button" value="添 加" class="btn btn-xs btn-success" data-bind="click:AddProperty">
+                                        </td>
+                                        <td>
+                                            <span class="alert-danger-new">例:(参数名:颜色,参数值:红色)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <span class="alert-danger" data-bind="visible:selPrototype">请填写完整的属性信息</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- ko foreach:property-->
+                                <div class="W_btn_arrow tag">
+                                    <span class="S_func1"><font data-bind="text:$data.allprototype"></font><a href="javascript:void(0)"
+                                        class="W_ico12 icon_close" data-bind="event: { click: function( data, event) {$root.delProperty(data, event);}}">
+                                    </a></span>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        <span class="alert-danger">*</span>品类：</label>
+                    <div class="col-md-6 no-padding">
+                        <input type="text" readonly="readonly" style="width: 430px;" data-bind="value:meatCategoryName" />
+                        <button type="button" class="btn  btn-lg btn-success" data-bind="click:SelectCategroy">
+                            选择品类</button>
+                        <span class="alert-danger" data-bind="visible:SelCategoryMeat">请选择品类</span>
+                        <input type="hidden" data-bind="value: meatCategory" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产地：</label>
+                    <div class="col-md-5 no-padding">
+                        <input type="text" maxlength="70" style="width: 600px;" class="form-control" data-bind="value: materialPlace">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-7 control-label no-padding" for="name">
+                        <input name="buyUrl" id="buyUrl" type="checkbox" class="ui-checkbox" data-bind="click:materialURL">
+                        <input style="display: none;" name="Checkbox1" id="Checkbox1" type="checkbox" class="ui-checkbox"
+                            data-bind="click:materialURL">
+                        产品购买链接：（勾选产品在线购买链接，在产品的拍码页面点击在线购买时跳转至产品的购买链接）</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                    </label>
+                    <div class="col-md-3 no-padding">
+                        <input type="text" name="tburl" id="tburl" placeholder="例如：http://www.taobao.com"
+                            class="form-control" data-bind="value:tburl,validationElement:tburl,hasfocus:seltburl"
+                            style="width: 600px;" readonly="readonly" />
+                        <span class="alert-danger" data-bind="visible:seltburl">请输入产品购买链接</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        淘宝商城链接：</label>
+                    <div class="col-md-10 no-padding">
+                        <input type="text" maxlength="200" class="form-control" style="width: 600px;" data-bind="value:ntbUrl" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        天猫商城链接：</label>
+                    <div class="col-md-10 no-padding">
+                        <input type="text" maxlength="200" class="form-control" style="width: 600px;" data-bind="value:tmUrl" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        京东商城链接：</label>
+                    <div class="col-md-10 no-padding">
+                        <input type="text" maxlength="200" class="form-control" style="width: 600px;" data-bind="value:jdUrl" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        微店链接：</label>
+                    <div class="col-md-10 no-padding">
+                        <input type="text" maxlength="200" class="form-control" style="width: 600px;" data-bind="value:wdUrl" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            实时视频链接：</label>
+                        <div class="col-md-10 no-padding">
+                            <div class="fake_input S_line">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            视频名称：
+                                        </td>
+                                        <td>
+                                            <input type="text" name="regular" style="width: 100px;" data-bind="value:newVideoName" />
+                                        </td>
+                                        <td>
+                                            视频地址：
+                                        </td>
+                                        <td>
+                                            <input type="text" name="regular" style="width: 100px;" data-bind="value:newVideoUrl" />
+                                        </td>
+                                        <td>
+                                            <input type="button" value="添 加" class="btn btn-xs btn-success" data-bind="click:addNewVideoUrl" />
+                                        </td>
+                                        <td>
+                                            <span class="alert-danger-new">例:(http://www.taobao.com)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <span class="alert-danger" data-bind="visible:selNewVideoUrl">请填写视频地址</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- ko foreach:newVideoUrls-->
+                                <div class="W_btn_arrow tag">
+                                    <span class="S_func1"><font data-bind="text:$data.fileUrl"></font><a href="javascript:void(0)"
+                                        class="W_ico12 icon_close" data-bind="event: { click: function( data, event) {$root.delNewVideoUrl(data, event);}}">
+                                    </a></span>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="display:none">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产品口味：</label>
+                    <div class="col-md-10 no-padding">
+                        <input type="text" maxlength="200" class="form-control" data-bind="value: materialTaste" />
+                    </div>
+                </div>
+                <div class="form-group" style="display:none">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产品评价：</label>
+                    <div class="col-md-10 no-padding">
+                        <div class="clearfix">
+                            <input maxlength="6" type="text" class="pj-input" data-bind="value: pingjia1" />
+                            <input maxlength="6" type="text" class="pj-input" data-bind="value: pingjia2" />
+                            <input maxlength="6" type="text" class="pj-input" data-bind="value: pingjia3" />
+                            <input maxlength="6" type="text" class="pj-input" data-bind="value: pingjia4" />
+                            <input maxlength="6" type="text" class="pj-input" data-bind="value: pingjia5" />
+                        </div>
+                        <span class="alert-danger" data-bind="visible:selPj">每条评价最多不超过6个字</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        产品简介：</label>
+                    <div class="col-md-10 no-padding">
+                        <textarea id="jianjieInfos" name="jianjieInfos" cols="100" rows="5" style="width: 100%;
+                            height: 200px; visibility: hidden;"></textarea>
+                    </div>
+                    <!--    <div class="col-md-10 no-padding">
+                        <textarea maxlength="200" id="txtdescription" cols="100" rows="5" style="width: 100%;"
+                            data-bind="value:materialjj"></textarea>
+                    </div>-->
+                </div>
+                <div class="form-group clearfix no-margin-bottom">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                        广告图片：
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB，建议上传图片尺寸710px * 200px。</span>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:AdFileUrls -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}" />
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delAdImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a> </li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="Adimage_upload"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group clearfix no-margin-bottom">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                        <span class="alert-danger">*</span>图片：
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB，建议上传图片尺寸750px * 400px。</span><span
+                            class="alert-danger" data-bind="visible:selMaterialImgInfo">至少上传一张照片</span>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:files -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a> </li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="image_upload"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group clearfix no-margin-bottom">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                        视频：
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <span class="alert-danger-new">支持格式.mp4,大小限制为200MB。</span>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                    </label>
+                    <div class="col-md-10 no-padding">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:videos -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.videoUrls}"/>
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delVideo(data, event);}}">
+                                        <i class="hide_clip">移除</i></a> </li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="video_upload"></a><!--<img src="/images/video-upload.jpg" />-->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        <!-- <span class="alert-danger">*</span>-->
+                        产品描述：</label>
+                    <div class="col-md-10 no-padding">
+                        <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                            visibility: hidden;"></textarea>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="row hr pat10 clearfix">
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn  btn-lg btn-success" data-bind="click:AddMaterial">
+                        确定</button>
+                    <button type="button" class="btn  btn-lg btn-cancel mal20" data-bind="click:goBack">
+                        返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

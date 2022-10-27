@@ -1,0 +1,89 @@
+﻿<div class="page-content">
+    <div class="row alert alert-success">
+        <div class="col-sm-12">
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11030'),click: function(data, event) {navigateTo('sys_enterprisemanage',data,event);}">
+                <i class="fa icon-btn icon-btn-qiye"></i>
+                <br />
+                企业管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11010'),click: function(data, event) {navigateTo('sys_brand',data,event);}">
+                <i class="fa icon-btn icon-btn-link"></i>
+                <br />
+                区域品牌
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11020'),click: function(data, event) {navigateTo('sys_brandaudit',data,event);}">
+                <i class="fa icon-btn icon-btn-quyuapprove"></i>
+                <br />
+                区域品牌审核
+            </button>
+        </div>
+    </div>
+    <div class="row alert alert-info">
+        <div class="col-sm-12">
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11090'),click: function(data, event) {navigateTo('sys_servicecenter',data,event);}">
+                <i class="fa icon-btn-new newicon-complain"></i>
+                <br />
+                服务中心管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11070'),click: function(data, event) {navigateTo('sys_supervision',data,event);}">
+                <i class="fa icon-btn icon-btn-supervise"></i>
+                <br />
+                监管部门管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11100'),click: function(data, event) {navigateTo('sys_platformmanage',data,event);}">
+                <i class="fa icon-btn-new newicon-sale"></i>
+                <br />
+                监管管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11060'),click: function(data, event) {navigateTo('sys_requestcode',data,event);}">
+                <i class="fa icon-btn icon-btn-codeapprove"></i>
+                <br />
+                二维码管理
+            </button>
+            <!--            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11120'),click: function(data, event) {navigateTo('sys_enterprisewarehouse',data,event);}">
+                <i class="fa icon-btn icon-btn-qiye"></i>
+                <br />
+                企业仓库管理
+            </button>-->
+        </div>
+    </div>
+    <div class="row alert alert-success">
+        <div class="col-md-12">
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11140'),click: function(data, event) {navigateTo('sys_recommend',data,event);}">
+                <i class="fa icon-btn-new newicon-brand"></i>
+                <br />
+                企业推荐产品
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11150'),click: function(data, event) {navigateTo('sys_recommend_enterprise',data,event);}">
+                <i class="fa icon-btn-new newicon-monitor"></i>
+                <br />
+                推荐企业
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11110'),click: function(data, event) {navigateTo('sys_enterpriseshop',data,event);}">
+                <i class="fa icon-btn-new newicon-shop"></i>
+                <br />
+                企业商城管理
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11040'),click: function(data, event) {navigateTo('sys_material_balance',data,event);}">
+                <i class="fa icon-btn-new newicon-balance"></i>
+                <br />
+                结算
+            </button>
+            <button href="#" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11050'),click: function(data, event) {navigateTo('sys_material_return',data,event);}">
+                <i class="fa icon-btn-new newicon-refund"></i>
+                <br />
+                退货退款
+            </button>
+            <button href="#" class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11130'),click: function(data, event) {navigateTo('sys_help',data,event);}">
+                <i class="fa icon-btn-new newicon-helptext"></i>
+                <br />
+                帮助
+            </button>
+            <button class="btn btn-sq-lg btn-gray mar12" data-bind="enable:loginInfo.checkPower('11080'),click: function(data, event) {navigateTo('sys_supervisionUpdatePass',data,event);}">
+                <i class="fa icon-btn icon-btn-password"></i>
+                <br />
+                修改密码
+            </button>
+        </div>
+    </div>
+</div>

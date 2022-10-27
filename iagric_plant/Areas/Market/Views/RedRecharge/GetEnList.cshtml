@@ -1,0 +1,23 @@
+﻿@model List<LinqModel.Enterprise_Info>
+@{
+    Layout = null;
+}
+<link href="@Url.Content("~/Areas/Market/Content/chosen.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Areas/Market/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/chosen.jquery.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#eid").chosen();
+    })
+</script>
+<select class="chosen-select" data-placeholder="Choose a Country..." name="CompanyID"
+    id="eid" tabindex="2" tabindex="2" style="width: 180px; color: #333; padding-left: 5px;">
+    <option value="0">请选择</option>
+    @if (Model != null)
+    {
+        foreach (var sub in Model)
+        { 
+        <option value="@sub.Enterprise_Info_ID">@sub.EnterpriseName</option>
+        }
+    }
+</select>

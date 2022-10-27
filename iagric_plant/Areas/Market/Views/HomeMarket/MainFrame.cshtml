@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>营销管理|医疗器械（UDI）服务云平台</title>
+</head>
+    <frameset rows="78,*" cols="*" border="0">
+<frame src="/Market/HomeMarket/Top" name="topFrame"  scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
+  <frameset cols="210,*"  framespacing="0"  border="0" bordercolor="#000000">
+    <frame src="/Market/HomeMarket/Left" name="leftFrame" scrolling="Auto"  id="leftFrame" title="leftFrame"/> 
+    @if (ViewBag.Flag == "1")
+    {
+      <frame src="/Market/ActivityManager/Index" name="mainFrame" id="mainFrame" title="mainFrame" scrolling="yes" />
+    }
+    else if (ViewBag.Flag=="2")
+	{
+		 <frame src="/Market/Packet/Add?activityId=@ViewBag.ActivityId" name="mainFrame" id="mainFrame" title="mainFrame" scrolling="yes" />
+	}
+    else
+    {
+    <frame src="/Market/HomeMarket/Index" name="mainFrame" id="mainFrame" title="mainFrame" scrolling="yes" />
+    }
+    </frameset>
+ </frameset>
+</html>

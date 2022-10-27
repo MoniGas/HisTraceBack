@@ -1,0 +1,724 @@
+﻿<div class="page-content" id="First">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                <div class="form-group">
+                    <label class="col-md-1 control-label no-padding-right" for="form-field-1">
+                    </label>
+                    <div class="col-md-9">
+                        你正在为批次编号<span data-bind="text:vmData.batchName"></span>码段进行追溯信息配置，剩余数量为<span data-bind="text:vmData.remaining"></span>个
+                    </div>
+                </div>
+                <div class="form-group" id="DivSpecifications" name="DivSpecifications">
+                    <label class="col-md-1 control-label no-padding-right" for="form-field-1">
+                    </label>
+                    <div class="col-md-9">
+                        <!-- ko if:vmData.isFirst-->
+                        <button type="button" class="btn  btn-lg btn-success" data-bind="click:function(data, event) {vmData.firstConfirm(1,data,event);}">
+                            全部配置</button>
+                        <!--/ko-->
+                        <!-- ko if:vmData.notFirst-->
+                        <table id="simple-table" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        子批次
+                                    </th>
+                                    <th>
+                                        配置码个数
+                                    </th>
+                                    <th>
+                                        产品名称
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:vmData.datas">
+                                <tr>
+                                    <td>
+                                        <p class="cut width150" data-bind="text:$data.BatchName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width150" data-bind="text:$data.Count">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width150" data-bind="text:$data.MaterialFullName">
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--/ko-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label no-padding-right" for="form-field-1">
+                        <span class="alert-danger">*</span>配置数量：
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" placeholder="配置数量..." style="width: 200px;" data-bind="value:vmData.settingCount" />个
+                        <span>请输入有效的正整数，剩余数量为<span data-bind="text:vmData.remaining"></span>，您最大可输入数量为<span
+                            data-bind="text:vmData.remaining"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label no-padding-right" for="form-field-1">
+                        <span class="alert-danger">*</span>批次号：
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" placeholder="批次号..." style="width: 200px;" data-bind="value:vmData.subBatchName" />
+                        <span>批次编号将用于索引和批量匹配，必须保证唯一</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 no-padding-right">
+                    </label>
+                    <div class="col-md-4">
+                        <button type="button" class="btn  btn-lg btn-success" data-bind="click:function(data, event) {vmData.firstConfirm(2,data,event);}">
+                            确定</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="configure" id="Second" style="display: none">
+    <form>
+    <div class="field-group">
+        <label class="tit">
+            页面配置：</label>
+        <div class="refund-reason">
+            <p>
+                请配置页面展示项目 <span class="remarks">（至少选一项）</span>
+            </p>
+            <ul class="reason-list cf">
+                <li style="width: 100%;">
+                    <input type="checkbox" class="ui-checkbox" value="全选" id="selectAll">
+                    <label for="selectAll">
+                        全选</label>
+                </li>
+                <!-- ko foreach:showArray-->
+                <li>
+                    <input name="allCheck" type="checkbox" class="ui-checkbox" data-bind="value:$data.text,attr: { id: $data.value,checked:$data.ischeck }">
+                    <label data-bind="text:$data.text,attr: { for: $data.value }">
+                    </label>
+                </li>
+                <!--/ko-->
+            </ul>
+        </div>
+    </div>
+    <div class="field-group">
+        <label class="tit">
+            模板样式：</label>
+        <div class="refund-reason">
+            <p>
+                请对该批二维码选择样式模板 <span class="remarks">（默认为经典）</span>
+            </p>
+            <div class="mobanlist clearfix" id="radio_wrap">
+                <ul data-bind="foreach:styleArray">
+                    <li class="checked" title="经典">
+                        <div>
+                            <input type="radio" id="radio_a_01" name="radio_a">
+                            <label for="radio_a_01">
+                                <img id="imgQR" src="/newmenu/images/nomoban.png">
+                            </label>
+                            <i></i>
+                        </div>
+                        <p data-bind="html:$data.text">
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p style="margin-left: 90px; margin-top: 20px;">
+        <button class="btn btn-lg btn-success" data-bind="click:EditSetting">
+            确定</button>
+    </p>
+    </form>
+</div>
+<div id="Third" style="display: none">
+    <div class="row clearfix" style="margin: 40px 0 0;">
+        <div class="yuanliao_pro">
+            <ul>
+                <li name="menuLi" class="current" data-bind="click:initThree">产品信息</li>
+                <!-- ko foreach: selectOption -->
+                <li name="menuLi" data-bind="html:$data.name,attr:{id:$data.id},click:$parent.menuClick">
+                </li>
+                <!--/ko-->
+            </ul>
+        </div>
+        <div class="yuanliao-content">
+            <div id="MaterialInfo">
+                <div class="row no-margin">
+                    <div class="material-edit">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                <span class="alert-danger">*</span>产品信息：
+                            </label>
+                            <div class="col-md-9">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="SelectMaterial"
+                                    data-bind="options:MaterialList.MaterialArray,value:MaterialList.SelectedId,optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                                </select>
+                                <button class="btn btn-lg-s btn-success mal10" data-bind="click:AddMaterial">
+                                    添加产品</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="material-edit">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                                <span class="alert-danger">*</span>品牌信息：
+                            </label>
+                            <div class="col-md-9">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="SelectBrand"
+                                    data-bind="options:BrandList.BrandArray,value:BrandList.SelectedId,optionsText:'BrandName',optionsValue:'Brand_ID'">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="material-edit">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding-right">
+                            </label>
+                            <div class="col-md-9">
+                                <button class="btn btn-success btn-lg" data-bind="click:MaterialSetting">
+                                    下一步</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="OriginInfo" style="display: none">
+                <div class="row no-margin">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>原材料名称：</label>
+                            <div class="col-md-3 no-padding">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="SelectOrigin"
+                                    data-bind="options:OriginList.OriginArray,optionsCaption:'选择原料',value:OriginList.SelectedId,optionsText:'OriginName',optionsValue:'Origin_ID'">
+                                </select><br />
+                                <span class="alert-danger" data-bind="visible:selOriginList">请选择原料</span>
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>来源：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="来源..." class="form-control" data-bind="value:Supplier">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>入库时间：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="入库时间..." readonly="readonly" class="form-control"
+                                    id="txtInDate" data-date-format="yyyy-mm-dd" data-bind="value:InDate">
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>运输车辆：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="运输车辆..." class="form-control" data-bind="value:CarNum">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>检验员：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="检验员..." class="form-control" data-bind="value:checkUser">
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row  no-margin">
+                    <h4 class="tit-modal">
+                        <span class="alert-danger-new-red">*</span>图片<span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span><span
+                            class="alert-danger" data-bind="visible:hasfiles">至少上传一张照片</span></h4>
+                    <div class="padlr15">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:files -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a></li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="image_upload"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:AddOrigin">
+                        保存</button>
+                </div>
+                <div class="row pat10  mat10 no-margin">
+                    <div class="col-md-12">
+                        <table id="Table1" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        原料
+                                    </th>
+                                    <th>
+                                        来源
+                                    </th>
+                                    <th>
+                                        入库时间
+                                    </th>
+                                    <th>
+                                        检验员
+                                    </th>
+                                    <th width="80">
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:SettingOriginList">
+                                <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.OriginName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.Supplier">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.StrInDate">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.CheckUser">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                            <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editOrigin($data.ID,data,event);}">
+                                                <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                    data-bind="click: function(data, event) {$parent.delOrigin($data.ID,data,event);}">
+                                                    <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:function(data, event) {nextButton(1,data,event);}">
+                        下一步</button>
+                </div>
+            </div>
+            <div id="WorkInfo" style="display: none">
+                <div class="row no-margin">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>生产环节类型：</label>
+                            <div class="col-md-3 no-padding">
+                                <select id="type" data-bind="value:Worktype">
+                                    <option value="0">生产</option>
+                                    <option value="1">加工</option>
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>生产环节：</label>
+                            <div class="col-md-3 no-padding">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="Select1"
+                                    data-bind="options:WorkList.WorkArray,optionsCaption:'选择生产环节',value:WorkList.SelectedId,optionsText:'OperationTypeName',optionsValue:'Batch_ZuoYeType_ID'">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>操作人员：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="操作人员..." class="form-control" data-bind="value:workUser">
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>操作时间：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="操作时间..." readonly="readonly" class="form-control"
+                                    id="txtWorkTime" data-date-format="yyyy-mm-dd" data-bind="value:WorkTime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>作业描述：</label>
+                            <div class="col-md-3 no-padding">
+                                <textarea name="comment" placeholder="请输入作业内容..." id="comment" style="width: 100%;"
+                                    class="height90" data-bind="value:WorkContent"></textarea>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <h4 class="tit-modal">
+                        图片<span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span></h4>
+                    <div class="padlr15">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:WorkImgs -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delWorkImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a></li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="A1"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <h4 class="tit-modal">
+                        视频 <span class="alert-danger-new">支持格式.avi|.mp4,大小限制为200MB。</span></h4>
+                    <div class="padlr15">
+                        <div class="pic-item clearfix">
+                            <ul>
+                                <!-- ko foreach:WorkVideos -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.videoUrls}" onerror="this.src='/images/video-def.jpg'">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delWorkVideo(data, event);}}">
+                                        <i class="hide_clip">移除</i></a> </li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="video_upload">
+                                            <img src="../../images/video-upload.jpg" /></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:AddWork">
+                        保存</button>
+                </div>
+                <div class="row pat10  mat10 no-margin">
+                    <div class="col-md-12">
+                        <table id="Table2" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        生产环节类型
+                                    </th>
+                                    <th>
+                                        生产环节
+                                    </th>
+                                    <th>
+                                        操作人员
+                                    </th>
+                                    <th>
+                                        操作时间
+                                    </th>
+                                    <th width="80">
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:SettingWorkList">
+                                <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.TypeName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.OperationTypeName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.UserName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.StrAddDate">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                            <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editWork($data.Batch_ZuoYe_ID,data,event);}">
+                                                <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                    data-bind="click: function(data, event) {$parent.delWork($data.Batch_ZuoYe_ID,data,event);}">
+                                                    <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:function(data, event) {nextButton(2,data,event);}">
+                        下一步</button>
+                </div>
+            </div>
+            <div id="CheckInfo" style="display: none">
+                <div class="row no-margin">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>操作人员：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="操作人员..." class="form-control" data-bind="value:CheckUser">
+                            </div>
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>操作时间：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="操作时间..." readonly="readonly" class="form-control"
+                                    id="txtCheckTime" data-date-format="yyyy-mm-dd" data-bind="value:CheckTime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>作业描述：</label>
+                            <div class="col-md-3 no-padding">
+                                <textarea name="comment" placeholder="请输入作业内容..." id="Textarea1" style="width: 100%;"
+                                    class="height90" data-bind="value:CheckContent"></textarea>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <h4 class="tit-modal">
+                        图片<span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span></h4>
+                    <div class="padlr15">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:CheckImgs -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delCheckImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a></li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="A2"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <h4 class="tit-modal">
+                        视频 <span class="alert-danger-new">支持格式.avi|.mp4,大小限制为200MB。</span></h4>
+                    <div class="padlr15">
+                        <div class="pic-item clearfix">
+                            <ul>
+                                <!-- ko foreach:CheckVideos -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.videoUrls}" onerror="this.src='/images/video-def.jpg'">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delCheckVideo(data, event);}}">
+                                        <i class="hide_clip">移除</i></a> </li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="A3">
+                                            <img src="../../images/video-upload.jpg" /></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:AddCheck">
+                        保存</button>
+                </div>
+                <div class="row pat10  mat10 no-margin">
+                    <div class="col-md-12">
+                        <table id="Table3" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        操作人员
+                                    </th>
+                                    <th>
+                                        操作时间
+                                    </th>
+                                    <th width="80">
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:SettingCheckList">
+                                <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.UserName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.StrAddDate">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                            <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editCheck($data.Batch_XunJian_ID,data,event);}">
+                                                <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                    data-bind="click: function(data, event) {$parent.delCheck($data.Batch_XunJian_ID,data,event);}">
+                                                    <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:function(data, event) {nextButton(3,data,event);}">
+                        下一步</button>
+                </div>
+            </div>
+            <div id="ReportInfo" style="display: none">
+                <div class="row no-margin">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>检测标题：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="检测标题..." class="form-control" data-bind="value:ReportTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>检测日期：
+                            </label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" placeholder="操作时间..." readonly="readonly" class="form-control"
+                                    id="txtReportTime" data-date-format="yyyy-mm-dd" data-bind="value:ReportTime">
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <h4 class="tit-modal">
+                        <span class="alert-danger-new-red">*</span>图片<span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span><span
+                            class="alert-danger" data-bind="visible:hasReportImgs">至少上传一张照片</span></h4>
+                    <div class="padlr15">
+                        <div class="pic-item  clearfix">
+                            <ul>
+                                <!-- ko foreach:ReportImgs -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <img data-bind="attr:{src:$data.fileUrls}">
+                                    </div>
+                                    <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delReportImage(data, event);}}">
+                                        <i class="hide_clip">移除</i></a></li>
+                                <!-- /ko -->
+                                <li>
+                                    <div class="thumbnail">
+                                        <a id="A4"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:AddReport">
+                        保存</button>
+                </div>
+                <div class="row pat10  mat10 no-margin">
+                    <div class="col-md-12">
+                        <table id="Table4" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        检测标题
+                                    </th>
+                                    <th>
+                                        操作人员
+                                    </th>
+                                    <th>
+                                        操作时间
+                                    </th>
+                                    <th width="80">
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:SettingReportList">
+                                <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.Content">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.UserName">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="cut width70" data-bind="text:$data.StrAddDate">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowAll">
+                                            <a class="green" href="#" title="编辑" data-bind="click: function(data, event) {$parent.editReport($data.Batch_JianYanJianYi_ID,data,event);}">
+                                                <i class="ace-icon fa fa-pencil bigger-150"></i></a><a class="red" href="#" title="删除"
+                                                    data-bind="click: function(data, event) {$parent.delReport($data.Batch_JianYanJianYi_ID,data,event);}">
+                                                    <i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+                    <button class="btn btn-success btn-lg mal105" data-bind="click:function(data, event) {nextButton(4,data,event);}">
+                        下一步</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="previewbox" id="previewCode" style="display: none">
+    <div class="ewm">
+        <!--<img src="/newmenu/images/noewm.png">-->
+        <img data-bind="attr:{src:codePath}">
+    </div>
+    <p>
+        扫描查看预览</p>
+</div>

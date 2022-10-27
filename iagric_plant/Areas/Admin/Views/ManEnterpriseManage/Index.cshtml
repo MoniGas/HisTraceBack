@@ -1,0 +1,234 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.Enterprise_Info>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<LinqModel.Enterprise_Info> alllist = ViewBag.alllist;
+}
+<style>
+.flot-area{
+				position: fixed;
+				bottom: 6%;
+				right: 20px;
+				z-index: 999;
+				width: 66px;
+				height: 54px;
+				background-color: #28dba1;
+				border-radius: 6px;
+				text-align: center;
+				box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+			}
+			.flot-area a{
+				display: block;
+				color: #fff;
+				font-size: 16px;
+				width: 100%;
+				margin-top: 8px;
+				cursor:pointer;
+			}
+			.popou-list
+			{
+				}
+			.popou-list li
+			{
+				padding:6px 0px;
+				text-align:center;
+				}
+				.popou-list li:hover
+				{
+					color:#49c397;
+					}
+
+</style>
+<body>
+    <!-------------------main start---------------------------------->
+    <div>
+        <form id="form1" method="get" action="/Admin/ManEnterpriseManage/Index">
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li class="dqwz">企业管理<span class="divider">›</span>我的企业</li>
+            </ul>
+        </div>
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                @*<p>
+                    <a href="/Market/Packet/Add">
+                        <input type="button" id="" name="" value="新建红包活动" class="button-line"></a></p>*@
+                <div class="table-filter borderLeft borderRight clearfix">
+                    <div class="sitem">
+                        筛选：
+                        <input placeholder="开始时间" type="text" style="width: 120px;" id="sDate" name="sDate" value="@ViewBag.sDate"
+        cssclass="Wdate" onclick="WdatePicker()" readonly="readonly">
+                        至
+                        <input placeholder="结束时间" type="text"
+        style="width: 120px;" readonly="readonly" onclick="WdatePicker()" id="eDate" name="eDate"
+        value="@ViewBag.eDate" cssclass="Wdate">
+                    </div>
+                    <div class="sitem">
+                        企业名称：
+                        <input
+        type="text" id="enName" name="enName" value="@ViewBag.Name">
+                        <input  type="hidden" value="@ViewBag.Status" name="activityStatus"/>
+                    </div>
+                    <div class="sitem">
+                        <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button">
+                    </div>
+                </div>
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    企业名称
+                                </th>
+                                <th>
+                                    联系人
+                                </th>
+                                <th>
+                                    联系电话
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    用码量
+                                </th>
+                                <th>
+                                    剩余码量
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.EnterpriseName
+                                    </td>
+                                    <td>
+                                        @sub.LinkMan
+                                    </td>
+                                    <td>
+                                        @sub.LinkPhone
+                                    </td>
+                                    <td>
+                                        @if (sub.Verify ==(int)Common.EnumFile.EnterpriseVerify.passVerify)
+                                        {
+                                            <span>正常</span>
+                                        }
+                                        else if (sub.Verify == (int)Common.EnumFile.EnterpriseVerify.Try)
+                                        {
+                                            <span>试用</span>
+                                        }
+                                        else if (sub.Verify == (int)Common.EnumFile.EnterpriseVerify.pauseVerify)
+                                        {
+                                            <span>停用</span> 
+                                        }
+                                    </td>
+                                    <td>
+                                        @sub.UsedCodeCount
+                                    </td>
+                                    @if (sub.OverDraftCount == -1)
+                                    {
+                                        <td>
+                                            无限制
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @(sub.RequestCodeCount - sub.UsedCodeCount + sub.OverDraftCount)
+                                        </td>
+                                    }
+                                    <td>
+                                        <a href="/Admin/ManEnterpriseManage/GetEnInfo?eid=@sub.Enterprise_Info_ID" class="lnk mar10">
+                                            进入</a>
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.TotalItemCount > 0)
+                {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+        </form>
+
+
+    </div>
+    <!-------------------main end---------------------------------->
+    @{
+        if (alllist.Count > 0)
+        {
+        <div class="flot-area" onmouseenter="iover()" onmouseleave="iout()">
+            <a>消息<br />
+                提示</a>
+        </div>
+        }
+    }
+    
+
+        <div id="Div2" style="display:none;
+            text-align:center;
+     padding:10px 20px;
+     width:300px;
+    min-height: 100px;
+    background: #f0f0f0;
+    border: 1px solid #dadada;
+    position: fixed;
+    z-index: 999;
+    bottom: 6%;
+    right: 89px;">
+            <div>
+                <h3 style=" color:#49c397;"> 以下企业已经触发码量阀值： </h3>
+                <ul class=" popou-list">
+                    @{
+                        foreach (var item in alllist)
+                        {
+                        <li>@item.EnterpriseName </li>
+                        }
+                    }
+                </ul>
+                    
+            </div>
+        </div>
+</body>
+<script>
+    function iover() {
+        $("#Div2").show();
+    }
+    function iout() {
+        $("#Div2").hide();
+    }
+</script>

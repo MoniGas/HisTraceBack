@@ -1,0 +1,148 @@
+a {
+	color: #66a7e8;
+}
+a:hover {
+	color: #498dd1;
+}
+:root .head_box {
+	background-image: -webkit-gradient(linear,left top,right top,from(#49a9f1),to(#1683d3));
+    background-image: -webkit-linear-gradient(left,#49a9f1,#1683d3);
+    background-image: -moz-linear-gradient(left,#49a9f1,#1683d3);
+    background-image: linear-gradient(to right,#49a9f1,#1683d3);
+}
+.head_box {
+	background-color: #49a9f1;
+}
+.account li{
+	background:#fff;
+	background-color: rgba(255,255,255,0.2);/* IE9、标准浏览器、IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂 */
+}
+.account li a {
+	color: #fff;
+	
+}
+@media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+  .account li{
+    background-color:#fff;
+    filter:Alpha(opacity=20);
+    position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+    *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+  }
+  .account li a {
+    position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值 */
+  }  
+}
+.account li:hover {
+	background-color: rgba(255,255,255,0.3);
+}
+
+.menu_box .menu .submenu > li > a:hover{
+	color: #333;
+	background: #fdfbf1;
+}
+/*button*/
+.button,.button-s{
+	background-color: #1683d3;
+	border: 1px solid #1683d3;
+    color: white;
+}
+.button:hover,.button-s:hover{
+	background-color: #1683d3;
+	border: 1px solid #1683d3;
+}
+.button-big{
+	background-color: #1683d3;
+	border: solid 1px #1683d3;
+	color: #fff;
+}
+.button-big:hover{
+	background: #1683d3;
+}
+.button-line{
+	background: #fff;
+	border: 1px solid #1683d3;
+	color: #1683d3;
+}
+.button-line:hover{
+	background: #1683d3;
+	color: #fff;
+}
+/**/
+.setup li a{
+	background:#1683d3;
+	color:#fff;
+}
+.setup li a:hover{	
+	background:#1683d3;
+}
+.notice{
+	background:#e5f6fd;
+	border:1px solid #cdecf7;
+	color:#999999;
+}
+.tabs ul li.selected {
+    border-top: 3px solid #1683d3;
+}
+.control-bar-wrapper .control-bar .date-select-bar .cur {
+	border: 1px solid #1683d3;
+    background-color: #1683d3;
+    color: #fff;
+}
+
+
+/*****steps******/
+.ncp-steps {
+	border-bottom: 2px solid #e6e6e6;
+}
+
+.ncp-steps ul li.active {
+	color: #3e3e3e;
+	border-bottom: 2px solid #f1b64c;
+}
+.ncp-steps ul li.visited{
+	color: #49a9f1;
+	border-bottom: 2px solid #49a9f1;
+}
+
+.ncp-steps ul li i {
+	color: #FFF;
+	background: url(../images/greenimages/ico-circle2.png) no-repeat 0 0;
+}
+.ncp-steps ul li.active i {
+	background-image: url(../images/greenimages/ico-circle1.png);
+}
+.ncp-steps ul li.visited i {
+	background-image: url(../images/greenimages/ico-circle0.png);
+}
+/*分页*/
+.mod-page-cur {
+	background-color: #49a9f1;
+	border: 1px solid #49a9f1;
+}
+
+.mod-page a:hover{
+	border: #49a9f1 1px solid;
+	color: #1683d3;
+	
+}
+.mod-page input[type=button]
+{
+    border: 1px solid #49a9f1;
+    background: #49a9f1;
+}
+
+.mod-main .mt .extra-l li.curr a {
+    color: #1683d3;
+    border-bottom: 2px solid #1683d3;
+}
+.mod-main .mt .extra-l li a:hover{
+	color: #1683d3;
+}
+
+/*登录按钮*/
+.btn_login_00 {
+    background-color: #49a9f1;
+}
+.btn_login_00:hover{
+	background: #49a9f1;
+}

@@ -1,0 +1,45 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    企业管理>重置密码</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            企业名称：</label>
+                        <div class="col-md-9">
+                            <span data-bind="text:eName"></span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>重置密码为：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="请输入密码..." class="col-xs-10 col-sm-5" style="width: 150px"
+                                data-bind="value:surepwd,validationElement:surepwd,hasfocus:selsurepwd" />
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:save">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

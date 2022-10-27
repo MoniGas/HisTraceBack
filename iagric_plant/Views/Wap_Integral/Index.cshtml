@@ -1,0 +1,89 @@
+﻿@model LinqModel.Order_Consumers
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的积分</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link rel="stylesheet" type="text/css" href="../public_css/base.css">
+    <link rel="stylesheet" type="text/css" href="../public_css/public-style.css">
+    <link rel="stylesheet" type="text/css" href="../public_css/login.css">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+</head>
+<body>
+    <header class="OriginHead bar-green">
+        <a href="/Wap_Consumers/Index" class="bar-item pull-left"><i class="icon bar-arrow-left">
+        </i></a>
+        <h1 class="bar-title">
+            我的积分</h1>
+    </header>
+    <div class="coupon-content">
+        <div class="banner-box">
+            <div class="box center">
+                <div class="flex">
+                    @if (ViewBag.IntegralCount == null)
+                    {
+                        <span id="total" class="total">0</span>
+                    }
+                    else
+                    {
+                        <span id="total" class="total">@ViewBag.IntegralCount</span>
+                    }
+                    积分 <a href="#">
+                        <img src="../public_img/ico-jf.png" alt="" class="how">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__bd">
+                @if (ViewBag.integralModel != null)
+                {
+
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">
+                            即将到期</label>
+                        @if (ViewBag.integralModel.IntergralChange == null)
+                        {
+                            <span class="weui-form-preview__value">0 积分</span>
+                        }
+                        else
+                        {
+                            <span class="weui-form-preview__value">@ViewBag.integralModel.IntergralChange 积分</span>
+                        }
+                    </div>
+
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">
+                            到期日期</label>
+                        <span class="weui-form-preview__value">@ViewBag.integralModel.AddDate</span>
+                    </div> 
+                }
+            </div>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="/Wap_Integral/IntegralDetail?OrderConsumersId=@ViewBag.OrderConsumersId">
+                <div class="weui-cell__bd">
+                    <p>
+                        明细查询</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a><a class="weui-cell weui-cell_access" href="/Wap_Integral/IntegralShuoM">
+                <div class="weui-cell__bd">
+                    <p>
+                        积分说明</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

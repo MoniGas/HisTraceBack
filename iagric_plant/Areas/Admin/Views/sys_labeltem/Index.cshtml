@@ -1,0 +1,124 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.LabelTem>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    //添加代理窗口
+    function AddLabelTem() {
+        openwin('Add', '添加标签模板', 700, 500);
+    }
+</script>
+<!-------------------main start---------------------------------->
+<div>
+    <form id="form1" method="get" >
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li class="dqwz">模板管理<span class="divider">›</span>模板管理</li>
+        </ul>
+    </div>
+    <div class="card_pa40 clearfix">
+        <div class="mod-main">
+            <div class="table-filter borderLeft borderRight clearfix">
+                <div class="sitem">
+                    模板名称：
+                    <input type="text" id="LabelName" placeholder="输入模板名称查询..." name="LabelName" value="@ViewBag.LabelName">
+                </div>
+                <div class="sitem">
+                    <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button">
+                </div>
+                <div class="sitem">
+                    <input  type="button" id="btnAdd" name="btnAdd" value="添加标签模板"onclick="AddLabelTem()" class="button">
+                </div>
+            </div>
+            <div class="boxtable mat20">
+                <table>
+                    <thead>
+                        <tr>
+                        <th>
+                            模板名称
+                        </th>
+                        <th>
+                            宽度
+                        </th>
+                        <th>
+                            高度
+                        </th>
+                        <th>
+                            图片
+                        </th>
+                        <th>
+                            添加时间
+                        </th>
+                        <th>
+                            说明
+                        </th>
+                        <th width="300">
+                            操作
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (var sub in Model)
+                                {
+                            <tr>
+                                <td>
+                                    @sub.LabelName
+                                </td>
+                                <td>
+                                    @sub.LabelWidht
+                                </td>
+                                <td>
+                                    @sub.LabelHeight
+                                </td>
+                                <td>
+                                    <img src="@(sub.LabelImg)" style="width: auto;height: auto;max-width: 40%;max-height: 40%;" />
+                                </td>
+                                <td>
+                                    @sub.AddData
+                                </td>
+                                <td>
+                                    @sub.Remarks
+                                </td>
+                                <td>
+                                <a href="/Admin/sys_labeltem/Delete?LabelTem_ID=@sub.LabelTem_ID" class="lnk mar10">删除</a>
+                                </td>
+                            </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @if (Model != null && Model.TotalItemCount > 0)
+            {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+        </form>
+    </div>

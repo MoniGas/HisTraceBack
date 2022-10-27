@@ -1,0 +1,330 @@
+﻿<div class="page-content" id="First">
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="active"><i>1</i><span>生成UDI码</span></li>
+                <li><i>2</i><span>追溯码配置</span></li>
+                <li><i>3</i><span>追溯页风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>二维码类型：
+                        </label>
+                        <div class="col-md-10">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select1"
+                                data-bind="options:SelTypeModel.SelTypeArray,value:SelTypeModel.SelectedId,optionsCaption:'选择类型',optionsText:'Text',optionsValue:'Value'">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:SelType">请选择二维码类型！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="DivSpecifications" name="DivSpecifications" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>套标码规格：
+                        </label>
+                        <div class="col-md-10">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select2"
+                                data-bind="options:SpecificationsModel.SpecificationsArray,value:SpecificationsModel.SelectedId,optionsCaption:'选择规格',optionsText:'GuiGe',optionsValue:'ID'">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:SelSpecification">请选择规格！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="DivMaterialSpe" name="DivMaterialSpe" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>产品规格：
+                        </label>
+                        <div class="col-md-10">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select4"
+                                data-bind="options:SpeMaterialModel.SpeMateiralArray,value:SpeMaterialModel.SelectedId,optionsCaption:'选择产品规格',optionsText:'Remark',optionsValue:'MaterialSpcificationID'">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:SelSpeMaterial">请选择产品规格！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="DivSclx" name="DivSclx" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生产类型：</label>
+                        <div class="col-md-10">
+                            <select id="scleixing" data-bind="value:scleixing">
+                                <option value="1">农药登记证持有人生产</option>
+                                <option value="2">委托加工</option>
+                                <option value="3">委托分装</option>
+                            </select>
+                            <span class="alert-danger" data-bind="visible:SelSclx">请选择生产类型！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>产品名称：
+                        </label>
+                        <div class="col-md-10">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select3"
+                                data-bind="options:VmMaterial.MaterialArray,value:VmMaterial.SelectedId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:SelMaterial">请选择产品！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>包装规格：
+                        </label>
+                        <div class="col-md-10">
+                            <select id="bzspec" data-bind="value:bzspec">
+                                <option value="0">包装规格1</option>
+                                <option value="1">包装规格2</option>
+                                <option value="2">包装规格3</option>
+                            </select>
+                            <span class="alert-danger" data-bind="visible:SelBZSpecType">请选择包装规格！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divTao" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生成套标数量：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" placeholder="套标数量..." style="width: 200px;" data-bind="value:Number,validationElement:Number,hasfocus:SelNumber" />
+                            <p>
+                                <span class="alert-danger-new">请输入有效的正整数</span></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生产日期：
+                        </label>
+                        <div class="col-md-10">
+                            <input style="width: 200px;" placeholder="生产日期" class="form-control date-picker"
+                                id="AddDate" name="AddDate" type="text" data-date-format="yyyy-mm-dd" data-bind="value:AddDate"
+                                readonly="readonly" />
+                            <span class="alert-danger" data-bind="visible:shengchengDate">请选择生产日期！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生产批号：</label>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="生产批号" class="form-control" maxlength="15" data-bind="value:shengchanPH,validationElement:shengchanPH,hasfocus:SelshengchanPH">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            有效期：
+                        </label>
+                        <div class="col-md-10">
+                            <input style="width: 200px;" placeholder="有效期" class="form-control date-picker" id="YouXiaoDate"
+                                name="YouXiaoDate" type="text" data-date-format="yyyy-mm-dd" data-bind="value:YouXiaoDate"
+                                readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            失效日期：
+                        </label>
+                        <div class="col-md-10">
+                            <input style="width: 200px;" placeholder="失效日期" class="form-control date-picker"
+                                id="ShiXiaoDate" name="ShiXiaoDate" type="text" data-date-format="yyyy-mm-dd"
+                                data-bind="value:ShiXiaoDate" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="SCodeLength" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>简码随机位数：
+                        </label>
+                        <div class="col-md-10">
+                            <input id="sjnum" type="text" placeholder="简码随机位数..." style="width: 200px;" oninput="myFunction()"
+                                data-bind="value:SJCodeNum,validationElement:SJCodeNum,hasfocus:SelSJCodeNum" />
+                            <p>
+                                <span class="alert-danger-new">请输入1-10之间有效的正整数</span></p>
+                            <p id="TiShi" style="display: none;">
+                                编码位数为<span id="s1"></span>位，码总长度为<span id="s2"></span>位。</p>
+                        </div>
+                    </div>
+                    <div class="form-group" id="codetype" style="display: none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>码制：
+                        </label>
+                        <div class="col-md-10" style="margin-top: 6px;" data-bind="">
+                            <input id="r2" name="CodeTypeCheck" type="radio" value="2" class="ui-checkbox" checked="checked"
+                                data-bind="" /><label for="r2">简码</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="r1" name="CodeTypeCheck" type="radio" value="1" class="ui-checkbox" data-bind="" /><label
+                                for="r1">IDCode码</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 no-padding-right">
+                        </label>
+                        <div class="col-md-10">
+                            <!-- ko if:$data.TraceEnMainCode()==null-->
+                            <button type="button" class="btn  btn-lg btn-success" data-bind="click:GetEntepriseMainJCode"
+                                style="display: none;">
+                                获取企业简码</button>
+                            <!--/ko-->
+                            <button type="button" class="btn  btn-lg btn-success" data-bind="click:GenerateOne">
+                                下一步</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="configure" id="Second" style="display: none">
+    <form>
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="visited"><i>1</i><span data-bind="click:function(data, event) {TopSubPageClick('First',data,event);}">生成UDI码</span></li>
+                <li class="active"><i>2</i><span>追溯码配置</span></li>
+                <li><i>3</i><span>追溯页风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row">
+                <div class="field-group" style="padding: 5px 0 0 0">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1" style="text-align: left;">
+                        <span class="alert-danger">*</span>生成码数量：
+                    </label>
+                    <div class="col-md-10" style="margin-left: -77px;">
+                        <input type="text" placeholder="生成码数量..." style="width: 200px;" data-bind="value:Number,validationElement:Number,hasfocus:SelNumber" />
+                        <p>
+                            <span class="alert-danger-new">请输入有效的正整数，按照实际生产需要，使用多少码就生成多少个码，例如：100，最大生成数量为100000</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group" style="padding: 5px 0 0 0px;">
+                <label class="tit">
+                    页面配置：</label>
+                <div class="refund-reason" style="padding: 5px 0 5px 90px;">
+                    <p>
+                        请配置页面展示项目 <span class="remarks">（至少选一项）</span>
+                    </p>
+                    <ul class="reason-list cf">
+                        <li style="width: 100%;">
+                            <input type="checkbox" class="ui-checkbox" value="全选" id="selectAll">
+                            <label for="selectAll">
+                                全选</label>
+                        </li>
+                        <!-- ko foreach:showArray-->
+                        <li>
+                            <input name="allCheck" type="checkbox" class="ui-checkbox" data-bind="value:$data.text,attr: { id: $data.value,checked:$data.ischeck }">
+                            <label data-bind="text:$data.text,attr: { for: $data.value }">
+                            </label>
+                        </li>
+                        <!--/ko-->
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-left: 90px; margin-top: 20px;">
+                <button class="btn btn-lg btn-success" data-bind="click:EditSetting">
+                    下一步</button>
+            </p>
+        </div>
+    </div>
+    </form>
+</div>
+<div id="Third" style="display: none">
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="visited"><a href=""><i>1</i><span data-bind="click:function(data, event) {TopSubPageClick('First',data,event);}">生成UDI码</span></a></li>
+                <li class="visited"><a href=""><i>2</i><span data-bind="click:function(data, event) {TopSubPageClick('Second',data,event);}">追溯码配置</span></a></li>
+                <li class="active"><i>3</i><span>追溯页风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row clearfix" style="margin: 40px 0 0;">
+                <div class="configure">
+                    <div class="field-group">
+                        <label class="tit">
+                            模板样式：</label>
+                        <div class="refund-reason">
+                            <p>
+                                请对该批二维码选择模板样式 <span class="remarks">（默认为模板一）</span>
+                            </p>
+                            <div class="mobanlist clearfix" id="radio_wrap">
+                                <ul style="width: 780px;" id="ulmuban" data-bind="foreach:styleArray">
+                                    <li class="meun" data-bind="value:$data.value,event: { click: $parent.ulClick.bind(this)}">
+                                        <div>
+                                            <input type="radio" id="radio_a_01" name="radio_a">
+                                            <label for="radio_a_01">
+                                                <!--<img id="imgQR" src="/newmenu/images/moban1.jpg">-->
+                                                <img id="imgQR" data-bind="attr:{src:$data.mubanimg}">
+                                            </label>
+                                            <i></i>
+                                        </div>
+                                        <p data-bind="html:$data.text">
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="muban4" style="display: none; width: 100%;">
+                    <div class="form-group no-margin">
+                        <label style="width: 18.4%;" class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>模板图片：</label>
+                        <div class="col-md-9">
+                            <span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB(建议上传图片宽750px)。</span><span
+                                class="alert-danger" data-bind="visible:selImgInfo">请上传模板图片！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                        </label>
+                        <div class="col-md-9">
+                            <div class="pic-item  clearfix">
+                                <ul>
+                                    <!-- ko foreach:files -->
+                                    <li>
+                                        <div class="thumbnail">
+                                            <img data-bind="attr:{src:$data.fileUrls}">
+                                        </div>
+                                        <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                            <i class="hide_clip">移除</i></a> </li>
+                                    <!-- /ko -->
+                                    <li>
+                                        <div class="thumbnail">
+                                            <a id="image_upload"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>图片链接：</label>
+                        <div class="col-md-10 no-padding">
+                            <input type="text" placeholder="图片链接" data-bind="value:mubanImgUrl" />
+                            <p>
+                                <span class="alert-danger" data-bind="visible:selmubanImgUrl">请输入图片链接！</span></p>
+                        </div>
+                    </div>
+                    <div class="form-group" id="isShow">
+                        <label style="margin-left: 48px;" class="col-md-2 control-label no-padding-right"
+                            for="form-field-1">
+                            <span class="alert-danger">*</span>是否显示底部按钮：
+                        </label>
+                        <div style="width: 62.33333%;" class="col-md-10" style="margin-top: 6px;">
+                            <input id="yes" name="shifou" type="radio" value="1" class="ui-checkbox" data-bind=""
+                                checked="checked" /><label>是</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="no" name="shifou" type="radio" value="0" class="ui-checkbox" data-bind="" /><label>否</label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div style="margin-left: 100px; margin-top: 95px; width: 18%;">
+                    <button class="btn btn-lg btn-success" data-bind="click:Generate">
+                        完成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

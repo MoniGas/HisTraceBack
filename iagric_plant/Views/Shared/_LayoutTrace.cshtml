@@ -1,0 +1,78 @@
+﻿@{
+    List<LinqModel.View_NavigationForMaterial> NavigationForMaterialList = @ViewBag.NavigationForMaterialList as List<LinqModel.View_NavigationForMaterial>;
+    var page = ViewBag.page;
+    }
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    @*<meta name="viewport" content="target-densitydpi=320,width=640,user-scalable=no">*@
+    <title></title>
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <link href="/Content/admin/public.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/wap/index.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function onNavClick(page1) {
+            $("#divInfo").attr("style", "display:none");
+            $("#liInfo").removeClass("select");
+
+            $("#divGuiGe").attr("style", "display:none");
+            $("#liGuiGe").removeClass("select");
+
+            $("#divRoots").attr("style", "display:none");
+            $("#liRoots").removeClass("select");
+
+            $("#divFangChuan").attr("style", "display:none");
+            $("#liFangChuan").removeClass("select");
+
+            $("#divProductList").attr("style", "display:none");
+            if (page1 == undefined) {
+                page1 = "@page";
+            }
+            $("#div" + page1).removeAttr("style");
+            $("#li" + page1).addClass("select");
+        }
+    </script>
+</head>
+<body onload="onNavClick()">
+    <div id="warp">
+        <div class="header">
+            <img src="/images/wap/title_03.png" />
+        </div>
+        
+        <div class="yanzheng">
+            <img src="/images/wap/img1_03.png" />
+            <p>
+                产品追溯码:&nbsp;&nbsp;@Model.EWM
+                @*<input type="text" class="fangwei" style="width: 60%">*@
+            </p>
+        </div>
+        <!--主要内容-->
+        <div class="main" style="padding-bottom: 20px;">
+            <div class="nav">
+                <ul>
+                @if (NavigationForMaterialList != null)
+                {
+                    for (int i = 0; i < NavigationForMaterialList.Count; i++)
+                    {
+                        <li name=@("li"+NavigationForMaterialList[i].NavigationId) id=@("li"+NavigationForMaterialList[i].NavigationId)><a href="#" onclick="onNavClick('@NavigationForMaterialList[i].NavigationId')">@NavigationForMaterialList[i].NavigationName</a></li>
+                    
+                    }
+                    
+                    @*<li name="li1" id="li1" class="select"><a href="#" onclick="onNavClick(1)">产品描述</a></li>
+                    <li name="li2" id="li2"><a href="#" onclick="onNavClick(2)">规格参数</a> </li>
+                    <li name="li3" id="li3"><a href="#" onclick="onNavClick(3)">溯源</a></li>
+                    <li name="li4" id="li4"><a href="#" onclick="onNavClick(4)">防串</a></li>*@
+                }
+                </ul>
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

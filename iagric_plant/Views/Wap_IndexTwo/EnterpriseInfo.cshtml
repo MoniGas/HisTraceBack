@@ -1,0 +1,81 @@
+﻿@model LinqModel.Enterprise_Info
+@{
+    ViewBag.Title = "EnterpriseInfo";
+    LinqModel.ShowCompany ShowCompanyModel = ViewBag.ShowCompanyModel as LinqModel.ShowCompany;
+}
+@if (Model != null)
+{
+    <section class="section-module">
+                <!--企业名称及Logo-->
+        <section class="section-module">
+            <div class="scroll-content">
+                <div class="item-list o-t-item no-padding">
+                    <div class="item-img">
+                        <p>
+                        <img src="@ViewBag.Logo" onerror="this.src='/images/pic-def.jpg'"/>
+                        </p>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="title mat10" style="font-size:16px;">@Model.EnterpriseName</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+                <section class="section-module">
+	        <div class="module-t">
+                <h3>企业介绍</h3>
+            </div>
+            <div class="ind-main-body">
+                <p>@Html.Raw(Model.Memo)</p>
+	        </div>
+        </section>
+        <section>
+        @if (!string.IsNullOrEmpty(Model.EnterpriseName))
+        {
+    		<dl class="contact-dl">
+                <dt>
+                    企业名称：</dt>
+                <dd>
+                    @Model.EnterpriseName</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.LinkMan))
+        { 
+            <dl class="contact-dl">
+                <dt>联系人：</dt>
+                <dd>@Model.LinkMan</dd>
+            </dl>
+        }
+        @if (!string.IsNullOrEmpty(Model.LinkPhone))
+        {
+            <dl class="contact-dl">
+                <dt>联系电话：</dt>
+                <dd>
+                	@Model.LinkPhone  
+                </dd>
+            </dl>
+        }
+            @if (!string.IsNullOrEmpty(Model.Address))
+            {
+            <dl class="contact-dl">
+                <dt>企业地址：</dt>
+                <dd>
+                	@Model.Address
+                </dd>
+            </dl>
+            }
+             @if (ShowCompanyModel != null && !string.IsNullOrEmpty(ShowCompanyModel.Url))
+             {
+                          <dl class="contact-dl center" style="width:100%; margin-top: 20px;">
+                <span class="djjr"><a href="@ShowCompanyModel.Url" class="blue">点击进入企业官网</a></span>
+            </dl>
+             }
+             @if (!string.IsNullOrEmpty(Model.VideoUrl))
+             {
+                          <dl class="contact-dl center" style="width:100%; margin-top: 20px;">
+                 <span class="djjr line"><a href="@Model.VideoUrl" class="blue">点击进入查看</a></span>
+                 </dl>
+             }
+     </section>
+    </section>
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://sms.fiwan.com:8080/" targetNamespace="http://sms.fiwan.com:8080/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getStock" type="tns:getStock" />
+  <xs:element name="getStockResponse" type="tns:getStockResponse" />
+  <xs:element name="retest" type="tns:retest" />
+  <xs:element name="retestResponse" type="tns:retestResponse" />
+  <xs:element name="send" type="tns:send" />
+  <xs:element name="sendResponse" type="tns:sendResponse" />
+  <xs:element name="sendSMS" type="tns:sendSMS" />
+  <xs:element name="sendSMSResponse" type="tns:sendSMSResponse" />
+  <xs:complexType name="sendSMS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendSMSResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="send">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStock">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getStockResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="retest">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="retestResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

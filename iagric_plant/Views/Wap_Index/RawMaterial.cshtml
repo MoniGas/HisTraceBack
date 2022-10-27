@@ -1,0 +1,45 @@
+﻿@model List<LinqModel.View_RequestOrigin>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@if (Model != null && Model.Count > 0 && ViewBag.BoolOrign==true)
+{
+    <div class="list clearfix">
+        <div class="list-title">
+            原材料 <a href="/Wap_Index/MoreRaw"><span>查看更多</span> </a>
+        </div>
+        <div class="m_article">
+            <div class="item-img">
+                <a href="/Wap_Index/MoreRaw">
+                    <img src="@Model[0].StrFiles">
+                </a>
+            </div>
+            <div class="m_article_info">
+                <div class="m_article_title">
+                    <span>@Model[0].OriginName</span>
+                </div>
+                <p>
+                    @(Model[0].InDate + "入场")</p>
+                <div class="m_article_desc clearfix">
+                    经<span class="m_article_channel">@Model[0].CheckUser</span>检疫
+                </div>
+            </div>
+        </div>
+        @if (Model[0].jcimgs != null && Model[0].jcimgs.Count > 0)
+        {
+            <div class="jianyi_list">
+                <h2>
+                    检验检疫</h2>
+                <div class="jianyi-pic">
+                 <a href="/Wap_Index/MoreRaw">
+                    <img src="@Model[0].jcimgs[0].jcfileUrls">
+                    </a>
+                </div>
+                <div class="list-title baogao">
+                    检疫报告@(Model[0].jcimgs.Count)份
+                </div>
+            </div>
+    }
+    </div>
+}

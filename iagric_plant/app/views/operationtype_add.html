@@ -1,0 +1,54 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加生产环节</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                   <!-- <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生产类型：
+                        </label>
+                        <div class="col-md-9">
+                            <select id="type" data-bind="value:type">
+                                <option value="0">种植</option>
+                                <option value="2">养殖</option>
+                                <option value="1">加工</option>
+                            </select>
+                        </div>
+                    </div>-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                                <span class="alert-danger">*</span>生产环节名称：
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="生产环节名称..." class="col-md-7" data-bind="value:name" />
+                                <span data-bind="visible:!selTitle">
+                                    <span class="alert-danger" style="height: 30px; line-height: 30px;" data-bind="validationMessage:name"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                描述：</label>
+                            <div class="col-md-10 no-padding">
+                                <textarea class="form-control" cols="100" placeholder="流程描述..." rows="5" style="width: 100%;" data-bind="value:Memo"></textarea>
+                            </div>
+                        </div>
+                    <div class="space-4">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+             <button type="button" class="btn  btn-lg btn-success" data-bind="click:Save">保存</button>
+             <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">取消</button>
+        </div>
+    </div>
+</div>

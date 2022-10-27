@@ -1,0 +1,42 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 3000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加班组</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            <span class="alert-danger">*</span>班组名称：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="班组名称..." class="form-control" data-bind="value:TeamName,validationElement:TeamName,hasfocus:selTitle" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            班组备注：</label>
+                                 <div class="col-md-9">
+                                <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                    visibility: hidden;"></textarea>
+                            </div>
+                  <!--      <div class="col-md-9">
+                            <textarea id="txtremark" cols="100" rows="5" style="width: 100%;" data-bind="value:Remark"></textarea>
+                        </div>-->
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:Register">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+                取消</button>
+        </div>
+    </div>
+</div>

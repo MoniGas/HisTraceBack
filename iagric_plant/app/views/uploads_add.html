@@ -1,0 +1,96 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 1000px">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    上传</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-1 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span> 上传说明：</label>
+                        <div class="col-md-10 no-padding">
+                            <!--    <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                visibility: hidden;"></textarea>-->
+                            <input type="text" id="txtRemark" class="form-control" data-bind="value: remark,validationElement:remark,hasfocus:selRemark">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="tit-modal">
+                    <span class="alert-danger-new">*</span>图片 <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span></h4>
+                <div class="padlr15">
+                    <div class="pic-item  clearfix">
+                        <ul>
+                            <!-- ko foreach:files -->
+                            <li>
+                                <div class="thumbnail">
+                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                    <i class="hide_clip">移除</i></a> </li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="image_upload"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="alert-danger" data-bind="visible:selImgInfo">至少上传一张照片</span>
+                    <div class="pic-item  clearfix">
+                        <label class="col-md-1 control-label no-padding" for="name">
+                            上传路径：</label><br />
+                        <label data-bind="html:filePath">
+                        </label>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="tit-modal">
+                    视频 <span class="alert-danger-new">支持格式.avi|.mp4,大小限制为200MB。</span></h4>
+                <div class="padlr15">
+                    <div class="pic-item clearfix">
+                        <ul>
+                            <!-- ko foreach:video -->
+                            <li>
+                                <div class="thumbnail">
+                                    <!--<img src="../../images/video-def.jpg" />-->
+                                    <img data-bind="attr:{src:$data.videoUrls}" onerror="this.src='/images/video-def.jpg'">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delVideo(data, event);}}">
+                                    <i class="hide_clip">移除</i></a> </li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="video_upload">
+                                        <img src="../../images/video-upload.jpg" /></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pic-item  clearfix">
+                        <label class="col-md-1 control-label no-padding" for="name">
+                            上传路径：</label><br />
+                        <label data-bind="html:videoPath">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<input type="text" class="form-control" data-bind="value: materialEWM">-->
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:AddUploads">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看码信息</h4>
+        </div>
+        <div class="modal-body">
+            <!-- ko foreach:ObjList-->
+            <div class="row" style="vertical-align: middle;">
+                <div class="col-md-5 ">
+                    <div class="thumbnail" style="text-align: center; margin-bottom: 0px; width: 200px;">
+                        <img data-bind="attr:{src:'/ShowImage/ShowImg?ewm='+$data.ewm()}" width="200px" />
+                        <p style="text-align: center; margin: 2px; vertical-align: middle;" data-bind="text:$data.infoName">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-7 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-md-3 no-padding align-right">码类型：</span> <span class="col-md-7"
+                            id="Span1" data-bind="text:$data.infoName"></span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-3 no-padding align-right">码号：</span> <span class="col-md-7" id="ewm"
+                            data-bind="text:$data.ewm"></span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-3 no-padding align-right">解析地址：</span> <span class="col-md-7"
+                            id="fullewm" data-bind="text:$data.fullewm"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="hr">
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

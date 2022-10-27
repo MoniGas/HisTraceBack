@@ -1,0 +1,42 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    选择推荐企业</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <h4 class="tit-modal">
+                    企业列表</h4>
+                <div class="padlr15">
+                    <table id="table1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    企业名称
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:dataList">
+                            <tr data-bind="checkBoxCascade:null">
+                                <td>
+                                    <label>
+                                        <input type="checkbox" name="cbx" class="cbx1" eleflag='allSelectBtn' data-bind="value:$data.Enterprise_Info_ID" />&nbsp;<span
+                                            data-bind="text:$data.EnterpriseName"></span></label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:save">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

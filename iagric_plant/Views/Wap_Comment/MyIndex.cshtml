@@ -1,0 +1,244 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<LinqModel.View_Order_Comment>
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            var orderStatus = '@ViewBag.level';
+            if (orderStatus != "0") {
+                $("[name='liStatus']").removeClass("cur");
+                $("#" + orderStatus).addClass("cur");
+            }
+            $("[name='liStatus']").click(function () {
+                $("[name='liStatus']").removeClass("cur");
+                $(this).addClass("cur");
+                $("#level").val(this.id);
+                if (this.id < 4) {
+                    $("#consumersId").val(0);
+                }
+                formChangeStatus.submit();
+            });
+            $("#btnSave").click(function () {
+                if (isNull($("#TextContent").val())) {
+                    alert("请输入对产品的评论！");
+                    return false;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/Wap_Comment/Add',
+                    data: $("#formComplaint").serialize(),
+                    success: function (data) {
+                        alert(data.info);
+                        try {
+                            formComplaint.reset();
+                            window.location.reload();
+                        } catch (Error) { }
+                    }
+                })
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#divBody").height($(window).height() - $("#divFooter").height());
+            }
+        });
+    </script>
+    <style>
+        .linle-pag
+        {
+            width: 100%;
+            text-align: center;
+            vertical-align: middle;
+            background-color: White;
+            height: 30px;
+        }
+        #linle-pag a
+        {
+            border: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- 页头 -->
+        <section>
+	<header class="headerbox">
+    @{
+        int type = Convert.ToInt32(ViewBag.type ?? 0);
+        switch (type)
+        {
+            case 1:
+        <a href="/Wap_Index/MaterialOrder" class="art-back">返回</a>
+                break;
+            default:
+        <a href="/Wap_Consumers/index" class="art-back">返回</a>
+                break;
+        }
+    }
+		    <h1 title="评论">评论</h1>
+	</header>
+</section>
+        <!--内容-->
+        <div class="wapper">
+            <section class="order-manage">
+        @if (ViewBag.pl > 0)
+        {
+ <form id="formComplaint">
+                    <input type="hidden" name="type" id="type" value="@ViewBag.type" />
+                    <input type="hidden" name="pl" id="pl" value="@ViewBag.pl" />
+                    <input type="hidden" name="enterpriseId" id="enterpriseId" value="@ViewBag.enterpriseId" />
+                    <input type="hidden" name="materialId" id="materialId" value="@ViewBag.materialId" />
+                    <input type="hidden" name="orderNum" id="orderNum" value="@ViewBag.orderNum" />
+            <dl class="list list-in">
+                <dd>
+                    <dl>
+                        <dd class="dd-padding kv-line">
+                            <h6 style="width:auto">
+                                <label><input type="radio" name="rdLevel" value="1" checked="checked" />好评</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label><input type="radio" name="rdLevel" value="2" />中评</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label><input type="radio" name="rdLevel" value="3" />差评</label>
+                            </h6>
+                        </dd>
+                        <dd class="dd-padding kv-line">
+                            <h6>
+                                我要评论：
+                            </h6>
+                            <textarea id="TextContent" name="TextContent" maxlength="200" class="input-weak kv-v" style="height: 100px;"
+                                placeholder="请填写评论"></textarea>
+                        </dd>
+                    </dl>
+                </dd>
+            </dl>
+            <section class="section-module mat10" style="border-top:none;">
+          <input id="btnSave" name="btnSave" type="button" class="orange-btn-l" value="评论">
+	</section>
+            </form>
+        }
+         <form id="formChangeStatus" method="get">
+        <input type="hidden" name="type" id="type" value="@ViewBag.type" />
+        <input type="hidden" name="pl" id="pl" value="@ViewBag.pl" />
+        <input type="hidden" name="enterpriseId" id="enterpriseId" value="@ViewBag.enterpriseId"/>
+        <input type="hidden" name="materialId" id="materialId" value="@ViewBag.materialId"/>
+        <input type="hidden" id="consumersId" name="consumersId" value="@ViewBag.consumersId">
+        <input type="hidden" id="level" name="level" value="0">
+                    <input type="hidden" name="orderNum" id="orderNum" value="@ViewBag.orderNum" />
+    <div class="nav-tab-top">
+        <ul>
+            <li name="liStatus" id="0">
+                <a href="/Wap_Comment/Index?orderNum=@ViewBag.orderNum&enterpriseId=@ViewBag.enterpriseId&materialId=@ViewBag.materialId&type=2&pl=1">全部</a>
+            </li>
+                    @if (ViewBag.pl > 0)
+                    {
+            <li name="liStatus" class="cur" id="4">
+                <a href="/Wap_Comment/MyIndex?orderNum=@ViewBag.orderNum&enterpriseId=@ViewBag.enterpriseId&materialId=@ViewBag.materialId&type=2&pl=1">我的评论</a>
+            </li>
+                    }
+            <li name="liStatus" id="1">
+                <a href="/Wap_Comment/Index?orderNum=@ViewBag.orderNum&enterpriseId=@ViewBag.enterpriseId&materialId=@ViewBag.materialId&type=2&pl=1">好评</a>
+            </li>
+            <li name="liStatus" id="2">
+                <a href="/Wap_Comment/Index?orderNum=@ViewBag.orderNum&enterpriseId=@ViewBag.enterpriseId&materialId=@ViewBag.materialId&type=2&pl=1">中评</a>
+            </li>
+            <li name="liStatus" id="3">
+                <a href="/Wap_Comment/Index?orderNum=@ViewBag.orderNum&enterpriseId=@ViewBag.enterpriseId&materialId=@ViewBag.materialId&type=2&pl=1">差评</a>
+            </li>
+        </ul>
+    </div>
+        </form>
+</section>
+            <div class="scroll-wrap">
+                <div class="scroll-content">
+                    <section class="order-cont">
+                <ul class="order-list">
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <li>
+                        <div class="o-t-title-shop" style="height:auto;">
+                                <div class="tcont" style=" margin-top:10px;">
+                                    <div class="contact">
+                                            <p class="title dark-gray">
+                                                @(item.LinkMan + " 说：")
+                                            </p>
+                                    </div>
+                                    <div class="state">
+                                        <div class="state-cont">
+                                            <p class="gray">
+                                                @item.AddTime
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <p class="huifu">@item.Content</p>
+                                    @{
+                                        LinqModel.View_Order_Comment Comment = new BLL.OrderCommentBLL().GetModel(0, item.Order_Comment_ID);
+                                        if (Comment != null && Comment.Order_Comment_ID > 0)
+                                        {
+                                    <div style="width:100%">
+                                    <div style="margin-left:20px;margin-right:20px;margin-bottom:10px;background:#f1f1f1;">
+                        <div class="o-t-title-shop" style="background:#f1f1f1; ">
+                                <div class="tcont">
+                                    <div class="contact">
+                                            <p class="title">
+                                                <span class="dark-gray">客服回复：</span>
+                                            </p>
+                                    </div>
+                                    <div class="state">
+                                        <div class="state-cont">
+                                            <p class="gray">
+                                                @Comment.AddTime
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="h huifu-s">@Comment.Content</p>
+                            </div>
+                                    </div>
+                                        }
+                                    }
+                    </li>
+                    }
+                        <div class="linle-pag">
+                            @Html.Pager(Model, new PagerOptions
+                       {
+                           PageIndexParameterName = "pageIndex",
+                           NumericPagerItemWrapperFormatString = "{0}",
+                           ShowDisabledPagerItems = false,
+                           AlwaysShowFirstLastPageNumber = true
+                       })
+                        </div>
+                }
+                </ul>
+        </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divFooter" class="juchou-footer">
+        <footer id="footer">
+            <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

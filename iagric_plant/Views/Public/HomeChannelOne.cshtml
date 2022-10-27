@@ -1,0 +1,24 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.View_NewsChannel>
+@{
+    Layout = null;
+}
+@if (Model != null && Model.Count > 0)
+{
+    <div class="section-module">
+        <h3 class="module-t">
+            <span></span><a href="/Wap_News/NewsList?channelId=@Model[0].ChannelID">
+                【@Model[0].ChannelName】</a></h3>
+        <ul class="padL20">
+            @foreach (var item in Model)
+            {
+                <li><a href="/Wap_News/NewsShow?id=@item.ID&ewm=@ViewBag.ewm">@item.Title</a></li>
+            }
+            @*<li><a href="#">如何正确选择灵芝产品</a></li>
+            <li><a href="#">山东聊城：无公害白菜不愁卖</a></li>
+            <li><a href="#">山东省成全国第一食用菌生产大省</a></li>
+            <li><a href="#">国家食用菌产业技术研发中心在河北平泉县开</a></li>*@
+        </ul>
+    </div>
+}
+

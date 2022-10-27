@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>医疗器械（UDI）服务云平台</title>
+    <link href="@Url.Content("~/Areas/Market/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Areas/Market/Scripts/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/My97DatePickerBeta/My97DatePicker/WdatePicker.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.css")" rel="stylesheet"
+        type="text/css" />
+    <script src="@Url.Content("~/Areas/Market/upload/jquery.uploadify-v2.1.4/jquery-1.4.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/My97DatePickerBeta/My97DatePicker/WdatePicker.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Areas/Market/Scripts/kindeditor/themes/default/default.css")" rel="stylesheet"
+        type="text/css" />
+    <script src="@Url.Content("~/Areas/Market/Scripts/kindeditor/kindeditor-all.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/upload/swfobject.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/upload/jquery.uploadify-v2.1.4/jquery.uploadify.v2.1.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/glvalidate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/artDialog4.1.7/artDialog.js?skin=blue")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/artDialog4.1.7/plugins/iframeTools.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Market/Scripts/OpenNewDiv.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Areas/Market/Content/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Market/Content/greenskin.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Market/Content/main.css")" rel="stylesheet" type="text/css" />
+    @*<link href="@Url.Content("~/Areas/Market/Content/common.css")" rel="stylesheet" type="text/css" />*@
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <script type="text/jscript">
+        function openwin(url, title, width, height) {
+            art.dialog.open(
+            url,
+            {
+                title: title,
+                height: height,
+                width: width,
+                top: '32%',
+                lock: true,
+                backgroud: '#CCFFCC',
+                opacity: 0.5,
+                close: function () {
+                }
+            });
+        }
+          function openclose(url, title, width, height,eid) {
+            art.dialog.open(
+            url,
+            {
+                title: title,
+                height: height,
+                width: width,
+                top: '32%',
+                lock: true,
+                backgroud: '#CCFFCC',
+                opacity: 0.5,
+                close: function () {
+                 location.href = "@Url.Action("GetEnInfo", "ManEnterpriseManage")"+"?eid="+eid;
+                }
+            });
+        }
+        function openwinEwm(url, title, width, height,tradeNo) {
+            art.dialog.open(
+            url,
+            {
+                title: title,
+                height: height,
+                width: width,
+                top: '32%',
+                lock: true,
+                backgroud: '#CCFFCC',
+                opacity: 0.5,
+                close: function () {
+                $.post("@Url.Action("HandNotify", "BuyCodeOrdePay")",{tradeNo:tradeNo},function(){
+                                    location.href = "@Url.Action("Index", "BuyCodeOrdePay")";
+                });
+                }
+            });
+        }
+
+        function CloseWindow(url) {
+            location.href = url;
+        }
+        function AjaxUrl(gUrl, msg) {
+            if (msg != '') {
+                if (confirm(msg)) {
+                    openNewDiv('newDiv');
+                    $.ajax({
+                        type: 'POST',
+                        url: gUrl,
+                        //data: $("#form1").serialize(),
+                        success: function (data) {
+                            cl();
+                            alert(data.info);
+                            if (data.res) {
+                                if (data.url != null && data.url != "") {
+                                    window.location.href = data.url;
+                                    //                                    location.reload();
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+            else {
+                openNewDiv('newDiv');
+                $.ajax({
+                    type: 'POST',
+                    url: gUrl,
+                    //data: $("#form1").serialize(),
+                    success: function (data) {
+                        cl();
+                        alert(data.info);
+                        if (data.res) {
+                            if (data.url != null && data.url != "") {
+                                window.location.href = data.url;
+                                //                                location.reload();
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+</head>
+<body>
+    <input type="hidden" id="uppage" name="uppage" value="@ViewBag.uppage">
+    <!-- 页头 -->
+    <section>
+	<header class="headerbox">
+		<h1 title="医疗器械（UDI）服务云平台">医疗器械（UDI）服务云平台</h1>
+	</header>
+</section>
+    <!--banner图-->
+    <section class="top_slide_pic">
+	<img src="/Content/wap/images/banner.jpg"/>
+            @RenderBody()
+    </section>
+    <div class="juchou-footer">
+        <footer>
+        <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 背景*/
+
+.blk_bg{ width:100%; height:100%; background:url(../images/login.png) no-repeat bottom center;
+           -webkit-background-size: cover;overflow: auto;}
+.middle{ width:1000px; background-color:#ffffff; margin:60px auto; padding-bottom:60px;}
+.logo{ padding-top:60px; margin-left:70px;}
+.nr{ width:844px; margin:40px auto;}
+
+
+.login_box{ float:left; width:280px; height:347px; border:1px solid #e1dfdf; background-color:#ffffff; padding:0px 45px;}
+.login_box p{ color:#1683d3; font-size:18px; margin-top:30px;}
+.yonghu,.yanzheng{ border:1px solid #d6d7dc; width:268px; height:43px; line-height:43px; padding-left:10px; margin:12px 0px 0px 0px;; 
+color:#808080;}
+.yanzheng_box{ height:53px;}
+.yanzheng{ width:116px; margin-top:12px;margin-right:6px;float:left}
+.yz_img{margin-top:20px;margin-right:6px;width:91px; height:43px; display:block; float:left}
+.change{margin-top:24px;float:left; color:#1683d3;}
+.forget{ color:#a9a8a8; font-size:12px; float:right; margin:12px 0px 8px 0px;}
+.login_btn{ width:278px; height:45px; border-radius:4px; color:#ffffff; font-size:18px; text-align:center; line-height:45px;
+ background-color:#1683d3; border:none;}
+ 
+ .rit_img{ float:right; width:438px; margin-top:30px;}

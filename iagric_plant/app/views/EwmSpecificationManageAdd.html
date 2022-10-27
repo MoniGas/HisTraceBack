@@ -1,0 +1,45 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 500px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加套标规格</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group" style="width: 450px">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>规格数量：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="数量..." class="col-md-5 autofocus" data-bind="value:Value,validationElement:name,hasfocus:selTitle" />
+                            <span data-bind="visible:!selTitle"><span class="alert-danger" style="height: 30px;
+                                line-height: 30px;" data-bind="validationMessage:name"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="width: 450px">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>规格名称：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="规格..." class="col-md-5 autofocus" data-bind="value:GuiGe,validationElement:name,hasfocus:selguige" />
+                            &nbsp;&nbsp;<span style="line-height: 30px;">例：（kg/箱；个/盒）</span> <span data-bind="visible:!selguige">
+                                <span class="alert-danger" style="height: 30px; line-height: 30px;" data-bind="validationMessage:name">
+                                </span></span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Register">
+                保存</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

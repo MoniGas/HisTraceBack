@@ -1,0 +1,101 @@
+﻿@model LinqModel.View_ActivityCouponGetRecord
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <!--获取手机窗口，禁止用户操作进行窗口缩放-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <!--    SEO优化-->
+    <meta name="keywords" content="红包系统" />
+    <!--去掉苹果系统的工具栏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- iphone 设备中的 safari 私有 meta 标签允许全屏模式浏览-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link href="../../../../css/new.css" rel="stylesheet" type="text/css" />
+    <title></title>
+</head>
+<body>
+    <div id="main">
+        <p class="people">
+            恭喜您，领取<span class="people">@Model.EnterpriseName</span>发送的<br/>
+            @if (Model.CouponType == (int)Common.EnumText.CouponType.Cash)
+            {
+                <a class="people">现金券</a>
+            }
+            else if (Model.CouponType == (int)Common.EnumText.CouponType.Discount)
+            {
+                <a class="people">折扣券</a>
+            }
+            else if (Model.CouponType == (int)Common.EnumText.CouponType.Gift)
+            {
+                <a class="people">礼品券</a>
+            }</p>
+        <div class="background">
+            @if (Model.CouponType == (int)Common.EnumText.CouponType.Cash)
+            {
+                <span class="many"><label style="display: inline-block;width: 4.02rem;margin-left: -0.04rem;">@Model.CouponContent 元</label></span> <span id="ture"> <a>
+                    现金劵</a></span>
+            }
+            else if (Model.CouponType == (int)Common.EnumText.CouponType.Discount)
+            {
+                <span class="many">
+                    <label>@Model.CouponContent %</label></span> <span id="ture"> <a>折扣券</a></span>
+            }
+            else if (Model.CouponType == (int)Common.EnumText.CouponType.Gift)
+            {
+                <span class="many">
+                    <label style=" width: 5.2rem; margin-top: 0.9rem;font-size: 0.50rem;display: inline-block;">@Model.CouponContent</label></span> <span id="ture"> <a>礼品劵</a></span>
+            }
+        </div>
+    </div>
+    <div id="main-group">
+        <p class="number">
+            您参与的优惠券优惠码号为：</p>
+        <p class="num">
+            @Model.CouponCode</p>
+        <p class="time">
+            <span id="endtime">有效期</span>：@Model.StartDate.Value.ToString("yyyy-MM-dd") 至 @Model.EndDate.Value.ToString("yyyy-MM-dd")
+            日请您在有效期内兑换！</p>
+        <p class="ti">
+            <span id="endtime">兑换地址</span>：@Model.CouponAddress</p>
+        <a href="/Wap_Order/Login" class="g">您可以登录查看详情</a>
+@*        @if (ViewBag.Codelength == 3)
+        {
+            <a href="/Wap_Index/Index" class="gox">返回首页</a>
+        }
+        else
+        {
+            <a></a> 
+        }*@
+    </div>
+</body>
+<script type="text/javascript">
+
+    //兼容处理，获取手机可视窗口，定义REM参数
+    var doc = document;
+    var win = window;
+    function initFontSize() {
+        var docEl = doc.documentElement;
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';   //判断窗口有没有orientationchange这个方法，有就赋值给一个变量，没有就返回resize方法。
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            fontSizeRate = (clientWidth / 750);
+            var baseFontSize = 100 * fontSizeRate;
+            docEl.style.fontSize = baseFontSize + 'px';
+            //  console.log(baseFontSize);
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt.recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    }
+    initFontSize();
+
+</script>
+</html>

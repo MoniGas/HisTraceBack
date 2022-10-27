@@ -1,0 +1,117 @@
+@charset "UTF-8";
+html, body {
+  width: 100%;
+  box-sizing: border-box; }
+
+.app {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 1rem; }
+  .app .head {
+    box-sizing: border-box; }
+    .app .head .sign {
+      overflow: hidden; }
+      .app .head .sign img {
+        width: 4.5rem; }
+      .app .head .sign .cut {
+        float: right;
+        font-size: 120%;
+        display: inline-block;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #dcdfe6;
+        color: #606266;
+        -webkit-appearance: none;
+        text-align: center;
+        box-sizing: border-box;
+        outline: none;
+        margin: 0;
+        margin-right: .2rem;
+        margin-top: .35rem;
+        transition: .1s;
+        font-family: "微软雅黑";
+        font-weight: 500;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        padding: .22rem .4rem;
+        border-radius: 4px; }
+    .app .head .exhibition {
+      width: 100%; }
+  .app .body {
+    padding: 0 .7rem; }
+    .app .body .border:after {
+      position: absolute;
+      content: "";
+      left: 0;
+      width: 100%;
+      bottom: -.15rem;
+      border-bottom: solid #e0651a 2px; }
+    .app .body .LightDescription .tit {
+      color: #000 !important;
+      font-weight: 600;
+      font-size: 0.4rem;
+      margin-top: .2rem;
+      position: relative;
+      color: #000 !important; }
+    .app .body .LightDescription .conL {
+      width: 100%;
+      font-size: 120%;
+      margin-top: .2rem;
+      color: #555555;
+      height: auto;
+      word-break: break-all; }
+    .app .body .introduction {
+      overflow: hidden; }
+      .app .body .introduction .imgred {
+        width: 1.4rem; }
+      .app .body .introduction .fr {
+        float: right;
+        width: 6.4rem; }
+        .app .body .introduction .fr .tit {
+          font-weight: 500; }
+          .app .body .introduction .fr .tit span {
+            font-weight: 500;
+            position: relative;
+            display: inline-block; }
+    .app .body .template {
+      padding-bottom: .6rem; }
+      .app .body .template .tit {
+        padding: .2rem 0; }
+        .app .body .template .tit span {
+          font-size: .5rem;
+          font-weight: 600;
+          position: relative; }
+      .app .body .template .con {
+        margin-top: .6rem; }
+        .app .body .template .con .row {
+          margin-top: 20px;
+          font-size: .4rem;
+          overflow: hidden; }
+          .app .body .template .con .row .fl {
+            width: 4.5rem;
+            color: #000 !important;
+            font-weight: 600;
+            display: inline-block;
+            vertical-align: middle; }
+          .app .body .template .con .row .fr {
+            width: 3.8rem;
+            vertical-align: middle;
+            display: inline-block; }
+            .app .body .template .con .row .fr span {
+              display: inline-block;
+              vertical-align: middle; }
+            .app .body .template .con .row .fr img {
+              width: 1rem;
+              display: inline-block;
+              margin-left: .2rem;
+              vertical-align: middle; }
+      .app .body .template .describe {
+        margin-top: .5rem;
+        width: 3rem;
+        border: solid #000000 1px; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,93 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="输入相关信息搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'">
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:searchMaterial">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            产品名称
+                        </th>
+                        <!--<th>
+                            投诉类型
+                        </th>-->
+                        <th>
+                            投诉内容
+                        </th>
+                        <th>
+                            投诉时间
+                        </th>
+                        <th>
+                            投诉人
+                        </th>
+                        <th>
+                            投诉人电话
+                        </th>
+                        <th width="120">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmMaterial.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p data-bind="text:$data.MaterialName,attr:{title:$data.MaterialName}">
+                            </p>
+                            <!--  <span data-bind="text:$data.MaterialName"></span>-->
+                        </td>
+                        <!--                     <td>
+                        
+                        <p data-bind="text:$data.ComplaintTypeName,attr:{title:$data.ComplaintTypeName}">
+                            </p>
+                        </td>-->
+                        <td>
+                            <p class="cut width150" data-bind="text:$data.ComplaintContent,attr:{title:$data.ComplaintContent}">
+                            </p>
+                            <!--<span data-bind="text:$data.ComplaintContent"></span>-->
+                        </td>
+                        <td>
+                            <p data-bind="text:$data.StrComplaintDate,attr:{title:$data.StrComplaintDate}">
+                            </p>
+                            <!--  <span data-bind="text:$data.StrComplaintDate"></span>-->
+                        </td>
+                        <td>
+                            <p data-bind="text:$data.LInkMan,attr:{title:$data.LInkMan}">
+                            </p>
+                            <!--<span data-bind="text:$data.LInkMan"></span>-->
+                        </td>
+                        <td>
+                            <p data-bind="text:$data.LinkPhone,attr:{title:$data.LinkPhone}">
+                            </p>
+                            <!--<span data-bind="text:$data.LinkPhone"></span>-->
+                        </td>
+                        <td class="hidden-480">
+                            <div class="hidden-sm hidden-xs action-buttons" style="display: none;" eleflag="ShowHand">
+                                <a class="red" href="#" data-bind="click: function(data, event) {$parent.delMaterial($data.Complaint_ID,data,event);}"
+                                    title="删除"><i class="ace-icon fa fa-trash-o bigger-150"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="materialPager" data-bind="materialPager:vmMaterial.pageSize,totalCounts:vmMaterial.totalCounts,pageIndex:vmMaterial.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

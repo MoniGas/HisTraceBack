@@ -1,0 +1,92 @@
+﻿@model LinqModel.EnterpriseShopLink
+@{
+    ViewBag.Title = "SetJKToken";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+   $(function () {
+   $("#btnSave").click(function(){
+        if($.trim($("#token").val())==""){
+        alert("请输入token！");
+             return;
+        };
+          if($.trim($("#tokencode").val())==""){
+        alert("请输入tokencode！");
+             return;
+        };
+            $.post("@Url.Action("SetJKToken")",
+            {
+            eid:$("#eid").val(),
+            token:$("#token").val(),
+            tokencode:$("#tokencode").val()
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        art.dialog.close();
+                    }
+                }
+            })
+    });
+    });
+</script>
+<html style="overflow-x: hidden">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="mc clearfix">
+        <div class="user-set userset-lcol">
+            <div class="form hd-manage-det">
+                <input id="eid" type="hidden"  value="@ViewBag.EnID" />
+                <div class="infoitem">
+                    <span class="label" style="width: 120px">企业名称：</span>
+                    <div class="fl">
+                        <span class="yellow">@ViewBag.EnName</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 120px"><em>*</em>token：</span>
+                    @if (Model != null)
+                    {
+                        <div class="fl">
+                            <input type="text"  id="token" value="@Model.access_token" style="width: 180px;" />
+                            <span style="color: #ed7049">请输入token</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="fl">
+                            <input type="text" id="token" value="" style="width: 180px;" />
+                            <span style="color: #ed7049">请输入token</span>
+                        </div>   
+                    }
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 120px"><em>*</em>tokencode：</span>
+                    @if (Model != null)
+                    {
+                        <div class="fl">
+                            <input type="text" id="tokencode" value="@Model.access_token_code" style="width: 180px;" />
+                            <span style="color: #ed7049">请输入tokencode</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="fl">
+                            <input type="text" id="tokencode" value="" style="width: 180px;" />
+                            <span style="color: #ed7049">请输入tokencode</span>
+                        </div> 
+                    }
+                </div>
+            </div>
+            <p style="padding-left: 75px" class="center mat40">
+                <input type="button" id="btnSave" value="确定" class="button">
+                <input type="button" id="btnQuXiao" onclick="art.dialog.close();" value="取消" class="button"></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "关联活动";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+@model List<LinqModel.View_RelationActivityEwm>
+<style>
+    html
+    {
+        overflow-x:hidden;
+    }
+</style>
+<script>
+    $(function () {
+    $("#end").keyup(function(){
+        $(this).val($(this).val().replace(/[^\d]/g, ""));
+        if ($(this).val().substring(0,1)=="0") {
+       $(this).val($(this).val().replace("0", ""));
+} 
+    });
+      $("#end").bind("copy paste", function (e) {
+            alert("禁止粘贴，请输入数据！");
+            e.preventDefault();
+        });
+    $("#btnSave").click(function(){
+       if ($.trim($("#slsActivity").val())=="0") {
+        alert("请选择活动！");
+        return;
+        }
+        if($.trim($("#end").val())==""){
+        alert("请输入终止码！");
+             return;
+        }
+         if (parseInt($.trim($("#end").val()))>parseInt($("#EndCode").val())||parseInt($.trim($("#end").val()))<parseInt($.trim($("#start").val()))) {
+             alert("输入终止码必须在码段中！");
+                  return;
+            }
+             if (parseInt($.trim($("#end").val()))<parseInt($.trim($("#start").val()))) {
+                alert("结束码必须小于开始码！");
+                return;
+            }
+            if (parseInt($.trim($("#count").val()))>parseInt($.trim($("#needSx").text().replace("个","")))) {
+                alert("分配码数量超过活动所需要数量！");
+                return;
+            }
+            $.post("@Url.Action("RelationActivity")",
+            {
+            ActivityID:$("#slsActivity").val(),
+            CompanyIDcodeID:$("#CompanyIDcodeID").val(),
+            StartCode:$("#start").val(),
+            EndCode:$("#end").val(),
+            CodeCount:$("#count").val(),
+            code:$("#EndCode").val()
+            }
+            ,function(data){
+            alert(data.msg);
+            if (data.ok) {
+              var parentwin = artDialog.open.origin;
+             parentwin.CloseWindow('@Url.Action("EwmIndex")');
+             art.dialog.close();
+             }
+            })
+    });
+    $("#end").blur(function(){
+       if($.trim($("#end").val())==""){
+        return;
+        }
+                    $("#count").val(parseInt($("#end").val())-parseInt($("#start").val())+1);
+    });
+        $("#slsActivity").change(function () {
+           if ($("#slsActivity").val()=="0") {
+           $("#spanCode").val("开始码-结束码 ");
+                $("#start").val("");
+                $("#end").val("");
+                $("#count").val("");
+                return;
+                           }
+            $.post("@Url.Action("GetActivityModel")", {activityId:$("#slsActivity").val(),companyIDcodeID:$("#CompanyIDcodeID").val()}, 
+            function (data) {
+                $("#spanCode").text(data.startCode+"-"+data.endCode); 
+                $("#start").val(data.startCode);
+                 $("#EndCode").val(data.endCode);
+                $("#title").text(data.model.ActivityTitle);
+                $("#spanType").text(data.model.ActivityType==1?"按码领取红包":"按用户领取红包");
+                $("#need").text(data.model.NeedCount+"个");
+                $("#used").text(data.model.UsedCode+"个");
+                $("#needSx").text(data.model.NeedCount-data.model.UsedCode+"个");
+            });
+        });
+    })
+</script>
+<div class="card_pa20 clearfix">
+    <div class="mod-main">
+        <div class="mc clearfix">
+            <div class="user-set userset-lcol mar40">
+                <div class="form hd-manage-det">
+                    <div class="infoitem">
+                        <span class="label">选择活动：</span>
+                        <div class="fl">
+                        <input id="CompanyIDcodeID" type="hidden"  value="@ViewBag.CompanyIDcodeModel.CompanyIDcodeID" />
+                          <input id="EndCode" type="hidden"  />
+                            <select id="slsActivity">
+                                <option value="0" selected="selected">请选择</option>
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.ActivityID">@item.ActivityTitle</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">可用码段：</span>
+                        <div class="fl">
+                            <span id="spanCode">@ViewBag.CompanyIDcodeModel.FromCode-@ViewBag.CompanyIDcodeModel.EndCode</span>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">起始号：</span>
+                        <div class="fl">
+                            <input type="text" style="width: 180px;" id="start" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">终止号：</span>
+                        <div class="fl">
+                            <input type="text" id="end" style="width: 180px;" />
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">码数量：</span>
+                        <div class="fl">
+                            <input type="text" id="count" style="width: 180px;" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-set userset-lcol borderLeft">
+                <div class="form">
+                    <div class="infoitem">
+                        <span class="label">活动名称：</span>
+                        <div class="fl">
+                            <div id="title" class="width200 ellipsis">
+                               活动名称
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">活动类型：</span>
+                        <div class="fl">
+                            <span id="spanType">按码领取红包</span>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">活动所需二维码数：</span>
+                        <div class="fl">
+                            <span id="need" class="redtxt">0个</span>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">已分配二维码数：</span>
+                        <div class="fl">
+                            <span id="used" class="redtxt">0个</span>
+                        </div>
+                    </div>
+                    <div class="infoitem">
+                        <span class="label">还需要二维码数：</span>
+                        <div class="fl">
+                            <span id="needSx" class="redtxt">0个</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="center mat40">
+            <input type="button" id="btnSave" value="确定" class="button-big"></p>
+    </div>
+</div>

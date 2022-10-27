@@ -1,0 +1,98 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">首页</a> </li>
+            <li class="active">企业商城管理</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="输入企业名称..." data-bind="value:name">
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:searchEnterprise">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            企业名称
+                        </th>
+                        <th>
+                            地址
+                        </th>
+                        <th>
+                            联系人
+                        </th>
+                        <th>
+                            联系电话
+                        </th>
+                        <th>
+                            支付宝账号
+                        </th>
+                        <th>
+                            支付宝开户名称
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmEnterprise.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.EnterpriseName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.Address"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.LinkMan"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.LinkPhone"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.AccountNum"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.AccountName"></span>
+                        </td>
+                        <td>
+                            <span eleflag="VerifyTest" data-bind="text:$parent.VerifyFun($data.ShopVerify)">
+                            </span>
+                        </td>
+                        <td width="200">
+                            <button style="display: none" eleflag="ShowPause" class="btn btn-xs btn-success mar8"
+                                data-bind="click: function(data,event) {$parent.VerifyShop($data.Enterprise_Info_ID,0,'暂停使用',data,event);}">
+                                暂停使用</button>
+                            <button style="display: none" eleflag="ShowBegin" class="btn btn-xs btn-success mar8"
+                                data-bind="click: function(data,event) {$parent.VerifyShop($data.Enterprise_Info_ID,1,'确认开通',data,event);}">
+                                确认开通</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="greenhousePagerBH" data-bind="greenhousePagerBH:vmEnterprise.pageSize,totalCounts:vmEnterprise.totalCounts,pageIndex:vmEnterprise.pageIndex">
+        </ul>
+    </div>
+</div>

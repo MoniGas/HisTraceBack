@@ -1,0 +1,78 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    编辑生产流程</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>生产流程名称：</label>
+                        <div class="col-md-9 no-padding">
+                            <input type="text" data-bind="value: processName,validationElement:processName,hasfocus:selProcessName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label no-padding" for="name">
+                                选择生产环节：</label>
+                            <div class="col-md-10 no-padding">
+                                <div class="fake_input S_line">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                生产环节：
+                                            </td>
+                                            <td>
+                                                <select id="slOpList" data-bind="options: processOps,optionsText: 'OperationTypeName',optionsValue:'Batch_ZuoYeType_ID',optionsCaption: '选择生产环节',value:selectedOp">
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="button" value="添 加" class="btn btn-xs btn-success" data-bind="click:AddProperty">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="排 序" class="btn btn-xs btn-success" data-bind="click:SortProperty">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <span class="alert-danger" data-bind="text:alertprocessOp,visible:selprocessOp">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- ko foreach:selectprocessOps-->
+                                    <div class="W_btn_arrow tag">
+                                        <span class="S_func1"><font data-bind="text:$data.opName"></font><a href="javascript:void(0)"
+                                            class="W_ico12 icon_close" data-bind="event: { click: function( data, event) {$root.delProperty(data, event);}}">
+                                        </a></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            描述：</label>
+                        <div class="col-md-10 no-padding">
+                            <textarea class="form-control" cols="100" rows="5" style="width: 100%;" data-bind="value:memo"></textarea>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:EditProcess">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

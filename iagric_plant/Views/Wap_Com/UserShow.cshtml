@@ -1,0 +1,113 @@
+﻿@model LinqModel.ShowUser
+@{
+    ViewBag.Title = "ShowUser";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+<link href="../../css/home.min.css" rel="stylesheet" type="text/css" />
+<script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#divFooter").height(35);
+        $("#footer").height(35);
+
+        if ($(window).height() > document.body.clientHeight) {
+            $("#divBody").height($(window).height() - $("#divFooter").height());
+        }
+    });
+    </script>
+
+</head>
+<body>
+<div id="divBody">
+<!-- 页头 -->
+<div class="headerbox">
+    <a href="javascript:history.go(-1);" class="art-back">返回</a>
+	<h1 title="医疗器械（UDI）服务云平台">医疗器械（UDI）服务云平台</h1>
+</div>
+<!--banner图-->
+<div class="top_slide_pic self">
+    <div class="info">
+        <a class="avatar J-avatar" href="javascript:;">
+            <img src="@Model.headimg"  width="83" height="83">
+        </a>
+        <div class="name">
+            <span>@Model.Infos</span><span class="zw">@Model.position</span>
+        </div>
+        <div class="gr_info">
+            @if (!string.IsNullOrEmpty(Model.telPhone))
+            {
+                <p class="ph">
+                    <a href="#">@Model.telPhone</a></p>
+            }
+            else
+            {
+                <p class="ph">
+                    <a href="#">未填写</a></p>
+            }
+            @if (!string.IsNullOrEmpty(Model.mail))
+            {
+                <p class="em">@Model.mail</p>
+            }
+            else
+            {
+                <p class="em">
+                    未填写</p>
+            }
+            @if (!string.IsNullOrEmpty(Model.qq))
+            {
+                <p class="qq">@Model.qq</p>
+            }
+            else
+            {
+                <p class="qq">
+                    未填写</p>
+            }
+        </div>
+    </div>
+</div>
+<!---->
+<div class="section-module">
+    
+    @if (!string.IsNullOrEmpty(Model.hometown))
+    {
+        <dl class="contact-dl">
+            <dt>故乡：</dt>
+            <dd>
+                @Model.hometown</dd>
+        </dl>
+    }
+    @if (!string.IsNullOrEmpty(Model.location))
+    {
+        <dl class="contact-dl">
+            <dt>所在地：</dt>
+            <dd>
+                @Model.location</dd>
+        </dl>
+    }
+    @if (!string.IsNullOrEmpty(Model.memo))
+    {
+        <dl class="contact-dl">
+            <dt>个人说明：</dt>
+            <dd>
+                @Model.memo</dd>
+        </dl>
+    }
+</div>
+</div>
+
+<div id="divFooter" class="juchou-footer">
+        <footer id="footer">
+        <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+

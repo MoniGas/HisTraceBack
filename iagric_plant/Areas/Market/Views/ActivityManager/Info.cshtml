@@ -1,0 +1,166 @@
+﻿@model LinqModel.View_ActivityManager
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<!-------------------main start---------------------------------->
+<div>
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li>活动管理<span class="divider">›</span>活动管理<span class="divider">›</span>查看详情<span class="divider">›</span></li>
+            <li style="cursor: pointer;" onclick="javascript:history.go(-1);">返回</li>
+        </ul>
+    </div>
+    <div class="card_pa40 clearfix">
+        <div class="mod-main">
+            <div class="account-info">
+                <span class="mar20">活动名称：<span class="yellow">@Model.ActivityTitle</span></span>
+                <span class="mar20">活动有效期：<span>@Model.StartDate.Value.ToString("yyyy-MM-dd")<span>至</span>@Model.EndDate.Value.ToString("yyyy-MM-dd")</span></span>
+            </div>
+            <div class="mc clearfix">
+                <div class="user-set userset-lcol">
+                    <div class="form hd-manage-det">
+                        <div class="infoitem">
+                            <span class="label">活动类型：</span>
+                            <div class="fl">
+                                <span>@Common.EnumText.EnumToText(typeof(Common.EnumText.ActiveType), Model.ActivityType.Value)</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">参与方式：</span>
+                            <div class="fl">
+                                <span>@Common.EnumText.EnumToText(typeof(Common.EnumText.JoinMode), Model.JoinMode.Value)</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">商户名称：</span>
+                            <div class="fl">
+                                <span>@Model.SendCompany</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">祝福语：</span>
+                            <div class="fl">
+                                <p>
+                                    @Model.BlessingWords</p>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">红包设置：</span>
+                            <div class="fl">
+                                <div class="hdlx" style="width: 500px;">
+                                    <div class="boxtable">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        金额（元）
+                                                    </th>
+                                                    <th>
+                                                        红包数量（个）
+                                                    </th>
+                                                    <th>
+                                                        小计（元）
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    if (ViewBag.hbDetail.Count > 0)
+                                                    {
+                                                        foreach (var item in ViewBag.hbDetail)
+                                                        {
+                                                    <tr>
+                                                        <td>
+                                                            @item.RedValue
+                                                        </td>
+                                                        <td>
+                                                            @item.RedCount
+                                                        </td>
+                                                        <td>
+                                                            <span class="red">@(item.RedValue * item.RedCount)</span>
+                                                        </td>
+                                                    </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="hb-order">
+                                        <div class="price">
+                                            红包总金额<span class="rmn-ico"><em>￥</em>@ViewBag.sumCount</span>
+                                        </div>
+                                        <div class="shu">
+                                            红包总数量 <span class="blacktxt">@ViewBag.hbCount</span> 个
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="boxtable mat20 clearfix">
+                <h3>
+                    红包记录</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                微信昵称
+                            </th>
+                            <th>
+                                性别
+                            </th>
+                            <th>
+                                地区
+                            </th>
+                            <th>
+                                红包金额
+                            </th>
+                            <th>
+                                领取时间
+                            </th>
+                            <th>
+                                状态
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (ViewBag.hbGetRecord.Count > 0)
+                            {
+                                foreach (var item in ViewBag.hbGetRecord)
+                                {
+                            <tr>
+                                <td>
+                                    @item.WeiXinName
+                                </td>
+                                <td>
+                                    @item.Sex
+                                </td>
+                                <td>
+                                    @item.Country @item.Province @item.City
+                                </td>
+                                <td>
+                                    <span class="red">￥@item.GetRedValue</span>
+                                </td>
+                                <td>
+                                    @item.GetDate
+                                </td>
+                                <td>
+                                    @Common.EnumText.EnumToText(typeof(Common.EnumText.GetState), item.GetState)
+                                </td>
+                            </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->

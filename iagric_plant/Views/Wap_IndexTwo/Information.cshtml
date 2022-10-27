@@ -1,0 +1,302 @@
+﻿@using LinqModel;
+@{
+    List<Batch_JianYanJianYi> batchJianYanJianCe = ViewBag.batchJianYanJianCe;
+    List<Batch_XunJian> batchXunJian = ViewBag.batchXunJian;
+    List<View_ZuoYeAndZuoYeType> batchShengChan = ViewBag.batchShengChan;
+    List<View_ZuoYeAndZuoYeType> batchJiaGong = ViewBag.batchJiaGong;
+    List<View_ZuoYeAndZuoYeType> feed = ViewBag.feed;
+    List<View_RequestOrigin> origin = ViewBag.origin;
+    ScanSubstation banzu = ViewBag.banzu;
+    ScanWareHouseInfo cunchu = ViewBag.cunchu;
+    ScanLogistics wuliu = ViewBag.wuliu;
+    Dealer dealer = ViewBag.dealer;
+    <div id="list">
+        @if (origin != null && origin.Count > 0 && ViewBag.BoolOrigin == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-yuanliao">
+                    原料信息</h3>
+                <section class="yl_list">
+                    @foreach (var item in origin)
+                    {
+                        <dl class="contact-dl">
+                            <dt>原材料名称：</dt>
+                            <dd>@item.OriginName</dd>
+                        </dl>
+                        <dl class="contact-dl">
+                            <dt>来源：</dt>
+                            <dd>@item.Supplier</dd>
+                        </dl>
+                        if (!string.IsNullOrEmpty(item.BatchNum))
+                        {
+                        <dl class="contact-dl">
+                            <dt>原材料批次：</dt>
+                            <dd>@item.BatchNum</dd>
+                        </dl>
+                        }
+                        if (!string.IsNullOrEmpty(item.Level))
+                        {
+                        <dl class="contact-dl">
+                            <dt>原材料等级：</dt>
+                            <dd>@item.Level</dd>
+                        </dl>
+                        }
+                        if (!string.IsNullOrEmpty(item.Factory))
+                        {
+                        <dl class="contact-dl">
+                            <dt>原材料厂地：</dt>
+                            <dd>@item.Factory</dd>
+                        </dl>
+                        }
+                        <dl class="contact-dl">
+                            <dt>入库时间：</dt>
+                            <dd>@item.StrAddDate</dd>
+                        </dl>
+                        if (!string.IsNullOrEmpty(item.CarNum))
+                        {
+                        <dl class="contact-dl">
+                            <dt>运输车辆：</dt>
+                            <dd>@item.CarNum</dd>
+                        </dl>
+                        }
+                        if (!string.IsNullOrEmpty(item.CheckUser))
+                        {
+                        <dl class="contact-dl">
+                            <dt>检验员：</dt>
+                            <dd>@item.CheckUser</dd>
+                        </dl>
+                        }
+                        <ul class="news_pic_items m_b">
+                            <li><a href="/Wap_IndexTwo/InformationSub?typeId=5&dataId=@item.ID" title="">
+                                <img src="@item.StrFiles" class="news_pic_img">
+                                <p class="news_pic_info">
+                                    原材料检测</p>
+                            </a></li>
+                        </ul>
+                    }
+                </section>
+            </section>
+        }
+        @if (batchJianYanJianCe != null && batchJianYanJianCe.Count > 0 && ViewBag.BoolReport == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-proc">
+                    检测</h3>
+                <ul class="news_pic_items m_b">
+                    @foreach (var item in batchJianYanJianCe)
+                    {
+                        <li><a href="/Wap_IndexTwo/InformationSub?typeId=1&dataId=@item.Batch_JianYanJianYi_ID&ewm=@ViewBag.ewm" title="">
+                            <img src="@item.StrFiles" class="news_pic_img">
+                            <p class="news_pic_info">@item.Content</p>
+                        </a></li>
+                    }
+                </ul>
+            </section>
+        }
+        @if (batchShengChan != null && batchShengChan.Count > 0 && ViewBag.BoolWork == true)
+        {
+            <!--生产-->
+            <section class="section-module">
+                <h3 class="p-tit p-tit-prod">
+                    生产</h3>
+                <ul class="news_pic_items m_b">
+                    @foreach (var item in batchShengChan)
+                    {
+                        <li><a href="/Wap_IndexTwo/InformationSub?typeId=2&dataId=@item.Batch_ZuoYe_ID&ewm=@ViewBag.ewm" title="">
+                            <img src="@item.oneFile" class="news_pic_img">
+                            <p class="news_pic_info">@item.OperationTypeName</p>
+                        </a></li>
+                    }
+                </ul>
+            </section>
+        }
+        @if (batchJiaGong != null && batchJiaGong.Count > 0 && ViewBag.BoolWork == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-prod">
+                    加工</h3>
+                <ul class="news_pic_items m_b">
+                    @foreach (var item in batchJiaGong)
+                    {
+                        <li><a href="/Wap_IndexTwo/InformationSub?typeId=2&dataId=@item.Batch_ZuoYe_ID&ewm=@ViewBag.ewm" title="">
+                            <img src="@item.oneFile" class="news_pic_img">
+                            <p class="news_pic_info">@item.OperationTypeName</p>
+                        </a></li>
+                    }
+                </ul>
+            </section>
+        }
+        @if (feed != null && feed.Count > 0 && ViewBag.BoolWork == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-prod">
+                    养殖</h3>
+                <ul class="news_pic_items m_b">
+                    @foreach (var item in feed)
+                    {
+                        <li><a href="/Wap_IndexTwo/InformationSub?typeId=2&dataId=@item.Batch_ZuoYe_ID&ewm=@ViewBag.ewm" title="">
+                            <img src="@item.oneFile" class="news_pic_img">
+                            <p class="news_pic_info">@item.OperationTypeName</p>
+                        </a></li>
+                    }
+                </ul>
+            </section>
+        }
+        @if (batchXunJian != null && batchXunJian.Count > 0 && ViewBag.BoolCheck == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-proc">
+                    巡检</h3>
+                <ul class="news_pic_items m_b">
+                    @foreach (var item in batchXunJian)
+                    {
+                        <li><a href="/Wap_IndexTwo/InformationSub?typeId=4&dataId=@item.Batch_XunJian_ID&ewm=@ViewBag.ewm" title="">
+                            <img src="@item.StrFiles" class="news_pic_img">
+                            <p class="news_pic_info">@item.AddDate.GetValueOrDefault(DateTime.Now).ToString("yyyy-MM-dd")</p>
+                        </a></li>
+                    }
+                </ul>
+            </section>
+        }
+        <!--存储环境 -->
+        @if (cunchu != null && ViewBag.BoolAmbient == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-huanjing">
+                    存储环境</h3>
+                @if (!string.IsNullOrEmpty(cunchu.WarehouseName))
+                {
+                    <dl class="contact-dl">
+                        <dt>仓库名称：</dt>
+                        <dd>@cunchu.WarehouseName</dd>
+                    </dl>
+                }
+                @if (!string.IsNullOrEmpty(cunchu.Temperature))
+                {
+                    <dl class="contact-dl">
+                        <dt>仓库温度：</dt>
+                        <dd>@cunchu.Temperature</dd>
+                    </dl>
+                }
+                @if (!string.IsNullOrEmpty(cunchu.OutData) && !string.IsNullOrEmpty(cunchu.InData))
+                {
+                    <dl class="contact-dl">
+                        <dt>存储时间：</dt>
+                        <dd>@(cunchu.InData + "至" + cunchu.OutData)</dd>
+                    </dl>
+                }
+                @if (!string.IsNullOrEmpty(cunchu.Remark))
+                {
+                    <dl class="contact-dl">
+                        <dt>备注：</dt>
+                        <dd>@cunchu.Remark</dd>
+                    </dl>
+                }
+            </section>  
+        }
+        <!--物流信息 -->
+        @if (wuliu != null && ViewBag.BoolWuLiu == true)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-wuliu">
+                    物流信息</h3>
+                <div class="prod-spec">
+                    @if (!string.IsNullOrEmpty(wuliu.Dealer))
+                    {
+                        <dl class="contact-dl">
+                            <dt>经销商：</dt>
+                            <dd>@wuliu.Dealer</dd>
+                        </dl>
+                    }
+                    @if (!string.IsNullOrEmpty(wuliu.SellDate))
+                    {
+                        <dl class="contact-dl">
+                            <dt>销售时间：</dt>
+                            <dd>@wuliu.SellDate</dd>
+                        </dl>
+                    }
+                    @if (!string.IsNullOrEmpty(wuliu.CarNum))
+                    {
+                        <dl class="contact-dl">
+                            <dt>运输车辆：</dt>
+                            <dd>@wuliu.CarNum</dd>
+                        </dl>
+                    }
+                    @if (!string.IsNullOrEmpty(wuliu.CarAmbient))
+                    {
+                        <dl class="contact-dl">
+                            <dt>运输环境：</dt>
+                            <dd>@wuliu.CarAmbient</dd>
+                        </dl>
+                    }
+                    @if (!string.IsNullOrEmpty(wuliu.StratDate) && !string.IsNullOrEmpty(wuliu.StartAddress))
+                    {
+                        <dl class="contact-dl">
+                            <dt>发车信息：</dt>
+                            <dd>@("于" + wuliu.StratDate + "由" + wuliu.StartAddress + "发出")</dd>
+                        </dl>
+                    }
+                    @if (!string.IsNullOrEmpty(wuliu.EndDate) && !string.IsNullOrEmpty(wuliu.EndAddress))
+                    {
+                        <dl class="contact-dl">
+                            <dt>到达信息：</dt>
+                            <dd>
+                                @("于" + wuliu.EndDate + "到达" + wuliu.EndAddress)</dd>
+                        </dl>
+                    }
+                    @if (!string.IsNullOrEmpty(wuliu.Url))
+                    {
+                        <dl class="contact-dl">
+                            <dt>物流信息：</dt>
+                            <dd>
+                                <a href="@wuliu.Url">点击查看</a></dd>
+                        </dl>
+                    }
+                </div>
+            </section>  
+        }
+        <!--销售-->
+        @if (dealer != null)
+        {
+            <section class="section-module">
+                <h3 class="p-tit p-tit-liuxiang">
+                    产品流向</h3>
+                <section>
+                    <dl class="contact-dl">
+                        <dt>经销商名称：</dt>
+                        <dd>
+                            @dealer.DealerName</dd>
+                    </dl>
+                    <dl class="contact-dl">
+                        <dt>经销商地址：</dt>
+                        <dd>@dealer.Address</dd>
+                    </dl>
+                </section>
+                @{
+            if (!string.IsNullOrEmpty(dealer.location))
+            {
+
+                string[] location = dealer.location.Split(',');
+                if (location.Length == 2)
+                {
+                    <div id="map-canvas" class="map">
+                    </div>
+                    <script type="text/javascript">
+                setTimeout(function () {
+                    var map= new BMap.Map("map-canvas");
+                    var pt = new BMap.Point(@location[0], @location[1]);
+                    map.centerAndZoom(pt, 15);
+                    map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+                    map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+                    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用        
+                    var marker = new BMap.Marker(pt);
+                    map.addOverlay(marker);
+                }, 300);
+                    </script> 
+                }
+            }
+                }
+            </section>
+        }
+    </div>
+}

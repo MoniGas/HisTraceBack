@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../src/jquery.poshytip.min.js" type="text/javascript"></script>
+    <link href="../src/tip-violet/tip-violet.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $('#demo-basic').poshytip(
+            {
+                content: divTip,
+                className: 'tip-violet',
+                alignTo: 'target',
+                alignX: 'center',
+                alignY: 'bottom',
+                offsetX: 0,
+                offsetY: 7
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <a id="demo-basic" title="Hey, there! This is a tooltip." href="#">Hover for a tooltip</a>
+    <div  style="display: none;">
+        <div id="divTip">
+            dfdfdff</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var dlName = $.trim($("#dlName").val());
+            if (dlName.length == 0) {
+                alert("请输入代理名称！");
+                $("#dlName").focus();
+                return false;
+            }
+            var Province = $('#Province').val();
+            var selCity = $('#selCity').val();
+            var selArea = $('#selArea').val();
+            if (Province == "710000" || Province == "810000" || Province == "820000" || Province == "110000" || Province == "310000" || Province == "120000" || Province == "500000") {
+                if (!(Province == "710000" || Province == "810000" || Province == "820000")) {
+                    if (selCity == "-2") {
+                        alert("请选择代理商所在区域！");
+                        return false;
+                    }
+                }
+            }
+            else {
+                if (selArea == "-2") {
+                    alert("请选择代理商所在区域！");
+                    return false;
+                }
+            }
+            var detailAddress = $.trim($("#detailAddress").val());
+            if (detailAddress.length == 0) {
+                alert('请输入详细地址');
+                $("#detailAddress").focus();
+                return;
+            }
+            var linkMan = $.trim($("#linkMan").val());
+            if (linkMan.length == 0) {
+                alert('请输入联系人');
+                $("#linkMan").focus();
+                return;
+            }
+            var linkPhone = $.trim($("#linkPhone").val());
+            if (linkPhone.length == 0) {
+                alert('请输入联系电话');
+                return;
+            }
+            else if (!checkMobileEx(linkPhone)) {
+                alert("请您填写有效的联系电话！");
+                $("#linkPhone").focus();
+                return false;
+            }
+            var tsPhone = $.trim($("#tsPhone").val());
+            if (tsPhone.length > 0 && !checkMobileEx(tsPhone)) {
+                alert("请您填写有效的投诉电话！");
+                $("#tsPhone").focus();
+                return false;
+            }
+            var postCode = $.trim($("#postCode").val());
+            if (postCode.length > 0 && !isPostalCode(postCode)) {
+                alert("请您填写有效的邮政编码！");
+                $("#postCode").focus();
+                return false;
+            }
+            var email = $.trim($("#email").val());
+            if (email.length > 0 && !checkEmail(email)) {
+                alert("请您填写有效的企业邮箱！");
+                $("#email").focus();
+                return false;
+            }
+            var webUrl = $.trim($("#webUrl").val());
+            if (webUrl.length > 0 && !IsURL(webUrl)) {
+                alert("请您填写有效的企业网址！");
+                $("#webUrl").focus();
+                return false;
+            }
+            var sendData = {
+                companyName: $.trim($("#dlName").val()),
+                province: Province,
+                city: selCity,
+                area: selArea,
+                centerAddress: detailAddress,
+                linkMan: linkMan,
+                linkPhone: linkPhone,
+                complaintPhone: $.trim($("#tsPhone").val()),
+                postalCode: $.trim($("#postCode").val()),
+                email: $.trim($("#email").val()),
+                webURL: $.trim($("#webUrl").val())
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/SysSupervision/AddDaiLi',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == 1) {
+                        alert(data.info);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("Supervision")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>代理名称：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="dlName" name="dlName" maxlength="25" /><span
+                                        style="color: #ed7049"> 输入最大长度不超过25个汉字</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                    <span class="label width130"><em>*</em>组织/单位所在区域：</span>
+                                    <div class="fl">
+                                    @Html.Action("Address", "SysSupervision")
+                                    </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>详细地址：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="detailAddress" name="detailAddress" maxlength="50" />
+                                    <span style="color: #ed7049"> 请输入详细地址</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>联系人：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="linkMan" name="linkMan" maxlength="10" /><span
+                                        style="color: #ed7049"> 请输入联系人</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>联系电话：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="linkPhone" name="linkPhone" maxlength="11" /><span
+                                        style="color: #ed7049"> 请输入联系电话</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">投诉电话：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="tsPhone" name="tsPhone" maxlength="11" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">邮编：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="postCode" name="postCode" maxlength="6" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">邮箱：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="email" name="email" maxlength="20" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">企业网址：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="webUrl" name="webUrl" maxlength="50" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

@@ -1,0 +1,442 @@
+﻿@{
+    Layout = null;
+    LinqModel.ScanMaterial material = ViewBag.material;
+    LinqModel.EnterpriseShopLink shopEn = ViewBag.ShopEn;
+    bool BoolScandate = ViewBag.BoolScanCount;
+    LinqModel.Enterprise_Info enterprise = ViewBag.enterprise;
+    List<LinqModel.View_MaterialSpecForMarket> MaterialSpecList =
+    ViewBag.MaterialSpecList as List<LinqModel.View_MaterialSpecForMarket>;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>产品信息</title>
+    <link href="../../wapstyle/wap3/css/swiper.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../wapstyle/wap3/css/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="footer">
+        <div class="footer_left">
+            <img src="../../wapstyle/wap3/img/logo.png" />
+        </div>
+        @if (ViewBag.Consumers == false)
+        {
+            <div class="footer_right">
+                <a href="/Wap_Order/Login">
+                    <img src="../../wapstyle/wap3/img/denglu.png" /></a>
+            </div>
+        }
+        else
+        {
+            <div class="footer_right">
+                <a href="/Wap_Consumers/Index">
+                    <img src="../../wapstyle/wap3/img/denglu.png" /></a>
+            </div>
+        }
+    </div>
+    <div class="zhuisu_nr">
+        <style type="text/css">
+            .boxwh
+            {
+                width: 100%;
+            }
+            .boxwh img
+            {
+                width: 100%;
+                height: 210px;
+            }
+            .sytupian
+            {
+                width: 100%;
+            }
+            
+            .sytupian img
+            {
+                width: 100%;
+                height: 210px;
+            }
+        </style>
+        @if (material.picUrl.Count == 1)
+        {
+            <div class="sytupian">
+                <img src="@material.picUrl[0].fileUrl" />
+            </div>
+        }
+        else
+        {
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach (var item in material.picUrl)
+                    {
+                        if (!string.IsNullOrEmpty(item.fileUrl))
+                        {
+                        <div class="swiper-slide boxwh">
+                            <img src="@item.fileUrl"/>
+                        </div>
+                        }
+                    }
+                </div>
+                <div class="swiper-pagination">
+                </div>
+            </div>
+        }
+        <div class="zhuisu_lbxtxt">
+            @material.MaterialName
+            @* @if (!string.IsNullOrEmpty(material.TaoBaoLink))
+            {
+                <a href="@material.TaoBaoLink">
+                    <img class="tao-icon" src="../../wapstyle/wap3/img/taobao.png" /></a>
+            }
+            @if (!string.IsNullOrEmpty(material.TianMaoLink))
+            {
+                <a href="@material.TianMaoLink">
+                    <img class="tao-icon" src="../../wapstyle/wap3/img/tianma.png" /></a>
+            }
+            @if (!string.IsNullOrEmpty(material.JingDongLink))
+            {
+                <a href="@material.JingDongLink">
+                    <img class="tao-icon" src="../../wapstyle/wap3/img/top-jdlogo.png" /></a>
+            }
+            @if (!string.IsNullOrEmpty(material.WeiDianLink))
+            {
+                <a href="@material.WeiDianLink">
+                    <img class="tao-icon" src="../../wapstyle/wap3/img/weidian.png" /></a>
+            }*@
+        </div>
+        <div class="zhuisu_yiduanwenzi">
+            @if (BoolScandate == true)
+            {
+                <div class="text">
+                    <p>
+                        拍码次数：<span>@material.ScanCount 次</span></p>
+                    @if (material.ScanCount == 1)
+                    {
+                        <p>
+                            该产品编码为首次验证！</p>
+                    }
+                    else
+                    {
+                        <p>
+                            首次验证时间为：@ViewBag.ValidateTime，谨防假冒产品！</p>
+                    }
+                    @*       @if (ViewBag.ScanCount > 5)
+                    {
+                        <p>
+                            拍码次数超过五次，谨防假冒产品。</p>
+                    }*@
+                </div>
+            }
+        </div>
+        <div class="zhuisu_yanzheng">
+            @if (ViewBag.ScanCount > 5)
+            {
+                <p class="zhuisu_yzbt">
+                    拍码次数超过五次，谨防假冒产品！
+                </p>
+            }
+            else
+            {
+                <p class="zhuisu_yzbt">
+                    本产品为官方正品
+                </p>
+            }
+            <div class="zhuisu_yzzw">
+                @if (ViewBag.FWCount == 1)
+                {
+                    if (ViewBag.MuBanImgs != null && ViewBag.MuBanImgs.FirstImgs.Count > 0)
+                    { 
+                    <img src="@ViewBag.MuBanImgs.FirstImgs[0].fileUrl" />
+                    }
+                    else
+                    {
+                    <img src="../../wapstyle/wap3/img/yanzhnegcg.png" />
+                    }
+                }
+                else if (ViewBag.FWCount > 1 && ViewBag.FWCount < 5)
+                {
+                    if (ViewBag.MuBanImgs != null && ViewBag.MuBanImgs.CenterImgs.Count > 0)
+                    { 
+                    <img src="@ViewBag.MuBanImgs.CenterImgs[0].fileUrl" />
+                    }
+                    else
+                    {
+                    <img src="../../wapstyle/wap3/img/yanzhnegcg.png" />
+                    }
+                }
+                else
+                {
+                    if (ViewBag.MuBanImgs != null && ViewBag.MuBanImgs.FiveImgs.Count > 0)
+                    { 
+                    <img src="@ViewBag.MuBanImgs.FiveImgs[0].fileUrl" />
+                    }
+                    else
+                    {
+                    <img src="../../wapstyle/wap3/img/yanzhnegcg.png" />
+                    }
+                }
+            </div>
+        </div>
+        <div class="zhuisu_goumai">
+  @*          @if (material.tbURL != null && material.tbURL != "")
+            {
+                <div class="querenbejh">
+                    <a href="@material.tbURL">
+                        <input type="button" name="" id="" value="在线购买" /></a>
+                </div>
+            }
+            else
+            {
+                <div class="querenbejh zaixingoumai">
+                    <input class="zaixingoumai" type="button" name="" id="" value="在线购买" />
+                </div>
+            }*@
+            <div class="querycode-part">
+                <p class="tit">
+                    <img src="../../wapstyle/wap3/img/cxtlt.png" /></p>
+                <p style="word-break: break-all;" class="code">
+                    @ViewBag.EWM</p>
+                <p class="tips">
+                    符合中国二维码注册认证中心IDcode编码</p>
+            </div>
+        </div>
+        @if (material.VideoUrl != null && !string.IsNullOrEmpty(material.VideoUrl.videoUrl))
+        {
+            <div class="zhuisu_chanpinxx">
+                <div class="zhuisu_chanpinbt">
+                    产品视频
+                </div>
+                <div class="zhuisu_chanpinimga">
+                    <video src="@material.VideoUrl.videoUrl" id="video1" poster="@material.VideoUrl.videoUrls" controls="controls" width="100%" height="100%">
+                您的浏览器不支持视频播放。
+            </video>
+                </div>
+            </div>
+        }
+        <div class="zhuisu_chanpinxx">
+            <p class="zhuisu_chanpinbt">
+                产品信息
+            </p>
+            <div class="zhuisu_chanpinimga" style="font-family: 楷体; color: Black;">
+                @Html.Raw(material.Memo)
+            </div>
+            @*   <div class="zhuisu_chanpinimg">
+                <img src="img/tuceng73.png" />
+            </div>*@
+        </div>
+    </div>
+    <div class="bottomss ">
+        <ul>
+            <li><a href="#">产品信息</a></li>
+            <li><a href="/Wap_Index3/Sy">溯源信息</a></li>
+            <li><a href="/Wap_Index3/Enterprise">企业信息</a></li>
+        </ul>
+    </div>
+    <style type="text/css">
+        .wolalalawawawa
+        {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .wolalalawawawa .zxscbox
+        {
+            width: 80%;
+            margin: 0 auto;
+            height: 4rem;
+            background-color: white;
+            margin-top: 60%;
+            position: relative;
+        }
+        .wolalalawawawa .zxscbox .gubi
+        {
+            width: 1rem;
+            text-align: center;
+            font-size: 14px;
+            color: red;
+            border: 1px solid red;
+            border-radius: 4px;
+            position: absolute;
+            top: 0.2rem;
+            right: 0.2rem;
+        }
+        .wolalalawawawa .zxscbox ul
+        {
+            width: 100%;
+            display: flex;
+        }
+        .wolalalawawawa .zxscbox ul li
+        {
+            width: 25%;
+            text-align: center;
+            line-height: 0.4rem;
+            margin-top: 1.1rem;
+        }
+        .wolalalawawawa .zxscbox ul li img
+        {
+            width: 0.8rem;
+            height: 0.8rem;
+        }
+    </style>
+    <div class="wolalalawawawa" style="display: none;">
+        <div class="zxscbox">
+            <div class="gubi">
+                关闭</div>
+            <ul>
+                @if (!string.IsNullOrEmpty(material.TaoBaoLink))
+                {
+                    <li><a href="@material.TaoBaoLink">
+                        <img src="../../wapstyle/wap3/img/taobao.png" /></a>
+                        <p>
+                            淘宝</p>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(material.TianMaoLink))
+                {
+                    <li><a href="@material.TianMaoLink">
+                        <img src="../../wapstyle/wap3/img/tianma.png" /></a>
+                        <p>
+                            天猫</p>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(material.JingDongLink))
+                {
+                    <li><a href="@material.JingDongLink">
+                        <img src="../../wapstyle/wap3/img/top-jdlogo.png" /></a>
+                        <p>
+                            京东</p>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(material.WeiDianLink))
+                {
+                    <li><a href="@material.WeiDianLink">
+                        <img src="../../wapstyle/wap3/img/weidian.png" /></a>
+                        <p>
+                            微店</p>
+                    </li>
+                }
+                @if (string.IsNullOrEmpty(material.TaoBaoLink) && string.IsNullOrEmpty(material.TianMaoLink) &&
+                    string.IsNullOrEmpty(material.JingDongLink) && string.IsNullOrEmpty(material.WeiDianLink))
+                {
+                    if (!string.IsNullOrEmpty(shopEn.TaoBaoLink))
+                    {
+                    <li><a href="@shopEn.TaoBaoLink">
+                        <img src="../../wapstyle/wap3/img/taobao.png" /></a>
+                        <p>
+                            淘宝</p>
+                    </li>
+                    }
+                    if (!string.IsNullOrEmpty(shopEn.TianMaoLink))
+                    {
+                    <li><a href="@shopEn.TianMaoLink">
+                        <img src="../../wapstyle/wap3/img/tianma.png" /></a>
+                        <p>
+                            天猫</p>
+                    </li>
+                    }
+                    if (!string.IsNullOrEmpty(shopEn.JingDongLink))
+                    {
+                    <li><a href="@shopEn.JingDongLink">
+                        <img src="../../wapstyle/wap3/img/top-jdlogo.png" /></a>
+                        <p>
+                            京东</p>
+                    </li>
+                    }
+                }
+@*                <li>
+                    <img src="../../wapstyle/wap3/img/womenSC.png" />
+                    <p>
+                        我们的</p>
+                </li>*@
+                @if (enterprise.IsOpenShop && enterprise.ShopVerify == 1 && MaterialSpecList.Count > 0)
+                {
+                    if (MaterialSpecList.Count > 0)
+                    {
+                        if (ViewBag.Consumers == true)
+                        { 
+                    <li><a href="/Wap_IndexTwo/MaterialOrder?pageType=2">
+                        <img src="../../wapstyle/wap3/img/womenSC.png" /></a>
+                        <p>
+                            我们的</p>
+                    </li>
+                        }
+                        else
+                        {
+                    <li><a href="/Wap_Order/Login?pageType=2">
+                        <img src="../../wapstyle/wap3/img/womenSC.png" /></a>
+                        <p>
+                            我们的</p>
+                    </li>
+                        }
+                    }
+                    else
+                    {
+                    <li><a href="#" class="buy" onclick="javascript:alert('该产品还未上架！')">
+                        <img src="../../wapstyle/wap3/img/womenSC.png" /></a>
+                        <p>
+                            我们的</p>
+                    </li>
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(material.TaoBaoLink) && string.IsNullOrEmpty(material.TianMaoLink) &&
+                    string.IsNullOrEmpty(material.JingDongLink) && string.IsNullOrEmpty(material.WeiDianLink))
+                    {
+                    <span style="font-size: 18px; margin-left: 80px; margin-top: 80px;">暂无可用的商城！</span> 
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="../../wapstyle/wap3/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../wapstyle/wap3/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //响应式自适应100px==1rem
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function () {
+				    var clientWidth = docEl.clientWidth
+				    if (!clientWidth) return
+				    if (clientWidth > 750) clientWidth = 750
+				    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+				}
+        if (!doc.addEventListener) return
+        win.addEventListener(resizeEvt, recalc, false)
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+    //		轮播图
+    var swiper = new Swiper(".swiper-container", {
+        autoplay: 1000, //自动播放时间
+        loop: true, //循环播放
+        speed: 1000, //滑动效果时间
+        autoplayStopOnLast: true, //如果设置为true，当切换到最后一个slide时停止自动切换。（在没有设置loop的情况下）
+        initialSlide: 2, //当前显示第几张
+        autoplayDisableOnInteraction: false, //是否停止autoplay
+        prevButton: ".swiper-button-prev", //点击按钮
+        nextButton: ".swiper-button-next",
+        pagination: ".swiper-pagination", //小圆点
+        //	paginationType: "progress", //进度条
+        //	paginationType: "fraction", //数字
+        paginationClickable: true, //点击小圆点
+        grabCursor: true, //变小手只在PC端
+        direction: 'horizontal' //滑动方向水平(horizontal)或垂直(vertical)
+    });
+
+    $('.zaixingoumai').click(function () {
+        $('.wolalalawawawa').show()
+    })
+    $('.gubi').click(function () {
+        $('.wolalalawawawa').hide()
+    })
+</script>
+</html>

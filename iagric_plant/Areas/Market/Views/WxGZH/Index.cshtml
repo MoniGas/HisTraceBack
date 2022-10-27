@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+@model LinqModel.EnterpriseWxGZH
+<script type="text/jscript">
+    function SaveSubmit() {
+        if (isNull($("#AppID").val())) {
+            alert("请输入开发者ID（AppID）！");
+            $("#AppID").focus();
+            return false;
+        }
+        if (isNull($("#AppSecret").val())) {
+            alert("请输入开发者密码（AppSecret）！");
+            $("#AppSecret").focus();
+            return false;
+        }
+        var sendData = {
+            AppID: $("#AppID").val(),
+            AppSecret: $("#AppSecret").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Market/WxGZH/AddEditEnGZH",
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                if (data.ok != 0) {
+                    alert(data.msg);
+                }
+                else {
+                    alert(data.msg);
+                    window.location.href = data.url;
+                }
+            }
+        })
+    }
+</script>
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>活动管理<span class="divider">›</span></li>
+        <li>微信公众号设置</li>
+    </ul>
+</div>
+<div class="card_pa40 clearfix">
+    <div style="padding-left: 150px" class="mod-main">
+        <div class="form">
+            <input type="hidden" value="@ViewBag.eId" id="eId" />@* color:#D98719*@
+            <div class="infoitem" style="font-size: 14px;">
+                <span>使用微信公众号，您需要确认以下条件是否全部满足，才可以正常使用微信公众号</span>
+                <p>
+                    1 微信公众号已开通微信支付商户功能</p>
+            </div>
+            <div class="infoitem">
+                <span class="label"><em>*</em>开发者ID（AppID）：</span>
+                <div class="fl">
+                    <input type="text" placeholder="开发者ID（AppID）" maxlength="100" id="AppID" name="AppID" value="@Model.WxAppId"/><span
+                        style="color: #ADADAD; margin-left: 15px">微信分配的公众账号ID（企业号corpid即为此appId）</span>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label" style="width: 169px; margin-left: -30px;"><em>*</em>开发者密码（AppSecret）：</span>
+                <div class="fl">
+                    <input type="text" placeholder="开发者密码（AppSecret）"  maxlength="100" id="AppSecret" name="AppSecret" value="@Model.AppSecret"/>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label">&nbsp;</span>
+                <div class="fl">
+                    <input type="button" value="保存" class="button-big" id="SaveSubmit" onclick="SaveSubmit()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "查看二维码";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+<style>
+    html
+    {
+        overflow:hidden;
+    }
+</style>
+    <script src="@Url.Content("~/Areas/Market/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+<script>
+    $(function () {
+        $(window).unload(function () {
+            //响应事件
+             $.post("@Url.Action("HandNotify")",{tradeNo:'@ViewBag.TradeNo'},function(){
+                                    location.href = "@Url.Action("Index","ActivityManager")";
+                });
+   
+        }); 
+    })
+</script>
+<div class="card_pa20 clearfix">
+    <div class="mod-main">
+        <div class="mc clearfix">
+            <div class="user-set userset-lcol mar40">
+                <div class="form hd-manage-det">
+                <img src="@Url.Action("CreateImage", new { tradeNo = ViewBag.TradeNo, jg = ViewBag.Jg })" />
+                 <p style="margin-top: 20px;
+    margin-left: 60px;
+    color: Black;
+    font-weight: bold;">
+                用微信扫一扫支付，有限时间两个小时</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

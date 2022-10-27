@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    @*<link rel="stylesheet" type="text/css" href="/Content/wapShow/style.css" />*@
+    <link href="../../css/home.min.css" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.CompanyName</title>
+</head>
+<body>
+    <div id="warp">
+        <!--网站头部-->
+        <div class="headerbox">
+            <h1>
+                医疗器械（UDI）服务云平台</h1>
+            <h2>
+                @ViewBag.CompanyName</h2>
+        </div>
+        <div class="top_slide_pic">
+            <img src="../images/banner.jpg" width="640" height="254" />
+        </div>
+        @if (ViewBag.TemplateIDs.IndexOf(((int)Common.EnumFile.TemplateType.IsDis).ToString()) >= 0)
+        {
+            @Html.Action("WapChannel", "Public")
+        }
+        <!--网站头部end-->
+        @RenderBody()
+        <!--网站底部-->
+        <div class="juchou-footer">
+            <footer><p>
+                医疗器械（UDI）服务云平台</p>
+                </footer>
+        </div>
+        <!--网站底部 end-->
+    </div>
+</body>
+</html>

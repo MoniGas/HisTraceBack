@@ -1,0 +1,117 @@
+﻿@model LinqModel.Enterprise_Info
+@{
+    ViewBag.Title = "EnterpriseInfo";
+    LinqModel.ShowCompany ShowCompanyModel = ViewBag.ShowCompanyModel as LinqModel.ShowCompany;
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>企业信息</title>
+    <link href="../../wapstyle/wap3/css/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="footer">
+        <div class="footer_left">
+            <img src="../../wapstyle/wap3/img/logo.png" />
+        </div>
+        @{
+            LinqModel.View_Order_Consumers consumers = Common.Argument.SessCokieOrder.Get;
+            if (consumers == null)
+            {
+            <div class="footer_right">
+                <a href="/Wap_Order/Login">
+                    <img src="../../wapstyle/wap3/img/denglu.png" /></a>
+            </div>
+            }
+            else
+            {
+            <div class="footer_right">
+                <a href="/Wap_Consumers/Index">
+                    <img src="../../wapstyle/wap3/img/denglu.png" /></a>
+            </div>
+            }
+        }
+    </div>
+    @if (ViewBag.Logo != null)
+    {
+    <div class="qiye_dtp" style="width: 100%;">
+        <img src="@ViewBag.Logo" style="width: 100%;" />
+    </div>
+    }
+    @if (Model != null)
+    {
+        <div class="qiye_nr">
+            <div class="qiye_wenzhnag">
+                <p class="qiyewenzhangbt">
+                    企业介绍
+                </p>
+                <p class="wenzhangduluo">@Html.Raw(Model.Memo)</p>
+            </div>
+            <div class="qiye_qiyejibenxinxi">
+                <p class="qiyexinxi_bt">
+                    企业基本信息
+                </p>
+                <ul>
+                    @if (!string.IsNullOrEmpty(Model.EnterpriseName))
+                    {
+                        <li>
+                            <p>
+                                企业名称：</p>
+                            <p>@Model.EnterpriseName</p>
+                        </li>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.LinkMan))
+                    { 
+                        <li>
+                            <p>
+                                联系人：</p>
+                            <p>@Model.LinkMan</p>
+                        </li>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.LinkPhone))
+                    {
+                        <li>
+                            <p>
+                                联系电话：</p>
+                            <p>@Model.LinkPhone</p>
+                        </li>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Address))
+                    {
+                        <li>
+                            <p>
+                                企业地址：</p>
+                            <p>@Model.Address</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="bottomss">
+            <ul>
+                <li><a href="/Wap_Index3/Material">产品信息</a></li>
+                <li><a href="/Wap_Index3/Sy">溯源信息</a></li>
+                <li><a href="#">企业信息</a></li>
+            </ul>
+        </div>
+    }
+</body>
+<script src="../../wapstyle/wap3/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //响应式自适应100px==1rem
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function () {
+				    var clientWidth = docEl.clientWidth
+				    if (!clientWidth) return
+				    if (clientWidth > 750) clientWidth = 750
+				    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+				}
+        if (!doc.addEventListener) return
+        win.addEventListener(resizeEvt, recalc, false)
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+</script>
+</html>

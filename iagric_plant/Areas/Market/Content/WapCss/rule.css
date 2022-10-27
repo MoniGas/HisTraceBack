@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+
+.rule_bg{ width:100%; margin:0 auto;background-color:#e63722; padding:151px 0px 165px 0px;}
+.z_box{width:508px;margin:0 auto; color:#ffffff;}
+.z_box h1{ font-size:34px; text-align:center; width:442px; margin:0 auto; position:relative; margin-bottom:80px;}
+.line_bg{ position:absolute; top:16px;}
+.text p{ font-size:26px; text-align:justify; text-justify:inter-ideograph; line-height:54px;}
+.back_btn{width:334px; margin:100px auto 30px;}

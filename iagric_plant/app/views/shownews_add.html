@@ -1,0 +1,116 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 750px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加资讯</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>资讯标题：</label>
+                        <div class="col-md-10 no-padding">
+                            <input type="text" id="txtTitle" placeholder="请输入资讯标题" class="form-control" data-bind="value: NewsTitle,validationElement:NewsTitle,hasfocus:selNewsTitle" />
+                            <!--<span class="alert-danger"></span>-->
+                        </div>
+                    </div>
+                   <!-- <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>新闻栏目：</label>
+                        <div class="col-md-10 no-padding">
+                            <select data-bind="options: channelsArray.channels,optionsText: 'ChannelName',optionsCaption: '选择栏目',value:channelsArray.selectchannel">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selNewsChannel">请选择新闻栏目</span>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>资讯内容：</label>
+                        <div class="col-md-10 no-padding">
+                            <textarea id="txtInfos" name="txtInfos" cols="100" rows="8" style="width: 100%; height: 400px;
+                                visibility: hidden;"></textarea>
+                            <span class="alert-danger" data-bind="visible:selNewsContent">请输入资讯内容</span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn  btn-lg btn-success" data-bind="click:AddNews">
+            确定</button>
+        <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+            取消</button>
+        </div>
+    </div>
+    
+</div>
+<!--<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li><i class="ace-icon fa fa-home home-icon"></i><a href="#notice?mc=10025">管理主页</a>
+        </li>
+        <li><a href="#advert">宣传营销</a> </li>
+        <li class="active">添加新闻</li>
+    </ul>
+    <div class="pull-right" style="padding: 0 15px 0px 0px;">
+        <button class="btn btn-xs btn-info bigger" title="返回到上一页" data-bind="click:goBack">
+            <i class="ace-icon fa fa-arrow-left"></i>返回
+        </button>
+    </div>
+    <div class="clearfix">
+    </div>
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                    新闻标题
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" id="txtNewsTitle" placeholder="新闻标题" class="col-xs-10 col-sm-5"
+                        data-bind="value: vmShowNews.NewsTitle" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                    栏目
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" id="txtChannelId" placeholder="栏目" class="col-xs-10 col-sm-5"
+                        data-bind="value: vmShowNews.ChannelId" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                    新闻内容
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" id="txtNewsContent" placeholder="新闻内容" class="col-xs-10 col-sm-5"
+                        data-bind="value: vmShowNews.NewsContent" />
+                </div>
+            </div>
+            <div class="space-4">
+            </div>
+            <div class="clearfix">
+                <div class="col-md-offset-5 col-md-9">
+                    <button class="btn btn-info" type="button" data-bind="click:vmShowNews.AddNews"
+                        id="saveData">
+                        <i class="ace-icon fa fa-check bigger-110"></i>保存
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>重置
+                    </button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+-->

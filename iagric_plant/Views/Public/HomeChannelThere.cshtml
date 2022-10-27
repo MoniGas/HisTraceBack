@@ -1,0 +1,39 @@
+﻿@model Webdiyer.WebControls.Mvc.PagedList<LinqModel.View_NewsChannel>
+@{
+    Layout = null;
+}
+@if (Model != null && Model.Count > 0)
+{
+    <div class="warpN1 marT15">
+        <h3 class="h3Style">
+            <span></span>【@Model[0].ChannelName】</h3>
+        <div style="padding-left: 10px; padding-right: 10px; margin-top: 10px;">
+            @{
+                     string content = Model[0].Infos ?? "";
+                     if (Model[0].ChannelName != "联系我们")
+                     {
+                         if (Common.Tools.Public.HtmlClear(Model[0].Infos ?? "").Length > 300)
+                         {
+                             string img = "";
+                             if (content.IndexOf("<img") > 0)
+                             {
+                                 img = content.Substring(content.IndexOf("<img"));
+                                 img = img.Substring(0, img.IndexOf(">") + 1);
+                             }
+                             content = Common.Tools.Public.HtmlClear(Model[0].Infos ?? "");
+                             content = content.Substring(0, 295);
+                             if (string.IsNullOrEmpty(img))
+                             {
+                                 content = content + "... <a href=\"/Wap_News/NewsShow/" + Model[0].ID + "\">更多</a>";
+                             }
+                             else
+                             {
+                                 content = "<center>" + img + "</center>" + content + "... <a href=\"/Wap_News/NewsShow/" + Model[0].ID + "\">更多</a>";
+                             }
+                         }
+                     }
+            }
+            @Html.Raw(content)
+        </div>
+    </div>
+}

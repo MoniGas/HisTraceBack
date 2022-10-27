@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>医疗器械（UDI）服务云平台</title>
+</head>
+<body>
+    <div style="float: left; width: 100%; height: 100%; vertical-align: top;">
+        @Html.Action("UserTop", "Home")
+    </div>
+    <div style="float: left; width: 100%; height: 100%; vertical-align: top;">
+        <iframe src="/Home/Navigation" id="mainFrame" name="mainFrame" frameborder="0" width="100%"
+            height="100%" onload="setIframeHeight(this)"></iframe>
+    </div>
+</body>
+</html>

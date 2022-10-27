@@ -1,0 +1,85 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入相关信息搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'" />
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchStore">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            设备类型
+                        </th>
+                        <th>
+                            出库单号
+                        </th>
+                   <!--     <th>
+                            出库仓库
+                        </th>-->
+                        <th>
+                            经销商
+                        </th>
+                         <th>
+                            数量
+                        </th>
+                        <th>
+                            出库时间
+                        </th>
+                        <th style="width:150px;">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmStore.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.DeviceName,attr:{title:$data.DeviceName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.OutStorageNO,attr:{title:$data.OutStorageNO}">
+                            </p>
+                        </td>
+                    <!--    <td>
+                            <p class="cut width150" data-bind="text:$data.StoreName,attr:{title:$data.StoreName}">
+                            </p>
+                        </td>-->
+                        <td>
+                            <p class="cut width150" data-bind="text:$data.DealerName,attr:{title:$data.DealerName}">
+                            </p>
+                        </td><td>
+                            <p class="cut width100" data-bind="text:$data.MaCount,attr:{title:$data.MaCount}">
+                            </p>
+                        </td>                        <td>
+                            <p class="cut width150" data-bind="text:$data.StrOutStorageDate,attr:{title:$data.StrOutStorageDate}">
+                            </p>
+                        </td>
+                        <td>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data,event){$parent.OutStorageDetail($data.OutStorageID,data,event);}">
+                                查看详情
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="dealerPager" data-bind="dealerPager:vmStore.pageSize,totalCounts:vmStore.totalCounts,pageIndex:vmStore.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

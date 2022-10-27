@@ -1,0 +1,107 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    巡检信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row no-margin">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>操作人员：
+                        </label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" placeholder="操作人员..." class="form-control" data-bind="value:CheckUser">
+                        </div>
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>操作时间：
+                        </label>
+                        <div class="col-md-3 no-padding">
+                            <input type="text" placeholder="操作时间..." readonly="readonly" class="form-control"
+                                id="txtCheckTime" data-date-format="yyyy-mm-dd" data-bind="value:CheckTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>巡检描述：</label>
+                        <div class="col-md-8 no-padding">
+                            <textarea name="comment" placeholder="请输入巡检描述..." id="Textarea1" style="width: 100%;"
+                                class="height90" data-bind="value:CheckContent"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label class="col-md-2 control-label no-padding" for="name">图片：</label>
+                        <div class="col-md-8 no-padding">
+                           <span class="alert-danger-new">支持格式：.bmp|.jpg|.jpeg|.png|.gif，单张大小限制为5MB。</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                        </label>
+                        <div class="col-md-8 no-padding">
+                           <div class="pic-item  clearfix">
+                        <ul>
+                            <!-- ko foreach:CheckImgs -->
+                            <li>
+                                <div class="thumbnail">
+                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delCheckImage(data, event);}}">
+                                    <i class="hide_clip">移除</i></a></li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="A2"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label class="col-md-2 control-label no-padding" for="name">视频：</label>
+                        <div class="col-md-8 no-padding">
+                           <span class="alert-danger-new">支持格式.mp4,大小限制为200MB。</span>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            </label>
+                        <div class="col-md-8 no-padding">
+                           <div class="pic-item clearfix">
+                        <ul>
+                            <!-- ko foreach:CheckVideos -->
+                            <li>
+                                <div class="thumbnail">
+                                    <img id="Videos" data-bind="attr:{src:$data.videoUrls}" onerror="this.src='/images/video-def.jpg'">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除视频" data-bind="event: { click: function( data, event) {$root.delCheckVideo(data, event);}}">
+                                    <i class="hide_clip">移除</i></a> </li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="A3">
+                                      <!--  <img src="../../images/video-upload.jpg" />-->
+                                        </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:AddCheck">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+                取消</button>
+        </div>
+    </div>
+</div>

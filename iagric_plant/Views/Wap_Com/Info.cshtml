@@ -1,0 +1,28 @@
+﻿@model LinqModel.ShowCompany
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutShow.cshtml";
+}
+<link href="../../css/home.min.css" rel="stylesheet" type="text/css" />
+@*<header class="headerbox">
+    <h2>
+        <a class="hIcon h_logo_new" href="/Wap_Com/index?ewm=@ViewBag.ewm">首页</a>
+    </h2>
+    <ul class="h_nav_items">
+		<li>@ViewBag.ChannelName</li>
+	</ul>
+	</header>*@
+<div class="section-module">
+    <h3 class="module-t">
+        【@ViewBag.ChannelName】</h3>
+    @if (Model != null)
+    {
+        <div class="section-module">
+            <div class="article-module title">
+                <h2>
+                    【@Model.CompanyName】</h2>
+            </div>
+            <p>@Html.Raw(Model.Infos)</p>
+        </div>
+    }
+</div>

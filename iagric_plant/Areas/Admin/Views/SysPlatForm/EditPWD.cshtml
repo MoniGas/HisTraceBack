@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "EditPWD";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+   $("#btnSave").click(function(){
+        if($.trim($("#oldpwd").val())==""){
+        alert("请输入旧密码！");
+             return;
+        };
+        if($.trim($("#newpwd").val())==""){
+        alert("请输入新密码！");
+             return;
+        };
+         if($.trim($("#newpwd").val()).length<5){
+        alert("密码至少为5位,请重新输入！");
+             return;
+        };
+        if($.trim($("#surepwd").val())==""){
+        alert("请确认新密码！");
+             return;
+        };
+        if($("#newpwd").val()!=$("#surepwd").val())
+        {
+        alert('新密码与确认密码不一致！');
+            return;
+        }
+            $.post("@Url.Action("EditPWD")",
+            {
+            oldPassword:$("#oldpwd").val(),
+            newPassword:$("#newpwd").val(),
+            surePassword:$("#surepwd").val()
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+//                        art.dialog.close();
+                          parent.location=data.url;
+                    }
+                }
+            })
+    });
+    });
+</script>
+<html style="overflow-x: hidden">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li>修改密码<span class="divider">›</span>修改密码</li>
+        </ul>
+    </div>
+    <div class="mc clearfix">
+        <div class="user-set userset-lcol">
+            <div class="form hd-manage-det">
+                <div class="infoitem">
+                    <span class="label" style="width: 120px"><em>*</em>旧密码：</span>
+                    <div class="fl">
+                        <input placeholder="请输入旧密码" maxlength="25" type="password" id="oldpwd" style="width: 180px;" />
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 120px"><em>*</em>新密码：</span>
+                    <div class="fl">
+                        <input placeholder="请输入新密码" maxlength="25" type="password" id="newpwd" style="width: 180px;" />
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 120px"><em>*</em>确认新密码：</span>
+                    <div class="fl">
+                        <input placeholder="请输入确认新密码" maxlength="25" type="password" id="surepwd" style="width: 180px;" />
+                    </div>
+                </div>
+            </div>
+            <p style="padding-left: 75px" class="center mat40">
+                <input type="button" id="btnSave" value="确定" class="button"></p>
+        </div>
+    </div>
+</body>
+</html>

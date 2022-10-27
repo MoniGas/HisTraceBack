@@ -1,0 +1,379 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+
+    List<LinqModel.View_NavigationForMaterial> NavigationForMaterialList = ViewBag.NavigationForMaterialList as List<LinqModel.View_NavigationForMaterial>;
+    var page = "Info";
+    if (NavigationForMaterialList != null && NavigationForMaterialList.Count > 0 && NavigationForMaterialList.FirstOrDefault(w => w.NavigationId == "Info") == null)
+    {
+        page = NavigationForMaterialList[0].NavigationId;
+    }
+
+    var uppage = ViewBag.uppage;
+    var isDiplay = false;
+}
+<!doctype html>
+<html style="font-size: 55.2px;">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    @*    <meta name="viewport" content="target-densitydpi=320,width=640,user-scalable=no">*@
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+@*    <script src="/Scripts/jquery.touchSlider.js" type="text/javascript"></script>*@
+    <script src="/Scripts/glvalidate.js" type="text/javascript"></script>
+    <link href="/Content/wap/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/wap/stylenew.css" rel="stylesheet" type="text/css" />
+    <link href="/wapstyle/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="http://api.map.baidu.com/api?v=1.4"></script>
+    <style>
+        .packet
+        {
+            position: fixed;
+            bottom: 60px;
+            right: 0;
+        }
+        .packet img
+        {
+            width: 80px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+            var varPage = "";
+            if ("@uppage" != "" && "@uppage" != null) {
+                varPage = "@uppage";
+            } else {
+                varPage = "@page";
+            }
+
+            $("#divInfo").hide();
+            $("#divGuiGe").hide();
+            $("#divRoots").hide();
+            $("#divFangChuan").hide();
+            $("#divEnterpriseInfo").hide();
+
+            $("#Info").removeClass('active');
+            $("#GuiGe").removeClass('active');
+            $("#Roots").removeClass('active');
+            $("#FangChuan").removeClass('active');
+            $("#EnterpriseInfo").removeClass('active');
+
+            $("#div" + varPage).show();
+            $("#" + varPage).addClass('active');
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#div" + varPage).height($(window).height() - $("#divFooter").height() - $("#divBodyTop").height());
+            }
+
+            $("[name='menu']").click(function () {
+                $("#divInfo").hide();
+                $("#divGuiGe").hide();
+                $("#divRoots").hide();
+                $("#divFangChuan").hide();
+                $("#divEnterpriseInfo").hide();
+
+                $("#Info").removeClass('active');
+                $("#GuiGe").removeClass('active');
+                $("#Roots").removeClass('active');
+                $("#FangChuan").removeClass('active');
+                $("#EnterpriseInfo").removeClass('active');
+
+                $("#div" + this.id).show();
+                $("#" + this.id).addClass('active');
+
+                $("#divFooter").height(35);
+                $("#footer").height(35);
+
+                if ($(window).height() > document.body.clientHeight) {
+                    $("#div" + this.id).height($(window).height() - $("#divFooter").height() - $("#divBodyTop").height());
+                }
+            });
+            $(".white_bg").css("top", $(window).height() - $(".white_bg").height() - 30);
+            try {
+                if ($(".ft").css("margin-top") != null && $(".ft").css("margin-top") != null) {
+                    var startRoll = setInterval(rollFun, 2000);
+                    var roll;
+                    var index = 0;
+                    var marginTopLeft = 0;
+                    var marginTopRight = 0;
+                    var leftContent = $(".ft").html();
+                    var rightContent = $(".ft2").html();
+                    var rollHeight = $("#container").height();
+                    function rollFun() {
+                        clearInterval(startRoll);
+                        roll = setInterval(rollSub, 50);
+                    }
+                    function rollSub() {
+                        index = index + 1;
+                        marginTopLeft = parseInt($(".ft").css("margin-top").replace('px', ''));
+                        marginTopLeft = marginTopLeft - 1;
+                        $(".ft").css("margin-top", marginTopLeft + "px");
+                        marginTopRight = parseInt($(".ft2").css("margin-top").replace('px', ''));
+                        marginTopRight = marginTopRight - 1;
+                        $(".ft2").css("margin-top", marginTopRight + "px");
+                        if (index == 105 || index == 51) {
+                            clearInterval(roll);
+                            marginTopLeft = parseInt($(".ft").css("margin-top").replace('px', ''));
+                            marginTopLeft = marginTopLeft - 1;
+                            $(".ft").css("margin-top", marginTopLeft + "px");
+                            marginTopRight = parseInt($(".ft2").css("margin-top").replace('px', ''));
+                            marginTopRight = marginTopRight - 1;
+                            $(".ft").css("margin-top", marginTopLeft + "px");
+                            $(".ft2").css("margin-top", marginTopRight + "px");
+                            startRoll = setInterval(rollFun, 2000);
+                        }
+                        if (index == 160) {
+                            clearInterval(roll);
+                            index = 0;
+                            marginTopLeft = 0;
+                            marginTopRight = 0;
+                            $(".ft").css("margin-top", marginTopLeft + "px");
+                            $(".ft2").css("margin-top", marginTopRight + "px");
+                            startRoll = setInterval(rollFun, 2000);
+                            if ((parseInt($(".ft").css("margin-top").replace('px', '')) - rollHeight) * -1 == parseInt($(".ft").height())) {
+                                $(".ft").append(leftContent);
+                            }
+                            if ((parseInt($(".ft2").css("margin-top").replace('px', '')) - rollHeight) * -1 == parseInt($(".ft2").height())) {
+                                $(".ft2").append(rightContent);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Error) { }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".main_visual").hover(function () {
+                $("#btn_prev,#btn_next").fadeIn()
+            }, function () {
+                $("#btn_prev,#btn_next").fadeOut()
+            })
+            $dragBln = false;
+            $(".main_image").touchSlider({
+                flexible: true,
+                speed: 200,
+                btn_prev: $("#btn_prev"),
+                btn_next: $("#btn_next"),
+                paging: $(".flicking_con a"),
+                counter: function (e) {
+                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                }
+            });
+            $(".main_image").bind("mousedown", function () {
+                $dragBln = false;
+            })
+            $(".main_image").bind("dragstart", function () {
+                $dragBln = true;
+            })
+            $(".main_image a").click(function () {
+                if ($dragBln) {
+                    return false;
+                }
+            })
+            timer = setInterval(function () {
+                $("#btn_next").click();
+            }, 5000);
+            $(".main_visual").hover(function () {
+                clearInterval(timer);
+            }, function () {
+                timer = setInterval(function () {
+                    $("#btn_next").click();
+                }, 5000);
+            })
+            $(".main_image").bind("touchstart", function () {
+                clearInterval(timer);
+            }).bind("touchend", function () {
+                timer = setInterval(function () {
+                    $("#btn_next").click();
+                }, 5000);
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="divBodyTop">
+        <!-- 页头 -->
+        <section>
+            <header class="headerbox">
+                <h1 title="医疗器械（UDI）服务云平台">
+                    医疗器械（UDI）服务云平台                     @{
+                        LinqModel.View_Order_Consumers consumers = Common.Argument.SessCokieOrder.Get;
+                        if (consumers == null)
+                        {
+                        <a href="/Wap_Order/Login" class="art-login">登录</a>
+                        }
+                        else
+                        {
+                        <a href="/Wap_Consumers/Index" class="art-list">查看订单</a>
+                        }
+                    }
+                </h1>
+            </header>
+        </section>
+        <!--banner图-->
+        <section class="top_slide_pic">
+            <img src="../../images/banner.jpg">
+        </section>
+        <!--nav导航-->
+        <nav class="main_nav">
+            <div class="main_nav_list">
+                @if (NavigationForMaterialList != null)
+                {
+                    for (int i = 0; i < NavigationForMaterialList.Count; i++)
+                    {
+                    <a id="@NavigationForMaterialList[i].NavigationId" name="menu" href="#" title="@NavigationForMaterialList[i].NavigationName">@NavigationForMaterialList[i].NavigationName</a>
+                    }
+                }
+            </div>
+        </nav>
+    </div>
+    @if (NavigationForMaterialList.Where(w => w.NavigationId == "Info").FirstOrDefault() != null)
+    {
+        <!--产品信息-->
+        <div id="divInfo" style="display: none">
+            @Html.Action("MaterialInfo", new { ewm = ViewBag.ewm, CodeValidation = ViewBag.CodeValidation })
+        </div>
+    }
+    @if (NavigationForMaterialList.Where(w => w.NavigationId == "Roots").FirstOrDefault() != null)
+    {
+        <!--溯源-->
+        <div id="divRoots" style="display: none">
+            @Html.Action("Information", new { ewm = ViewBag.ewm })
+        </div>
+    }
+    @if (NavigationForMaterialList.Where(w => w.NavigationId == "FangChuan").FirstOrDefault() != null)
+    {
+        <!--防串-->
+        <div id="divFangChuan" style="display: none">
+            @Html.Action("SellInfo", new { ewm = ViewBag.ewm })
+        </div>
+    }
+    @if (NavigationForMaterialList.Where(w => w.NavigationId == "EnterpriseInfo").FirstOrDefault() != null)
+    {
+        <!--企业信息-->
+        <div id="divEnterpriseInfo" style="display: none">
+            @Html.Action("EnterpriseInfo", new { EnterpriseId = ViewBag.EnterpriseId })
+        </div>
+    }
+    @if (new BLL.EnterpriseSwitchBLL().GetIsOff(ViewBag.EnterpriseId, (int)Common.EnumFile.EnterpriseSwitch.Recommend) == true)
+    {
+        List<LinqModel.MyRecommend> r = new BLL.RecommendBLL().GetScanRecommend(ViewBag.EnterpriseId, ViewBag.MaterialId);
+        List<LinqModel.MyRecommend> material = r.Where(m => m.type == "1").ToList();
+        List<LinqModel.MyRecommend> enterprise = r.Where(m => m.type == "2").ToList();
+        if ((material != null && material.Count > 0) || (enterprise != null && enterprise.Count > 0))
+        {
+            material = material == null || material.Count < 0 ? enterprise : material;
+            enterprise = enterprise == null || enterprise.Count < 0 ? material : enterprise; ;
+
+            isDiplay = true;
+        <div class="white_bg">
+            <div class="your_like">
+                猜您喜欢</div>
+            <div id="container" style="height: 72px; overflow: hidden;">
+                <div class="ft">
+                    @foreach (var item in material)
+                    {
+                        <a href="/wap_index/index?ewm=@item.code">
+                            <div class="apple">
+                                @item.name</div>
+                        </a>
+                    }
+                </div>
+                <div class="ft2">
+                    @foreach (var item in enterprise)
+                    {
+                        <a href="/wap_index/index?ewm=@item.code">
+                            <div class="pear">
+                                @item.name</div>
+                        </a>
+                    }
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div> 
+        }
+    }
+    @if (ViewBag.IsDiplayPacket)
+    {
+        <div class="packet">
+            <a href="@ViewBag.PacketUrl">
+                <img src="@Url.Content("~/images/wap/redPacket.png")"></a>
+        </div>
+    }
+         <div class="am-share">
+            <h3 style="font-size:15px" class="am-share-title">
+                分享到</h3>
+            <ul class="am-share-sns">
+                <li><a href="#"><i class="share-icon-pyq"></i><span>朋友圈</span> </a></li>
+                <li><a href="#"><i class="share-icon-wx"></i><span>微信好友</span> </a></li>
+                <li><a href="#"><i class="share-icon-qq"></i><span>QQ好友</span> </a></li>
+                <li><a href="#"><i class="share-icon-kj"></i><span>QQ空间</span> </a></li>
+            </ul>
+            <div class="am-share-footer">
+                <button class="share_btn">
+                    取消</button></div>
+        </div>
+        <script type="text/javascript">
+            function toshare() {
+                $(".am-share").addClass("am-modal-active");
+                if ($(".sharebg").length > 0) {
+                    $(".sharebg").addClass("sharebg-active");
+                } else {
+                    $("body").append('<div class="sharebg"></div>');
+                    $(".sharebg").addClass("sharebg-active");
+                }
+                $(".sharebg-active,.share_btn").click(function () {
+                    $(".am-share").removeClass("am-modal-active");
+                    setTimeout(function () {
+                        $(".sharebg-active").removeClass("sharebg-active");
+                        $(".sharebg").remove();
+                    }, 300);
+                })
+            }	
+		</script>
+    <div id="divFooter" class="juchou-footer">
+        <footer id="footer">
+            <p>
+                医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+            <div id="footer">
+            @if (ViewBag.VideoUrl != null)
+            {
+                foreach (var item in ViewBag.VideoUrl.videos)
+                {
+                    if (!string.IsNullOrEmpty(item.videoUrl))
+                    {
+                <div class="video">
+                    <a href="/Wap_Index/VideoList">
+                        <img src="@Url.Content("~/images/video-ico.gif")"></a>
+                </div>
+                    }
+                }
+            }
+        </div>
+    @if (isDiplay)
+    {
+        <table style="height: 130px;">
+            <tr>
+                <td>
+                </td>
+            </tr>
+        </table>
+    }
+</body>
+</html>

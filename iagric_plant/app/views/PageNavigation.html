@@ -1,0 +1,64 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">首页</a> </li>
+            <li class="active">配置导航页</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <select class="form-control" data-placeholder="选择产品..." id="Select1" data-bind="options:VmMaterial.MaterialArray,value:VmMaterial.SelectedId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                </select>
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:SearchNavigation">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+            <button class="btn btn-lg btn-success" data-bind="click: function(data, event) {AddNavigation(data,event);}">
+                配置导航模块</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="500">
+                            产品名
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:VmNavigation.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.MouseoverFun, mouseout: $parent.MouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'BtnSort_'+$data.MaterialId()},click: function(data,event) {$parent.ViewSorting($data.MaterialId,data,event);}">
+                                排序
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'BtnDel_'+$data.MaterialId()},click: function(data,event) {$parent.DelNavigation($data.MaterialId,data,event);}">
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="greenhousePagerBH" data-bind="greenhousePagerBH:VmNavigation.pageSize,totalCounts:VmNavigation.totalCounts,pageIndex:VmNavigation.pageIndex">
+        </ul>
+    </div>
+</div>

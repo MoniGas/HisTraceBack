@@ -1,0 +1,57 @@
+﻿@model LinqModel.ShowNews
+@{
+    ViewBag.Title = "ShowNews";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    @*<link rel="stylesheet" type="text/css" href="/Content/wapShow/style.css" />*@
+    <link href="../../css/home.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <title>医疗器械（UDI）服务云平台</title>
+    <script type="text/javascript">
+        $(function () {
+            $("#divFooter").height(35);
+            $("#footer").height(35);
+
+            if ($(window).height() > document.body.clientHeight) {
+                $("#warp").height($(window).height() - $("#divFooter").height());
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="warp">
+        <!--网站头部-->
+        <div class="headerbox">
+            <a href="javascript:history.go(-1);" class="art-back">返回</a>
+		    <h1 title="医疗器械（UDI）服务云平台">医疗器械（UDI）服务云平台</h1>
+        </div>
+        @*<div class="top_slide_pic">
+            <img src="../images/banner.jpg" width="640" height="254" />
+        </div>*@
+        <!--网站头部end-->
+        <div class="section-module">
+            @if (Model != null)
+            {
+                <div class="section-module">
+                    <div class="article-module title">
+                        <h2>@Model.Title</h2>
+                    </div>
+                    <p>@Html.Raw(Model.Infos)</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div id="divFooter" class="juchou-footer">
+        <footer id="footer">
+        <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

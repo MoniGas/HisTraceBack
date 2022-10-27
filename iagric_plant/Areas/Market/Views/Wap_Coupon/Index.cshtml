@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+@model LinqModel.View_ActivityCoupon
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>领取优惠券</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link rel="stylesheet" type="text/css" href="../../../../public_css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../../../public_css/login.css">
+    <link href="../../../../public_css/public-style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/glvalidate.js" type="text/javascript"></script>
+    <script>
+    $(function () {
+        $("#btnGet").click(function () {
+            if ($("#PreView").val() == "1") {
+                alert("预览效果！");
+                return;
+            }
+        if("@(ViewBag.Tel)" == ""&&(isNull($("#tel").val())||!checkMobileEx($("#tel").val()))){
+        alert("请输入正确的手机号");
+        $("#tel").focus();
+        return;
+    }
+    else {
+        location.href = "/Market/Wap_Coupon/GetCoupon?activityId=@ViewBag.ActivityId" + "&tel=" + $("#tel").val();
+    }
+        });
+    })
+    </script>
+</head>
+<body style="background-color: #14112c;">
+    <input type="hidden" value="@ViewBag.PreView" id="PreView" />
+    <header class="OriginHead bar-white">
+        @if (ViewBag.settingId == 0)
+        {
+            <a></a>
+        }
+        else
+        {
+            <a href="javascript:history.go(-1)" class="bar-item pull-left"><i class="icon bar-arrow-left">
+            </i></a>
+        }
+        <h1 class="bar-title">
+            领取优惠券</h1>
+    </header>
+    <div class="coupon-content">
+        <div class="y-body-wrap">
+            <div class="shop-info">
+                <h2 class="shop-title">
+                    @Model.ActivityTitle
+                </h2>
+                <div class="coupons-wrap noFollow">
+                    <div class="coupons-container js-ready jptl">
+                        <div class="yhq-main">
+                            <div class="coupons-jp">
+                                @if (Model.CouponType == (int)Common.EnumText.CouponType.Cash)
+                                {
+                                    <span class="yh_p">@Model.CouponContent 元现金券</span>
+                                }
+                                else if (Model.CouponType == (int)Common.EnumText.CouponType.Discount)
+                                {
+                                    <span class="yh_p">@Model.CouponContent %折扣券</span>
+                                }
+                                else
+                                {
+
+                                    <span class="yh_p">@Model.CouponContent </span>
+                                }
+                                @if (Model.StartDate != null && Model.EndDate != null)
+                                {
+                                <span class="jp-data">有效期： @Model.StartDate.Value.ToString("yyyy-MM-dd") 至 @Model.EndDate.Value.ToString("yyyy-MM-dd")
+                                </span>
+                                }
+                            </div>
+                        </div>
+                        @if (ViewBag.Tel == "")
+                        {
+                            <div class="yhq-lq">
+                                <p>
+                                    优惠券将放入该手机号的账户中</p>
+                                <div class="lq-phone">
+                                    <input type="number" id="tel" class="lq-phone-input" placeholder="请输入手机号">
+                                </div>
+                                <a id="btnGet" style="cursor: pointer;" class="coupons-btn"></a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="yhq-lq">
+                                <a id="btnGet" style="cursor: pointer;" class="coupons-btn"></a>
+                            </div> 
+                        }
+                        <!-----------领取成功后状态------------>
+                        <div class="yhq-success" style="display: none;">
+                            <h3>
+                                领取成功</h3>
+                            <p>
+                                兑换码：YH18421684356</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-rules">
+                    <div class="activity-title">
+                        <span class="title">活动规则</span>
+                    </div>
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

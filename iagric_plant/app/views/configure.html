@@ -1,0 +1,88 @@
+﻿<div class="page-content">
+    <div class="row mat10">
+        <div class="col-md-7">
+            <div class="input-group stylish-input-group">
+                <img data-bind="attr:{src:FileUrls}" onerror="this.src='/images/pic-def.jpg'" width="80" />&nbsp;
+                <strong><span data-bind="text:companyName"></span></strong>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="table1">
+        <div class="col-md-12">
+            <div class="main_gd clearfix">
+                <div class="title">
+                    <strong>请选择企业品牌</strong></div>
+                <div class="content clearfix" data-bind="checkBoxCascade:null">
+                    <div class="col-md-2 no-padding">
+                        <label>
+                            <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="checked:$root.isAllChecked1(),value:-1" />
+                            全选
+                        </label>
+                    </div>
+                    <div class="col-md-10">
+                        <!-- ko foreach: dataBrandList -->
+                        <label class="inline">
+                            <input type="checkbox" name="cbx" class="cbx1" data-bind="checked:$parent.isBrandChecked($data.Brand_ID),value:$data.Brand_ID" />&nbsp;<span
+                                data-bind="text:$data.BrandName"></span>
+                        </label>
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="table2">
+        <div class="col-md-12">
+            <div class="main_gd clearfix">
+                <div class="title">
+                    <strong>请选择员工名片</strong></div>
+                <div class="content clearfix" data-bind="checkBoxCascade:null">
+                    <div class="col-md-2 no-padding">
+                        <label>
+                            <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="checked:$root.isAllChecked2(),value:-1" />
+                            全选
+                        </label>
+                    </div>
+                    <div class="col-md-10">
+                        <!-- ko foreach: dataUserList -->
+                        <label class="inline">
+                            <input type="checkbox" name="cbx" class="cbx1" data-bind="checked:$parent.isUserChecked($data.UserID),value:$data.UserID" />&nbsp;<span
+                                data-bind="text:$data.Infos"></span>
+                        </label>
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="table3">
+        <div class="col-md-12">
+            <div class="main_gd clearfix">
+                <div class="title">
+                    <strong>请选择新闻资讯</strong></div>
+                <div class="content clearfix" data-bind="checkBoxCascade:null">
+                    <div class="col-md-2 no-padding">
+                        <label>
+                            <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="checked:$root.isAllChecked3(),value:-1" />
+                            全选
+                        </label>
+                    </div>
+                    <div class="col-md-10">
+                        <!-- ko foreach:  dataNewsList-->
+                        <label class="inline">
+                            <input type="checkbox" id="Checkbox1" name="cbx" class="cbx1" data-bind="checked:$root.isNewsChecked($data.ID),value:$data.ID,attr:{eleflag1:-1}" />&nbsp;<span
+                                data-bind="text:$data.Title"></span>
+                        </label>
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+            <button class="btn btn-lg btn-success" data-bind="click:save">
+                保存</button>
+        </div>
+    </div>
+</div>

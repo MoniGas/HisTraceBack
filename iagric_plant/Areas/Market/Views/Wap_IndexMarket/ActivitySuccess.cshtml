@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "抢红包";
+    Layout = "~/Areas/Market/Views/Shared/_WapLayout.cshtml";
+}
+@model LinqModel.SendPacketResult
+<link href="@Url.Content("~/Areas/Market/Content/lingHB.css")" rel="stylesheet" type="text/css" />
+<script>
+    //兼容处理，获取手机可视窗口，定义REM参数
+    var doc = document;
+    var win = window;
+    function initFontSize() {
+        var docEl = doc.documentElement;
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';   //判断窗口有没有orientationchange这个方法，有就赋值给一个变量，没有就返回resize方法。
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            fontSizeRate = (clientWidth / 750);
+            var baseFontSize = 100 * fontSizeRate;
+            docEl.style.fontSize = baseFontSize + 'px';
+            //  console.log(baseFontSize);
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt.recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    }
+    initFontSize();
+ 
+</script>
+<div id="banner">
+    <img src="/Areas/Market/Content/images/banner.png" alt="" />
+</div>
+@if (Model.Ok == true)
+{
+    //if (Model.Money >= 1)
+    //{
+    <div id="ma" style="height: 3.56rem">
+        <p class="text">
+            恭喜您，成功领取<br />
+            <span class="text" style="font-size: 0.36rem; display: inline-block; margin-top: 27px;">@Model.EnterpriseName</span>的红包
+        </p>
+        <!--传入具体红包金额-->
+        <p id="turemany" style="padding-top: 0.25rem;">
+            ￥@Model.Money</p>
+        @if (ViewBag.sid == 3)
+        {
+            <a href="/Wap_Index/Index" style="margin-top: 0.1rem" class="i">返回首页</a>
+        }
+    </div>
+    <div id="twomain">
+        <p>
+            领取红包步骤:</p>
+        <img src="/Areas/Market/Content/images/line.png" alt="" id="here" />
+        <p class="one">
+            第一步：微信会给您发送红包信息，请查看微信聊天记录列表</p>
+        <div class="frist">
+            <img src="/Areas/Market/Content/images/frist.png" />
+        </div>
+        <p class="one">
+            第二步：点击信息出现领取红包页面，点击拆红包：</p>
+        <div id="many">
+            <img src="/Areas/Market/Content/images/turemany.jpg" />
+        </div>
+        <p class="one">
+            红包将会放入您的零钱账号，<span style="font-size: 0.4rem;">24小时</span>过期微信将会自动退回，祝您生活愉快！</p>
+    </div>
+@*    }
+    else
+    {
+    <!--此处传入发红包人的ID名字-->
+    <div id="sendpeople">
+        <p class="text">
+            恭喜您，成功领取<br>
+            <span class="text" style="font-size: 0.36rem">@Model.EnterpriseName</span> 的红包
+        </p>
+    </div>
+    <div id="main" style="margin-top: 1.04rem;">
+        <!--传入具体红包金额-->
+        <p id="turemany">
+            ￥@Model.Money</p>
+        <div class="background">
+            <p id="idcode">
+                红包已放入账号：@Model.Phone</p>
+            <a href="/Wap_Consumers/Index">立即查看 </a>
+        </div>
+        @if (ViewBag.sid == 3)
+        { 
+            <a href="/Wap_Index/Index" class="index">返回首页</a>
+        }
+    </div>
+    }*@
+}
+else
+{
+    <div id="ma">
+        <p class="text">
+            很遗憾
+        </p>
+        <p class="text" style="margin-top: -13px;">@Model.Msg</p>
+        @if (ViewBag.sid == 3)
+        {
+            <a href="/Wap_Index/Index" class="i">返回首页</a>
+        }
+    </div>
+}

@@ -1,0 +1,48 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 360px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    修改密码</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label no-padding-right" for="name">
+                            <span class="alert-danger">*</span>旧密码：</label>
+                        <div class="col-md-6">
+                            <!-- <input id="oldpwd" name="oldpwd" type="text" placeholder="请输入旧密码" class="form-control"
+                                data-bind="value: oldpwd">-->
+                            <input id="oldpwd" name="oldpwd" type="password" placeholder="请输入旧密码" class="inputstyle password"
+                                data-bind="value: oldpwd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label no-padding-right" for="name">
+                            <span class="alert-danger">*</span>新密码：</label>
+                        <div class="col-md-6">
+                            <input id="newpwd" name="newpwd" type="password" placeholder="请输入新密码" class="inputstyle password"
+                                data-bind="value: newpwd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label no-padding-right" for="name">
+                            <span class="alert-danger">*</span>确认新密码：</label>
+                        <div class="col-md-6">
+                            <input id="surepwd" name="surepwd" type="password" placeholder="请输入确认密码" class="inputstyle password"
+                                data-bind="value: surepwd">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button data-bb-handler="success" type="button" class="btn btn-success" data-bind="click:Save"
+                id="saveData">
+                确定</button></div>
+    </div>
+</div>

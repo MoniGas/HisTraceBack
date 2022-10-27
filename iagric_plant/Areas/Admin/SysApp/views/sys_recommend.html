@@ -1,0 +1,93 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">首页</a> </li>
+            <li class="active">推荐产品管理</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="输入企业名称..." data-bind="value:name">
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:searchEnterprise">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row pat10">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            企业名称
+                        </th>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            推荐名称
+                        </th>
+                        <th>
+                            推荐类型
+                        </th>
+                        <th>
+                            推荐时间
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmRecommend.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.EnterpriseName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.MaterialName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.RecommendName"></span>
+                        </td>
+                        <td>
+                            <span eleflag="TypeText" data-bind="text:$data.StrType"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.AddTime"></span>
+                        </td>
+                        <td>
+                            <span eleflag="VerifyText" data-bind="text:$data.StrVerify"></span>
+                        </td>
+                        <td width="300">
+                            <button style="display: none" eleflag="ShowPass" class="btn btn-xs btn-success mar8"
+                                data-bind="click: function(data,event) {$parent.Verify($data.RecommendID,1,data,event);}">
+                                通过</button>
+                            <button style="display: none" eleflag="ShowNoPass" class="btn btn-xs btn-success mar8"
+                                data-bind="click: function(data,event) {$parent.Verify($data.RecommendID,-1,data,event);}">
+                                不通过</button>
+                            <button style="display: none" eleflag="ShowCancel" class="btn btn-xs btn-success mar8">
+                                取消推荐</button>
+                            <button style="display: none" eleflag="ShowPreview" class="btn btn-xs btn-success mar8">
+                                查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="recommendPager" data-bind="recommendPager:vmRecommend.pageSize,totalCounts:vmRecommend.totalCounts,pageIndex:vmRecommend.pageIndex">
+        </ul>
+    </div>
+</div>

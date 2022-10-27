@@ -1,0 +1,178 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>帮助详情</title>
+    <link rel="shortcut icon" href="../../images/ncp.ico"/>
+    <script src="../../Scripts/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <link href="../../css/common.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shipin.css"/>
+    <link href="../../newmenu/css/helpstyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".menubar").click(function () {
+                var name = $(this).find("span").html();
+                var URL = $(this).find("span").attr("url");
+                $("#VideoBox").html("");
+                var video = "<video src=\"" + URL + "\" autoplay=\"autoplay\" controls=\"controls\" width=\"700\" height=\"500\"></video>";
+                if ($.browser.msie) {
+                    video = "<object title=\"dvubb\" align=\"middle\" classid=\"CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95\" class=\"object\" id=\"MediaPlayer\" width=\"700\" height=\"500\"> "
+                    + "<param name=\"AUTOSTART\" value=\"true\"/> "
+                    + "<param name=\"ShowStatusBar\" value=\"-1\"/> "
+                    + "<param name=\"Filename\" value=\"" + URL + "\"/> "
+                    + "<embed title=\"dvubb\" type=\"application/x-oleobject\" codebase=\" http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701 \" flename=\"mp\" src=\"你的视频地址\" width=\"480\" height=\"360\" autoplay=\"false\"></embed> "
+                    + "</object>";
+                }
+                $("#VideoBox").html(video);
+                $("#VideoNameTitle").html(name);
+            });
+        });
+    </script>
+</head>
+<body style="background-color: #f7f7f7;">
+    <div class="header-wrapper">
+        <div class="header width1100 clearfix"  style="width:  auto;padding: 0 15px;">
+            <div class="logo fl">
+                <a href="/Home/Index">
+                    <img src="/newmenu/images/bg_logo.png"/></a>
+            </div>
+        </div>
+    </div>
+    <!------------------left start-------------------------->
+    <div class="col_side">
+        <div class="menu_box">
+            <dl class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/liucheng.png">
+                </i><span>操作流程视频</span> <i class="icon_treemenu_arrow"></i></dt>
+            </dl>
+            <dl class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/shengchengma.mp4">生成追溯码 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/zhuisuxinxi.mp4">追溯信息 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/zhuisupeizhi.mp4">追溯配置 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/chaifenpici.mp4">拆分批次 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/chakanxiazaima.mp4">查看/下载码 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/brandmaterial.mp4">品牌产品信息 </span></dt>
+            </dl>
+        @*    <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/yuancailiaofeifang.mp4">原材料配方信息</span></dt>
+            </dl>*@
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/shengchanhuanjieshuju.mp4">生产环节 </span></dt>
+            </dl>
+           @* <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/dapeng.mp4">大棚数据 </span></dt>
+            </dl>*@
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/jingxiaoshangxiaoshou.mp4">经销商|销售 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/ktshopshangpinshangjia.mp4">开通商城|商品上架 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/dingdan.mp4">订单信息 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/tousupinglun.mp4">投诉评论信息 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/enxuanchuan.mp4">企业宣传</span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/steps/jueseyonghu.mp4">角色用户</span></dt>
+            </dl>
+            <dl class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/gongneng_07.png">
+                </i>功能介绍视频 </dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/function/function.mp4">功能介绍视频 </span></dt>
+            </dl>
+            <dl class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/gongneng_07.png">
+                </i>应用场景介绍视频</dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/scenarios/fwzs.mp4">防伪追溯 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/scenarios/shangcheng.mp4">商城 </span></dt>
+            </dl>
+            <dl style="border-top-style: 1px dotted #e4e4e4;" class="menubar">
+                <dt class="menu_title"><i class="icon_menu">
+                    <img src="/images/zhuishu3_03.png" />
+                </i><span url="/Video/scenarios/xuanchuan.mp4">企业宣传 </span></dt>
+            </dl>
+        </div>
+    </div>
+    <!------------------left end-------------------------->
+    <div class="col_main">
+        <div class="main_hd">
+            <ul class="tablist">
+                <li><a style="color: #777777; font-size: 12px;" href="#">
+                    <div class="tabs-item-text" id="VideoNameTitle">
+                    </div>
+                </a></li>
+            </ul>
+        </div>
+        <div class="shipin_box">
+            @* <div class="shengcheng" id="VideoName">
+                </div>*@
+            <div class="box_bodr" id="VideoBox">
+            </div>
+        </div>
+        <div class="content clearfix">
+        </div>
+    </div>
+</body>
+</html>

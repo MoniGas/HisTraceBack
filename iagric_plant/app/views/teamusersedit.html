@@ -1,0 +1,51 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    编辑人员</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>人员名称：
+                        </label>
+                        <div class="col-md-5 no-padding">
+                            <input type="text" placeholder="人员名称..." style="width: 200px;"
+                                data-bind="value:userName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger"></span>电话号码：
+                        </label>
+                        <div class="col-md-5 no-padding">
+                            <input type="text" placeholder="电话号码..." style="width: 200px;"
+                                data-bind="value:userPhone" />
+                        </div>
+                    </div>
+                   <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger"></span>工牌号：
+                        </label>
+                        <div class="col-md-5 no-padding">
+                            <input type="text" placeholder="工牌号..." style="width: 200px;"
+                                data-bind="value:userNumber" />
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-lg btn-success" data-bind="click:Register">
+                    确定</button>
+                <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancel">
+                    取消</button>
+            </div>
+        </div>
+    </div>
+</div>

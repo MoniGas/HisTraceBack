@@ -1,0 +1,77 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:addStore">
+                    添加仓库</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入相关信息搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchStore">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="300">
+                            仓库名称
+                        </th>
+                        <th width="300">
+                            二维码
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmStore.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.StoreName,attr:{title:$data.StoreName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width270" data-bind="text:$data.EwmUrl,attr:{title:$data.EwmUrl}">
+                            </p>
+                        </td>
+                        <td>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.editStore($data.Store_ID,data,event);}">
+                                编辑
+                            </button>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.delStore($data.Store_ID,data,event);}">
+                                删除
+                            </button>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.addSlotting($data.Store_ID,data,event);}">
+                                添加货位
+                            </button>
+                            <button style="display: none" eleflag="ShowAll" class="btn btn-xs btn-success mal20"
+                                data-bind="click: function(data, event) {$parent.storeSlotting($data.Store_ID,data,event);}">
+                                货位管理
+                            </button>
+                            <button style="display: none" class="btn btn-xs btn-success mal20" eleflag="ShowAll"
+                                data-bind="click: function(data,event) {$parent.showCodeInfo($data.EwmUrl);}">
+                                码信息查看
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top no-t-border">
+                <ul class="pagination" id="dealerPager" data-bind="dealerPager:vmStore.pageSize,totalCounts:vmStore.totalCounts,pageIndex:vmStore.pageIndex">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

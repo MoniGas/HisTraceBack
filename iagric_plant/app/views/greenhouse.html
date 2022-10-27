@@ -1,0 +1,64 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click: function(data, event) {addGreenhouse(data,event);}">
+                    添加生产基地</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入生产基地..." data-bind="value:name">
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchGreenhouse">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            生产基地
+                        </th>
+                        <th>
+                            二维码
+                        </th>
+                        <th width="300">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmGreenhouse.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.GreenhousesName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$data.EWM"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnEdit_'+$data.Greenhouses_ID()},click: function(data,event) {$parent.editGreenhouse($data.Greenhouses_ID,data,event);}">
+                                修改
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'btnDel_'+$data.Greenhouses_ID()},click: function(data,event) {$parent.delGreenhouse($data.Greenhouses_ID,data,event);}">
+                                删除
+                            </button>
+                            <button class="btn btn-xs btn-success" data-bind="visible:false,attr:{id:'btnSee_'+$data.Greenhouses_ID()},click: function(data,event) {$parent.showCodeInfo($data.EWM);}">
+                                码信息查看
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="greenhousePagerBH" data-bind="greenhousePagerBH:vmGreenhouse.pageSize,totalCounts:vmGreenhouse.totalCounts,pageIndex:vmGreenhouse.pageIndex">
+        </ul>
+    </div>
+</div>

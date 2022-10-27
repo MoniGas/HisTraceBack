@@ -1,0 +1,63 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 500px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加产品规格</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form">
+                    <div class="form-group no-margin" style="width: 450px">
+                        <label class="col-md-3 control-label no-padding" for="form-field-1">
+                            <span class="alert-danger">*</span>规格数量：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="规格数量..." class="col-md-5 autofocus" data-bind="value:Value,validationElement:name,hasfocus:selTitle" />
+                            <span data-bind="visible:!selTitle"><span class="alert-danger" style="height: 30px;
+                                line-height: 30px;" data-bind="validationMessage:name"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin" style="width: 450px">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>规格单位：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="规格单位..." class="col-md-5 autofocus" data-bind="value:MaterialSpcificationName,validationElement:name,hasfocus:selMaterialSpcificationName" />
+                             &nbsp;&nbsp;<span class="alert-danger" style="line-height: 30px;"></span><span data-bind="visible:!selMaterialSpcificationName"><span class="alert-danger" style="height: 30px;
+                                line-height: 30px;" data-bind="validationMessage:name"></span></span>
+                                
+                        </div>
+                    </div>
+                    <div class="form-group no-margin" style="width: 450px">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                        </label>
+                        <div class="col-md-9">
+                        <span class="alert-danger" style="line-height: 30px;">例：（g/袋）</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="width: 450px">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>规格编码：
+                        </label>
+                        <div class="col-md-9">
+                            <input maxlength="3" type="text" placeholder="规格编码..." class="col-md-5 autofocus" data-bind="value:MaterialSpcificationCode,validationElement:name,hasfocus:selMaterialSpcificationCode" />
+                            &nbsp;&nbsp;<span class="alert-danger" style="line-height: 30px;"></span><span data-bind="visible:!selMaterialSpcificationCode">
+                                <span class="alert-danger" style="height: 30px; line-height: 30px;" data-bind="validationMessage:name">
+                                </span></span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Register">
+                保存</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

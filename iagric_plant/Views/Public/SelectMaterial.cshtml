@@ -1,0 +1,27 @@
+﻿@model List<LinqModel.Material>
+@{
+    Layout = null;
+}
+<script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#material").change(function () {
+            $.get("/Public/GetMaterialSpec?materialId=" + $("#material").val(), function (data) {
+                $("#materialspec").html(data);
+            });
+        })
+    });
+</script>
+<div class="textarea-wrap">
+    <select id="material" name="material">
+        @foreach (var item in Model)
+        {
+            <option value="@item.Material_ID">@item.MaterialFullName</option>
+        }
+    </select>
+</div>
+<div class="textarea-wrap">
+    <select id="materialspec" name="materialspec">
+        <option selected="selected" value="0">请选择规格</option>
+    </select>
+</div>

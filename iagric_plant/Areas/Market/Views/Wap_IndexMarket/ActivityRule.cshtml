@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "活动规则";
+    Layout = "~/Areas/Market/Views/Shared/_WapLayout.cshtml";
+}
+
+<div class="rule_bg">	
+    <div class="z_box">    	
+        <h1>活动规则
+        	<img class="line_bg" src="@Url.Content("~/Areas/Market/images/WapImages/line.png")">
+        </h1>        
+        <div class="text">
+          <p>@Html.Raw(ViewBag.Rule)</p>
+            <p>*本活动最终解释权归广联所有。</p>
+        </div>
+    </div>
+    <a href="javascript:history.go(-1)"><img class="back_btn" src="@Url.Content("~/Areas/Market/images/WapImages/back_03.png")"></a>
+</div>
+

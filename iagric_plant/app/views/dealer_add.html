@@ -1,0 +1,59 @@
+﻿
+<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加经销商</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>经销商名称：</label>
+                        <div class="col-md-6 no-padding">
+                            <input type="text" id="txtDealerName" placeholder="经销商名称" class="form-control" data-bind="value: dealerName,validationElement:dealerName,hasfocus:selDealerName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>地址：</label>
+                        <div class="col-md-10 no-padding">
+                            <select data-bind="options: provinces,optionsText: 'AddressName',optionsCaption: '选择省份',value:province" class="col-md-3 no-padding mar8">
+                            </select>
+                            <select data-bind="options: citys,optionsText: 'AddressName',optionsCaption: '选择城市',value:city" class="col-md-3 no-padding mar8">
+                            </select>
+                            <select data-bind="options: areas,optionsText: 'AddressName',optionsCaption: '选择区/县',value:area" class="col-md-3 no-padding">
+                            </select>
+                         </div>
+                         <span class="alert-danger" data-bind="visible:selDealerssq">请选择所在地区</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                        </label>
+                        <div class="col-md-10 no-padding">
+                            <input type="text" id="txtDealerAddress" placeholder="地址" class="form-control" data-bind="value: dealerAddress,validationElement:dealerAddress,hasfocus:selDealerAddress" />
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <p class="tit-modal">
+                    提示：点击鼠标左键完成标记</p>
+                <div class="padlr15 overflow-hidden" id="map-canvas" style="width: 98%; height: 320px;
+                    margin: 0px auto;">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn  btn-lg btn-success" data-bind="click:AddDealer">
+            确定</button>
+        <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+            取消</button>
+    </div>
+</div>
+</div> 

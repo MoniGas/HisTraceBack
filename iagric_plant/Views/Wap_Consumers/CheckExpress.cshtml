@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "CheckExpress";
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗器械（UDI）服务云平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link href="/css/home.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- 页头 -->
+    <section>
+	<header class="headerbox">
+    <a href="javascript:window.history.go(-1);" class="art-back">返回</a>
+		<h1 title="物流详情">物流详情</h1>
+	</header>
+</section>
+    <!--内容-->
+    <div class="new-ct">
+        <div>
+            <div id="changeContent1" style="margin: 0 20px 20px; padding-top: 20px;">
+                <div class="new-order-track">
+                    @if (ViewBag.ExpressComp != null)
+                    {
+                        <span>快递公司：@ViewBag.ExpressComp </span><span class="new-txt-rd2">快递单号：@ViewBag.ExpressNum</span>
+                    }
+                    else
+                    {
+                        <span class="new-txt-rd2">暂无物流信息</span>
+                    }
+                </div>
+            </div>
+            @*<div class="new-order-track">
+                    <span>订单编号：9530060454 </span><span class="new-txt-rd2">状态：完成 </span>
+                </div>
+                <div class="new-order-flow new-p-re">
+                    <span class="new-order-arr"></span>
+                    <ul class="new-of-storey">
+                        <li><span class="icon on"></span><span>您的订单在【石家庄泰华站】验货完成，正在分配配送员&nbsp;&nbsp;仵胜涛 </span>
+                            <span>2015-06-18 17:46:23 </span></li>
+                        <li><span class="icon"></span><span>感谢您在京东购物，欢迎您再次光临！&nbsp;&nbsp;梁浩 </span><span>2015-06-18
+                            16:16:41 </span></li>
+                        <li><span class="icon"></span><span>配送员【梁浩】已出发，联系电话【0311-69027560或0311-69027601，感谢您的耐心等待，参加评价还能赢取京豆呦】&nbsp;&nbsp;梁浩
+                        </span><span>2015-06-18 14:42:31 </span></li>
+                        <li><span class="icon"></span><span>您的订单在【石家庄分拨中心】发货完成，准备送往【石家庄泰华站】&nbsp;&nbsp;马鹿平 </span>
+                            <span>2015-06-18 01:26:53 </span></li>
+                        <li><span class="icon"></span><span>您的订单在【石家庄分拨中心】分拣完成&nbsp;&nbsp;马鹿平 </span><span>2015-06-18
+                            01:02:37 </span></li>
+                        <li><span class="icon"></span><span>您的订单在【廊坊固安分拣中心】发货完成，准备送往【石家庄分拨中心】&nbsp;&nbsp;杜文祥
+                        </span><span>2015-06-17 17:03:48 </span></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="changeContent2" class="new-order-map" style="display: none">
+            </div>*@
+        </div>
+    </div>
+    <div class="juchou-footer">
+        <footer>
+            <p>医疗器械（UDI）服务云平台</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var macAddress = $.trim($("#MacAddress").val());
+            if (macAddress.length == 0) {
+                alert('请输入Mac地址！');
+                $("#MacAddress").focus();
+                return;
+            }
+            if ($.trim($("#endDate").val()) == "") {
+                alert("请选择到期日期！");
+                return;
+            };
+            var sendData = {
+                macAddress: macAddress,
+                endDate: $("#endDate").val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/SysSetAnalysis/AddMacAddress',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == 1) {
+                        alert(data.info);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("Index")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label" style="width: 120px"><em>*</em>Mac地址：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="MacAddress" name="MacAddress" maxlength="300" />
+                                    <span style="color: #ed7049">请输入Mac地址</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label" style="width: 130px"><em>*</em>到期日期：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 120px;" id="endDate" name="endDate" cssclass="Wdate"
+                                        onclick="WdatePicker()" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

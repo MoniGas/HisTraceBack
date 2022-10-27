@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "抢红包";
+    Layout = "~/Areas/Market/Views/Shared/_WapLayout.cshtml";
+}
+@model LinqModel.View_Activity
+          @if (Model != null)
+          {
+              if (!string.IsNullOrEmpty(Model.AtivityImageURL))
+              {
+ <div class="login_bg" style=" background-image:url(@Model.AtivityImageURL)">	
+    <div class="lg_btn">
+    	<a><img class="lg_btn1" src="@Url.Content("~/Areas/Market/images/WapImages/redpk.png")"></a>
+        <a href="@Url.Action("ActivityRule", new { activityId = Model.ActivityID })"><img class="lg_btn2" src="@Url.Content("~/Areas/Market/images/WapImages/active.png")"></a>
+    </div>
+</div>
+              }
+              else
+              {
+<div class="login_bg">	
+    <div class="lg_btn">
+    	<a><img class="lg_btn1" src="@Url.Content("~/Areas/Market/images/WapImages/redpk.png")"></a>
+        <a href="@Url.Action("ActivityRule", new { activityId = Model.ActivityID })"><img class="lg_btn2" src="@Url.Content("~/Areas/Market/images/WapImages/active.png")"></a>
+    </div>
+</div>
+              }
+          }

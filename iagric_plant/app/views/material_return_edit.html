@@ -1,0 +1,40 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看物流</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>快递公司：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="快递公司" class="col-md-9" data-bind="value: kdcomp" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>快递单号：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="快递单号" class="col-md-9" data-bind="value: kdnum" />
+                        </div>
+                    </div>
+                    <div class="space-4">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

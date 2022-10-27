@@ -1,0 +1,459 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <script src="../../Scripts/glvalidate.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#UserName").keyup(function (data) {
+                if ($.trim($("#UserName").val()) == "") {
+                    $("#errorUserName").show();
+                    $("#successUserName").hide();
+                }
+                else {
+                    $("#errorUserName").hide();
+                    $("#successUserName").show();
+                }
+            });
+            $("#UserName").change(function (data) {
+                if ($.trim($("#UserName").val()) == "") {
+                    $("#errorUserName").show();
+                    $("#successUserName").hide();
+                }
+                else {
+                    $("#errorUserName").hide();
+                    $("#successUserName").show();
+                }
+            });
+            $("#Pwd").keyup(function (data) {
+                if ($.trim($("#Pwd").val()) == "" || $.trim($("#Pwd").val()).length < 6 || $.trim($("#Pwd").val()).length > 20) {
+                    $("#errortest").show();
+                    $("#successPwd").hide();
+                }
+                else {
+                    $("#errortest").hide();
+                    $("#successPwd").show();
+                }
+            });
+            $("#Pwd").change(function (data) {
+                if ($.trim($("#Pwd").val()) == "" || $.trim($("#Pwd").val()).length < 6 || $.trim($("#Pwd").val()).length > 20) {
+                    $("#errortest").show();
+                    $("#successPwd").hide();
+                }
+                else {
+                    $("#errortest").hide();
+                    $("#successPwd").show();
+                }
+            });
+            $("#PwdT").keyup(function (data) {
+                if ($.trim($("#PwdT").val()) != $.trim($("#Pwd").val())) {
+                    $("#errorPwdT").show();
+                    $("#successPwdT").hide();
+                }
+                else {
+                    $("#errorPwdT").hide();
+                    $("#successPwdT").show();
+                }
+            });
+            $("#PwdT").change(function (data) {
+                if ($.trim($("#PwdT").val()) != $.trim($("#Pwd").val())) {
+                    $("#errorPwdT").show();
+                    $("#successPwdT").hide();
+                }
+                else {
+                    $("#errorPwdT").hide();
+                    $("#successPwdT").show();
+                }
+            });
+            $("#plat").change(function (data) {
+                var platId = $.trim($('#plat').val());
+                if (platId != "") {
+                    if (!isInteger(platId)) {
+                        alert("请输入正确的代理编码！")
+                        $("#plat").focus();
+                    }
+                    else {
+                        $("#errorPlat").css("display", "none");
+                    }
+                }
+            });
+            $("#User").keyup(function (data) {
+                if ($.trim($("#User").val()) == "") {
+                    $("#errorUser").show();
+                    $("#successUser").hide();
+                }
+                else {
+                    $("#errorUser").hide();
+                    $("#successUser").show();
+                }
+            });
+            $("#User").change(function (data) {
+                if ($.trim($("#User").val()) == "") {
+                    $("#errorUser").show();
+                    $("#successUser").hide();
+                }
+                else {
+                    $("#errorUser").hide();
+                    $("#successUser").show();
+                }
+            });
+            $("#Tel").keyup(function (data) {
+                if ($.trim($("#Tel").val()) == "" || !checkMobileEx($.trim($("#Tel").val()))) {
+                    $("#errorTel").show();
+                    $("#successTel").hide();
+                }
+                else {
+                    $("#errorTel").hide();
+                    $("#successTel").show();
+                }
+            });
+            $("#Tel").change(function (data) {
+                if ($.trim($("#Tel").val()) == "" || !checkMobileEx($.trim($("#Tel").val()))) {
+                    $("#errorTel").show();
+                    $("#successTel").hide();
+                }
+                else {
+                    $("#errorTel").hide();
+                    $("#successTel").show();
+                }
+            });
+        });
+        function Register() {
+            var userName = $.trim($('#UserName').val());
+            if (userName.length == 0) {
+                alert("请您输入用户名！", function () {
+                    $("#UserName").focus();
+                });
+                return false;
+            }
+            else if (userName.length > 50) {
+                alert("请您将用户名控制在50个字符以内！", function () {
+                    $("#UserName").focus();
+                });
+                return false;
+            }
+            var pwd = $.trim($('#Pwd').val());
+            if (pwd.length == 0) {
+                alert("请您输入密码！", function () {
+                    $("#Pwd").focus();
+                });
+                return false;
+            }
+            else if (pwd.length < 6 || pwd.length > 20) {
+                alert("请将密码长度控制在6-20位的字符！", function () {
+                    $("#Pwd").focus();
+                });
+                return false;
+            }
+            var pwdT = $.trim($('#PwdT').val());
+            if (pwdT.length == 0) {
+                alert("请您再次输入密码！", function () {
+                    $("#PwdT").focus();
+                });
+                return false;
+            }
+            else if (pwdT != pwd) {
+                alert("请您输入相同的密码！")
+                return false;
+            }
+            var email = $.trim($('#Email').val());
+            if (!checkEmail(email) && email.length>0) {
+                alert("请您填写正确的企业邮箱！", function () {
+                    $("#Email").focus();
+                });
+                return false;
+            }
+            var organizeName = $.trim($('#Organize').val());
+            if (organizeName.length == 0) {
+                alert("请您填写单位名称！", function () {
+                    $("#Organize").focus();
+                });
+                return false;
+            }
+            else if (organizeName.length > 50) {
+                alert("请您将单位名称控制在50个字符以内！", function () {
+                    $("#Organize").focus();
+                });
+                return false;
+            }
+            var platId = $("#plat").val();
+            if (!isInteger(platId) && platId.length > 0) {
+                alert("请输入正确的代理编码！");
+                $("#plat").focus();
+                return false;
+            }
+            if (platId.length > 0) {
+                platId = $("#plat").val();
+            }
+            else {
+                platId = 0;
+            }
+            var organizeNameEn = $.trim($('#OrganizeEn').val());
+            var unitType_ID = $("#unitType_ID").val();
+            if (unitType_ID.length == 0 || unitType_ID == "-2") {
+                alert("请选择您企业性质！", function () {
+                });
+                return false;
+            }
+            var Province = $('#Province').val();
+            var selCity = $('#selCity').val();
+            var selArea = $('#selArea').val();
+            if (Province == "710000" || Province == "810000" || Province == "820000" || Province == "110000" || Province == "310000" || Province == "120000" || Province == "500000") {
+                if (!(Province == "710000" || Province == "810000" || Province == "820000")) {
+                    if (selCity == "-2") {
+                        alert("请选择您企业所在区域！");
+                        return false;
+                    }
+                }
+            }
+            else {
+                if (selArea == "-2") {
+                    alert("请选择您企业所在区域！");
+                    return false;
+                }
+            }
+            var user = $.trim($('#User').val());
+            if (user.length == 0) {
+                alert("请您填写企业联系人！", function () {
+                    $("#User").focus();
+                });
+                return false;
+            }
+            else if (user.length > 50) {
+                alert("请您将企业联系人控制在50个字符以内！", function () {
+                    $("#User").focus();
+                });
+                return false;
+            }
+            var userEn =$.trim($('#UserEn').val());
+            if (userEn.length > 50) {
+                alert("请您将企业联系人英文名称控制在50个字符以内！", function () {
+                    $("#UserEn").focus();
+                });
+                return false;
+            }
+            var tel = $.trim($("#Tel").val());
+            if (tel.length == 0) {
+                alert("请您填写组织/单位联系人手机！", function () {
+                    $("#Tel").focus();
+                });
+                return false;
+            }
+            else if(!checkMobileEx(tel)) {
+                alert("请您填写有效的手机号码！", function () {
+                    $("#Tel").focus();
+                });
+                return false;
+            }
+            var code = $.trim($("#txtCode").val());
+            if (code.length == 0) {
+                alert("请填写获取的验证码！");
+                return false;
+            }
+            var sendData = {
+                userName: userName,
+                pwd: pwd,
+                email: email,
+                organizeName: organizeName,
+                organizeNameEn: organizeNameEn,
+                unitType_ID: unitType_ID,
+                province: Province,
+                selCity: selCity,
+                selArea: selArea,
+                user: user,
+                userEn: userEn,
+                tel: tel,
+                code: code,
+                platId: platId
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Register/Online",
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (jsonResult) {
+                    alert(jsonResult.Msg);
+                    if (jsonResult.code != 0) {
+                        location.href = "/";
+                    }
+                }
+            })
+        }
+        var code = "";
+        function GetVerifyCode() {
+            if (!checkMobileEx($("#Tel").val())) {
+                alert("您填写的手机号格式不正确！", $("#Tel"));
+                return false;
+            }
+            var a = 60;
+
+            var id = setInterval(function () {
+                $("#btGetCode").val("剩余" + a + "秒");
+                a--;
+            }, 1000);
+
+            $("#btGetCode").attr("disabled", true);
+            $.post('/Register/GetPhoneCode?phone=' + $("#Tel").val(), function (data) {
+                //alert(data.VerifyCode);
+            });
+
+            setTimeout(function () {
+                clearInterval(id);
+                $("#btGetCode").val("获取验证码");
+                $("#btGetCode").attr("disabled", false);
+            }, 1000 * a);
+        }
+    </script>
+</head>
+<body>
+    <div class="reg-main">
+        <div class="reg-article mod">
+            <div class="art-hd clearfix">
+                <h2>
+                    填写注册信息</h2>
+            </div>
+            <div class="art-bd">
+                <div class="form form-1 mod-reslut-t2">
+                    <form class="check-account-form">
+                    <ul class="mt10">
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 用户名：</label>
+                            <span class="v">
+                                <input type="text" id="UserName" class="text text3" maxlength="50" />
+                                <span class="text-error account-info">
+                                    <div id="errorUserName">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">请输入用户名</em>
+                                    </div>
+                                    <div id="successUserName" style="display: none">
+                                        <i class="ico ico-err-1"></i><em class="gray error-info">已输入用户名</em>
+                                    </div>
+                                </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 密码：</label>
+                            <span class="v">
+                                <input type="password" id="Pwd" name="Pwd" class="text text3" maxlength="20" />
+                                <span class="text-error account-info">
+                                    <div id="errortest">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">密码长度6-20个字符以内</em>
+                                    </div>
+                                    <div id="successPwd" style="display: none">
+                                        <i class="ico ico-err-1"></i><em class="gray error-info">已输入密码</em>
+                                    </div>
+                                </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 确认密码：</label>
+                            <span class="v">
+                                <input type="password" id="PwdT" name="PwdT" class="text text3" maxlength="20" />
+                                <span class="text-error account-info">
+                                    <div id="errorPwdT">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">请输入相同的密码</em>
+                                    </div>
+                                    <div id="successPwdT" style="display: none">
+                                        <i class="ico ico-err-1"></i><em class="gray error-info">输入密码正确</em>
+                                    </div>
+                                </span></span></li>
+                    </ul>
+                    <div class="line">
+                    </div>
+                    <ul class="mt10">
+                        <li class="fm-item" style="display: none">
+                            <label for="#" class="k">
+                                单位邮箱：</label>
+                            <span class="v">
+                                <input type="text" id="Email" name="Email" class="text text3" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 组织/单位名称：</label>
+                            <span class="v">
+                                <input type="text" id="Organize" name="Organize" class="text text3" maxlength="50"
+                                    readonly="readonly" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                组织/单位英文名称：</label>
+                            <span class="v">
+                                <input type="text" id="OrganizeEn" name="OrganizeEn" class="text text3" maxlength="50" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                代理编码：</label>
+                            <span class="v">
+                                <input type="text" id="plat" name="plat" class="text text3" maxlength="50" />
+                                <span class="text-error account-info">
+                                    <div id="errorPlat" style="display: none">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">没有查到代理信息</em>
+                                    </div>
+                                </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 单位性质：</label>
+                            <span class="v">
+                                @Html.Action("HisUnitType", "Public")
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 组织/单位所在区域：</label>
+                            <span class="v">
+                                @Html.Action("Address", "Public")
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 组织/单位联系人：</label>
+                            <span class="v">
+                                <input type="text" id="User" name="User" class="text text3" maxlength="50" />
+                                <span class="text-error account-info">
+                                    <div id="errorUser">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">请输入组织/单位联系人</em>
+                                    </div>
+                                    <div id="successUser" style="display: none">
+                                        <i class="ico ico-err-1"></i><em class="gray error-info">已输入组织/单位人</em>
+                                    </div>
+                                </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                组织/单位联系人英文名：</label>
+                            <span class="v">
+                                <input type="text" id="UserEn" name="UserEn" class="text text3" maxlength="50" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span>组织/单位联系人手机：</label>
+                            <span class="v">
+                                <input type="text" id="Tel" name="Tel" class="text text3" />
+                                <input type='button' id="btGetCode" class="btn btn-1" onclick="GetVerifyCode()" value="获取验证码" />
+                                <span class="text-error account-info">
+                                    <div id="errorTel">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">请输入正确的手机号码</em>
+                                    </div>
+                                    <div id="successTel" style="display: none">
+                                        <i class="ico ico-err-1"></i><em class="gray error-info">已输入组织/单位人手机</em>
+                                    </div>
+                                </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                手机验证码：</label>
+                            <span class="v">
+                                <input type="text" id="txtCode" name="txtCode" class="text text3" />
+                            </span></li>
+                    </ul>
+                    <div class="btns">
+                        <input type="button" class="btn btn-2" value="上一步" onclick="onNavClick(1)" />
+                        <input type='button' id="bt3" class="btn btn-1" value="注册" onclick=" Register()" />
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

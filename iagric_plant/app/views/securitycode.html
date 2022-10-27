@@ -1,0 +1,145 @@
+﻿<div class="page-content" id="First">
+    <!--    <div class="guide-title">
+            <ul>
+                <li class="active"><i>1</i> <span>生成码</span> </li>
+                <li><i>2</i> <span>追溯码配置</span> </li>
+                <li><i>3</i> <span>追溯页风格设置</span> </li>
+            </ul>
+        </div>-->
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="active"><i>1</i><span>生成码</span></li>
+                <li><i>2</i><span>页面风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                                  <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                        <span class="alert-danger">*</span>二维码类型：
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control" style="width: 200px; display: inline-block;" id="Select1"
+                            data-bind="options:SelTypeModel.SelTypeArray,value:SelTypeModel.SelectedId,optionsCaption:'选择类型',optionsText:'Text',optionsValue:'Value'">
+                        </select>
+                        <span class="alert-danger" data-bind="visible:SelType">请选择二维码类型！</span>
+                    </div>
+                </div>
+                <div class="form-group" id="DivSpecifications" name="DivSpecifications">
+                    <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                        <span class="alert-danger">*</span>套标码规格：
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control" style="width: 200px; display: inline-block;" id="Select2"
+                            data-bind="options:SpecificationsModel.SpecificationsArray,value:SpecificationsModel.SelectedId,optionsCaption:'选择规格',optionsText:'GuiGe',optionsValue:'ID'">
+                        </select>
+                        <span class="alert-danger" data-bind="visible:SelSpecification">请选择规格！</span>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>产品名称：
+                        </label>
+                        <div class="col-md-10">
+                            <select class="form-control" style="width: 200px; display: inline-block;" id="Select3"
+                                data-bind="options:VmMaterial.MaterialArray,value:VmMaterial.SelectedId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                            </select>
+<!--                            <button class="btn btn-lg-s btn-success mal10" data-bind="click:addmaterial">
+                                添加产品</button>-->
+                            <span class="alert-danger" data-bind="visible:SelMaterial">请选择产品！</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divCodeCount"  style=" display:none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生成码数量：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" placeholder="生成码数量..." style="width: 200px;" data-bind="value:Number,validationElement:Number,hasfocus:SelNumber" />
+                        <!--    <span class="alert-danger" data-bind="visible:SelNumber">请输入生成数量！</span>-->
+                            <p>
+                                <span class="alert-danger-new">请输入有效的正整数，按照实际生产需要，使用多少码就生成多少个码，例如：100，最大生成数量为100000</span></p>
+                        </div>
+                    </div>
+                      <div class="form-group" id="divTao" style=" display:none;">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生成套标数量：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" placeholder="套标数量..." style="width: 200px;" data-bind="value:Number,validationElement:Number,hasfocus:SelNumber" />
+                            <!-- <span class="alert-danger" data-bind="visible:SelNumber">请输入生成数量！</span>-->
+                            <p>
+                                <span class="alert-danger-new">请输入有效的正整数</span></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            <span class="alert-danger">*</span>生成时间：
+                        </label>
+                        <div class="col-md-10">
+                            <input style="width: 200px;" placeholder="生成时间" class="form-control date-picker"
+                                id="AddDate" name="AddDate" type="text" data-date-format="yyyy-mm-dd" data-bind="value:AddDate"
+                                readonly="readonly" />
+                            <span class="alert-danger" data-bind="visible:shengchengDate">请选择生成时间！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 no-padding-right">
+                        </label>
+                        <div class="col-md-10">
+                            <button type="button" class="btn  btn-lg btn-success" data-bind="click:GenerateOne">
+                                下一步</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Second" style="display: none">
+    <div class="part-index clearfix">
+        <div class="ncp-steps">
+            <ul>
+                <li class="visited"><a href=""><i>1</i><span data-bind="click:function(data, event) {TopSubPageClick('First',data,event);}">生成码</span></a></li>
+                <li class="active"><i>2</i><span>页面风格设置</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content">
+            <div class="row clearfix" style="margin: 40px 0 0;">
+                <div class="configure">
+                    <div class="field-group">
+                        <label class="tit">
+                            模板样式：</label>
+                        <div class="refund-reason">
+                            <p>
+                                请对该批二维码选择模板样式 <span class="remarks">（默认为模板一）</span>
+                            </p>
+                            <div class="mobanlist clearfix" id="radio_wrap">
+                                <ul data-bind="foreach:styleArray">
+                                    <li class="checked" title="模板一">
+                                        <div>
+                                            <input type="radio" id="radio_a_01" name="radio_a">
+                                            <label for="radio_a_01">
+                                                <img id="imgQR" src="/newmenu/images/secCode.png">
+                                            </label>
+                                            <i></i>
+                                        </div>
+                                        <p data-bind="html:$data.text">
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-left: 90px; margin-top: 20px;">
+                    <button class="btn btn-lg btn-success" data-bind="click:Generate">
+                        完成</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

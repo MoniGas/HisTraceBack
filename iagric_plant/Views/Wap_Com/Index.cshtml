@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutShow.cshtml";
+}
+@{
+    @*int a = int.Parse(ViewBag.TemplateIDs.Split(',')[0]);
+    switch (a)
+    {
+        case ((int)Common.EnumFile.TemplateType.HomeMany):
+    @Html.Action("HomeMany", "Public", new { ewm = ViewBag.ewm });
+                                                                 break;
+        case ((int)Common.EnumFile.TemplateType.HomeOnly):
+    @Html.Action("HomeOnly", "Public", new { ewm = ViewBag.ewm });
+                                                                 break;
+        case ((int)Common.EnumFile.TemplateType.HomeOnlyCompany):
+    @Html.Action("HomeOnlyCompany", "Public", new { ewm = ViewBag.ewm });
+                                                                        break;
+        case ((int)Common.EnumFile.TemplateType.HomeDisMore):
+    @Html.Action("HomeDisMore", "Public", new { ewm = ViewBag.ewm });
+                                                                        break;
+    }*@
+    
+    @Html.Action("HomeOnlyCompany", "Public", new { ewm = ViewBag.ewm })
+    @Html.Action("HomeMany", "Public", new { ewm = ViewBag.ewm });
+    @*@Html.Action("HomeOnly", "Public", new { ewm = ViewBag.ewm });
+                                                                 ;
+    @Html.Action("HomeDisMore", "Public", new { ewm = ViewBag.ewm });*@
+}
+
+

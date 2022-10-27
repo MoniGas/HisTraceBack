@@ -1,0 +1,86 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 3000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    管理主页>二维码销售管理>二维码列表</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-7 no-padding">
+                            <div class="input-group stylish-input-group">
+                               <!-- <input type="text" class="form-control" data-bind="value:code" placeholder="输入相关信息搜索" />
+                                <span class="input-group-addon btn-success">-->
+                                    <!--<button type="submit" data-bind="click:searchInfo">-->
+                                <!--    <button type="submit" data-bind="click: function(data, event) {$root.searchInfo(data,event);}">
+                                        <span class="fa fa-search"></span>
+                                    </button>-->
+                         <!--       </span>-->
+                                   <button id="btn1" class="btn btn-lg btn-success" data-bind="click: function(data, event) {$root.export(data,event);}">导出</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover no-lr-border">
+                        <thead>
+                            <tr>
+                                <th>
+                                    销售时间
+                                </th>
+                                <th>
+                                    二维码
+                                </th>
+                                <th>
+                                    类型
+                                </th>
+                                <th>
+                                    防伪码
+                                </th>
+                                <th>
+                                    预览效果
+                                </th>
+                                <th>
+                                    标签效果
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:ObjList">
+                            <tr>
+                                <td>
+                                    <span class="middle" data-bind="text:$data.StrUseTime"></span>
+                                </td>
+                                <td>
+                                    <span class="middle" data-bind="text:$data.EWM"></span>
+                                </td>
+                                <td>
+                                    <span class="middle" data-bind="text:$parent.ViewType($data.Type)"></span>
+                                </td>
+                                <td>
+                                    <span class="middle" data-bind="text:$data.FWCode"></span>
+                                </td>
+                                <td>
+                                    <a target="_blank" data-bind="attr:{href:'/Wap_index/index?ewm='+$data.EWM() + '.9.1'}"
+                                        class="blue">查看</a>
+                                </td>
+                                <td>
+                                    <a data-bind="attr:{href:'http://s.idcode.org.cn/m?code='+$data.EWM()}" target="_blank">
+                                        查看</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer no-margin-top no-t-border">
+                        <ul class="pagination" id="sellinfoPager" data-bind="sellinfoPager:pageSize,totalCounts:totalCounts,pageIndex:pageIndex">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

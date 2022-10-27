@@ -1,0 +1,220 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var dlName = $.trim($("#LabelName").val());
+            if (dlName.length == 0) {
+                alert("请输入标签模板名称！");
+                $("#LabelName").focus();
+                return false;
+            }
+
+            var LabelWidht = $.trim($("#LabelWidht").val());
+            if (LabelWidht.length == 0) {
+                alert('请输入宽度');
+                return;
+            }
+            var LabelHeight = $.trim($("#LabelHeight").val());
+            if (LabelHeight.length == 0 ) {
+                alert("请输入高度！");
+                return false;
+            }
+            var Remarks = $.trim($("#Remarks").val());
+            var LabelImg=$.trim($('#LabelImg').attr('src'));
+            var LocalUrl=$.trim($("#zipurl").val());
+            if (LocalUrl.length == 0 ) {
+                alert("请上传模板！");
+                return false;
+            }
+            var sendData = {
+                LabelName: $.trim($("#LabelName").val()),
+                LabelWidht: LabelWidht,
+                LabelHeight: LabelHeight,
+                Remarks: Remarks,
+                LabelImg:LabelImg,
+                LocalUrl: LocalUrl,
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/sys_labeltem/Add',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.code == "1") {
+                        alert(data.Msg);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("Index")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+        var index=0;
+        var str = new Array();
+        var sign=0;
+        var errorsmsg="";
+        $("#uploadify").uploadify({
+            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf', // 做上传的Flash插件
+            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=6', //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif', // 关闭按钮的图片地址
+            'folder': '/Areas/Admin/Files/', // 保存文件的文件夹
+            'queueID': 'fileQueue',
+            'fileDesc': '请选择你电脑里格式为*.zip;的文件', // 描述（必须和fileExt一起使用）
+            'fileExt': '*.zip', // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+            'sizeLimit': 1048576, // 文件大小限制10M（注意，在ASP.NET中Web.Config也要配置）
+            'simUploadLimit':1,//允许同时上传的个数
+            'auto': true,
+            'multi': false, // 是否支持多文件上传
+//            '': '200px',
+            //'buttonText': '浏览',    // 按钮上的文本
+            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+            'overrideEvents': ['onError', 'onComplete', 'onAllComplete', 'onSelectOnce','onCancel'],
+            'onError': function (a, b, c, d) {
+                if (d.status == 404)
+                    alert('Could not find upload script.');
+                else if (d.type === "HTTP")
+                    alert('error ' + d.type + ": " + d.status);
+                else if (d.type === "File Size")
+                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+                else
+                    alert('error ' + d.type + ": " + d.info);
+            },
+//            'onSelect':function (a,b,c)
+//            {
+//                if(c.type!=".zip")
+//                {
+//                    alert("上传失败,请上传zip格式文件");
+//                    //$("#div_Msg").addClass("div_Msg").text("上传失败,请上传zip格式文件" );
+//                }
+//            },
+            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+                $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+                str=d.split(';');
+                if(str[0]!=1)
+                {
+                    alert(str[1]);
+                    sign=0;
+                    errorsmsg=str[1];
+                    $("#LabelWidht").val("");
+                    $("#LabelHeight").val("");
+                    $("#LabelName").val("");
+                    $("#LabelImg").attr("src", "");
+                    $("#zipurl").val("");
+                }
+                else
+                {
+                    sign=1;
+                    $("#LabelWidht").val(str[2]);
+                    $("#LabelHeight").val(str[3]);
+                    $("#LabelName").val(str[4]);
+                    $("#LabelImg").attr("src", str[5]);
+                    $("#zipurl").val(str[6]);
+                }
+            },
+            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+                if(sign==1)
+                    $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+                else if(sign==0)
+                    $("#div_Msg").addClass("div_Msg").text("上传失败  " + errorsmsg + "");
+            },
+            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+            },
+            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+            },
+        });
+        
+        
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                            <span style="width: 105px" class="label">模板上传：</span>
+                            <div class="fl">
+                                <div class="clearfix">
+                                    <div class="div_FilesBox">
+                                        <div id="imgMsg"></div>
+                                        <div class="div_Handler" style="margin-top: 10px;">
+                                            @*<a href="javascript:$('#uploadify').uploadifyUpload()" style="float: right; margin-right: 140px;" >
+                                                开始上传</a>*@
+                                            <input type="file" name="uploadify" id="uploadify"/>
+                                        </div>
+                                        <div id="fileQueue" class="uploadifyQueue">
+                                        </div>
+                                        <div id="div_Msg">
+                                        </div>
+                                    </div>
+                                    <p class="ftx03">
+                                        文件大小不超过10M，后缀名为zip的文件</p>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>标签模板名称：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="LabelName"  maxlength="25" />
+                                    <span style="color: #ed7049"> 输入最大长度不超过25个汉字</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em></em>宽度：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="LabelWidht" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em></em>高度：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="LabelHeight" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">说明信息：</span>
+                                <div class="fl">
+                                    <textarea type="text" cols="100" rows="5" style="width: 180px;" id="Remarks" 
+                                        maxlength="1000"></textarea>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">图片预览：</span>
+                                <div class="fl">
+                                    <img  id="LabelImg" name="LabelImg" />
+                                </div>
+                            </div>
+                            <div class="infoitem" style="display: none;">
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="zipurl" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="添 加" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

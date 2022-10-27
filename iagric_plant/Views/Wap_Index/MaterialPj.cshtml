@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "MaterialPj";
+    Layout = null;
+}
+@model List<LinqModel.NewComplaint>
+           <style>
+              #pj .img1
+               {
+                   display:none;
+                   position:absolute;
+                   top:-.5rem;
+                   left:.5rem;
+               }
+           </style>
+<script type="text/javascript">
+     $(function () {
+         $("#pj a").one("click",function () {
+            var obj=$(this);
+            obj.find(".tag-num").text("("+(parseInt(obj.find(".tag-num").text().replace("(","").replace(")",""))+1)+")");
+            obj.addClass("active");
+            obj.find(".img1").fadeIn("slow",function(){obj.find(".img1").fadeOut("slow")});
+             $.post("@Url.Action("MaterialPj")", {content:obj.attr("title")}, function (data) {
+             });
+         });
+     })
+</script>
+<div class="list" id="pj">
+    <div class="list-title">
+        商品评价
+    </div>
+    <div class="assess-label cloud-tag clearfix">
+        @foreach (var item in Model)
+        {
+            if (!string.IsNullOrEmpty(item.ComplaintContent))
+            {
+            <a class="tag-hot"  title="@item.ComplaintContent" style=" position:relative;">
+                            <img src="@Url.Content("~/images/-1.png")" class="img1" />
+            <span class="tag-title">@(item.ComplaintContent)<span class="tag-num">(@item.Count)</span></span> </a>
+            }
+        }
+    </div>
+</div>

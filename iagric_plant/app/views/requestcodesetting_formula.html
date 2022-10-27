@@ -1,0 +1,85 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 700px;
+    height: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    选择配方</h4>
+        </div>
+        <div class="modal-body" style="height:500px">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group clearfix">
+                        <div class="col-md-4 no-padding">
+                            <span>
+                                <select class="form-control" style="width: 200px;height: 30px;" data-bind="options:FormulaList.FormulaArray,value:FormulaList.SelectedId,optionsText:'FormulaName',optionsValue:'FormulaID',optionsCaption: '选择配方'">
+                                </select>
+                            </span>
+                        </div>
+                        <div class="col-md-6 no-padding">
+                        <button class="btn btn-lg btn-success" data-bind="click:SelectOrigin">
+                            选择</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    原料名称
+                                </th>
+                                <th>
+                                    供应商
+                                </th>
+                                <th>
+                                    配比
+                                </th>
+                                <th>
+                                    等级
+                                </th>
+                                <th>
+                                    产地
+                                </th>
+                                <th>
+                                    批次
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:FormulaDetail">
+                            <tr>
+                                <td>
+                                    <p data-bind="text:$data.OriginName">
+                                    </p>
+                                </td>
+                                <td>
+                                    <p data-bind="text:$data.Supplier">
+                                    </p>
+                                </td>
+                                <td>
+                                    <p data-bind="text:$data.Amount">
+                                    </p>
+                                </td>
+                                <td>
+                                    <p data-bind="text:$data.Level">
+                                    </p>
+                                </td>
+                                <td>
+                                    <p data-bind="text:$data.Factory">
+                                    </p>
+                                </td>
+                                <td>
+                                    <p data-bind="text:$data.Batch">
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

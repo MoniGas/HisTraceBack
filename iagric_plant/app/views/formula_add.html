@@ -1,0 +1,64 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 650px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加原料</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="form-field-1">
+                            <span class="alert-danger">*</span>原料：</label>
+                        <div class="col-md-3">
+                            <select class="form-control" style="display: inline-block;" id="selectOrigin" data-bind="options:OriginList.OriginArray,value:OriginList.SelectedId,optionsText:'OriginName',optionsValue:'Origin_ID',optionsCaption: '选择原料'">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selOrigin">请选择原料！</span>
+                        </div>
+                        <label class="col-md-2 control-label" for="form-field-1">
+                            <span class="alert-danger">*</span>供应商：</label>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="供应商..." maxlength="10" class="form-control" data-bind="value:Supplier">
+                            <span class="alert-danger" data-bind="visible:selSupplier,text:selSupplierTitle">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="form-field-1">
+                            配比：</label>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="原料配比..." maxlength="10" class="form-control" data-bind="value:Amount">
+                        </div>
+                        <label class="col-md-2 control-label" for="form-field-1">
+                            等级：</label>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="原料等级..." maxlength="10" class="form-control" data-bind="value:Level">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="form-field-1">
+                            批次：</label>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="原料批次..." maxlength="10" class="form-control" data-bind="value:Batch">
+                        </div>
+                        <label class="col-md-2 control-label" for="form-field-1">
+                            产地：</label>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="原料产地..." maxlength="10" class="form-control" data-bind="value:Factory">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:AddOrigin">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+                取消</button>
+        </div>
+    </div>
+</div>

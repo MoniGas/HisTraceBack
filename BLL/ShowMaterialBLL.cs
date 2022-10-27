@@ -1,0 +1,7 @@
+﻿
+namespace Dal
+{
+    class ShowMaterialBLL
+    {
+    }
+}

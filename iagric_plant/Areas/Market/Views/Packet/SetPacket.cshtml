@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+<script src="@Url.Content("~/Areas/Market/Scripts/artDialog4.1.7/artDialog.js?skin=blue")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/artDialog4.1.7/plugins/iframeTools.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/glvalidate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/Market/Scripts/jquery.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Areas/Market/Content/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Market/Content/greenskin.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Market/Content/main.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    function closewin() {
+        var parentwin = artDialog.open.origin;
+        var amount = $("#amount").val();
+        if (!isNumber(amount)) {
+            alert('红包数量请输入正整数');
+            return;
+        }
+        if (parseFloat(amount) > 10000 || parseFloat(amount) <= 0) {
+            alert('红包数量在0-10000之间');
+            return;
+        }
+        var sum = $("#sum").val();
+        if (!isMoney(sum)) {
+            alert('红包金额必须是有效数字，最多保留两位小数');
+            return;
+        }
+        if (parseFloat(sum) > 200 || parseFloat(sum) < 0.3) {
+            alert('红包金额在0.3-200之间');
+            return;
+        }
+        var total = amount * sum;
+        parentwin.AfterSet(amount, sum, total);
+        art.dialog.close();
+    }
+</script>
+<div>
+<body style="min-width: 0; width: 400px;">		
+			<!-------------------main start---------------------------------->
+				<div class="card_pa20 clearfix">
+					<div class="mod-main">
+						<div class="mc clearfix">
+                        <div class="user-set userset-lcol">
+                            <div class="form hd-manage-det">
+                                <div class="infoitem">
+                                    <span class="label">红包金额：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;"id="sum" name="sum" maxlength="6"/> 元
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label">红包数量：</span>
+                                    <div class="fl">
+                                        <input type="text" style="width: 180px;"id="amount" name="amount" maxlength="5"/> 个
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <p class="center mat20"><input type="button" value="确定" class="button" onclick="closewin()"></p>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+					</div>
+				</div>
+			<!-------------------main end---------------------------------->
+	</body>
+@*    <table>
+        <tr>
+            <td>
+                红包数量
+            </td>
+            <td>
+                <input type="text" id="amount" name="amount" value="5" /><span>请输入红包数量</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                红包金额
+            </td>
+            <td>
+                <input type="text" id="sum" name="sum" value="1" /><span>红包金额在1-200之间，单位精确到分，例如：1.55</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="确定" onclick="closewin()" />
+            </td>
+        </tr>
+    </table>*@
+</div>

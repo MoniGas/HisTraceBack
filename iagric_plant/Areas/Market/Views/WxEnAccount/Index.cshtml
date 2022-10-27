@@ -1,0 +1,488 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+@model LinqModel.YX_WxEnAccount
+<link rel="stylesheet" type="text/css" href="/lib/webuploader/css/webuploader.css" />
+<style>
+     #uploadifyNIJGWI {
+         background-color: #F5F5F5;
+         border: 2px solid #E5E5E5;
+         font: 11px Verdana, Geneva, sans-serif;
+         margin-top: 5px;
+         padding: 10px;
+         width: 350px;
+         display: none;
+     }
+     .uploadifyQueueItem {
+         background-color: #F5F5F5;
+         border: 2px solid #E5E5E5;
+         font: 11px Verdana, Geneva, sans-serif;
+         margin-top: 5px;
+         padding: 10px;
+         width: 350px;
+     }
+    .progress {
+        height: 20px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .progress.active .progress-bar {
+        -webkit-animation: progress-bar-stripes 2s linear infinite;
+        animation: progress-bar-stripes 2s linear infinite;
+    }
+
+    .progress-striped .progress-bar {
+        background-image: linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+        background-size: 40px 40px;
+    }
+    .progress-bar {
+        background-image: -webkit-linear-gradient(top,#428bca 0,#3071a9 100%);
+        background-image: linear-gradient(to bottom,#428bca 0,#3071a9 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=’#ff428bca’,endColorstr=’#ff3071a9’,GradientType=0);
+    }
+    .progress-bar {
+        float: left;
+        height: 100%;
+        font-size: 12px;
+        line-height: 20px;
+        color: #fff;
+        text-align: center;
+        background-color: #428bca;
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+        transition: width .6s ease;
+    }
+    .webuploader-pick
+    {
+        background: #555;
+    }
+    #uploadify div
+    {
+        width: 118px;
+        font-family: 微软雅黑;
+        height: 28px;
+        line-height: 28px;
+        border: solid 1px #555555;
+        font-size: 13px;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        margin-right: 7px;
+        float: left;
+        display: block;
+        color: #fff;
+        padding-top: 0;
+    }
+</style>
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>活动管理<span class="divider">›</span></li>
+        <li>微信红包账户设置</li>
+    </ul>
+</div>
+<div class="card_pa40 clearfix">
+    <div style="padding-left: 150px" class="mod-main">
+        <div class="form">
+            <input type="hidden" value="@ViewBag.eId" id="eId" />@* color:#D98719*@
+            <div class="infoitem" style="font-size: 14px;">
+                <span>使用微信红包业务，您需要确认以下条件是否全部满足，才可以正常发放微信红包</span>
+                <p>
+                    1 微信公众号已开通微信支付商户功能</p>
+                <p>
+                    2 发放现金红包将扣除商户微信商户账号的可用余额(可用余额并不是微信支付交易额,需要预先充值),请确保可用余额充足,否则红包将发放失败。</p>
+                <p>
+                    3 首次创建微信红包前需要您自主进行红包配置，配置完成后方可创建微信红包。</p>
+            </div>
+            <div class="infoitem">
+                <span class="label"><em>*</em>开发者ID（AppID）：</span>
+                <div class="fl">
+                    <input type="text" placeholder="开发者ID（AppID）" maxlength="100" id="AppID" name="AppID" value="@Model.WxAppId"/><span
+                        style="color: #ADADAD; margin-left: 15px">微信分配的公众账号ID（企业号corpid即为此appId）</span>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label" style="width: 169px; margin-left: -30px;"><em>*</em>开发者密码（AppSecret）：</span>
+                <div class="fl">
+                    <input type="text" placeholder="开发者密码（AppSecret）"  maxlength="100" id="AppSecret" name="AppSecret" value="@Model.AppSecret"/>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label"><em>*</em>微信商户号：</span>
+                <div class="fl">
+                    <input type="text" placeholder="微信商户号" maxlength="100" id="WxShangHuHao" name="WxShangHuHao" value="@Model.MarId"/><span
+                        style="color: #ADADAD; margin-left: 15px">微信支付分配的商户号</span>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label"><em>*</em>签名API密钥：</span>
+                <div class="fl">
+                    <input type="text" placeholder="签名API密钥" maxlength="100" id="QMApiMiYao" name="QMApiMiYao" value="@Model.Key"/><span
+                        style="color: #ADADAD; margin-left: 15px">微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置</span>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label"><em>*</em>API证书：</span>
+                <div class="fl">
+                    <div class="clearfix">
+                        <div class="div_FilesBox">
+                            @if (string.IsNullOrEmpty(Model.APIFileURL))
+                            {
+                                <div id="showimg" style="display: none">
+                                    <input type="hidden" id="ImagePath" value="" />
+                                    @*<span id="fspan"></span><a id="delActivity" href="#">删除1</a>*@
+                                </div>
+                            }
+                            else
+                            { 
+                                <div id="showimg">
+                                    <input type="hidden" id="ImagePath" value="@Model.APIFileURL" />
+                                    @*  <img id="imgsrc" style=" max-height:100px; max-width:100px;" src="@Model.APIFileURL">*@
+                                    <span>@Model.APIFileURL.Substring(Model.APIFileURL.LastIndexOf('/')).Replace('/', ' ')</span>
+                                    <a id="delActivity" href="#">删除</a>
+                                </div>
+                            }
+                            <div class="div_Handler" style="margin-top: 10px;">
+                                <div id="uploadify">
+                                    选择文件
+                                </div>
+                                <a href="javascript:" style="float: right; margin-right: 140px;" id="ctlBtnUp">开始上传</a>
+                                @*<a href="javascript:" style="float: right; margin-right: 140px;" onclick="javascript:$('#uploadify').uploadifyUpload()">
+                                    开始上传</a>*@
+                            </div>
+                            <div id="uploadifyNIJGWI" class="uploadifyQueueItem">
+                                
+                                <div id="filedelete" class="cancel"><img src="/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif">
+                                </div>
+                                <span class="fileName"></span>
+                                <span class="percentage"></span>
+                                <div class="uploadifyProgress">
+                                    <div id="uploadifyNIJGWIProgressBar" class="uploadifyProgressBar"><!--Progress Bar--></div>
+                                </div>
+                            </div>
+                            <div id="fileQueue" class="uploadifyQueue">
+                            </div>
+                            <div id="div_Msg">
+                            </div>
+                        </div>
+                        <p class="ftx03">
+                            文件大小不超过5M,文件格式为p12</p>
+                    </div>
+                </div>
+            </div>
+            <div class="infoitem">
+                <span class="label">&nbsp;</span>
+                <div class="fl">
+                    <input type="button" value="保存" class="button-big" id="SaveSubmit" onclick="SaveSubmit()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/lib/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/lib/webuploader/js/webuploader.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //        $("#uploadify").uploadify({
+        //            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf',    // 做上传的Flash插件
+        //            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=3',   //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+        //            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif',  // 关闭按钮的图片地址
+        //            'folder': '/Areas/Market/Files/APIZShu/', // 保存文件的文件夹
+        //            'queueID': 'fileQueue',
+        //            'fileDesc': '请选择你电脑里格式为*.p12的文件',  // 描述（必须和fileExt一起使用）
+        //            'fileExt': '*.p12',   // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+        //            'sizeLimit': 104857600, // 文件大小限制100M（注意，在ASP.NET中Web.Config也要配置）
+        //            'auto': false,
+        //            'multi': false,  // 是否支持多文件上传
+        //            //'buttonText': '浏览',    // 按钮上的文本
+        //            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+        //            'onError': function (a, b, c, d) {
+        //                if (d.status == 404)
+        //                    alert('Could not find upload script.');
+        //                else if (d.type === "HTTP")
+        //                    alert('error ' + d.type + ": " + d.status);
+        //                else if (d.type === "File Size")
+        //                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+        //                else
+        //                    alert('error ' + d.type + ": " + d.info);
+        //            },
+        //            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+        //                $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+        //                $("#ImagePath").val(d);
+        //                $("#fspan").text($("#ffspan").text(d).Substring($("#ffspan").text().LastIndexOf('/')).Replace('/', ' '));
+        //                $("#showimg").css({ "display": "" });
+        //                $("#delActivity").click(function () {
+        //                    //                    $("#imgsrc").attr("src", '');
+        //                    $("#fspan").text(d);
+        //                    $("#ImagePathLogo").val('');
+        //                    $("#showimg").css({ "display": "none" });
+        //                });
+        //            },
+        //            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+        //                $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+        //            },
+        //            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+        //                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+        //            },
+        //            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+        //                $("#fspan").text();
+        //                $("#ImagePath").val('');
+        //                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+        //            }
+        //        });
+        //        var uploader = WebUploader.create({
+        //            // swf文件路径
+        //            swf: '/lib/webuploader/Uploader.swf',
+        //            // 文件接收服务端。
+        //            server: "/Areas/Market/BLL/FilesUpLoad.ashx?type=3",
+        //            // 选择文件的按钮。可选。
+        //            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        //            pick: { id: '#uploadify',
+        //                multiple: false            //默认为true，true表示可以多选文件，HTML5的属性
+        //            },
+        //            //auto: true,
+        //            //            formData: { guid: guid },
+        //            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        //            resize: false,
+        //            fileNumLimit: 1,
+        //            formData: {
+        //                folder: '/Areas/Market/Files/APIZShu/' // 保存文件的文件夹
+        //            },
+        //            //切片
+        //            chunked: true,
+        //            //每片的大小，C#接收文件也有默认大小，也可以自己在C#中修改
+        //            chunkSize: 2 * 1024 * 1024,
+        //            threads: 1,
+        //            accept: {
+        //                title: 'p12的文件',
+        //                extensions: 'p12',
+        //                mimeTypes: 'p12/*'
+        //            }
+        //        });
+        //        uploader.on('uploadSuccess', function () {
+        //            $("#div_Msg").addClass("div_Msg").text("成功上传 !");
+        //        });
+        //        uploader.on('beforeFileQueued', function (file) {
+        //            //实时获得上传限制的文件总数
+        //            max = this.options.fileNumLimit;
+        //            if (count >= max && flag) {
+        //                flag = false;
+        //                this.trigger('error', 'Q_EXCEED_NUM_LIMIT', max, file);
+        //                setTimeout(function () {
+        //                    flag = true;
+        //                }, 1);
+        //            }
+        //            return count >= max ? false : true;
+        //        });
+        ////        //当所有文件上传结束时触发。
+        ////        uploader.on('uploadFinished', function (a, b) {
+        ////            $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+        ////        });
+        //        //当文件被加入队列以后触发。
+        //        uploader.on('fileQueued', function (a, b) {
+        //            count++;
+        //            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+        //        });
+        //        //当文件被移除队列后触发。
+        //        uploader.on('fileDequeued', function (a, b, c, d) {
+        //            count--;
+        //            $("#fspan").text();
+        //            $("#ImagePath").val('');
+        //            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+        //        });
+        //        //不管成功或者失败，文件上传完成时触发。
+        //        uploader.on('uploadComplete', function (a, b, c, d, e) {
+        //            $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+        //            $("#ImagePath").val(d);
+        //            $("#fspan").text($("#ffspan").text(d).Substring($("#ffspan").text().LastIndexOf('/')).Replace('/', ' '));
+        //            $("#showimg").css({ "display": "" });
+        //            $("#delActivity").click(function () {
+        //                //                    $("#imgsrc").attr("src", '');
+        //                $("#fspan").text(d);
+        //                $("#ImagePathLogo").val('');
+        //                $("#showimg").css({ "display": "none" });
+        //            });
+        //        });
+        var max = 0, count = 0;
+        var flag = true;
+        var uploader = WebUploader.create({
+
+            // swf文件路径
+            swf: '/lib/webuploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: "/Areas/Market/BLL/FilesUpLoad.ashx?type=3",
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#uploadify',
+            auto: false,
+            formData: { folder: '/Areas/Market/Files/APIZShu/' },
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false,
+            //切片
+            chunked: true,
+            //每片的大小，C#接收文件也有默认大小，也可以自己在C#中修改
+            chunkSize: 5 * 1024,
+            fileSingleSizeLimit: 5 * 1024 * 1024, // 限制在5M
+            threads: 1,
+            accept: {
+                title: 'file',
+                extensions: 'p12',
+                mimeTypes: '.p12'
+            }
+        });
+        uploader.on('beforeFileQueued', function (file) {
+            if (file.ext === "p12") {
+                $(".fileName").text(file.fileName);
+                return true;
+            } else {
+                $("#div_Msg").addClass("div_Msg").text("文件格式错误 ! ");
+                return false;
+            }
+        });
+        //当文件被加入队列以后触发。
+        uploader.on('fileQueued', function (file) {
+   
+            count++;
+            $('.uploadifyProgressBar').css('width', "1px");
+            $('#uploadifyNIJGWI').css('display', "block");
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+            //删除上传的文件
+            $('#filedelete').on('click', function () {
+                uploader.removeFile(file);
+                $('#uploadifyNIJGWI').css('display', "none");
+//                    $(this).parent().remove();
+            });
+        });
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on('uploadProgress', function (file, percentage) {
+            // var perNumber = Math.floor(percentage * 100) / 100;
+            var perNumber = Math.floor(percentage * 100) + '%';
+//            var $list = $("#div_Msg");
+//            var $li = $('#' + file.id),
+//                $percent = $list.find('.progress span');
+
+            // 避免重复创建
+//            if (!$percent.length) {
+//                $percent = $('<p class="progress"><span style="height:20px;background:red;color:#fff;"></span></p>')
+//                    .appendTo($list)
+//                    .find('span');
+//            }
+//            console.log(perNumber)
+            // $percent.css( {'width': perNumber * 100 + '%','display':'block'} );
+            $('#uploadifyNIJGWIProgressBar').css({ 'width': perNumber, 'display': 'block' });
+            // $percent.text(perNumber*100 + '%')
+            //            $('#uploadifyNIJGWIProgressBar').text(perNumber)
+            
+        });
+        //当文件被移除队列后触发。
+        uploader.on('fileDequeued', function (a, b, c, d) {
+            //count--;
+            $("#fspan").text();
+            $("#ImagePath").val('');
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+        });
+        uploader.on('uploadSuccess', function (file, data, response) {
+            $("#div_Msg").addClass("div_Msg").text('上传成功');
+            $('#uploadifyNIJGWI').css('display', "none");
+            uploader.removeFile(file);
+            $("#ImagePath").val(data._raw);
+            //            $("#fspan").text($("#ffspan").text(data._raw));
+            $("#showimg").css({ "display": "" });
+            $("#delActivity").click(function () {
+                //                    $("#imgsrc").attr("src", '');
+                $("#fspan").text(data._raw);
+                $("#ImagePathLogo").val('');
+                $("#showimg").css({ "display": "none" });
+            });
+        });
+        //当所有文件上传结束时触发。
+        uploader.on('uploadfinished', function (a, b) {
+            $("#div_msg").addclass("div_msg").text("恭喜您 , 所选的 " + b.filesuploaded + " 个文件已成功上传 !");
+        });
+        //不管成功或者失败，文件上传完成时触发。
+        uploader.on('uploadComplete', function (a, b, c, d, e) {
+            count--;
+            $("#div_Msg").addClass("div_Msg").text("剩余 " + count + " 个文件正在上传 . . .");
+            //            $("#ImagePath").val(d);
+            //            $("#fspan").text($("#ffspan").text(d).Substring($("#ffspan").text().LastIndexOf('/')).Replace('/', ' '));
+            //            $("#showimg").css({ "display": "" });
+            //            $("#delActivity").click(function () {
+            //                //                    $("#imgsrc").attr("src", '');
+            //                $("#fspan").text(d);
+            //                $("#ImagePathLogo").val('');
+            //                $("#showimg").css({ "display": "none" });
+            //            });
+        });
+
+        $("#ctlBtnUp").on('click', function () {
+            uploader.upload();
+        });
+
+        $("#delActivity").click(function () {
+            //            $("#imgsrc").attr("src", '');
+            $("#fspan").text();
+            $("#ImagePath").val('');
+            $("#showimg").css({ "display": "none" });
+        });
+
+
+
+    });
+
+    function SaveSubmit() {
+        if (isNull($("#AppID").val())) {
+            alert("请输入开发者ID（AppID）！");
+            $("#AppID").focus();
+            return false;
+        }
+        if (isNull($("#AppSecret").val())) {
+            alert("请输入开发者密码（AppSecret）！");
+            $("#AppSecret").focus();
+            return false;
+        }
+        if (isNull($("#WxShangHuHao").val())) {
+            alert("请输入微信商户号！");
+            $("#WxShangHuHao").focus();
+            return false;
+        }
+        if (isNull($("#QMApiMiYao").val())) {
+            alert("请输入签名API密钥！");
+            $("#QMApiMiYao").focus();
+            return false;
+        }
+        if (isNull($("#ImagePath").val())) {
+            alert("请上传API证书！");
+            return false;
+        }
+        var sendData = {
+            AppID: $("#AppID").val(),
+            AppSecret: $("#AppSecret").val(),
+            WxShangHuHao: $("#WxShangHuHao").val(),
+            QMApiMiYao: $("#QMApiMiYao").val(),
+            APIFileURL: $("#ImagePath").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Market/WxEnAccount/AddEditEnAccount",
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                if (data.ok != 0) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                    window.location.href = data.url;
+                }
+            }
+        });
+    }
+</script>

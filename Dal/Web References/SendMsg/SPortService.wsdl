@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sms.fiwan.com:8080/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SPortService" targetNamespace="http://sms.fiwan.com:8080/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://opensms.fiwan.cn:80/GogowanSMS/SPort?xsd=1" namespace="http://sms.fiwan.com:8080/" />
+    </xsd:schema>
+  </types>
+  <message name="retest">
+    <part name="parameters" element="tns:retest" />
+  </message>
+  <message name="retestResponse">
+    <part name="parameters" element="tns:retestResponse" />
+  </message>
+  <message name="send">
+    <part name="parameters" element="tns:send" />
+  </message>
+  <message name="sendResponse">
+    <part name="parameters" element="tns:sendResponse" />
+  </message>
+  <message name="getStock">
+    <part name="parameters" element="tns:getStock" />
+  </message>
+  <message name="getStockResponse">
+    <part name="parameters" element="tns:getStockResponse" />
+  </message>
+  <message name="sendSMS">
+    <part name="parameters" element="tns:sendSMS" />
+  </message>
+  <message name="sendSMSResponse">
+    <part name="parameters" element="tns:sendSMSResponse" />
+  </message>
+  <portType name="SPortDelegate">
+    <operation name="retest">
+      <input message="tns:retest" />
+      <output message="tns:retestResponse" />
+    </operation>
+    <operation name="send">
+      <input message="tns:send" />
+      <output message="tns:sendResponse" />
+    </operation>
+    <operation name="getStock">
+      <input message="tns:getStock" />
+      <output message="tns:getStockResponse" />
+    </operation>
+    <operation name="sendSMS">
+      <input message="tns:sendSMS" />
+      <output message="tns:sendSMSResponse" />
+    </operation>
+  </portType>
+  <binding name="SPortBinding" type="tns:SPortDelegate">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="retest">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="send">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getStock">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="sendSMS">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="SPortService">
+    <port name="SPort" binding="tns:SPortBinding">
+      <soap:address location="http://opensms.fiwan.cn:80/GogowanSMS/SPort" />
+    </port>
+  </service>
+</definitions>

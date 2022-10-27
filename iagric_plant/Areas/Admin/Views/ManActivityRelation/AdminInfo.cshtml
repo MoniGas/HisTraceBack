@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "编辑红包活动";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<LinqModel.YX_AcivityDetail> DetailList = ViewBag.detailLst as List<LinqModel.YX_AcivityDetail>;
+}
+@model LinqModel.View_ActivityManager
+<style type="text/css">
+    .ke-container
+    {
+        float: left;
+    }
+    .diviput
+    {
+        display: inline-block;
+        margin-left: 10px;
+        position: relative;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("input:radio[value='@Model.OpenMode']").prop("checked", true);
+    });
+</script>
+<div>
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li>营销管理<span class="divider">›</span></li>
+            <li>活动信息<span class="divider">›</span></li><li>查看</li>
+        </ul>
+    </div>
+    <div class="card_pa40 clearfix">
+        <div class="mod-main">
+            <div class="mc clearfix">
+                <div class="user-set userset-lcol">
+                    <div class="form hd-manage-det">
+                        <div class="infoitem">
+                            <span class="label">活动名称：</span>
+                            <div class="fl">
+                                <input id="ActivityID" type="hidden" value="@Model.ActivityID" />
+                                <span>@Model.ActivityTitle</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">公司名称：</span>
+                            <div class="fl">
+                                <span>@Model.EnterpriseName</span>
+                            </div>
+                        </div>
+                        @if (Model.ActivityMethod == (int)Common.EnumText.ActivityMethod.Packet)
+                        {
+                            <div class="infoitem">
+                                <span class="label">活动费用：</span>
+                                <div class="fl">
+                                    <div class="hdlx" style="width: 500px;">
+                                        <div class="boxtable">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            金额（元）
+                                                        </th>
+                                                        <th>
+                                                            红包数量（个）
+                                                        </th>
+                                                        <th>
+                                                            小计（元）
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                            if (ViewBag.detailLst.Count > 0)
+                            {
+                                foreach (var item in ViewBag.detailLst)
+                                {
+                                                        <tr>
+                                                            <td>
+                                                                @item.RedValue
+                                                            </td>
+                                                            <td>
+                                                                @item.RedCount
+                                                            </td>
+                                                            <td>
+                                                                <span class="red">@(item.RedValue * item.RedCount)</span>
+                                                            </td>
+                                                        </tr>
+                                }
+                            }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="hb-order">
+                                            <div class="price">
+                                                红包总金额<span class="rmn-ico"><em>￥</em>@ViewBag.sumCount</span>
+                                            </div>
+                                            <div class="shu">
+                                                红包总数量 <span class="blacktxt">@ViewBag.hbCount</span> 个
+                                            </div>
+                                            <div class="price">
+                                                手续费用<span class="rmn-ico"><em>￥</em>@(Math.Round(Model.RechargeValue - ViewBag.sumCount, 2, MidpointRounding.AwayFromZero))</span>
+                                            </div>
+                                            <div class="price">
+                                                费用合计<span class="rmn-ico"><em>￥</em>@Model.RechargeValue</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">支付状态：</span>
+                                <div class="fl">
+                                    @if (Model.RechargePayState == (int)Common.EnumText.PayState.Payed)
+                                    {
+                                        <input type="checkbox" checked="checked" id="chePay" /><span>已支付</span>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="chePay" /><span>已支付</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="infoitem">
+                                <span class="label">活动有效期：</span>
+                                <div class="fl">
+                                    <span>@Model.StartDate.Value.ToString("yyyy-MM-dd")<span>至</span>@Model.EndDate.Value.ToString("yyyy-MM-dd")</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">优惠券类型：</span>
+                                <div class="fl">
+                                    <span>@Common.EnumText.EnumToText(typeof(Common.EnumText.CouponType), Model.CouponType.Value)</span>
+                                    @if (Model.CouponType == (int)Common.EnumText.CouponType.Cash)
+                                    {
+                                        <span style="margin-left: 25px" class="mar20">优惠券金额：<span>@Model.CouponContent 元</span></span>
+                                    }
+                                    else if (Model.CouponType == (int)Common.EnumText.CouponType.Discount)
+                                    {
+                                        <span style="margin-left: 25px" class="mar20">优惠券折扣：<span>@Model.CouponContent %</span></span> 
+                                    }
+                                    else if (Model.CouponType == (int)Common.EnumText.CouponType.Gift)
+                                    {
+                                        <span style="margin-left: 25px" class="mar20">优惠券礼品：<span>@Model.CouponContent</span></span> 
+                                    }
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">参与方式：</span>
+                                <div class="fl">
+                                    <span>@Common.EnumText.EnumToText(typeof(Common.EnumText.ActiveType), Model.ActivityType.Value)</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">领取地址：</span>
+                                <div class="fl">
+                                    <span>@Model.CouponAddress</span>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.Open)
+                        {
+                            <div class="infoitem">
+                                <span class="label">开启模式：</span>
+                                <div class="fl">
+                                    <input type="radio" id="auto" value="0" name="Radio" />自动
+                                    <input type="radio" style="margin-left: 10px;" id="hand" value="1" name="Radio" />手动
+                                </div>
+                            </div>
+                        }
+                        <div class="infoitem">
+                            <span class="label">单据上传：</span>
+                            <div class="fl">
+                                <div class="clearfix">
+                                    <div class="div_FilesBox">
+                                        <div id="showimg">
+                                            <img id="imgsrc" onclick="openwin('@Url.Action("ImageSeach", new { url = Model.BillUrl })','查看单据',800,500)" style=" max-height:100px; max-width:100px; cursor:pointer;" src="@Model.BillUrl">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">&nbsp;</span>
+                            <div class="fl">
+                                <input type="button" value="返回" onclick="javascript:history.go(-1);" class="button-big"
+                                    id="btnSet">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+    <script language="JavaScript" for="window" event="onload">
+    var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+    xmlDoc.async="false";
+
+    xmlDoc.load("SystemUpReport.xml");
+
+    nodes = xmlDoc.documentElement.childNodes;
+
+    Modual.innerText = nodes.item(0).text;
+
+    Value.innerText = nodes.item(1).text;
+
+    Date.innerText = nodes.item(2).text;
+    </script>
+    <title>在HTML中调用XML数据</title>
+</head>
+<body bgcolor="#FFFFFF">
+    系统升级公告信息：<p>
+        <b>模块：</b> <span id="Modual"></span>
+    </p>
+    <p>
+        <b>内容：</b> <span id="Value"></span>
+    </p>
+    <p>
+        <b>日期：</b> <span id="Date"></span>
+    </p>
+</body>
+</html>

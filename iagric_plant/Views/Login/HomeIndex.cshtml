@@ -1,0 +1,299 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<style type="text/css">
+    .cooperation_content ul li
+    {
+        width: 210px;
+        height: 84px;
+        display: inline-block;
+        margin-right: 20px;
+        margin-top:10px;    
+    }
+    .cooperation_content ul li:nth-last-of-type(1)
+    {
+        margin-right:0;    
+    }
+    .cooperation_content ul li a img
+    {
+        width: 100%;
+        height: 100%;    
+        display: block;
+        max-width: 100%;
+    }
+</style>
+<div class="container-fluid">
+    <div class="banner">
+       <a href="/Login/DataDown">
+            <img class="img-responsive" src="/IndexStyle/Medical/images/banner-home.jpg" alt="" />
+        </a>
+    </div>
+</div>
+<!-- 国家政策 -->
+<div class="container">
+    <section class="row">
+        <div class="section_one" style="overflow: hidden;text-overflow:ellipsis;">
+            <div class="section_article pull-left">
+            <h3>国家政策</h3>
+            <div style="display: flex;">
+                <div class="section_article_content">
+                    <p>
+                        2019年8月26日,国家药监局发布《医疗器械唯-标识系统规则》( 以下简称《规则》)，旨在贯彻落实《国务院办公厅关于印发治理高值医用耗材改革方案的通知》( 国办发[2019]
+                        37号)和《医疗器械监督管理条例》,
+                        进一步加强医疗器械全生命周期的监督管理，创新监管模式。《规则》 共18条,明确了医疗器械唯-标识系统建设的目的、适用对象、建设原则、各方职责和有关要求，自2019年10月1日起正式施行。
+                    </p>
+                    <!-- <p>在中关村工信二维码技术研究院、统一二维码注册管理中心和国药研究院的指导下，河北广联信息技术有限公司联合北京四聪科技发展有限公司、佛山云数智能科技观公司一起研发了医疗器械追溯公共服务云平台，为医疗器械生产企业、经营企业、使用单位及医疗器械协会或药监部门提供一条龙的云服务</p> -->
+                </div>
+                <div style="width: 320px;height: 240px;margin-left: 20px;">
+                    <video width="320" height="240" controls>
+                        <source src="../../IndexStyle/Medical/video/UDI.mp4"  style="outline:none" type="video/mp4"></source>
+                        您的浏览器不支持Video标签。
+                    </video>
+                </div>
+            </div>
+        </div>
+
+            <div class="section_login pull-right">
+                <h3>
+                </h3>
+                <form class="form-horizontal">
+                <div class="form-group">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <input type="text" name="uName" id="uName" class="form-control" placeholder="请输入用户名" />
+                </div>
+                <div class="form-group">
+                    <i class="glyphicon glyphicon-lock"></i>
+                    <input type="password" id="uPwd" name="uPwd" class="form-control" placeholder="请输入密码" />
+                </div>
+                <div class="form-group">
+                    <button type="button" id="loginBtn" class="btn btn-block">
+                        登录</button>
+                </div>
+@*                <div class="form-group">
+                    <p class="pull-left">
+                        还没有用户，点这里 <a href="/Register/RegisterOne">注册会员!</a>
+                    </p>
+                </div>*@
+                </form>
+            </div>
+        </div>
+        <div class="section_two">
+            <h1>
+                <img class="img-responsive" src="/IndexStyle/Medical/images/process_title.png" alt=""/></h1>
+            <div class="flow_chart">
+                <div class="flow_chartRoom">
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/userImg.png" alt=""/>
+                        <p>
+                            注册用户</p>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/arrow.png" alt=""/>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/review.png" alt=""/>
+                        <p>
+                            审核用户</p>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/arrow.png" alt=""/>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/generate.png" alt=""/>
+                        <p>
+                            生成UDI标识码</p>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/arrow.png" alt=""/>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/product.png" alt=""/>
+                        <p>
+                            产品赋码</p>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/arrow.png" alt=""/>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/datacollection.png" alt=""/>
+                        <p>
+                            产品数据采集</p>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/arrow.png" alt=""/>
+                    </div>
+                    <div class="pull-left">
+                        <img class="img-responsive" src="/IndexStyle/Medical/images/activationcode.png" alt=""/>
+                        <p>
+                            激活码</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- UDI申请流程 -->
+<div class="container-fluid" style="margin-top: 46px;">
+    <div class="be_applicable row">
+        <h1>
+            <img class="img-responsive" src="/IndexStyle/Medical/images/beapplicable_title.png"
+                alt="" /></h1>
+    </div>
+</div>
+<!-- 平台适用企业 -->
+<div class="container">
+    <div class="business_case row">
+        <dl>
+            <dt>
+                <img src="/IndexStyle/Medical/images/img1.png" width="254" height="229" alt="" /></dt>
+            <dd>
+                医疗器械生产企业</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="/IndexStyle/Medical/images/img2.png" width="254" height="229" alt="" /></dt>
+            <dd>
+                医疗器械经营企业</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="/IndexStyle/Medical/images/img3.png" width="254" height="229" alt="" /></dt>
+            <dd>
+                医疗器械使用医疗机构</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="/IndexStyle/Medical/images/img4.png" width="254" height="229" alt="" /></dt>
+            <dd>
+                食药监/医疗协会</dd>
+        </dl>
+    </div>
+</div>
+<div class="container">
+    <div class="solved_problem row">
+        <h1>
+            <img class="img-responsive" src="/IndexStyle/Medical/images/solved_problem.png" alt="" /></h1>
+        <ul class="solved_problem_list">
+            <li class="pull-left">
+                <div class="solved_problemli_Lt pull-left">
+                    <img class="img-responsive" src="/IndexStyle/Medical/images/number1.png" alt="" /></div>
+                <div class="solved_problemli_Rt pull-left">
+                    <p>
+                        为各省市食药监或医疗协会提供省级医疗器械数据平台，并对接国家医疗器械数据平台，把省级医疗器械数据上传到国家平台
+                    </p>
+                </div>
+            </li>
+            <li class="pull-right">
+                <div class="solved_problemli_Lt pull-left">
+                    <img class="img-responsive" src="/IndexStyle/Medical/images/number2.png" alt="" /></div>
+                <div class="solved_problemli_Rt pull-left">
+                    <p>
+                        为患者提供医疗器械追溯查询服务，提升医疗器械生产、经营和使用透明度，让患者放心。
+                    </p>
+                </div>
+            </li>
+            <li class="pull-left">
+                <div class="solved_problemli_Lt pull-left">
+                    <img class="img-responsive" src="/IndexStyle/Medical/images/number3.png" alt="" /></div>
+                <div class="solved_problemli_Rt pull-left">
+                    <p>
+                        为医疗器械生产企业、经营企业、使用医疗机构提供发放医疗器械唯一标识码，并为相关企业单位提供赋码、扫码数据采集一条龙服务
+                    </p>
+                </div>
+            </li>
+            <li class="pull-right">
+                <div class="solved_problemli_Lt pull-left">
+                    <img class="img-responsive" src="/IndexStyle/Medical/images/number4.png" alt="" /></div>
+                <div class="solved_problemli_Rt pull-left">
+                    <p>
+                        为了医疗器械生产企业提供医疗器械生产过程数据采集和追溯服务，并提供数据数上传到省级或国家医疗器械数据平台服务
+                    </p>
+                </div>
+            </li>
+            <li class="pull-left">
+                <div class="solved_problemli_Lt pull-left">
+                    <img class="img-responsive" src="/IndexStyle/Medical/images/number5.png" alt="" /></div>
+                <div class="solved_problemli_Rt pull-left">
+                    <p>
+                        为医疗器械经营企业提供医疗器械仓储、流通数据追溯服务，并提供数据数上传到省级或国家医疗器械数据平台服务
+                    </p>
+                </div>
+            </li>
+            <li class="pull-right">
+                <div class="solved_problemli_Lt pull-left">
+                    <img class="img-responsive" src="/IndexStyle/Medical/images/number6.png" alt="" /></div>
+                <div class="solved_problemli_Rt pull-left">
+                    <p>
+                        为医疗机构提供医疗器械维护和保养数据采集服务，并提供数据数上传到省级或国家医疗器械数据平台服务
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container" style="padding:0; ">
+    <h1 style="width: 106px; float: left; color: #113bab; padding-top: 10px;">
+        战略合作</h1>
+    <div style="width: 95%; float: left; border-bottom: 2px solid #c5d1d7; margin-left: 80px;">
+    </div>
+    <div class="cooperation_content">
+    <ul class="">
+    <li><a href="http://www.nmpa.gov.cn/WS04/CL2042/" target="_blank"><img src="../../images/zlhz1.jpg" /></a></li>
+    <li><a href="http://udi.nmpa.gov.cn/" target="_blank"><img src="../../images/zlhz2.jpg" /></a></li>
+    <li><a href="http://www.nmpa.gov.cn/WS04/CL2044/" target="_blank"><img src="../../images/zlhz3.jpg" /></a></li>
+    <li><a href="http://www.sinopharm.com/" target="_blank"><img src="../../images/zlhz4.png" /></a></li>
+    <li><a href="http://udi.idcode.org.cn/" target="_blank"><img src="../../images/zlhz5.png" /></a></li>
+    </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    document.onkeydown = function (e) {
+        var theEvent = window.event || e;
+        var code = theEvent.keyCode || theEvent.which;
+        if (code === 13) {
+            $("#loginBtn").click();
+        }
+    }
+    $(function () {
+        $('#loginBtn').click(function () {
+            Check();
+        });
+    });
+    function Check() {
+        var loginName = $('#uName').val();
+        if (loginName.length === 0) {
+            alert("请输入用户名！", function () {
+                $("#uName").focus();
+            });
+            return false;
+        }
+        var loginPwd = $('#uPwd').val();
+        if (loginPwd.length === 0) {
+            alert("请输入登录密码！", function () {
+                $("#uPwd").focus();
+            });
+            return false;
+        }
+        var list = {
+            uName: loginName.toLocaleLowerCase(),
+            uPwd: loginPwd
+
+        }
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "/Login/LoginMethod",
+            data: JSON.stringify(list),
+            success: function (result) {
+                if (result.code !== "0") {
+                    location.href = '/Home/Index';
+                } else {
+                    alert(result.Msg);
+                }
+            },
+            error: function (e) {
+            }
+        });
+    }
+
+</script>

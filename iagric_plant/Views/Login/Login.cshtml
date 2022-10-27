@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>医疗器械（UDI）服务云平台</title>
+    <link href="../../IndexStyle/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="../../IndexStyle/css/login.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/json2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.onkeydown = function (e) {
+            var theEvent = window.event || e;
+            var code = theEvent.keyCode || theEvent.which;
+            if (code == 13) {
+                $("#btnlogin").click();
+            }
+        }
+        $('#btnlogin').on('click', function () {
+            var loginName = $('#uName').val();
+            if (loginName.length == 0) {
+                alert("用户名不能为空！", function () {
+                    $("#uName").focus();
+                });
+                return false;
+            }
+
+            var loginPwd = $('#uPwd').val();
+            if (loginPwd.length == 0) {
+                alert("登录密码不能为空！", function () {
+                    $("#uPwd").focus();
+                });
+                return false;
+            }
+
+            var list = {
+                loginName: loginName.toLocaleLowerCase(),
+                loginPwd: loginPwd
+            }
+
+            $.ajax({
+                type: "post",
+                contentType: "application/json",
+                url: "/Login/LoginMethod",
+                data: JSON.stringify(list),
+                success: function(result) {
+                    if (result.statuscode > 0) {
+                        location.href = '/Home/Index';
+                    } else {
+                        alert(result.msg);
+                        AA();
+                    }
+                }
+            });
+
+        });
+        function AA() {
+            $("#imageCode").attr("src", "/Home/CheckImg?" + new Date());
+        }
+    </script>
+</head>
+<body>
+    <div class="blk_bg">
+        <div class="middle">
+            <div class="logo">
+                <img src="/IndexStyle/images/logo_03.png" /></div>
+            <div class="nr">
+                <div class="login_box">
+                    <p>
+                        用户登录</p>
+                    <input type="text" id="uName" name="uName" placeholder="用户名" class="yonghu" />
+                    <input type="password" placeholder="密码" id="uPwd" name="uPwd"
+                        class="yonghu" />
+                    @*<input class="yonghu" type="text" value="用户名" onfocus="javascript:if(this.value=='用户名')this.value='';" /> 
+                <input class="yonghu" type="text" value="密码" onfocus="javascript:if(this.value=='密码')this.value='';" />    *@
+                    <div class="yanzheng_box">
+                        <input type="text" class="yanzheng" id="CheckCode" name="CheckCode"
+                            placeholder="验证码" value="" maxlength="4">
+                         <a class="yz_img"><img id="imageCode" src="/Home/CheckImg" onclick="AA()" width="68" height="30" alt=""
+                            class="verifyimg" /></a>
+                        <a href="javascript:void(0);" onclick="AA()"  class="change">换一张</a> @*  <a class="yz_img"><img src="images/yanzheng_06.png"</a>
+                     <a class="change" href="#">换一张</a>*@
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <div class="forget">
+                        <a href="/Register/RegisterOne">在线注册</a></div>
+                    <button class="login_btn" type="button" id="btnlogin">
+                        登录
+                    </button>
+                </div>
+                <div class="rit_img">
+                    <img src="/IndexStyle/images/rit-img_07.png" /></div>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

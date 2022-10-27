@@ -1,0 +1,37 @@
+﻿@model LinqModel.ScanInfo
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+    <link href="/wapstyle/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="/wapstyle/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <header class="OriginHead bar-green">
+			<a href="/Wap_Index/Index" class="bar-item pull-left"><i class="icon bar-arrow-left"></i><span>首页</span></a>
+			<h1 class="bar-title">在线实时视频</h1>
+		</header>
+    <div class="main">
+        <div class="list woList clearfix">
+        @if (Model != null && Model.imgs.Count > 0)
+        {
+            <ul>
+            @foreach (var sub in Model.imgs)
+            {
+                <li><a href="/Wap_Index/Video?url=@sub.videoUrl&name=@sub.fileUrl">@sub.fileUrl</a><i class="arrow"></i></li>
+            }
+            </ul>
+        }
+        </div>
+    </div>
+</body>
+</html>

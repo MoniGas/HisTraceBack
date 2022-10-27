@@ -1,0 +1,73 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 700px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加品牌</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="form-field-1">
+                            <span class="alert-danger">*</span>品牌名称：</label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="品牌名称..." class="form-control" data-bind="value:BrandName,validationElement:BrandName,hasfocus:selTitle" />
+                            <!--       <span data-bind="visible:!selTitle"><span
+                                    class="alert-danger" style="height: 30px; line-height: 30px;" data-bind="validationMessage:BrandName">
+                                </span></span>-->
+                            <!--<span class="alert-danger">请输入品牌名称</span>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            品牌描述：</label>
+                        <div class="col-md-9">
+                            <textarea id="txtdescription" cols="100" rows="5" style="width: 100%;" data-bind="value:Descriptions"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>品牌Logo：</label>
+                        <div class="col-md-9">
+                            <span class="alert-danger-new">支持格式.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB(建议尺寸：54px * 54px)。</span><span class="alert-danger" data-bind="visible:logo">请上传品牌LOGO！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                        </label>
+                        <div class="col-md-9">
+                            <div class="pic-item  clearfix">
+                        <ul>
+                            <!-- ko foreach:files -->
+                            <li>
+                                <div class="thumbnail">
+                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                </div>
+                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                    <i class="hide_clip">移除</i></a> </li>
+                            <!-- /ko -->
+                            <li>
+                                <div class="thumbnail">
+                                    <a id="image_upload"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    
+                    </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:Register">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:cancle">
+                取消</button>
+        </div>
+    </div>
+</div>

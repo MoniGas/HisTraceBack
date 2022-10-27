@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*-------------base------------------*/
+*{margin:0; padding:0;}
+body{font-size:26px; font-family:"微软雅黑";color:#333; line-height:2em; }
+h3{font-size:28px; font-family:"微软雅黑"; font-weight:500; color:#027641;}
+h4{font-size:26px; font-family:"微软雅黑"; font-weight:500; color:#076fbe;}
+img{border:none;}
+ul{list-style:none;}
+table{border-collapse:collapse;}
+a{text-decoration:none; color:#333;}
+
+
+/*-----------------common style------------------*/
+.fl{float:left; display:inline;}
+.fr{float:right; display:inline;}
+.clearB{clear:both;}
+.padL10{padding-left:10px;}
+.padR10{padding-right:10px;}
+.padT10{padding-top:10px;}
+.alignC{text-align:center;}
+.alignR{text-align:right;}
+.padT15{padding-top:15px;}
+.marT10{margin-top:10px;}
+#warp{width:640px; margin:0 auto;}
+.borderC{border:1px solid #ccc; background-color:#fff; padding:10px;}
+
+.despri1{width:75%;}
+.ssImg{margin-top:5px;}
+.tableStyle1 td font{white-space:nowrap;}
+
+
+/*-------------------mainContent----------------------*/
+.header{background:url(/images/wapnew/bgTop.png) repeat-x; height:88px;}
+.header img{position:relative; top:15px; left:20px;}
+.mainContent{background-color:#efefef; padding:10px 20px;}
+.line{ position:relative; top:-10px; left:-11px;}
+.fangwei{height:30px; border:1px solid #ccc; margin-left:10px; width:455px;}
+.tousu{height:30px; border:1px solid #ccc; margin-left:10px; width:400px;}
+.tousuContent{height:100px; border:1px solid #ccc; margin-left:10px; width:535px;}
+.h4A{background:url(/images/wapnew/bg1.png) no-repeat; height:39px; line-height:39px; padding-left:10px;}
+.h4A img{position:relative; top:3px; margin-right:10px;}
+.h4A a{color:#fff;}
+.labelA label{color:#076fbe;}
+.chakan img{position:relative; top:4px; margin-right:5px;}
+.footer{height:100px; line-height:100px;}
+.good{font-size:30px; color:#d8271c;}
+.geshi{text-align:center;}
+
+.bgx{ background:url(/images/wapnew/bgx.png) no-repeat center center; width:190px; height:158px; }
+.counts{ position:absolute; margin-top:-50px; margin-left:400px;}

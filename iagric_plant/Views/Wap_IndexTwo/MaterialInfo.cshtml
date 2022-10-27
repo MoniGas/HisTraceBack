@@ -1,0 +1,423 @@
+﻿@using LinqModel;
+@{
+    List<LinqModel.View_ProductInfoForMaterial> ProductList =
+        ViewBag.PropertyList as List<LinqModel.View_ProductInfoForMaterial>;
+    List<LinqModel.View_MaterialSpecForMarket> MaterialSpecList =
+    ViewBag.MaterialSpecList as List<LinqModel.View_MaterialSpecForMarket>;
+    bool CodeValidation = ViewBag.CodeValidation;
+    bool BoolScandate = ViewBag.BoolScanCount;
+}
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+@*<script src="../../js/JScript1.js" type="text/javascript"></script>*@
+<!--验证-->
+<section class="section-module">
+    <script type="text/javascript">
+        $(function () {
+            $("#btnV").click(function () {
+                if (isNull($("#VerificationCode").val())) {
+                    alert("请输入防伪验证码！");
+                    return false;
+                }
+                window.location.href = "/Wap_IndexTwo/Validate?VerificationCode=" + $("#VerificationCode").val();
+            });
+        });   
+    </script>
+    @if (ProductList.Where(w => w.Condition != null &&
+    w.Condition.Contains("," + (int)Common.EnumFile.Condition.Verify + ",")).ToList().Count > 0)
+    {
+        <div class="product-info">
+            <header class="title">
+                <span class="bg-yellow">商品活动</span></header>
+            <section>
+                @foreach (var item in ProductList.Where(w => w.Condition != null &&
+    w.Condition.Contains("," + (int)Common.EnumFile.Condition.Verify + ",")).ToList())
+                {
+                    <dl class="contact-dl">
+                        <dd style="color: Red">
+                            @(item.MaterialFullName + "(" + item.MaterialSpecification + ")参加" + item.PropertyName + "活动。")<br />
+                        </dd>
+                    </dl>
+                }
+            </section>
+        </div>
+    }
+    <div id="no" name="no" style="display: block">
+        @if (CodeValidation == true)
+        {
+            <form name="formValidate" id="formValidate">
+            <div class="search_form">
+                <input type="text" id="VerificationCode" name="VerificationCode" class="search_input"
+                    placeholder="输入验证码" value="" />
+                <span class="search_btn">
+                    <input type="button" id="btnV" name="btnV" value="防伪验证" class="i_search_btn" />
+                </span>
+            </div>
+            </form>
+        }
+        @if (BoolScandate == true)
+        {
+            <p class="mat10 grey f16">@("已拍" + ViewBag.ScanCount + "次")
+                @*<a style="margin-top:10px" class="share" href="#" onclick="toshare()"><i></i>分享</a>*@</p>
+        }
+    </div>
+</section>
+<!--产品信息-->
+@{
+    Material material = ViewBag.material;
+    Brand brand = ViewBag.brand;
+    Brand areaBrand = ViewBag.areaBrand;
+    bool BoolBrand = ViewBag.BoolBrand;
+    bool BoolCreatedate = ViewBag.BoolCreateDate;
+    Enterprise_Info enterprise = ViewBag.enterprise;
+    if (ViewBag.seleTime != null)
+    {
+        DateTime saleTime = ViewBag.seleTime;
+    }
+    string firstImg = "";
+    if (material != null)
+    {
+    <section class="section-module">
+        <h2>@material.MaterialFullName</h2>
+        <div class="top_slide_pic mat10">
+            @foreach (var item in material.imgs)
+            {
+                firstImg = item.fileUrl;
+                <img src="@item.fileUrl"/>
+                     break;
+            }
+            @if (material.tbURL != null && material.tbURL != "")
+            {
+                <a href="@material.tbURL" class="buy">在线购买</a> 
+            }
+            else
+            {
+                if (enterprise.IsOpenShop && enterprise.ShopVerify == 1 && MaterialSpecList.Count > 0)
+                {
+                    if (MaterialSpecList.Count > 0)
+                    {
+                        if (ViewBag.Consumers == true)
+                        { 
+                <a href="/Wap_IndexTwo/MaterialOrder?pageType=2" class="buy">在线购买</a>
+                        }
+                        else
+                        {
+                <a href="/Wap_Order/Login?pageType=2" class="buy">在线购买</a>
+                        }
+@*<a href="#" class="buy" onclick="javascript:alert('预览模式不能购买产品！')">在线购买</a>*@
+                    }
+                    else
+                    {
+                <a href="#" class="buy" onclick="javascript:alert('该产品还未上架！')">在线购买</a>
+                    }
+                }
+            }
+            <a href="/Wap_IndexTwo/OtherProduct" class="more">查看更多产品请点击</a><br />
+        </div>
+        <dl class="list list-in no-border" style="margin-top: 15px;">
+            @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewOrderHotline == true
+              && enterprise != null && !string.IsNullOrEmpty(enterprise.OrderingHotline))
+            {
+                <dd class="tit-xq no-border">
+                    <h1 class="title">
+                        订购热线：<strong class="strong-red-color">@enterprise.OrderingHotline</strong></h1>
+                </dd>
+            }
+            @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewMaterialPrice == true
+              && material != null && !string.IsNullOrEmpty(material.price.ToString())
+              && !string.IsNullOrEmpty(material.MaterialSpecification))
+            {
+                <dd class="buy-price no-border" style="margin-top: 10px;">
+                    <div class="price">
+                        <span>单价:</span><strong class="J_pricetag strong-red-color">￥@material.price.Value.ToString("0.00")元</strong>
+                        <span>@material.MaterialSpecification</span>
+                    </div>
+                </dd>
+            }
+        </dl>
+            <!--领券-->
+            @if (ViewBag.TitleCoupon != "")
+            {
+                <div class="common_block">
+                <div class="promotionList_box ">
+                    <span class="promotionList_title">优惠券</span>
+                    <ul class="promotionList">
+                        <li><a href="@Url.Action("Index", "Wap_Coupon", new { area = "Market", ewm = ViewBag.Ewm, settingId = ViewBag.SettingId })">@ViewBag.TitleCoupon</a></li>
+                        @*                    <li>支付优惠</li>
+                    <li>点评返现</li>*@
+                    </ul>
+                    <span class="promotionList_num">1个</span> <i class="icon-down4 arrow"></i>
+                </div>
+                </div>
+            }
+        <table class="ui-table mat10">
+            <tbody>
+                <tr>
+                    <td>
+                        @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewProductionTime.Value == true)
+                        {
+                     @*       if (BoolCreatedate == true)
+                            {
+                            <p>
+                                <span class="tit-info">生产日期:</span>
+                                @if (ViewBag.seleTime != null)
+                                {
+                                    <span class="f14">@(ViewBag.seleTime.ToString("yyyy.MM.dd"))</span>
+                                }
+                            </p>
+                            }*@
+                        }
+                        <p>
+                       @*     @if (ViewBag.seleTime != null && BoolCreatedate == true)
+                            { 
+                                <span class="tit-info">生产日期:</span>
+                                <span class="f14">@(ViewBag.seleTime.ToString("yyyy.MM.dd"))</span>
+                            }
+                            else
+                            {*@
+                                <span class="tit-info">扫码时间:</span>
+                                <span class="f14">@(DateTime.Now.ToString("yyyy.MM.dd"))</span>
+                           @* }*@
+                        </p>
+                                                @if (ViewBag.ShengChanPH != null)
+                                                {
+                            <p>
+                                <span class="tit-info">生产批号:</span> <span class="f14">@ViewBag.ShengChanPH</span>
+                            </p>
+                                                }
+                                                @if (BoolCreatedate == true)
+                                                {
+                                                    if (ViewBag.ShengChanDate != null)
+                                                    {
+                            <p>
+                                <span class="tit-info">生产日期:</span> <span class="f14">@ViewBag.ShengChanDate</span>
+                            </p>
+                                                    }
+                                                }
+                                                   @if (ViewBag.YouXiaoDate != null)
+                                                   {
+                            <p>
+                                <span class="tit-info">有效日期:</span> <span class="f14">@ViewBag.YouXiaoDate</span>
+                            </p>
+                                                   }
+                                                 @if (ViewBag.ShiXiaoDate != null)
+                                                 {
+                            <p>
+                                <span class="tit-info">失效日期:</span> <span class="f14">@ViewBag.ShiXiaoDate</span>
+                            </p>
+                                                 }
+                                                 @if (ViewBag.MieJunNo != null)
+                                                 {
+                            <p>
+                                <span class="tit-info">灭菌批号:</span> <span class="f14">@ViewBag.MieJunNo</span>
+                            </p>
+                                                 }
+                                                 @if (ViewBag.XuLieHao != null)
+                                                 {
+                            <p>
+                                <span class="tit-info">序列号:</span> <span class="f14">@ViewBag.XuLieHao</span>
+                            </p>
+                                                 }
+@*                        @if (material.ShelfLife != null)
+                        {
+                            <p>
+                                <span class="tit-info">保质期:</span> <span class="f14">@(material.ShelfLife.Replace("月", "个月"))</span>
+                            </p>
+                        }*@
+                    </td>
+                    @if (ViewBag.seleTime != null)
+                    {
+                        <td>
+                            @{
+                        string css = "icon-fresh";
+                        string value = "新鲜";
+
+                        string shelfLift = material.ShelfLife;
+                        DateTime gq = DateTime.Now;
+                        if (shelfLift != "无" && !string.IsNullOrEmpty(shelfLift))
+                        {
+                            if (shelfLift.IndexOf("天") > 0)
+                            {
+                                int addTime = int.Parse(shelfLift.Substring(0, shelfLift.IndexOf("天")));
+                                gq = ViewBag.seleTime.AddDays(addTime);
+                            }
+                            else if (shelfLift.IndexOf("月") > 0)
+                            {
+                                int addTime = int.Parse(shelfLift.Substring(0, shelfLift.IndexOf("月")));
+                                gq = ViewBag.seleTime.AddMonths(addTime);
+                            }
+                            else if (shelfLift.IndexOf("年") > 0)
+                            {
+                                int addTime = int.Parse(shelfLift.Substring(0, shelfLift.IndexOf("年")));
+                                gq = ViewBag.seleTime.AddYears(addTime);
+                            }
+                            if (gq < DateTime.Now)
+                            {
+                                css = "icon-stale";
+                                value = "不新鲜";
+                            }
+                        }
+                            }
+                            <span class="zt-icon @css"></span>
+                            <!---枯萎：将 icon-fresh 换为 icon-stale--->
+                            <p class="f16">@value</p>
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    }
+    <!--产品信息2-->
+    <section class="section-module">
+        @if (material != null)
+        {
+            <div class="product-info">
+                <header class="title">
+                    <span style="font-size: 16px" class="bg-green">产品信息</span></header>
+                <section>
+                    <dl class="contact-dl">
+                        <dt>产品名称：</dt>
+                        <dd>
+                            @material.MaterialFullName</dd>
+                    </dl>
+                    @if (material.Enterprise_Info_ID == 37)
+                    { 
+                        <dl class="contact-dl">
+                            <dt>经销商：</dt>
+                            <dd>香港荣誉红花贸易有限公司</dd>
+                        </dl>
+                        <dl class="contact-dl">
+                            <dt>生产厂家：</dt>
+                            <dd>老挝寮中红塔好运烟草有限公司</dd>
+                        </dl>
+                        <dl class="contact-dl">
+                            <dt>厂址：</dt>
+                            <dd>老挝沙湾拿吉省，乌通鹏县，那塔村，9号公里，26公里</dd>
+                        </dl>
+                    }
+                    @if (ProductList != null && ProductList.Count > 0 && ProductList[0].ViewProductionTime.Value == true)
+                    {
+                        <dl class="contact-dl">
+                            <dt>生产日期：</dt>
+                            @if (ViewBag.saleTime != null)
+                            {
+                                <dd>@(ViewBag.saleTime.ToString("yyyy-MM-dd"))</dd>
+                            }
+                        </dl>
+                    }
+                    <dl class="contact-dl">
+                        <dt>保质期：</dt>
+                        <dd>@material.ShelfLife</dd>
+                    </dl>
+                    @if (material.propertys != null)
+                    {
+                        foreach (var item in material.propertys)
+                        {
+                        <dl class="contact-dl">
+                            <dt>@item.pName：</dt>
+                            <dd>@item.pValue</dd>
+                        </dl>
+                        }
+                    }
+                </section>
+            </div>
+            <div class="brand-content"style=" font-size:14px;">
+                <p>@Html.Raw(material.Memo)</p>
+            </div> 
+        }
+        @if (BoolBrand == true && (brand != null || areaBrand != null))
+        {
+            <div class="product-info">
+                <header class="title">
+                    <span style="font-size: 16px" class="bg-yellow">品牌信息</span></header>
+                @if (areaBrand != null)
+                {
+                    <section class="border-bottom">
+                        <dl class="contact-dl brand-info">
+                            <dt>
+                                <img src="@areaBrand.Logo"></dt>
+                            <dd>@areaBrand.Descriptions</dd>
+                        </dl>
+                    </section>
+                }
+                @if (brand != null)
+                {
+                    <section class="border-bottom">
+                        <dl class="contact-dl brand-info">
+                            <dt>
+                                <img src="@brand.Logo"></dt>
+                            <dd>@brand.Descriptions</dd>
+                        </dl>
+                    </section>
+                }
+            </div>
+        }
+        <!--投诉建议-->
+        <script type="text/javascript">
+            $(function () {
+                $("#btnTS").click(function () {
+                    if (isNull($("#content").val())) {
+                        alert("请输入投诉建议内容！");
+                        return false;
+                    }
+                    if (isNull($("#linkman").val())) {
+                        alert("请输入您的姓名！");
+                        return false;
+                    }
+                    if (isNull($("#linkphone").val())) {
+                        alert('请输入联系电话！');
+                        return false;
+                    }
+                    if (!checkMobile($("#linkphone").val())) {
+                        alert('联系电话不正确！');
+                        return false;
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Wap_IndexTwo/AddComplaint',
+                        data: $("#formComplaint").serialize(),
+                        success: function (data) {
+                            alert(data.info);
+                            try {
+                                formComplaint.reset();
+                            } catch (Error) { }
+                        }
+                    })
+                });
+            });
+        </script>
+        <section class="section-module">
+            @if (Convert.ToBoolean(ViewBag.ViewLinkPhone) == true && !string.IsNullOrEmpty(ViewBag.LinkPhone))
+            {
+                <dd>
+                    投诉电话：<strong class="strong-red-color">@ViewBag.LinkPhone</strong></dd>
+            }
+            <div class="pro-input-wrap cf">
+                <p>
+                    投诉建议</p>
+                <form id="formComplaint" name="formComplaint">
+                <div class="textarea-wrap">
+                    <textarea id="content" name="content" placeholder="请在此输入您的投诉建议"></textarea>
+                </div>
+                <div class="textarea-wrap">
+                    <input id="linkman" name="linkman" maxlength="25" type="text" placeholder="请输入您的姓名">
+                </div>
+                <div class="textarea-wrap">
+                    <input id="linkphone" name="linkphone" maxlength="25" type="text" placeholder="请输入您的联系方式">
+                </div>
+                <input name="btnTS" id="btnTS" type="button" class="orange-btn" value="提交">
+                </form>
+            </div>
+        </section>
+        <div class="weixinewm" style="width: 60%; margin: 15px auto;">
+            @if (enterprise.Enterprise_Info_ID == 508)
+            {
+         
+                <p style="text-align: center; font-size: 12px; color: #999;">
+                    长按识别图中二维码关注我们</p>
+                <img src="/images/zhaozhouxueli.jpg" width="100%" />
+            }
+        </div>
+    </section>
+}

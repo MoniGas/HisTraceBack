@@ -1,0 +1,99 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "红包发送记录";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+    var lst = Model.RedRecordLst as Webdiyer.WebControls.Mvc.PagedList<LinqModel.View_RedSendRecord>;
+}
+@model LinqModel.RedPacketMoney
+<!-------------------main start---------------------------------->
+<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>红包活动管理<span class="divider">›</span></li>
+        <li>红包发送记录</li>
+    </ul>
+</div>
+<div class="card_pa40 clearfix">
+    <div class="mod-main">
+        <div class="account-info">
+            @*            <span class="mar20">余额：<span class="red"><em>￥</em>@(Model.LeftMoney)</span></span>*@
+            <span class="mar20">充值总额：<span class="red"><em>￥</em>@Model.AllMoney</span></span>
+            @*    <span class="mar20">手续费：<span class="red"><em>￥</em>@(Math.Round(Convert.ToDecimal(Model.AllMoney-Model.LeftMoney-Model.SendMoney),2,MidpointRounding.AwayFromZero))</span></span>*@
+            <span class="mar20">红包发出额：<span class="red"><em>￥</em>@Model.SendMoney</span></span>
+        </div>
+        <div class="boxtable mat20">
+            <h3>
+                发送记录</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="330">
+                            红包活动名称
+                        </th>
+                        <th>
+                            发送红包额（元）
+                        </th>
+                        <th>
+                            发送红包数
+                        </th>
+                        <th>
+                            活动时间
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.RedRecordLst != null)
+                    {
+                        foreach (var item in Model.RedRecordLst)
+                        {
+
+                        <tr>
+                            <td>
+                                <span class="width300 ellipsis">@item.ActivityTitle</span>
+                            </td>
+                            <td>
+                                <span class="red">￥@Convert.ToDecimal(item.SendMoney).ToString("f2")</span>
+                            </td>
+                            <td>
+                                @(item.SendCount)个
+                            </td>
+                            <td>
+                                @(item.StartDate.Value.ToString("yyyy-MM-dd"))至@(item.EndDate.Value.ToString("yyyy-MM-dd"))
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Info", new { id = item.ActivityID })">查看详情</a>
+                            </td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (lst != null && lst.TotalItemCount > 0)
+        {
+            <div class="mod-page fy">
+                <div>
+                    @Html.Pager(lst, new Webdiyer.WebControls.Mvc.PagerOptions
+                               {
+                                   PageIndexParameterName = "pageIndex",
+                                   FirstPageText = "首页",
+                                   ShowNumericPagerItems = true,
+                                   ShowPageIndexBox = true,
+                                   ShowGoButton = true,
+                                   GoButtonText = "跳转",
+                                   PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                                   LastPageText = "尾页",
+                                   NextPageText = "下一页",
+                                   PrevPageText = "上一页",
+                                   AutoHide = false,
+                                   CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                               })
+                </div>
+                每页@(lst.PageSize)条共@(lst.TotalPageCount)页共@(lst.TotalItemCount)条
+            </div>
+        }
+    </div>
+</div>
+<!-------------------main end---------------------------------->

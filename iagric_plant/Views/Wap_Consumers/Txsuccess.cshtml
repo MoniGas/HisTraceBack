@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+<script>
+    //兼容处理，获取手机可视窗口，定义REM参数
+    var doc = document;
+    var win = window;
+    function initFontSize() {
+        var docEl = doc.documentElement;
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';   //判断窗口有没有orientationchange这个方法，有就赋值给一个变量，没有就返回resize方法。
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            fontSizeRate = (clientWidth / 750);
+            var baseFontSize = 100 * fontSizeRate;
+            docEl.style.fontSize = baseFontSize + 'px';
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt.recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    }
+    initFontSize();
+ 
+</script>
+<link href="../../Areas/Market/Content/lingHB.css" rel="stylesheet" type="text/css" />
+<div id="banner">
+    <img src="/Areas/Market/Content/images/banner.png" alt="" />
+</div>
+@if (ViewBag.Ok == "true")
+{
+    <div id="ma" style="height: 2.86rem;margin-top: -0.3rem;">
+        <p class="text">
+            恭喜您，提现成功</p>
+        <!--传入具体红包金额-->
+        <p id="turemany" style="padding-top:0.25rem;">
+            ￥@ViewBag.Money</p>
+        <a href="/Wap_Consumers/Index" class="i" style="margin-top: 0.3rem;">返回</a>
+    </div>
+    <div id="twomain">
+        <p>
+            领取红包步骤:</p>
+        <img src="/Areas/Market/Content/images/line.png" alt="" id="here" />
+        <p class="one">
+            第一步：微信会给您发送红包信息，请查看微信聊天记录列表</p>
+        <div class="frist">
+            <img src="/Areas/Market/Content/images/frist.png" />
+        </div>
+        <p class="one">
+            第二步：点击信息出现领取红包页面，点击拆红包：</p>
+        <div id="many">
+            <img src="/Areas/Market/Content/images/turemany.jpg" />
+        </div>
+        <p class="one">
+            红包将会放入您的零钱账号，<span style="font-size: 0.4rem;">24小时</span>过期微信将会自动退回，祝您生活愉快！</p>
+    </div>
+}
+else
+{ 
+    <div id="ma" style="height: 2.86rem">
+        <p class="text">
+            提现失败</p>
+        <a href="/Wap_Consumers/Index" class="i">返回</a>
+    </div>
+}

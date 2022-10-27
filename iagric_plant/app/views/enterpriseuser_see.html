@@ -1,0 +1,80 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width:600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看用户</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            角色：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="角色..." class="col-md-9" data-bind="value:roleName" disabled="disabled"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            用户名称：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="用户名称..." class="col-md-9" data-bind="value:userName" disabled="disabled" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            用户编号：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="用户编号..." class="col-md-9" data-bind="value:userCode" disabled="disabled"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            登录名：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="登录名..." class="col-md-9" data-bind="value:loginName" disabled="disabled" />
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            登录密码：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="登录密码..." class="col-md-9" data-bind="value:loginPass" />
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            电话：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="电话..." class="col-md-9" data-bind="value:telephone" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding-right" for="form-field-1">
+                            地址：
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" placeholder="地址..." class="col-md-9" data-bind="value:address" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <div class="space-4">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

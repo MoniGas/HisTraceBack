@@ -1,0 +1,240 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RegisterQuery</title>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Pwdq").keyup(function (data) {
+                if ($.trim($("#Pwdq").val()).length== 0 || $.trim($("#Pwdq").val()).length < 6 || $.trim($("#Pwdq").val()).length > 20) {
+                    $("#errorPassWord").show();
+                }
+                else {
+                    $("#errorPassWord").hide();
+                }
+            });
+            $("#Pwdq").change(function (data) {
+                if ($.trim($("#Pwdq").val()).length == 0 || $.trim($("#Pwdq").val()).length < 6 || $.trim($("#Pwdq").val()).length > 20) {
+                    $("#errorPassWord").show();
+                }
+                else {
+                    $("#errorPassWord").hide();
+                }
+            });
+            $("#PwdTq").keyup(function (data) {
+                if ($.trim($("#Pwdq").val()) != $.trim($("#PwdTq").val())) {
+                    $("#errorPwd").show();
+                }
+                else {
+                    $("#errorPwd").hide();
+                }
+            });
+            $("#PwdTq").change(function (data) {
+                if ($.trim($("#Pwdq").val()) != $.trim($("#PwdTq").val())) {
+                    $("#errorPwd").show();
+                }
+                else {
+                    $("#errorPwd").hide();
+                }
+            });
+            $("#platId").change(function (data) {
+                var platId = $.trim($('#platId').val());
+                if (platId != "") {
+                    if (!isInteger(platId)) {
+                        alert("请输入正确的代理编码！")
+                        $("#platId").focus();
+                    }
+                    else {
+                        $("#errorPlat").css("display", "none");
+                    }
+                }
+            });
+        })
+        function RegistNy() {
+            var userName = $.trim($('#UserNameq').val());
+            if (userName.length == 0) {
+                alert("用户名不能为空！", function () {
+                    $("#UserNameq").focus();
+                });
+                return false;
+            }
+            else if (userName.length > 50) {
+                alert("请您将用户名控制在50个字符以内！", function () {
+                    $("#UserNameq").focus();
+                });
+                return false;
+            }
+            var pwd = $.trim($('#Pwdq').val());
+            if (pwd.length == 0) {
+                alert("密码不能为空！", function () {
+                    $("#Pwdq").focus();
+                });
+                return false;
+            }
+            else if (pwd.length > 20 || pwd.length < 6) {
+                alert("请将密码长度控制在6-20位的字符！", function () {
+                    $("#Pwdq").focus();
+                });
+                return false;
+            }
+            var pwdT = $.trim($('#PwdTq').val());
+            if (pwdT.length == 0) {
+                alert("请再次输入密码！", function () {
+                    $("#PwdTq").focus();
+                });
+                return false;
+            }
+            else if (pwdT != pwd) {
+                alert("请输入相同的密码！")
+                return false;
+            }
+            var platId = $.trim($('#platId').val());
+            if (!isInteger(platId) && !isNull(platId)) {
+                alert("请输入正确的代理编码！");
+                $("#platId").focus();
+                return false;
+            }
+            var platId = 0;
+            if ($.trim($('#platId').val()).length > 0) {
+                platId = $.trim($('#platId').val());
+            }
+            var idcode = $.trim($('#idCodeq').val());
+            var sendData = {
+                userName: userName,
+                pwd: pwd,
+                idcode: idcode,
+                platId: platId,
+                organUnitAddress: $("#UOrganUnitAddress").val(),
+                linkMan:$("#ULinkMan").val(),
+                linkPhone:$("#ULinkPhone").val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Register/OnlineQuery",
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (jsonResult) {
+                    alert(jsonResult.Msg);
+                    if (jsonResult.code != 0) {
+                        location.href = "/";
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="reg-main">
+        <div class="reg-article mod">
+            <div class="art-hd clearfix">
+                <h2>
+                    您已经在IDcode平台注册，请确认您企业的注册信息</h2>
+            </div>
+            <div class="art-bd">
+                <div class="form form-1 mod-reslut-t2">
+                    <form class="check-account-form">
+                    <ul class="mt10">
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 本平台登录账号：</label>
+                            <span class="v">
+                                <input type="text" id="UserNameq" name="UserNameq" class="text text3" maxlength="50" />
+                                <span class="text-error account-info"><i class="ico ico-err-1"></i><em class="gray error-info">
+                                    请输入本平台登录账号</em> </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 本平台登录密码：</label>
+                            <span class="v">
+                                <input type="password" id="Pwdq" name="Pwdq" class="text text3" />
+                                <span class="text-error account-info" style="width:100px">
+                                    <div id="errorPassWord" style="display: none;width:200px">
+                                        <i class="ico ico-err-2"></i><em class="red error-info" style=" width:100px">密码长度6-20个字符以内</em>
+                                    </div>
+                                </span>
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 确认密码：</label>
+                            <span class="v">
+                                <input type="password" id="PwdTq" name="PwdTq" class="text text3" maxlength="20" />
+                                <span class="text-error account-info">
+                                    <div id="errorPwd" style="display: none">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">密码设置不一致</em>
+                                    </div>
+                                </span></span></li>
+                    </ul>
+                    <div class="line">
+                    </div>
+                    <ul class="mt10">
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 组织/单位名称：</label>
+                            <span class="v">
+                                <input type="text" id="OrganizeNameq" name="OrganizeNameq" class="text text3" readonly="readonly" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                组织/单位英文名称：</label>
+                            <span class="v">
+                                <input type="text" id="OrganizeNameEnq" class="text text3" name="OrganizeNameEnq"
+                                    maxlength="50" readonly="readonly" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                代理编码：</label>
+                            <span class="v">
+                                <input type="text" id="platId" name="platId" class="text text3" maxlength="50" />
+                                <span class="text-error account-info">
+                                    <div id="errorPlat" style="display: none">
+                                        <i class="ico ico-err-2"></i><em class="red error-info">没有查到代理信息</em>
+                                    </div>
+                                </span></span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 组织/单位所在区域：</label>
+                            <input type="text" id="Areaq" name="Areaq" class="text text3" readonly="readonly" />
+                        </li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                <span class="red">*</span> 组织/单位联系人：</label>
+                            <span class="v">
+                                <input type="text" id="OrganizeUserq" name="OrganizeUserq" class="text text3" readonly="readonly" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                组织/单位联系人英文名：</label>
+                            <span class="v">
+                                <input type="text" id="OrganizeUserEnq" maxlength="50" name="OrganizeUserEnq" class="text text3" maxlength="50"
+                                    readonly="readonly" />
+                            </span></li>
+                        <li class="fm-item">
+                            <label for="#" class="k">
+                                组织/单位联系人手机：</label>
+                                <span class="v">
+                            <input type="text" id="OrganizeUserTelq" maxlength="20" name="OrganizeUserTelq" class="text text3"
+                                readonly="readonly" />
+                            </span></li>
+                    </ul>
+                    <div class="btns">
+                        <input type="button" value="上一步" class="btn btn-2" onclick="onNavClick(2)" />
+                        <input type='button' id="bt3" class="btn btn-1" value="加入UDI平台" onclick="RegistNy()" />
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        <input type="text" id="provinceq" name="provinceq" />
+        <input type="text" id="cityq" name="cityq" />
+        <input type="text" id="areaq" name="areaq" />
+        <input type="text" id="unitTypeq" name="unitTypeq" />
+        <input type="text" id="idCodeq" name="idCodeq" />
+    </div>
+</body>
+</html>

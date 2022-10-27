@@ -1,0 +1,43 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width:500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    申请加入区域品牌</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>区域品牌：</label>
+                        <div class="col-md-9">
+                            <select data-bind="options: brandModelIsArray,optionsText: 'BrandName',optionsValue:'Brand_ID',optionsCaption: '选择区域品牌',value:selectedBrand">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selbrandmodel">请选择区域品牌！</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="name">
+                            <span class="alert-danger">*</span>产品名称：</label>
+                        <div class="col-md-9">
+                            <select data-bind="options: materialModelsArray,optionsText: 'MaterialFullName',optionsValue:'Material_ID',optionsCaption: '选择产品',value:selectedModel">
+                            </select>
+                            <span class="alert-danger" data-bind="visible:selmaterialmodel">请选择产品名称！</span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" id="saveData" data-bind="click:Register">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:calcel">
+                取消</button>
+        </div>
+    </div>
+</div>
+

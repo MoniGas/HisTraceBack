@@ -1,0 +1,8 @@
+2022-09-14 09:29:57------/interface.ashx?action=PingTrace
+2022-09-14 09:29:57------/interface.ashx?action=Login&LoginName=hbglyl&PassWord=123456
+2022-09-14 09:29:57------/interface.ashx?action=PingTrace
+2022-09-14 09:29:57------/interface.ashx?action=Login&LoginName=hbglyl&PassWord=123456
+2022-09-14 09:29:57------/interface.ashx?action=PingTrace
+2022-09-14 09:29:57------/interface.ashx?action=SynchroUDIDI&EnterpriseID=1
+2022-09-14 09:30:21------/interface.ashx?action=PingTrace
+2022-09-14 09:30:21------/interface.ashx?Action=UpSyMaterialPI&EnterpriseID=1&YouXiaoDate=220914&ShiXiaoDate=220914&MaterialName=医用口罩&FixedCode=MA.156.M0.100032.00001564&TotalCount=100&ShengChanPH=123&CodingClientType=1&category_code=000156&specification=0&start_date=220914&d_batch_number=&product_model=10cm&codeNumFile=WaterFlow.txt

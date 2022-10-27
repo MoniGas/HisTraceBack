@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "我的红包";
+}
+@model  List<LinqModel.View_RedSendChange> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>红包零钱</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link rel="stylesheet" type="text/css" href="/public_css/base.css">
+    <link rel="stylesheet" type="text/css" href="/public_css/public-style.css">
+    <link rel="stylesheet" type="text/css" href="/public_css/login.css">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script>
+    $(function () {
+        $("#btnTx").click(function () {
+            $.post("@Url.Action("SendRedChangePacket", "Wap_IndexMarket", new { area = "Market" })", {money:@ViewBag.TotalMoney},function (data) {
+            
+            window.location.href = '/Wap_Consumers/Txsuccess?money='+@ViewBag.TotalMoney+"&ok="+data.ok;
+            });
+        });
+        $("a[flag]").click(function(){
+        $("a[flag]").removeClass("current");
+        var $this=$(this);
+        $this.addClass("current");
+        $.getJSON("@Url.Action("RedChangeDetail")",{flag:$this.attr("flag")},function(data){
+
+                if ($this.attr("flag")=="0") {
+                $("#ulTx").hide()
+                     $("#ulJl").html("");
+                    $.each(data,function(index,item){
+                     var birthdayMilliseconds = parseInt(item.AddDate.replace(/\D/igm, ""));
+                    //实例化一个新的日期格式，使用1970 年 1 月 1 日至今的毫秒数为参数
+                    var birthday = new Date(birthdayMilliseconds);
+                            $("#ulJl").append(" <li class='row running-row'><div class='title'>领取红包</div><div class='faf'>"+item.EnterpriseName+"</div><div class='time'>"+birthday.toLocaleString()+"</div><div class='money reduce green'>+"+item.RedValue+"</div></li>");
+                    })
+            
+                }
+                else{
+                 $("#ulJl").html("");
+                 if(data.length==0){$("#ulTx").show();}
+                 else{$("#ulTx").hide();};
+                 ;
+                    $.each(data,function(index,item){
+                          var birthdayMilliseconds = parseInt(item.SendDate.replace(/\D/igm, ""));
+                    //实例化一个新的日期格式，使用1970 年 1 月 1 日至今的毫秒数为参数
+                    var birthday = new Date(birthdayMilliseconds);
+                            $("#ulJl").append(" <li class='row running-row'><div class='title'>提现- 交易单号 "+item.BillNumber+"</div><div class='time'>"+birthday.toLocaleString()+"</div><div class='money reduce'>-"+item.RedValue+"</div></li>");
+                    })
+                }
+        });
+        });
+
+      $("a[flag]").eq(0).click();
+    })
+    </script>
+</head>
+<body>
+    <header class="OriginHead bar-green">
+			<a href="javascript:history.go(-1)" class="bar-item pull-left"><i class="icon bar-arrow-left"></i></a>
+			<h1 class="bar-title">我的红包</h1>
+		</header>
+    <div class="coupon-content">
+        <div class="head-row padding4">
+            <p class="clearfix">
+                红包总额:<span class="red money">￥@ViewBag.TotalMoney</span>
+                @if (ViewBag.TotalMoney > 1)
+                {
+
+                    <a class="btn-withdrawals" style="cursor: pointer;" id="btnTx">提现</a>
+                }
+            </p>
+        </div>
+        <div class="main-content">
+            <div class="tab-header clearfix">
+                <div class="having-line">
+                </div>
+                <span class="item"><a class="a_all_record current" href="javascript:;" flag="0">红包记录</a>
+                </span><span class="item"><a class="a_withdrawal_record" href="javascript:;" flag="1">
+                    提现记录</a> </span>
+            </div>
+            <div class="tab-content">
+                <ul id="ulJl" class="list_all">
+                </ul>
+                <ul id="ulTx" class="list_withdrawal" style="display: none;">
+                    <!--  初始化页面获取提现记录 -->
+                    <div class="no-record padding4">
+                        您暂时没有提现流水</div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

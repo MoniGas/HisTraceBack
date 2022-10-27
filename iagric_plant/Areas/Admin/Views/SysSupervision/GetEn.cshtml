@@ -1,0 +1,143 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.Enterprise_Info>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <!-------------------main start---------------------------------->
+    <div>
+        <form id="form1" method="get"action="/Admin/SysSupervision/GetEn?platID==@ViewBag.eid">
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li class="dqwz">代理管理<span class="divider">›</span>查看企业</li>
+                <li class="goback"><span class="shuline">|</span><a href="/Admin/SysSupervision/GetPlatInfo?eid=@ViewBag.eid">返回</a></li>
+            </ul>
+        </div>
+        <div class="table-filter borderLeft borderRight clearfix">
+            <div class="sitem">
+                筛选：
+                <input type="text" style="width: 120px;" id="sDate" name="sDate" value="@ViewBag.sDate"
+        cssclass="Wdate" onclick="WdatePicker()" readonly="readonly">
+                至
+                <input type="text"
+        style="width: 120px;" readonly="readonly" onclick="WdatePicker()" id="eDate" name="eDate"
+        value="@ViewBag.eDate" cssclass="Wdate">
+            </div>
+            <div class="sitem">
+                企业名称：
+                <input type="text" id="enName" name="enName" value="@ViewBag.Name">
+                <input  type="hidden" value="@ViewBag.Status" name="activityStatus"/>
+            </div>
+            <div class="sitem">
+                <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button">
+            </div>
+        </div>
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    企业名称
+                                </th>
+                                <th>
+                                    联系人
+                                </th>
+                                <th>
+                                    联系电话
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    用码量
+                                </th>
+                                <th>
+                                    剩余码量
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.EnterpriseName
+                                    </td>
+                                    <td>
+                                        @sub.LinkMan
+                                    </td>
+                                    <td>
+                                        @sub.LinkPhone
+                                    </td>
+                                    <td>
+                                        @if (sub.Verify == 1)
+                                        {
+                                            <span>正常</span>
+                                        }
+                                        else if (sub.Verify == 2)
+                                        {
+                                            <span>试用</span>
+                                        }
+                                        else if (sub.Verify == 3)
+                                        {
+                                            <span>停用</span> 
+                                        }
+                                    </td>
+                                    <td>
+                                        @sub.UsedCodeCount
+                                    </td>
+                                    @if (sub.OverDraftCount == -1)
+                                    {
+                                        <td>
+                                            无限制
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @(sub.RequestCodeCount - sub.UsedCodeCount + sub.OverDraftCount)
+                                        </td>
+                                    }
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.TotalItemCount > 0)
+                {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-------------------main end---------------------------------->
+</body>

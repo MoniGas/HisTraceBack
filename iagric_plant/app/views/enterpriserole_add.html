@@ -1,0 +1,76 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 800px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    添加角色</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        <span class="alert-danger">*</span>角色名称：</label>
+                    <div class="col-md-8 no-padding">
+                        <input type="text" data-bind="value:name"><span class="alert-danger"></span>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="row">
+                <h4 class="tit-modal">
+                    权限列表</h4>
+                <div class="padlr15">
+                    <table id="table1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                    模块
+                                </th>
+                                <th>
+                                    子模块
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ko foreach:  [1, 2] -->
+                            <!-- ko foreach: $parent.initMenus1(1,$data) -->
+                            <tr data-bind="checkBoxCascade:null">
+                                <!-- ko if:$root.HasTd -->
+                                <td  data-bind="attr:{rowspan:$root.RowCount} ">
+                                    <label class="inline">
+                                                                            <span data-bind="text:$data.PlatModual==1?'Web端':'客户端'"></span>
+                                    </label>
+                                </td>
+                                <!-- /ko -->
+                                <td>
+                                    <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="value:$data.PRRU_Modual_ID" />&nbsp;<span
+                                        data-bind="text:$data.Title"></span>
+                                </td>
+                                <td class="form-inline">
+                                    <!-- ko foreach: $root.initMenus2(2,$data.PRRU_Modual_ID) -->
+                                    <label class="inline">
+                                        <input type="checkbox" name="cbx" class="cbx1" data-bind="value:$data.PRRU_Modual_ID,attr:{eleflag1:$data.Parent_ID}" />&nbsp;<span
+                                            data-bind="text:$data.Title"></span>&nbsp;&nbsp;
+                                    </label>
+                                    <!--/ko-->
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:save">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

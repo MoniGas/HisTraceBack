@@ -1,0 +1,168 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.Contract>
+@{
+    ViewBag.Title = "Contract";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(function () {
+   $("#btnSave").click(function(){
+        if($.trim($("#signingDate").val())==""){
+        alert("请选择签订日期！");
+             return;
+        };
+        if($.trim($("#signingUserName").val())==""){
+        alert("请输入签订人！");
+             return;
+        };
+        if($.trim($("#beginDate").val())==""){
+        alert("请选择合同期限的开始日期！");
+             return;
+        };
+        if($.trim($("#endDate").val())==""){
+        alert("请选择合同期限的到期日期！");
+             return;
+        };
+        var beginDate = $("#beginDate").val();
+        var endDate = $("#endDate").val();
+        var fmt="yyyy-MM-dd";
+        if(beginDate>endDate)
+        {
+         alert("合同起始日期不能大于到期日期！");
+             return;
+        }
+            $.post("@Url.Action("Contract")",
+            {
+            eid:$("#eid").val(),
+            signingDate:$("#signingDate").val(),
+            signingUserName:$("#signingUserName").val(),
+            beginDate:$("#beginDate").val(),
+            endDate:$("#endDate").val()
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                    location.href=data.url;
+                    }
+                }
+            })
+    });
+    });
+</script>
+<body>
+    <!-------------------main start---------------------------------->
+    <div>
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li class="dqwz" >企业管理<span class="divider">›</span><a href="/Admin/ManEnterpriseManage/Index">我的企业</a><span
+                    class="divider">›</span>合同管理</li>  <li class="goback"><span class="shuline">|</span>
+                    <a href="/Admin/ManEnterpriseManage/GetEnInfo?eid=@ViewBag.eid">返回</a></li>
+            </ul>
+        </div>
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                <div class="table-filter borderLeft borderRight clearfix">
+                    <div class="form hd-manage-det">
+                        <input id="eid" name="eid" type="hidden"  value="@ViewBag.eid" />
+                        <div class="infoitem">
+                            <span class="label" style="width: 120px">企业名称：</span>
+                            <div class="fl">
+                                <span class="yellow">@ViewBag.Name</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label" style="width: 120px"><em>*</em>签订日期：</span>
+                            <div class="fl">
+                                <input type="text" style="width: 120px;" id="signingDate" name="signingDate" value="@ViewBag.sDate"
+        cssclass="Wdate" onclick="WdatePicker()" readonly="readonly">
+                                <span style="color: #ed7049">请选择签订日期</span>
+                            </div>
+                            <span class="label" style="width: 120px"><em>*</em>签订人：</span>
+                            <input type="text" id="signingUserName" name="signingUserName" value="">
+                            <span style="color: #ed7049">请输入签订人</span>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label" style="width: 120px"><em>*</em>合同期限：</span>
+                            <div class="fl">
+                                <input type="text" style="width: 120px;" id="beginDate" name="beginDate" value=""
+                                    cssclass="Wdate" onclick="WdatePicker()" readonly="readonly">
+                                至
+                                <input type="text" style="width: 120px;" readonly="readonly" onclick="WdatePicker()"
+                                    id="endDate" name="endDate" value="" cssclass="Wdate">
+                                    <span style="color: #ed7049">请选择合同开始和结束日期</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center mat40">
+                        <input type="button" id="btnSave" value="提交" class="button"></p>
+                </div>
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    签订日期
+                                </th>
+                                <th>
+                                    合同期限
+                                </th>
+                                <th>
+                                    签订人
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.SigningDate.Value.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+                                        @sub.BeginDate.Value.ToString("yyyy-MM-dd")<label>—</label>@sub.EndDate.Value.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+                                        @sub.SigningUserName
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.TotalItemCount > 0)
+                {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-------------------main end---------------------------------->
+</body>

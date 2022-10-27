@@ -1,0 +1,26 @@
+﻿<div class="header-wrapper" id="topheader">
+    <div class="header17 clearfix">
+        <!--ko compose: 'top.html'-->
+        <!--/ko-->
+    </div>
+</div>
+<div class="col_side" id="leftMenu" style="display: none">
+    <!--ko compose: 'left.html'-->
+    <!--/ko-->
+</div>
+<div class="col_main" style="margin-left: 0; padding-top: 20px;" id="mainContent">
+    <div class="main_hd clearfix" id="tabMenu" style="display: none">
+        <!--ko compose: 'tab.html'-->
+        <!--/ko-->
+    </div>
+    <div class="content clearfix">
+        <div data-bind="router: { transition:'entrance', cacheViews:false }">
+        </div>
+    </div>
+    <div class="part-index clearfix" id="HomePage" style="display: none">
+    </div>
+</div>
+<div>
+    <!--ko compose: 'footer.html'-->
+    <!--/ko-->
+</div>

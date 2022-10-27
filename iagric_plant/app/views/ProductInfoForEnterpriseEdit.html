@@ -1,0 +1,99 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 800; width: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    配置信息模块</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding" for="name">
+                        <span class="alert-danger">*</span>产品名称：</label>
+                    <div class="col-md-8 no-padding">
+                        <!--<select class="form-control" data-placeholder="选择产品..." id="Select1" data-bind="options:MaterialModels.MaterialModelArray,value:MaterialModels.selectedAddOption,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                        </select>-->
+                        <input type="text" style="width: 200px; display:inline-block;" readonly="readonly" data-bind="value:MaterialName" />
+                    </div>
+                    <span class="alert-danger" data-bind="visible:SelAddProduct">请选择产品!</span>
+                </div>
+                <div class="col-md-9">
+                    <span data-bind="text:'显示活动介绍'"></span>
+                </div>
+                <div class="padlr15">
+                    <table id="table1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="100">
+                                    商品规格
+                                </th>
+                                <th>
+                                    活动名称
+                                </th>
+                                <th>
+                                    活动介绍
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ko foreach: MaterialSpecList -->
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="cbx2" class="cbx1" eleflag='allSelectBtn' data-bind="checked:$parent.isChecked($data.SpecId),value:$data.SpecId" />&nbsp;<span
+                                        data-bind="text:$data.MaterialSpecification"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.PropertyName"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.PropertyDescribe"></span>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+                <!--</div>-->
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxOrderHotline" id="CbxOrderHotline" class="cbx1" data-bind="checked:OrderHotline" />&nbsp;<span
+                            data-bind="text:'显示订购热线'"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxMaterialPrice" id="CbxMaterialPrice" class="cbx1" data-bind="checked:MaterialPrice" />&nbsp;<span
+                            data-bind="text:'显示产品价格'"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxProductionTime" id="CbxProductionTime" class="cbx1" data-bind="checked:ProductionTime"/>&nbsp;<span
+                            data-bind="text:'显示生产日期'"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxFactory" id="CbxFactory" class="cbx1"data-bind="checked:Factory"/>&nbsp;<span
+                            data-bind="text:'显示生产厂家'"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="checkbox" name="CbxComplaintPhone" id="CbxComplaintPhone" data-bind="checked:ComplaintPhone" class="cbx1" />&nbsp;<span
+                            data-bind="text:'显示投诉电话'"></span>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:save">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>

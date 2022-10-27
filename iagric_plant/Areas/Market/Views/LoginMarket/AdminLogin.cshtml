@@ -1,0 +1,169 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>宣传营销后台监管平台</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Areas/Market/Content/login.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Areas/Market/greenskin.css")" />
+    <script src="@Url.Content("~/Areas/Market/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.onkeydown = function (e) {
+            var theEvent = window.event || e;
+            var code = theEvent.keyCode || theEvent.which;
+            if (code == 13) {
+                $("#btnlogin").click();
+            }
+        }
+        $('#btnlogin').on('click', function () {
+            $("#btnlogin").click(function () {
+                if ($("#loginName").val() == "") {
+                    alert("请输入用户名！");
+                    return false;
+                }
+                if ($("#loginPass").val() == "") {
+                    alert("请输入密码！");
+                    return false;
+                }
+                if ($("#CheckCode").val() == "") {
+                    alert("请输入验证码！");
+                    return false;
+                }
+                $.post('@Url.Action("AdminLogin")', { loginName: $("#loginName").val(), loginPass: $("#loginPass").val(), yzCode: $("#CheckCode").val() }, function (data) {
+                    if (data.res) {
+                        location.href = data.url;
+                    }
+                    else {
+                        alert(data.info);
+                        AA();
+                    }
+                });
+            });
+        });
+        $(function () {
+            $("#btnlogin").click(function () {
+                if ($("#loginName").val() == "") {
+                    alert("请输入用户名！");
+                    return false;
+                }
+                if ($("#loginPass").val() == "") {
+                    alert("请输入密码！");
+                    return false;
+                }
+                if ($("#CheckCode").val() == "") {
+                    alert("请输入验证码！");
+                    return false;
+                }
+                $.post('@Url.Action("AdminLogin")', { loginName: $("#loginName").val(), loginPass: $("#loginPass").val(), yzCode: $("#CheckCode").val() }, function (data) {
+                    if (data.res) {
+                        location.href = data.url;
+                    }
+                    else {
+                        alert(data.info);
+                        AA();
+                    }
+                });
+            });
+        })
+        function AA() {
+            $("#imageCode").attr("src", "/Market/HomeMarket/CheckImg?" + new Date());
+        }
+    </script>
+</head>
+<body>
+    <div class="loginhead ease-3 head_fixed">
+        <div class="inner clearfix mar0">
+            <div class="fl">
+                <div class="logo ease-3">
+                    <a href="">
+                        <img src="@Url.Content("~/Areas/Market/images/adminlogo.png")"></a></div>
+            </div>
+        </div>
+    </div>
+    <div class="login-main" style="margin-top: 90px;">
+        <div class="bce-login">
+            <div class="bce-login-wrap">
+                <div class="bce-login-inner">
+                    <span>
+                        <img src="@Url.Content("~/Areas/Market/images/experience.png")" alt="" class="banner">
+                    </span>
+                    <div class="login-box">
+                        <div class="common-login">
+                            <div class="tang-pass-login">
+                                <div class="login-main">
+                                    <div class="loginBox_ligin">
+                                        <div class="clearfix">
+                                            <p class="tit">
+                                                用户登录</p>
+                                        </div>
+                                        <div class="login-item">
+                                            <div class="Area">
+                                                @*   <label class="input_tips" style="display: block;">
+                                                    用户名</label>*@
+                                                <div class="inputOuter">
+                                                    <input placeholder="用户名" type="text" id="loginName" name="loginName" class="inputstyle"
+                                                        value="" />
+                                                </div>
+                                            </div>
+                                            <div class="Area">
+                                                @* <label class="input_tips" style="display: block;">
+                                                    密码</label>*@
+                                                <div class="inputOuter">
+                                                    <input placeholder="密码" type="password" id="loginPass" name="loginPass" class="inputstyle password"
+                                                        value="" />
+                                                </div>
+                                            </div>
+                                            <div class="Area">
+                                                <div class="verifyinputArea">
+                                                    @*<label class="input_tips">
+                                                        验证码</label>*@
+                                                    <div class="inputOuter inputOuter_yz">
+                                                        <input type="text" class="inputstyle verifycode" id="CheckCode" name="CheckCode"
+                                                            placeholder="验证码" value="" maxlength="4">
+                                                    </div>
+                                                </div>
+                                                <div class="verifyimgArea">
+                                                    <img id="imageCode" src="/Home/CheckImg" onclick="AA()" width="68" height="30" alt=""
+                                                        class="verifyimg" />
+                                                    <a href="javascript:void(0);" onclick="AA()" class="verifyimg_tips">换一张</a>
+                                                </div>
+                                            </div>
+                                            @*  <div class="clearfix">
+                                            <span class="rem-passw fl">
+                                                <input type="checkbox" id="cbRemeber" style="vertical-align: middle;">
+                                                <label>
+                                                    记住密码</label>
+                                            </span><a href="#" class="light-blue fr" target="_blank" style="vertical-align: middle;
+                                                margin-top: 3px;">忘记密码？</a>
+                                        </div>*@
+                                            <p>
+                                                <button class="btn_login_00 mgt20" style="width: 100%;" type="button" id="btnlogin">
+                                                    登录</button></p>
+                                            @*   <p style="text-align: right;">
+                                            <a href="#" class="register">会员申请</a></p>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright container">
+        <p>
+            <span>注册运营机构：工信二维码技术研究院</span><span>丨</span><span>电话：010-68207646 68207573</span><span>丨</span><span>邮箱：ncpzs@idcode.org.cn</span>
+        </p>
+        <p>
+            <span>京ICP备19010367号-2</span>@*<span>丨</span> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802023558">
+                <span>京公网安备11010802023558号</span>
+                <img src="../../images/ghs.png" /></a> *@<span>丨</span><span>版权所有：二维码注册解析中心</span>
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<div class="page-content">
+<!--    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">首页</a> </li>
+            <li class="active">套标规格</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>-->
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control" placeholder="输入规格..." data-bind="value:Value">
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:SearchSpecification">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+            <button class="btn btn-lg btn-success" data-bind="click: function(data, event) {AddSpecification(data, event);}">
+                添加规格</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="500">
+                            规格
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:ViewModelSpecification.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.MouseoverFun, mouseout: $parent.MouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.Value"></span><span data-bind="text:$data.GuiGe"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'BtnEdit'+$data.ID()},click: function(data,event) {$parent.EditSpecification($data.ID,data,event);}">
+                                修改
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'BtnDel'+$data.ID()},click: function(data,event) {$parent.DelSpecification($data.ID,data,event);}">
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="SpecificationBH" data-bind="SpecificationBH:ViewModelSpecification.pageSize,totalCounts:ViewModelSpecification.totalCounts,pageIndex:ViewModelSpecification.pageIndex">
+        </ul>
+    </div>
+</div>

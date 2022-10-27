@@ -1,0 +1,376 @@
+﻿@{
+    ViewBag.Title = "新建大转盘活动";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+    var loginType = Common.Argument.CurrentUser.User == null ? 1 : Common.Argument.CurrentUser.User.LoginType;
+}
+<script type="text/javascript">
+    //    $(function () {
+    //        if ("@ViewBag.ActivityID" != 0) {
+    //            $("#Img").attr('src', '/YXActivity/CenterEwmImg?id=' + "@ViewBag.ActivityID" + '&w=100&h=100');
+    //            $("#li2").removeClass('active');
+    //            $("#li1").removeClass('active');
+    //            $("#li3").addClass('active');
+    //            $("#Step2").css({ "display": "none" });
+    //            $("#Step1").css({ "display": "none" });
+    //            $("#Step3").css({ "display": "" });
+    //        }
+    //    });
+</script>
+<script type="text/jscript">
+    function FirstStep() {
+        if (isNull($("#ActivityTitle").val())) {
+            alert("请输入活动名称！");
+            $("#ActivityTitle").focus();
+            return false;
+        }
+        if (isNull($("#StartTime").val())) {
+            alert("请选择活动开始时间！");
+            $("#StartTime").focus();
+            return false;
+        }
+        if (isNull($("#EndTime").val())) {
+            alert("请选择活动结束时间！");
+            $("#EndTime").focus();
+            return false;
+        }
+        if ($("#StartTime").val() > $("#EndTime").val()) {
+            alert("开始时间不能大于结束时间！");
+            $("#StartTime").focus();
+            return false;
+        }
+        if (isNull($("#Content").val())) {
+            alert("请输入活动规则！");
+            $("#Content").focus();
+            return false;
+        }
+        var activeID = $("#ActiveID").val();
+        if (activeID > 0) {
+            $("#li1").removeClass('active');
+            $("#li2").addClass('active');
+            $("#Step1").css({ "display": "none" });
+            $("#Step2").css({ "display": "" });
+            AfterSet(activeID);
+        }
+        else
+            {
+            var sendData = {
+                SetingID: $("#SetingID").val(),
+                ActivityTitle: $("#ActivityTitle").val(),
+                Content: $("#Content").val(),
+                StartDate: $("#StartTime").val(),
+                EndDate: $("#EndTime").val(),
+                JoinMode: $('input:radio[name="JoinMode"]:checked').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Market/YXLottery/AddActivity",
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == true) {
+                        $("#li1").removeClass('active');
+                        $("#li2").addClass('active');
+                        $("#Step1").css({ "display": "none" });
+                        $("#Step2").css({ "display": "" });
+                        $("#ActiveID").val(data.id);
+                    }
+                    else {
+                        alert(data.info);
+                    }
+
+                }
+            })
+        }
+    }
+    function SecondStep() {
+        var ActiveID = $("#ActiveID").val();
+        var jxcount = $("#Amount").text();
+        if (jxcount != null && jxcount != "") {
+            jxcount = $("#Amount").text();
+        }
+        else
+        {
+            jxcount = "0";
+        }
+        var sendData = {
+            settingID: $("#SetingID").val(),
+            ActiveID:$("#ActiveID").val(),
+            jxSumCount: jxcount
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/Market/YXLottery/CompareJXCount',
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                if (data.res == true) {
+                    layer.alert(data.info);
+                    //AfterSet($("#ActiveID").val());
+                    $("#Img").attr("src", "@Url.Action("CenterEwmImg")?id=" + ActiveID + '&w=100&h=100');
+                    $("#li2").removeClass('active');
+                    $("#li3").addClass('active');
+                    $("#Step2").css({ "display": "none" });
+                    $("#Step3").css({ "display": "" });
+                }
+                else {
+                    alert(data.info);
+                }
+            }
+        })
+    }
+
+    //function closeLayer() {
+    //    window.location.reload();
+    //    var index =layer.getFrameIndex(window.name);
+    //    layer.close(index);
+    //}
+    //奖项设置窗口
+    function SetLottery(ActiveID) {
+        ActiveID = $("#ActiveID").val();
+        //页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+//        layer.open({
+//            type: 2,
+//            title: '设置奖项',
+//            maxmin: false,
+//            area: ['600px', '500px'],
+//            content: '/Market/YXLottery/SetLottery?ActiveID='+ActiveID,
+//            end: function () {
+//                //layer.tips('Hi', '#about', { tips: 1 })
+//            }
+//        });
+
+        openwin('/Market/YXLottery/SetLottery?ActiveID='+ActiveID, '设置奖项', 600, 500);
+    }
+    //弹窗回调函数   amount, sum, total
+    function AfterSet(ActiveID) {
+        var sendData = {
+            ActiveID: ActiveID
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/Market/YXLottery/GetJXList',
+            contentType: "application/json;charset=utf-8", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: JSON.stringify(sendData),
+            async: false,
+            success: function (data) {
+                lists = data.ObjList;
+                $("#Amount").text(data.totalCounts);
+                $("#Lottery").empty();
+                    var aa = '';
+                    for (var i = 0; i < lists.length; i++) {
+                        $("#Lottery").append('<tr><td>' + lists[i].LotteryName + '</td>'
+                            + '<td><img src="' + lists[i].LotteryPic +'" style="width:50px;height:50px;"</td>'
+                            + '<td><a href="' + lists[i].LotteryFileURL+'">' + lists[i].LotteryFile + '</a></td>'
+                            + '<td>' + lists[i].LotteryCount + '</td>'
+                            + '<td><a href="javascript:EditJX(\'' + lists[i].ActivitylotteryID + '\');" class="lnk mar10">编辑</a><a href="javascript:DelJX(\'' + lists[i].ActivitylotteryID + '\');" class="lnk mar10">删除</a></td></tr>')
+                    }
+            }
+        });
+    }
+
+    //编辑奖项
+    function EditJX(lotteryID) {
+//        layer.open({
+//            type: 2,
+//            title: '编辑奖项',
+//            maxmin: false,
+//            area: ['600px', '500px'],
+//            content: '/Market/YXLottery/EditLottery?lotteryID=' + lotteryID,
+//            end: function () {
+//                //layer.tips('Hi', '#about', { tips: 1 })
+//            }
+//        });
+         openwin('/Market/YXLottery/EditLottery?lotteryID='+lotteryID, '编辑奖项', 600, 500);
+    }
+    //删除奖项
+    function DelJX(lotteryID) {
+        var a=confirm("确定要删除该奖项吗？");
+        if(a==true)
+        {
+         var sendData = {
+                lotteryID: lotteryID
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Market/YXLottery/DelLottery',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == true) {
+                        alert(data.info);
+                        AfterSet($("#ActiveID").val());
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        }
+        else
+        {
+        this.close();
+        }
+    }
+</script>
+<script type="text/jscript">
+    function GoBack() {
+        $("#li2").removeClass('active');
+        $("#li1").addClass('active');
+        $("#Step2").css({ "display": "none" });
+        $("#Step1").css({ "display": "" });
+    }
+    function Complate() {
+        top.location.href = "/Home/Index?hash=#requestsettingmanage";
+    }
+</script>
+<!-------------------main start---------------------------------->
+@*<div class="main_hd clearfix">
+    <ul class="breadcrumb">
+        <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+        <li>营销管理<span class="divider">›</span>新建大转盘活动<span class="divider">›</span><a href="javascript:history.go(-1)">返回</a></li>
+    </ul>
+</div>*@
+<div class="card_pa40 clearfix">
+    <div class="index-part">
+        <div class="ncp-steps">
+            <ul>
+                <li class="active" id="li1"><i>1</i><span>设置活动信息</span></li>
+                <li id="li2"><i>2</i><span>设置奖项</span></li>
+                <li id="li3"><i>3</i><span>扫码预览活动效果</span></li>
+            </ul>
+        </div>
+        <div class="ncp-content clearfix" id="Step1">
+            <div class="mod-main">
+                <input type="hidden" id="SetingID" name="SetingID" value="@ViewBag.SetingID" />
+                <div class="mc">
+                    <div class="user-set userset-lcol">
+                        <div class="form">
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动名称：</span>
+                                <div class="fl">
+                                    <input type="text" maxlength="10" id="ActivityTitle" name="ActivityTitle" placeholder="不超过10个汉字，含标点符号" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动有效期：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 190px;" id="StartTime" name="StartTime" placeholder="开始时间"
+                                        cssclass="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'EndTime\')}'})"
+                                        readonly="readonly" />
+                                    至
+                                    <input cssclass="Wdate" readonly="readonly" placeholder="结束时间" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'StartTime\')}' })"
+                                        type="text" id="EndTime" class="col-xs-3 col-sm-2" name="EndTime" style="width: 190px;" />
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label"><em>*</em>活动规则：</span>
+                                <div class="fl">
+                                    <textarea id="Content" name="Content" cols="100" rows="8" style="width: 400px; height: 80px;"
+                                        maxlength="500" placeholder="活动规则"></textarea>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">参与方式：</span>
+                                <div class="fl interest-list">
+                                    <p class="hdlx">
+                                        <label class="mar10">
+                                            <input type="radio" name="JoinMode" checked="checked" value="1" />微信授权登录才能参加大转盘活动
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label">&nbsp;</span>
+                                <div class="fl">
+                                    <input type="button" value="下一步" class="button-big" id="btnFirstStep" onclick="FirstStep()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ncp-content clearfix" id="Step2" style="display: none">
+            <div class="mod-main" style="margin-left: 110px;">
+                <div class="mc">
+                    <div class="user-set userset-lcol">
+                        <div class="form">
+                            <input type="hidden" id="ActiveID" name="ActiveID" value="" />
+                            <div class="infoitem">
+                                @*<span class="label"><em>*</em>奖项设置：</span>*@
+                                <div class="fl">
+                                    <div class="hdlx">
+                                        <p>
+                                            <input type="button" value="添加奖项" class="button-yellow" onclick="SetLottery(ActiveID)" />
+                                        </p>
+                                        <div class="boxtable">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            奖项名称
+                                                        </th>
+                                                        <th>
+                                                            奖项图片
+                                                        </th>
+                                                        <th>
+                                                            奖项文件
+                                                        </th>
+                                                        <th>
+                                                            奖项数量
+                                                        </th>
+                                                        <th>
+                                                            操作
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="Lottery">
+                                                </tbody>
+                                            </table>
+                                            @*<input type="hidden" id="SetSumDetail" />*@
+                                            <input type="hidden" id="SetAmountDetail" />
+                                        </div>
+                                        <div class="hb-order">
+                                            @*<div class="price">
+                                                    红包总金额<span class="rmn-ico" id="Sum"><em>￥</em></span>
+                                                </div>*@
+                                            <div class="shu">
+                                                奖项总数量 <span class="blacktxt" id="Amount"></span>个
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infoitem" style="margin-top: 20px;">
+                                <span class="label">&nbsp;</span>
+                                <div class="fl">
+                                    <input type="button" value="返   回" class="button-big-gray" onclick="GoBack()" />
+                                    <input type="button" value="下一步" class="button-big" onclick="SecondStep()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ncp-content clearfix" style="display: none" id="Step3">
+            <div class="lookewmbox">
+                <img id="Img" name="Img" src="" />
+                <p>
+                    用微信扫一扫，查看红包活动效果
+                </p>
+                <p>
+                    <input type="button" value="完   成" class="button-big-gray" onclick="Complate()" />
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------main end---------------------------------->

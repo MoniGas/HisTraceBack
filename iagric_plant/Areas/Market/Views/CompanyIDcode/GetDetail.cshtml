@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "GetDetail";
+    Layout = "~/Areas/Market/Views/Shared/_Layout.cshtml";
+}
+
+@model LinqModel.DetailCompanyIDCode
+                   <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li>二维码管理<span class="divider">›</span>我的二维码<span class="divider">›</span>查看详情<span class="divider">›</span></li>
+                <li style="cursor:pointer;" onclick="javascript:history.go(-1);">返回</li>
+            </ul>
+        </div>
+			<div class="card_pa40 clearfix">
+					<div class="mod-main">
+@*         <p>
+                    <a href="javascript:history.go(-1);">
+                        <input type="button" id="" name="" value="返回" class="button-line"></a></p>*@
+						<div class="mc clearfix">
+                        <div class="user-set userset-lcol mar30">
+                            <div class="form hd-manage-det">
+                                <div class="infoitem">
+                                    <span class="label">码段：</span>
+                                    <div class="fl">
+                                        <span>@Model.CodeContent</span>
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label">剩余数量：</span>
+                                    <div class="fl">
+                                        <span>@Model.RestCount</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-set userset-lcol">
+                            <div class="form">
+                                <div class="infoitem">
+                                    <span class="label">二维码总数：</span>
+                                    <div class="fl">
+                                        <span class="mat8">@(Model.CodeCount)</span>
+                                    </div>
+                                </div>
+                                <div class="infoitem">
+                                    <span class="label">已用数量：</span>
+                                    <div class="fl">
+                                        <span>@Model.UsedCount</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+					</div>
+				</div>
+                        <div class="card_pa40 clearfix" style="padding-top:0;">
+            <div class="mod-main">
+                <div class="boxtable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    活动名称
+                                </th>
+                                <th>
+                                    活动类型
+                                </th>
+                                <th>
+                                    使用码段
+                                </th>
+                                <th>
+                                    二维码数
+                                </th>
+                                <th>
+                                    活动有效期
+                                </th>
+                                <th>
+                                    活动创建时间
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model.List)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.ActivityTitle
+                                    </td>
+                                    <td>
+                                        @(Common.EnumText.EnumToText(typeof(Common.EnumText.ActiveType),sub.ActivityType.Value))
+                                    </td>
+                                    <td>
+                                        @sub.StartCode ~ @sub.EndCode
+                                    </td>
+                                    <td>
+                                        @sub.CodeCount
+                                    </td>
+                                    <td>
+                                        @sub.StartDate.Value.ToString("yyyy-MM-dd") ~ @sub.EndDate.Value.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td class="valign_m">
+
+                                            @sub.CreateDate.Value.ToString("yyyy-MM-dd")
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+

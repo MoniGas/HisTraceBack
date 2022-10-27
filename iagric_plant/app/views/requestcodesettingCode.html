@@ -1,0 +1,91 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 1000px;
+    height: 500px;">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    查看产品二维码</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-2 no-padding">
+                            <span>
+                                <select class="form-control" id="status" data-bind="options:vmModels.statusArray,value:vmModels.selectedOption,optionsText:'name',optionsValue:'id'">
+                                </select>
+                            </span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" placeholder="请输入二维码..." class="form-control" data-bind="value:ewm" />
+                                <span class="input-group-addon btn-success">
+                                    <!--<button type="submit" data-bind="click:searchInfo">-->
+                                    <button type="submit" data-bind="click:SearchData">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- ko if:CheckVerify()-->
+                        <button class="btn btn-lg btn-success" data-bind="click:DownLoad">
+                            下载码</button>
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <table id="newsList" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    二维码
+                                </th>
+                                <th>
+                                    验证码
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th width="150">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:vmDataList.ObjList">
+                            <tr data-bind="event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun}">
+                                <td>
+                                    <span eleflag="ShowCode" data-bind="text:$data.EWM"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$data.FWCode"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text:$parent.status($data.Status)"></span>
+                                </td>
+                                <td>
+                                    <div class="hidden-sm hidden-xs action-buttons">
+                                        <button class="btn btn-xs btn-success mar8" style="display: none" eleflag="Setting"
+                                            data-bind="click: function(data,event){$parent.showCode($data.EWM);}">
+                                            查看二维码
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer no-margin-top no-t-border">
+                        <ul class="pagination" id="ewmPager" data-bind="ewmPagerBH:vmDataList.pageSize,totalCounts:vmDataList.totalCounts,pageIndex:vmDataList.pageIndex">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mydiv1" style="position: absolute; display: none; border: 1px solid silver;
+    background: silver;">
+    <img data-bind="attr:{src:path}" width="100px" />
+</div>

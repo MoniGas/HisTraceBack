@@ -1,0 +1,82 @@
+﻿@model LinqModel.ScanLogistics
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@if (Model != null && ViewBag.Wuliu==true)
+{
+    try
+    {
+    <div class="list clearfix">
+        <div class="list-title">
+            物流信息
+        </div>
+        <div class="prod-spec">
+            @if (!string.IsNullOrEmpty(Model.Dealer))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">经销商</span>
+                    <div class="base-txt">
+                        @Model.Dealer
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.SellDate))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">销售时间</span>
+                    <div class="base-txt">
+                        @Model.SellDate
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.CarNum))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">运输车辆</span>
+                    <div class="base-txt">
+                        @Model.CarNum
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.CarAmbient))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">运输环境</span>
+                    <div class="base-txt">
+                        @Model.CarAmbient
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.StratDate) && !string.IsNullOrEmpty(Model.StartAddress))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">发车信息</span>
+                    <div class="base-txt">
+                        @("于" + Model.StratDate + "由" + Model.StartAddress + "发出")
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.EndDate) && !string.IsNullOrEmpty(Model.EndAddress))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">到达信息</span>
+                    <div class="base-txt">
+                        @("于" + Model.EndDate + "到达" + Model.EndAddress)
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Url))
+            {
+                <div class="spec-desc comp-des">
+                    <span class="part-note-msg">物流信息</span>
+                    <div class="base-txt">
+                        <a href="@Model.Url">点击查看</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    }
+    catch { }
+}

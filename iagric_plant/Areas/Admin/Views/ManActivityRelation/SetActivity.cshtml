@@ -1,0 +1,346 @@
+﻿@{
+    ViewBag.Title = "编辑红包活动";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<LinqModel.YX_AcivityDetail> DetailList = ViewBag.detailLst as List<LinqModel.YX_AcivityDetail>;
+}
+@model LinqModel.View_ActivityManager
+<style type="text/css">
+    .ke-container
+    {
+        float: left;
+    }
+    .diviput
+    {
+        display: inline-block;
+        margin-left: 10px;
+        position: relative;
+    }
+</style>
+<div>
+    <div class="main_hd clearfix">
+        <ul class="breadcrumb">
+            <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+            <li>营销管理<span class="divider">›</span></li>
+            <li>活动信息<span class="divider">›</span></li><li>设置</li>
+        </ul>
+    </div>
+    <div class="card_pa40 clearfix">
+        <div class="mod-main">
+            <div class="mc clearfix">
+                <div class="user-set userset-lcol">
+                    <div class="form hd-manage-det">
+                        <div class="infoitem">
+                            <span class="label">活动名称：</span>
+                            <div class="fl">
+                                <input id="ActivityID" type="hidden" value="@Model.ActivityID" />
+                                <span>@Model.ActivityTitle</span>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">公司名称：</span>
+                            <div class="fl">
+                                <span>@Model.EnterpriseName</span>
+                            </div>
+                        </div>
+                        @if (Model.ActivityMethod == (int)Common.EnumText.ActivityMethod.Packet)
+                        {
+                                                    <div class="infoitem">
+                            <span class="label">活动费用：</span>
+                            <div class="fl">
+                                <div class="hdlx" style="width: 500px;">
+                                    <div class="boxtable">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        金额（元）
+                                                    </th>
+                                                    <th>
+                                                        红包数量（个）
+                                                    </th>
+                                                    <th>
+                                                        小计（元）
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                            if (ViewBag.detailLst.Count > 0)
+                            {
+                                foreach (var item in ViewBag.detailLst)
+                                {
+                                                    <tr>
+                                                        <td>
+                                                            @item.RedValue
+                                                        </td>
+                                                        <td>
+                                                            @item.RedCount
+                                                        </td>
+                                                        <td>
+                                                            <span class="red">@(item.RedValue * item.RedCount)</span>
+                                                        </td>
+                                                    </tr>
+                                }
+                            }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="hb-order">
+                                        <div class="price">
+                                            红包总金额<span class="rmn-ico"><em>￥</em>@ViewBag.sumCount</span>
+                                        </div>
+                                        <div class="shu">
+                                            红包总数量 <span class="blacktxt">@ViewBag.hbCount</span> 个
+                                        </div>
+                                        <div class="price">
+                                            手续费用<span class="rmn-ico"><em>￥</em>@(Math.Round(Model.RechargeValue - ViewBag.sumCount, 2, MidpointRounding.AwayFromZero))</span>
+                                        </div>
+                                        <div class="price">
+                                            费用合计<span class="rmn-ico"><em>￥</em>@Model.RechargeValue</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <span class="label">支付状态：</span>
+                            <div class="fl">
+                                @if (Model.RechargePayState == (int)Common.EnumText.PayState.Payed)
+                                {
+                                    <input type="checkbox" checked="checked" id="chePay" /><span>已支付</span>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="chePay" /><span>已支付</span>
+                                }
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                                              <div class="infoitem">
+                                <span class="label">优惠券类型：</span>
+                                <div class="fl interest-list yt">
+                                  <p class="hdlx"><label class="mar10">
+                                        <input type="radio" name="CouponType" checked="checked" value="1"/>现金券
+                                    </label>
+                                    <label class="mar10">
+                                        <input type="radio" name="CouponType"  value="2"/>折扣券
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="CouponType"  value="3"/>礼品券
+                                    </label>
+                                    </p>  
+                                    <p class="hdlx yt" yt="1"><label class="mar10">面值</label><input readonly="readonly" class="mar10" id="xj" type="text" value="@ViewBag.CouponContent" placeholder="最大为10000元" style=" width:200px;" /><label>元</label></p>
+                                     <p class="hdlx yt" yt="2" style=" display:none;"><label class="mar10">折扣</label><input readonly="readonly" class="mar10"  value="@ViewBag.CouponContent" type="text"  id="zk" style=" width:200px;" /><label>%</label></p>
+                                         <p class="hdlx yt" yt="3" style=" display:none;"><label class="mar10">礼品</label><input readonly="readonly" class="mar10"  value="@ViewBag.CouponContent" type="text" id="lp" style=" width:300px;" /><label></label></p>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.Open)
+                        {
+                            <div class="infoitem">
+                                <span class="label">开启模式：</span>
+                                <div class="fl">
+                                    <input type="radio" id="auto" value="0" name="Open" />自动
+                                    <input style=" margin-left:10px;"  type="radio" id="hand" value="1" name="Open" />手动
+                                </div>
+                            </div>
+                        }
+                          @if (Model.ActivityMethod == (int)Common.EnumText.ActivityMethod.Packet)
+                          {
+                          
+                        <div class="infoitem">
+                            <span class="label">单据上传：</span>
+                            <div class="fl">
+                                <div class="clearfix">
+                                    <div class="div_FilesBox">
+                                        @if (string.IsNullOrEmpty(Model.BillUrl))
+                                        {
+                                            <div id="showimg" style="display: none">
+                                                <input type="hidden" id="ImagePath" value="@Model.BillUrl" />
+                                                <img id="imgsrc" style=" max-height:100px; max-width:100px;" src="@Model.BillUrl">
+                                            </div>
+                                        }
+                                        else
+                                        { 
+                                            <div id="showimg">
+                                                <input type="hidden" id="ImagePath" value="@Model.BillUrl" />
+                                                <img id="imgsrc" style=" max-height:100px; max-width:100px;" src="@Model.BillUrl">
+                                            </div>
+                                        }
+                                        <div class="div_Handler" style="margin-top: 10px;">
+                                            <a href="javascript:" style="float: right; margin-right: 140px;" onclick="javascript:$('#uploadify').uploadifyUpload()">
+                                                开始上传</a>
+                                            <input type="file" name="uploadify" id="uploadify">
+                                        </div>
+                                        <div id="fileQueue" class="uploadifyQueue">
+                                        </div>
+                                        <div id="div_Msg">
+                                        </div>
+                                    </div>
+                                    <p class="ftx03">
+                                        图片大小不超过1M，建议尺寸296px*476px,图片格式为jpg，jpeg，png</p>
+                                </div>
+                            </div>
+                        </div>
+                          }
+                        <div class="infoitem">
+                            <span class="label">&nbsp;</span>
+                            <div class="fl">
+                                <input type="button" value="设置" class="button-big" id="btnSet">
+                                <input type="button" value="取消" onclick="javascript:history.go(-1);" class="button-big"
+                                    id="btnSet">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+    if("@ViewBag.CouponType"!="0"){
+       $(".yt input[type=radio][value=@ViewBag.CouponType]").prop("checked", true);
+            $(".lq input[type=radio][value=@ViewBag.ActivityType]").prop("checked", true);
+            $("p.yt").hide();
+            $("p.yt[yt=@ViewBag.CouponType]").show();
+    }
+        $("#btnSet").click(function () {
+          var openMode=$(":radio[name='Open']:checked").length==0?"-1":$(":radio[name='Open']:checked").val();
+          var payState=$("input:checkbox:checked").length==0?1:2;
+            $.post("@Url.Action("SetActivity")",
+             {
+                 activityId:$("#ActivityID").val(),
+                 url:$("#ImagePath").val(),
+                 openMode: openMode,
+                 payState:payState
+            }, function (data) {
+            alert(data.msg);
+            if (data.ok) {
+                  location.href="@Url.Action("AdminIndex")";
+        }
+            });
+        });
+        $("input:radio[value='@Model.OpenMode']").prop("checked", true);
+
+          var uploader = WebUploader.create({
+
+            // swf文件路径
+            swf: '/lib/webuploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: "/Areas/Market/BLL/FilesUpLoad.ashx?type=1",
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick:{id:'#uploadify',multiple: false} ,
+            auto: false,
+            formData: { folder: '/Areas/Market/Files/APIZShu/' },
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false,
+            //切片
+            chunked: false,
+            //每片的大小，C#接收文件也有默认大小，也可以自己在C#中修改
+            chunkSize: 5 * 1024,
+            fileSingleSizeLimit: 5 * 1024 * 1024, // 限制在5M
+            threads: 1,
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+//        uploader.on('beforeFileQueued', function (file) {
+//                return true;  
+//        });
+        //当文件被加入队列以后触发。
+        uploader.on('fileQueued', function (file) {
+            count++;
+            $('.uploadifyProgressBar').css('width', "1px");
+            $('#uploadifyNIJGWI').css('display', "block");
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+            //删除上传的文件
+            $('#filedelete').on('click', function () {
+                uploader.removeFile(file);
+                $('#uploadifyNIJGWI').css('display', "none");
+            });
+        });
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on('uploadProgress', function (file, percentage) {
+            var perNumber = Math.floor(percentage * 100) + '%';
+            $('#uploadifyNIJGWIProgressBar').css({ 'width': perNumber, 'display': 'block' });
+            
+        });
+        //当文件被移除队列后触发。
+        uploader.on('fileDequeued', function (a, b, c, d) {
+            $("#fspan").text();
+            $("#ImagePath").val('');
+            $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + count + " 个可上传文件 ! ");
+        });
+        uploader.on('uploadSuccess', function (file, data, response) {
+            $("#div_Msg").addClass("div_Msg").text("剩余 " + count + " 个文件正在上传 . . .");
+            $('#uploadifyNIJGWI').css('display', "none");
+            uploader.removeFile(file);
+            $("#imgsrc").attr("src", data._raw);
+            $("#ImagePath").val(data._raw);
+            $("#showimg").css({ "display": "" });  
+        });
+        //当所有文件上传结束时触发。
+        uploader.on('uploadFinished', function (a, b) {
+           // $("#div_msg").addclass("div_msg").text("恭喜您 , 所选的 " + b.filesuploaded + " 个文件已成功上传 !");
+            $("#showimg").css({ "display": "" });
+        });
+        //不管成功或者失败，文件上传完成时触发。
+        uploader.on('uploadComplete', function (a, b, c, d, e) {
+            count--;
+            $("#div_Msg").addClass("div_Msg").text("剩余 " + count + " 个文件正在上传 . . .");
+        });
+        $("#ctlBtnUp").on('click', function () {
+            uploader.upload();
+        });
+//        $("#uploadify").uploadify({
+//            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf',    // 做上传的Flash插件
+//            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=1',   //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+//            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif',  // 关闭按钮的图片地址
+//            'folder': '/Areas/Admin/Files/Bill/', // 保存文件的文件夹
+//            'queueID': 'fileQueue',
+//            'fileDesc': '请选择你电脑里格式为*.jpg;*.jpeg;*.png的文件',  // 描述（必须和fileExt一起使用）
+//            'fileExt': '*.jpg;*.jpeg;*.png',   // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+//            'sizeLimit': 1048576, // 文件大小限制100M（注意，在ASP.NET中Web.Config也要配置）
+//            'auto': false,
+//            'multi': false,  // 是否支持多文件上传
+//            //'buttonText': '浏览',    // 按钮上的文本
+//            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+//            'onError': function (a, b, c, d) {
+//                if (d.status == 404)
+//                    alert('Could not find upload script.');
+//                else if (d.type === "HTTP")
+//                    alert('error ' + d.type + ": " + d.status);
+//                else if (d.type === "File Size")
+//                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+//                else
+//                    alert('error ' + d.type + ": " + d.info);
+//            },
+//            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+//                $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+//                $("#imgsrc").attr("src", d);
+//                $("#ImagePath").val(d);
+//                $("#showimg").css({ "display": "" });
+//                //                $("#activiImg").attr("src", d);
+//            },
+//            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+//                $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+//            },
+//            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+//                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+//            },
+//            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+//                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+//            }
+//        });
+
+    });
+</script>

@@ -1,0 +1,66 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px">
+    <div class="modal-content">
+        <div class="modal-header" id="divMessageBoxHeader" style="cursor: move;">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    选择产品类别</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="firsthome clearfix">
+                        <h5 class="bluetxt">
+                            请选择您要维护产品的类别</h5>
+                    </div>
+                    <form class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
+                    <div class="form-group" style=" width:300px;">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" id="selTitle" placeholder="产品类别" class="form-control" data-bind="value: selTitle" />
+                            <span class="input-group-addon btn-success">
+                                <button type="submit" data-bind="click:searchMaterial">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="firsthome clearfix">
+                        <h5 class="bluetxt">
+                            您选择的产品类别是：</h5>
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <input type="text" class="form-control"  readonly="readonly"data-bind="value:selectName">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" id="Text1" class="form-control" style="display: none" readonly="readonly"
+                                data-bind="value: selectValue" />
+                        </div>
+                    </div>
+                    <div class="search-res clearfix">
+                        <h5>
+                            搜索结果</h5>
+                        <ul id="searchResult">
+                            <!-- ko foreach:property-->
+                            <li>
+                            <a href="javascript:void(0)" style=" font-size:14px;" data-bind="event: { click: function( data, event) {$root.Search($data.pValue,$data.pName,data, event);}}">
+                            <span data-bind="text:$data.pName"></span>
+                            </a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <div class="space-4">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-lg btn-success" data-bind="click:Selected">
+                确定</button>
+            <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+                取消</button>
+        </div>
+    </div>
+</div>
+

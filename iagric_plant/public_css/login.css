@@ -1,0 +1,181 @@
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a, button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    outline: 0;
+}
+.h5ui-content {
+    max-width: 640px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 30px;
+    background: #fff;
+}
+.h5ui-content .login-header, .h5ui-content .login-user-header {
+    padding: 60px 0 40px;
+}
+.h5ui-content .login-header img {
+    display: block;
+    width: 160px;
+    margin: auto;
+    border: none;
+}
+.h5ui-group {
+    margin-bottom: 15px;
+}
+.h5ui-form {
+    background: #fff;
+    position: relative;
+}
+.h5ui-content .login-content .h5ui-form {
+    height: 50px;
+}
+.h5ui-content .login-content #sms {
+    position: relative;
+}
+.h5ui-form:before, .h5ui-form:last-child:before {
+    content: " ";
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+}
+.h5ui-form:before {
+    height: 0;
+    border-top: 1px solid #e5e5e5;
+}
+.h5ui-form:last-child:before {
+    bottom: 0;
+    height: 200%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.h5ui-form-label {
+    width: 100px;
+    padding: 14px 0 14px 15px;
+    line-height: 1.1333;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    color: #222;
+    position: absolute;
+}
+.icon-login {
+    background: url(../public_img/icon-login.png) left top no-repeat;
+    background-size: 36px auto;
+}
+.icon-login-username {
+    background-position: 5px 15px;
+}
+.icon-login-phone {
+    background-position: 5px -45px;
+}
+.icon-login-code {
+    background-position: 5px -105px;
+}
+.h5ui-content .login-content .h5ui-form-label {
+    padding: 0;
+    width: 50px;
+    height: 50px;
+}
+.h5ui-btn, .h5ui-form-input, .h5ui-select>select, input:active, input:focus, input:hover {
+    -webkit-appearance: none;
+}
+.h5ui-form-input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    color: #222;
+    padding: 10px 15px 10px 100px;
+    background: #fff;
+}
+.h5ui-content .login-content .h5ui-form-input {
+    padding: 16px 15px 12px 45px;
+}
+.h5ui-content .login-content #sms a {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    height: 49px;
+    line-height: 49px;
+    padding: 2px 5px 0;
+    font-size: 14px;
+    color: #43ac43;
+    background: #fff;
+}
+.h5ui-content .login-content .login-btn {
+    text-align: center;
+}
+.h5ui-btn, .h5ui-list {
+    font-size: 17px;
+    vertical-align: middle;
+}
+.h5ui-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border:1px solid #43ac43;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    min-width: 140px;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    background-image: none;
+    position: relative;
+    width: 100%;
+}
+.h5ui-btn_primary {
+    color: #fff;
+    background-color: #43ac43;
+}
+.h5ui-content .login-content .login-btn .h5ui-btn_primary {
+    margin: 20px 0 15px;
+    background-color: #43ac43;
+}
+.h5ui-content .login-content .login-btn .h5ui-btn_line{
+	margin: 0 0 15px;
+	background-color: #fff;
+	color: #43ac43;
+}
+.h5ui-content .login-footer {
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    left: 0;
+}
+.h5ui-agree {
+    font-size: 12px;
+    color: #999;
+}
+.h5ui-content .login-footer .h5ui-agree {
+    margin: 20px 0;
+    text-align: center;
+}
+.h5ui-content .login-footer .h5ui-agree a {
+    color: #43ac43;
+}
+.h5ui-register{
+	margin-top: 0px;
+}
+.h5ui-register a{
+	font-size: 14px;
+	color: #999;
+}

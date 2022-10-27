@@ -1,0 +1,131 @@
+﻿@model PagedList<LinqModel.Greenhouses_Probe_Data>
+@using Webdiyer.WebControls.Mvc
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_LayoutWap.cshtml";
+}
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+    <section class="section-module">
+	<section>
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    采集时间：</dt>
+                <dd>
+                    @item.collectTime.GetValueOrDefault(DateTime.Now).ToString("yyyy-MM-dd HH:mm")</dd>
+            </dl>
+            @if (!string.IsNullOrEmpty(item.value1) || !string.IsNullOrEmpty(item.key1) || !string.IsNullOrEmpty(item.unit1))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key1：</dt>
+                <dd>
+                    @(item.value1 + item.unit1)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value2) || !string.IsNullOrEmpty(item.key2) || !string.IsNullOrEmpty(item.unit2))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key2：</dt>
+                <dd>
+                    @(item.value2 + item.unit2)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value3) || !string.IsNullOrEmpty(item.key3) || !string.IsNullOrEmpty(item.unit3))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key3：</dt>
+                <dd>
+                    @(item.value3 + item.unit3)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value4) || !string.IsNullOrEmpty(item.key4) || !string.IsNullOrEmpty(item.unit4))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key4：</dt>
+                <dd>
+                    @(item.value4 + item.unit4)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value5) || !string.IsNullOrEmpty(item.key5) || !string.IsNullOrEmpty(item.unit5))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key5：</dt>
+                <dd>
+                    @(item.value5 + item.unit5)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value6) || !string.IsNullOrEmpty(item.key6) || !string.IsNullOrEmpty(item.unit6))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key6：</dt>
+                <dd>
+                    @(item.value6 + item.unit6)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value7) || !string.IsNullOrEmpty(item.key7) || !string.IsNullOrEmpty(item.unit7))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key7：</dt>
+                <dd>
+                    @(item.value7 + item.unit7)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value8) || !string.IsNullOrEmpty(item.key8) || !string.IsNullOrEmpty(item.unit8))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key8：</dt>
+                <dd>
+                    @(item.value8 + item.unit8)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value9) || !string.IsNullOrEmpty(item.key9) || !string.IsNullOrEmpty(item.unit9))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key9：</dt>
+                <dd>
+                    @(item.value9 + item.unit9)</dd>
+            </dl>
+            }
+            @if (!string.IsNullOrEmpty(item.value10) || !string.IsNullOrEmpty(item.key10) || !string.IsNullOrEmpty(item.unit10))
+            {
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    @item.key10：</dt>
+                <dd>
+                    @(item.value10 + item.unit10)</dd>
+            </dl>
+            }
+	</section>
+	</section>
+    }
+    <div class="linle-pag0">
+        <div class="linle-pag">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", NumericPagerItemWrapperFormatString = "{0}", ShowDisabledPagerItems = false, AlwaysShowFirstLastPageNumber = true })
+        </div>
+    </div>
+}
+else
+{
+    <section class="section-module">
+	<section>
+    		<dl class="contact-dl">
+                <dt style=" width:110px;">
+                    暂无数据</dt>
+            </dl>
+	</section>
+	</section>
+}
+<section class="section-module">
+          <input type="button" class="orange-btn-l" onclick="window.location.href = '/Wap_Probe/Index'" value="返回">
+</section>

@@ -1,0 +1,165 @@
+﻿@model LinqModel.View_DealerUser
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var dName = $.trim($("#dName").val());
+            if (dName.length == 0) {
+                alert("请输入代理名称！");
+                $("#dName").focus();
+                return false;
+            }
+            var DICount = $.trim($("#DICount").val());
+            if (DICount.length == 0) {
+                alert("请输入各DI生成码数量！");
+                $("#DICount").focus();
+                return false;
+            }
+            if (!isNumber(DICount)) {
+                alert("请您填写有效的DI生成码数量！");
+                $("#DICount").focus();
+                return false;
+            }
+            //            var Address = $.trim($("#Address").val());
+            //            if (Address.length == 0) {
+            //                alert('请输入详细地址');
+            //                $("#Address").focus();
+            //                return;
+            //            }
+            //            var linkMan = $.trim($("#linkMan").val());
+            //            if (linkMan.length == 0) {
+            //                alert('请输入联系人');
+            //                $("#linkMan").focus();
+            //                return;
+            //            }
+            //            var linkPhone = $.trim($("#linkPhone").val());
+            //            if (linkPhone.length == 0) {
+            //                alert('请输入联系电话');
+            //                return;
+            //            }
+            //            else if (!checkMobileEx(linkPhone)) {
+            //                alert("请您填写有效的联系电话！");
+            //                $("#linkPhone").focus();
+            //                return false;
+            //            }
+            var loginName = $.trim($("#loginName").val());
+            if (loginName.length == 0) {
+                alert("请您填写登录名！");
+                $("#loginName").focus();
+                return false;
+            }
+            var pwd = $.trim($("#pwd").val());
+            if (pwd.length == 0) {
+                alert("请您填写密码！");
+                $("#pwd").focus();
+                return false;
+            }
+            var sendData = {
+                dId: $("#DealerID").val(),
+                dealerName: $.trim($("#dName").val()),
+                diCount: $("#DICount").val(),
+                loginName: loginName,
+                pwd: pwd,
+                address: $("#Address").val(),
+                linkMan: $("#linkMan").val(),
+                linkPhone: $("#linkPhone").val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/SysJYEnterprise/EditJYEn',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == 1) {
+                        alert(data.info);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("Index")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <input type="hidden" id="DealerID" value="@Model.Dealer_ID" />
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>经营企业名称：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="dName" name="dName"value="@Model.DealerName" maxlength="25" /><span
+                                        style="color: #ed7049"> 输入最大长度不超过25个汉字</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>各DI生成码数量：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="DICount" name="DICount" value="@Model.DICount" />
+                                    <span style="color: #ed7049">请输入各DI生成码数量</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>登录名：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="loginName" name="loginName" value="@Model.LoginName" maxlength="6" />
+                                    <span style="color: #ed7049">请输入登录名</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130"><em>*</em>密码：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="pwd" name="pwd" value="@Model.LoginPassWord" maxlength="20" />
+                                    <span style="color: #ed7049">请输入密码</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">地址：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="Address" name="Address" value="@Model.Address" maxlength="50" />
+                                    <span style="color: #ed7049">请输入地址</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">联系人：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="linkMan" name="linkMan"  value="@Model.Person" maxlength="10" /><span
+                                        style="color: #ed7049"> 请输入联系人</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <span class="label width130">联系电话：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="linkPhone" name="linkPhone" value="@Model.Phone" maxlength="11" /><span
+                                        style="color: #ed7049"> 请输入联系电话</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="修 改" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>

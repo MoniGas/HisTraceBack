@@ -1,0 +1,176 @@
+﻿<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content">
+            <div class="row">
+                <div class="ma15" style="width: 960px; margin: 15px auto;">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                上级单位：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.superiorUnit"
+                                    readonly="readonly">
+                                <span class="alert-danger"></span>
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                单位名称：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.unitName"
+                                    readonly="readonly">
+                                <span class="alert-danger"></span>
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                区域：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.area"
+                                    readonly="readonly">
+                                <span class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                主IDcode：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.EWM" readonly="readonly">
+                                <span class="alert-danger"></span>
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>联系人：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.personName">
+                                <!--<span class="alert-danger"></span>-->
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>联系电话：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.telephone">
+                                <!--<span class="alert-danger"></span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>邮箱：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.email">
+                                <!--<span class="alert-danger"></span>-->
+                            </div>
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                企业网址：</label>
+                            <div class="col-md-3 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.weburl">
+                                <!--<span class="alert-danger"></span>-->
+                            </div>
+                            <div class="col-md-4 no-padding">
+                            </div>
+                        </div>
+                        <div class="hr">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>所属行业：</label>
+                            <div class="col-md-3 no-padding">
+                                <select class="form-control" data-bind="options: vmEnterpriseInfo.trades,optionsText: 'TradeName',optionsValue:'Trade_ID',optionsCaption: '选择一级行业',value:vmEnterpriseInfo.trade">
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" data-bind="options:vmEnterpriseInfo.etrades,optionsText: 'TradeName',optionsValue:'Trade_ID',optionsCaption: '选择二级行业',value:vmEnterpriseInfo.etrade">
+                                </select>
+                            </div>
+                            <div class="alert-danger" data-bind="visible:vmEnterpriseInfo.selTrade">
+                                请选择所属行业
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>地址：</label>
+                            <div class="col-md-7 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.address">
+                            </div>
+                            <div class="" data-bind="">
+                                请填写营业执照注册地址
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>证件类型：</label>
+                            <div class="col-md-7 no-padding">
+                                <select class="form-control" style="width: 200px; display: inline-block;" id="Select1"
+                                    data-bind="options:vmEnterpriseInfo.selTypeArray,value:vmEnterpriseInfo.selTypeArray.SelectedId,optionsText:'Text',optionsValue:'Value'">
+                                </select>
+                            </div>
+                          <!--  <div class="alert-danger" data-bind="visible:vmEnterpriseInfo.selType">
+                                请选择证件类型！</div>-->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label no-padding" for="name">
+                                <span class="alert-danger">*</span>证件号码：</label>
+                            <div class="col-md-7 no-padding">
+                                <input type="text" class="form-control" data-bind="value: vmEnterpriseInfo.zjhm">
+                            </div>
+                        </div>
+                        </form>
+                        <div class="form-group">
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <h6 class="header bigger no-padding clearfix">
+                                        <span class="alert-danger">*</span>企业Logo： <span class="alert-danger-new">支持格式:.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB</span></h6>
+                                    <div class="pic-item clearfix">
+                                        <ul>
+                                            <!-- ko foreach:vmEnterpriseInfo.files -->
+                                            <li>
+                                                <div class="thumbnail">
+                                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                                </div>
+                                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delImage(data, event);}}">
+                                                    <i class="hide_clip">移除</i></a> </li>
+                                            <!-- /ko -->
+                                            <li>
+                                                <div class="thumbnail">
+                                                    <a id="image_upload"></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="alert-danger" data-bind="visible:vmEnterpriseInfo.selLogo">
+                                            请上传企业Logo
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="header bigger no-padding clearfix">
+                                        <span class="alert-danger">*</span>营业执照 <span class="alert-danger-new">支持格式:.bmp|.jpg|.jpeg|.png|.gif,单张大小限制为5MB</span></h6>
+                                    <div class="pic-item clearfix">
+                                        <ul>
+                                            <!-- ko foreach:vmEnterpriseInfo.yyzzs -->
+                                            <li>
+                                                <div class="thumbnail">
+                                                    <img data-bind="attr:{src:$data.fileUrls}">
+                                                </div>
+                                                <a class="icon-img-remove" href="javascript:void(0)" title="删除图片" data-bind="event: { click: function( data, event) {$root.delyyzz(data, event);}}">
+                                                    <i class="hide_clip">移除</i></a> </li>
+                                            <!-- /ko -->
+                                            <li>
+                                                <div class="thumbnail">
+                                                    <a id="yyzz_upload"></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="alert-danger" data-bind="visible:vmEnterpriseInfo.selZhiZhao">
+                                            请上传营业执照
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row hr pat10 clearfix">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-lg btn-success" data-bind="click:vmEnterpriseInfo.save">
+                        确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

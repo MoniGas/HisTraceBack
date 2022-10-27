@@ -1,0 +1,16 @@
+﻿@model Webdiyer.WebControls.Mvc.PagedList<LinqModel.View_NewsChannel>
+@{
+    Layout = null;
+}
+@if (Model != null && Model.Count > 0)
+{
+    <div class="section-module">
+    <div class="module-t">
+        <h3>
+            <span></span>【@Model[0].ChannelName】</h3>
+            </div>
+        <p class="news_items morelistbox">
+            @Html.Raw(Model[0].Infos)
+        </p>
+    </div>
+}

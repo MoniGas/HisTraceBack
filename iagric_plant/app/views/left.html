@@ -1,0 +1,22 @@
+﻿<div class="menu_box">
+    <!-- ko foreach:leftArray-->
+    <!-- ko if:isNavShow==1-->
+    <dl class="menubar open" data-bind="css: { active: isActive },event: { mouseover: $parent.mouseoverFun, mouseout: $parent.mouseoutFun }">
+        <dt class="menu_title" data-bind="click: function(data, event) {$parent.navigateTo(data,event);}">
+            <i class="icon_menu">
+                <img data-bind="attr:{src:icon}">
+            </i>
+            <!-- ko if:$parent.isDisplay($data.id)-->
+             <i class="icon_treemenu_arrow"data-bind="click: function(data, event) {$parent.clickUp(data,event);}"></i>
+            <!--/ko-->
+            <span data-bind="text:$data.title"></span></dt>
+      <!-- ko if:$parent.isDisplay($data.id)-->
+        <ul class="submenu nav-show" data-bind="foreach:$parent.getSubmenu($data.id)">
+            <li><a data-bind="event: { click: function( data, event) {$root.navigateTo(data, event);}},html:$data.title">
+            </a></li>
+        </ul>
+        <!--/ko-->
+    </dl>
+    <!--/ko-->
+    <!--/ko-->
+</div>

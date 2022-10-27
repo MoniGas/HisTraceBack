@@ -1,0 +1,32 @@
+﻿<div class="modal-dialog" id="divMessageBox" style="z-index: 2000; width: 600px;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move;" id="divMessageBoxHeader">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+                data-bind="click:close">
+                ×</button><h4 class="modal-oldpwd">
+                    宣传营销>栏目管理>修改栏目</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label no-padding" for="name">
+                            <span class="alert-danger">*</span>栏目名称：</label>
+                        <div class="col-md-6 no-padding">
+                            <input type="text" id="txtChannelName" placeholder="栏目名称" class="form-control" data-bind="value: channelName,validationElement:channelName,hasfocus:selChannelName" />
+                            <span class="alert-danger"></span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn  btn-lg btn-success" data-bind="click:SaveChannelName">
+            确定</button>
+        <button type="button" class="btn  btn-lg btn-cancel" data-bind="click:close">
+            取消</button>
+    </div>
+</div>

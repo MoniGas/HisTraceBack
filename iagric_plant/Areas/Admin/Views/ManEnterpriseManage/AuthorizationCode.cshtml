@@ -1,0 +1,165 @@
+﻿@model LinqModel.Enterprise_License
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<script>
+    $(function () {
+   $("#btnSave").click(function(){
+        if($.trim($("#setDate").val())==""){
+        alert("请选择到期日期！");
+             return;
+        };
+//        if($.trim($("#LicenseCode").val())!=""){
+        if(confirm("确认要设置授权码吗！"))
+        {
+            $.post("@Url.Action("SetAuthorizationCode")",
+            {
+            eid:$("#eid").val(),
+            setDate:$("#setDate").val(),
+            fileurl:$("#fileurl").val(),
+            LicenseType:$("#LinseType").val()
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        art.dialog.close();
+                    }
+                }
+            })
+            }
+//        };
+    });
+    });
+</script>
+<html style="overflow-x: hidden">
+<head>
+    <title>企业授权码</title>
+</head>
+<body>
+    <div class="mc clearfix">
+        <div class="user-set userset-lcol">
+            <div class="form hd-manage-det">
+                <input id="eid" type="hidden"  value="@Model.EnterpriseID" />
+                <input id="LicenseCode" type="hidden"  value="@Model.LicenseCode" />
+                <div class="infoitem">
+                    <span class="label" style="width: 120px">企业名称：</span>
+                    <div class="fl">
+                        <span class="yellow">@ViewBag.eName</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 130px"><em>*</em>授权方式：</span>
+                    <div class="fl">
+                        <select id="LinseType" name="Province"style="width: 123px;
+                            height: 28px; font-size: 14px; padding-left: 10px;">
+                            <option value="1">河北广联授权</option>
+                            <option value="2">二维码研究院授权</option>
+                            <option value="3">企业授权</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 130px"><em>*</em>到期日期：</span>
+                    <div class="fl">
+                        <input type="text" style="width: 120px;" id="setDate" name="setDate" cssclass="Wdate"
+                            onclick="WdatePicker()" readonly="readonly" value="@Model.LicenseEndDate">
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span style="width: 105px" class="label">模板上传：</span>
+                    <div class="fl">
+                        <div class="clearfix">
+                            <div class="div_FilesBox">
+                                <div id="imgMsg">
+                                </div>
+                                <div class="div_Handler" style="margin-top: 10px;">
+                                    @*<a href="javascript:$('#uploadify').uploadifyUpload()" style="float: right; margin-right: 140px;" >
+                                                开始上传</a>*@
+                                    <input type="file" name="uploadify" id="uploadify" />
+                                </div>
+                                <div id="fileQueue" class="uploadifyQueue">
+                                </div>
+                                <div id="div_Msg">
+                                </div>
+                            </div>
+                            <p class="ftx03">
+                                文件大小不超过10M，后缀名为jpg,png的文件</p>
+                        </div>
+                    </div>
+                    <input type="hidden" id="fileurl" />
+                </div>
+            </div>
+            <p style="padding-left: 75px" class="center mat40">
+                <input type="button" id="btnSave" value="设置" class="button">
+                <input type="button" id="btnQuXiao" onclick="art.dialog.close();" value="取消" class="button"></p>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../../../../lib/webuploader/js/webuploader.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var index=0;
+        var str = new Array();
+        var sign=0;
+        var errorsmsg="";
+        $("#uploadify").uploadify({
+            'uploader': '/Areas/Market/upload/jquery.uploadify-v2.1.4/uploadify.swf', // 做上传的Flash插件
+            'script': '/Areas/Market/BLL/FilesUpLoad.ashx?type=1', //服务器处理页面（支持多种语言，例如您可以修改成PHP、ASP、JSP等语言）
+            'cancelImg': '/Areas/Market/upload/jquery.uploadify-v2.1.4/cancel.gif', // 关闭按钮的图片地址
+            'folder': '/Areas/Admin/Files/', // 保存文件的文件夹
+            'queueID': 'fileQueue',
+            'fileDesc': '请选择你电脑里格式为*.jpg;*.png的文件', // 描述（必须和fileExt一起使用）
+            'fileExt': '*.jpg;*.png', // 允许浏览上传的文件扩展名（必须和fileDesc一起使用）
+            'sizeLimit': 1048576, // 文件大小限制10M（注意，在ASP.NET中Web.Config也要配置）
+            'simUploadLimit':1,//允许同时上传的个数
+            'auto': true,
+            'multi': false, // 是否支持多文件上传
+//            '': '200px',
+            //'buttonText': '浏览',    // 按钮上的文本
+            'buttonImg': '/Areas/Market/Images/SelectedFile.jpg',
+            'overrideEvents': ['onError', 'onComplete', 'onAllComplete', 'onSelectOnce','onCancel'],
+            'onError': function (a, b, c, d) {
+                if (d.status == 404)
+                    alert('Could not find upload script.');
+                else if (d.type === "HTTP")
+                    alert('error ' + d.type + ": " + d.status);
+                else if (d.type === "File Size")
+                    alert("文件：" + c.name + ' ' + ' 已超出文件大小限制！');
+                else
+                    alert('error ' + d.type + ": " + d.info);
+            },
+//            'onSelect':function (a,b,c)
+//            {
+//                if(c.type!=".zip")
+//                {
+//                    alert("上传失败,请上传zip格式文件");
+//                    //$("#div_Msg").addClass("div_Msg").text("上传失败,请上传zip格式文件" );
+//                }
+//            },
+            'onComplete': function (a, b, c, d, e) {    // 完成一个上传后执行
+                $("#div_Msg").addClass("div_Msg").text("剩余 " + e.fileCount + " 个文件正在上传 . . .");
+                    $("#fileurl").val(d);
+                    sign=1;
+            },
+            'onAllComplete': function (a, b) {   // 完成所有上传后执行
+                if(sign==1)
+                    $("#div_Msg").addClass("div_Msg").text("恭喜您 , 所选的 " + b.filesUploaded + " 个文件已成功上传 !");
+                else if(sign==0)
+                    $("#div_Msg").addClass("div_Msg").text("上传失败  " + errorsmsg + "");
+            },
+            'onSelectOnce': function (a, b) {   // 浏览一次本机文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + b.fileCount + " 个可上传文件 ! ");
+            },
+            'onCancel': function (a, b, c, d) { // 取消一个将要上传的文件后执行
+                $("#div_Msg").addClass("div_Msg").text("据统计：总共 " + d.fileCount + " 个可上传文件 ! ");
+            },
+        });
+        
+        
+    });
+</script>

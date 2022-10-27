@@ -1,0 +1,40 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <!--<button class="btn btn-lg btn-success" data-bind="click:addBrand">
+                    月扫码量分析</button>-->
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control date-picker"
+                           id="AddDate" name="AddDate" placeholder="年份"  data-date-format="yyyy" data-bind="value:AddDate"
+                           readonly="readonly"/>
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchYear">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <div class="trend-detail clearfix" id="ulid">
+                <div id="chartDIV" style="float: left">
+                </div>
+                 <div id="chartDIVPie" style="float: left">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer no-margin-top no-t-border">
+            <ul class="pagination" id="brandPager" data-bind="brandPager:vmBrand.pageSize,totalCounts:vmBrand.totalCounts,pageIndex:vmBrand.pageIndex">
+            </ul>
+        </div>
+    </div>
+</div>
+<input hidden id="timeInfo" value="" />
+<input hidden id="countInfo" value="" />
+<input hidden id="areaInfo" value="" />
+<input hidden id="areacount" value="" />

@@ -1,0 +1,170 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<LinqModel.View_BuyCodeOrderEnterprise>
+@{
+    ViewBag.Title = "SeachAllIndex";
+    Layout = "~/Areas/Market/Views/Shared/_AdminLayout.cshtml";
+}
+<html>
+<body>
+    <!-------------------main start---------------------------------->
+    <div>
+        <form id="form1" method="get" action="/Market/BuyCodeOrder/SeachAllIndex">
+        <div class="main_hd clearfix">
+            <ul class="breadcrumb">
+                <li class="icofont-home"><span class="dqwz">当前位置：</span></li>
+                <li>二维码订单<span class="divider">›</span>二维码订单</li>
+            </ul>
+        </div>
+        <div class="card_pa40 clearfix">
+            <div class="mod-main">
+                <div class="table-filter borderLeft borderRight clearfix">
+                    <div class="sitem">
+                        企业名称：
+                        <input
+        type="text" id="comName" name="comName" value="@ViewBag.Name">
+                        <label>
+                            状态：</label>
+                            <select id="status" name="status">
+                                @if (ViewBag.Status == "0")
+                                {
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="1">已支付</option>
+                                    <option value="4">审核中</option>
+                                }
+                                else if (ViewBag.Status == "1")
+                                {
+                                    <option value="0">全部</option>
+                                    <option value="1" selected="selected">已支付</option>
+                                    <option value="4">审核中</option>
+                                }
+                                else
+                                {
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="1">已支付</option>
+                                    <option value="4" selected="selected">审核中</option>
+                                }
+                            </select>
+                            <input type="submit" id="btnSearch" name="btnSearch" value="查询" class="button" style=" margin-left:15px">
+                    </div>
+                </div>
+                <div class="boxtable mat20">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    订单号
+                                </th>
+                                <th>
+                                    企业名称
+                                </th>
+                                <th>
+                                    套餐
+                                </th>
+                                <th width="100">
+                                    二维码数量（个）
+                                </th>
+                                <th width="100">
+                                    套餐价（元）
+                                </th>
+                                <th width="100">
+                                    成交价（元）
+                                </th>
+                                <th width="150">
+                                    购买时间
+                                </th>
+                                <th width="100">
+                                    支付方式
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var sub in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @sub.OrderNum
+                                    </td>
+                                    <td>
+                                        @sub.EnterpriseName
+                                    </td>
+                                    <td>
+                                        @sub.PackageName
+                                    </td>
+                                    <td>
+                                        @sub.PackageCodeCount
+                                    </td>
+                                    <td>
+                                        <span class="bold">￥@sub.PackagePrice</span>
+                                    </td>
+                                    <td>
+                                        <span class="bold">￥@sub.RealPrice</span>
+                                    </td>
+                                    <td>
+                                        @sub.CreateDate.Value.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+                                        @Common.EnumText.EnumToText(typeof(Common.EnumText.PayType), sub.PayMode.Value)
+                                    </td>
+                                    <td>
+                                        @Common.EnumText.EnumToText(typeof(Common.EnumText.OrderState), sub.OrderStatus.Value)
+                                    </td>
+                                    @if (sub.OrderStatus == (int)Common.EnumText.OrderState.Auditing)
+                                    {
+                                        <td>
+                                            <a href="javascript:AjaxUrl('/Market/BuyCodeOrder/EditOrderStatus/@sub.BuyCodeOrderID','您确定要审批通过吗？')" class="lnk mar10">
+                                                审批</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="javascript:openwin('/Market/BuyCodeOrder/InfoA?id=@sub.BuyCodeOrderID','详情',300,300);"
+                                                    class="lnk mar10">详情</a>
+                                        </td>
+                                    }
+                                </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.TotalItemCount > 0)
+                {
+                    <div class="mod-page fy">
+                        <div>
+                            @Html.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+                       {
+                           PageIndexParameterName = "id",
+                           FirstPageText = "首页",
+                           ShowNumericPagerItems = true,
+                           ShowPageIndexBox = true,
+                           ShowGoButton = true,
+                           GoButtonText = "跳转",
+                           PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                           LastPageText = "尾页",
+                           NextPageText = "下一页",
+                           PrevPageText = "上一页",
+                           AutoHide = false,
+                           CurrentPagerItemWrapperFormatString = "<span class=\"mod-page-cur\">{0}</span>"
+                       })
+                        </div>
+                        每页@(Model.PageSize)条共@(Model.TotalPageCount)页共@(Model.TotalItemCount)条
+                    </div>
+                }
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-------------------main end---------------------------------->
+</body>
+</html>

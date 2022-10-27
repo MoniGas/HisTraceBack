@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutWap.cshtml";
+}
+<script type="text/javascript">
+    function login() {
+        if (isNull($("#loginname").val())) {
+            alert("请输入登录名");
+            return;
+        }
+        if (isNull($("#pwd").val())) {
+            alert("请输入密码");
+            return;
+        }
+        $("#form1").submit();
+    }
+
+</script>
+<section class="section-module">
+	<section  class="pro-input-wrap cf">
+        <form id="form1" action="/Wap_Probe/Login" method="post" class="form1">
+        <input type="hidden" name="ewm" id="ewm" value="@ViewBag.ewm">
+            <div class="textarea-wrap">
+                 <input id="loginname" type="text" name="loginname" placeholder="用户名"/>
+            </div>
+            <div class="textarea-wrap">
+                <input id="pwd" type="password" name="pwd" style="border:0"  placeholder="密码"/>
+            </div>
+            <input type="button" class="green-btn" onclick="login()" value="登录">
+        </form>
+    </section>
+</section>

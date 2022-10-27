@@ -1,0 +1,308 @@
+﻿<div class="header-wrapper" id="topheader">
+    <div class="header17 clearfix">
+        <!--ko compose: 'top.html'-->
+        <!--/ko-->
+    </div>
+</div>
+<div class="col_side" id="leftMenu" style="display: none">
+    <!--ko compose: 'left.html'-->
+    <!--/ko-->
+</div>
+<div class="col_main" style="margin-left: 0; padding-top: 20px;" id="mainContent">
+    <div class="main_hd clearfix" id="tabMenu" style="display: none">
+        <!--ko compose: 'tab.html'-->
+        <!--/ko-->
+    </div>
+    <div class="content clearfix">
+        <div data-bind="router: { transition:'entrance', cacheViews:false }">
+        </div>
+    </div>
+    <div class="part-index clearfix" id="HomePage" style="display: none">
+        <div style="display: none;">
+            <div id="div2">
+                <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                    <li class="dropdown-header"><i class="ace-icon fa fa-bell-o"></i>消息 </li>
+                    <li class="dropdown-content ace-scroll" style="position: relative;">
+                        <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmEwmNewsList.ObjList">
+                            <li><a href="#" class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.MaterialFullName() + '：二维码生成成功！'">
+                                > </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                    data-bind="text:$parent.newDate($data.StrRequestDate())"></span></span></span>
+                            </a></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmEnterpriseVerify.ObjList">
+                            <li><a href="#" class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.VerifyContent()">
+                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                data-bind="text:$parent.newDate($data.StrAddDate())"></span></span></span></a>
+                            </li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-navbar" data-bind="foreach:vmCodeRecord.ObjList">
+                            <li><span class="msg-body"><span class="msg-title" data-bind="text:$data.VerifyContent()">
+                            </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                data-bind="text:$parent.newDate($data.StrAddDate())"></span></span></span></li>
+                        </ul>
+                        <ul id="viewNewsTipe">
+                            <li>
+                                <p class="light-grey smaller-90 center mat10">
+                                    暂无消息</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="Li1" class="dropdown-footer"><a href="#" data-bind="click: function(data, event) {ignoreAll(data,event);}">
+                        忽略二维码记录</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div style="display: none;">
+            <div id="div1">
+                <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                    <li class="dropdown-header"><i class="ace-icon fa fa-users"></i>投诉管理 </li>
+                    <li class="dropdown-content ace-scroll" style="position: relative;">
+                        <div class="scroll-content">
+                            <ul id="viewComplaintTipe" class="dropdown-menu dropdown-navbar">
+                                <li class="clearfix">
+                                    <p class="light-grey smaller-90 center mat10">
+                                        暂无投诉</p>
+                                </li>
+                            </ul>
+                            <ul id="viewComplaint" class="dropdown-menu dropdown-navbar" data-bind="foreach:vmComplaintList.ObjList">
+                                <li><a href="javascript:void(0);" data-bind="click: function(data, event) {navigateToUrl('投诉信息','complaint?menu=76100','76100','70000',data,event),updateComplaint($data.Complaint_ID)}"
+                                    class="clearfix"><span class="msg-body"><span class="msg-title" data-bind="text:$data.ComplaintContent">
+                                    </span><span class="msg-time text-right"><i class="ace-icon fa fa-clock-o"></i><span
+                                        data-bind="text:$parent.newDate($data.StrComplaintDate)"></span></span></span>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="theViewMore" class="dropdown-footer"><a href="#" data-bind="click: function(data, event) {navigateToUrl('投诉信息','complaint?menu=76100','76100','70000',data,event);}">
+                        查看更多 </a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="display: none;">
+            <div id="div3">
+                <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close open">
+                    <li class="dropdown-header"><i class="ace-icon fa  fa-lightbulb-o"></i>温馨提示</li>
+                    <li class="dropdown-content ace-scroll" style="position: relative;">
+                        <div class="scroll-content">
+                            <ul class="dropdown-menu dropdown-navbar" id="viewReminder">
+                                <li id="li_enterpriseInfo"><a href="#" data-bind="click: function(data, event) {navigateToUrl('企业认证','enterpriseinfo','11000','70000',data,event);}"
+                                    class="clearfix"><span class="msg-body"><span class="msg-title">您还没进行企业认证</span><span
+                                        class="msg-time text-right"><span class="msg-btn">企业认证</span> </span></span>
+                                </a></li>
+                                <li id="li_Brand"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateToUrl('品牌管理','brand','27000','20000',data,event);}"
+                                    class="clearfix"><span class="msg-body"><span class="msg-title">您还没有品牌</span><span
+                                        class="msg-time text-right"><span class="msg-btn">品牌管理</span> </span></span>
+                                </a></li>
+                                <li id="li_Material"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateToUrl('产品信息','material?menu=26000','26000','20000',data,event);}"
+                                    class="clearfix"><span class="msg-body"><span class="msg-title">您还没有产品 </span><span
+                                        class="msg-time text-right"><span class="msg-btn">产品管理</span> </span></span>
+                                </a></li>
+                                <li id="li_GongXu"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateToUrl('生产环节','operationtype?menu=37100','37100','30000',data,event);}"
+                                    class="clearfix"><span class="msg-body"><span class="msg-title">您还没有生产环节</span><span
+                                        class="msg-time text-right"><span class="msg-btn">生产环节管理</span> </span></span>
+                                </a></li>
+                                <li id="li_Dealer"><a href="javascript:void(0)" data-bind="click: function(data, event) {navigateToUrl('经销商','dealer?menu=65000','65000','60000',data,event);}"
+                                    class="clearfix"><span class="msg-body"><span class="msg-title">您还没有经销商</span><span
+                                        class="msg-time text-right"><span class="msg-btn">经销商管理</span> </span></span>
+                                </a></li>
+                                <li id="li_ThresholdWarning"><a href="javascript:void(0)" data-bind="" class="clearfix">
+                                    <span class="msg-body"><span class="msg-title">您的二维码数量已经触发阀值</span></span> </a>
+                                </li>
+                            </ul>
+                            <ul id="viewReminderTipe">
+                                <li>
+                                    <p class="light-grey smaller-90 center mat10">
+                                        暂无提示</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="part-index clearfix">
+            <div class="user-info-ind clearfix">
+                <div class="gWel-left-new" style="width: 722px">
+                    <div class="gWel-top-new">
+                        <div class="gWel-avatar-new">
+                            <a href="#" class="gWel-avatar-inner nui-faceEdit nui-faceEdit-54">
+                                <img data-bind="attr:{src:$data.LogoUrl}" width="54" height="54">
+                            </a>
+                        </div>
+                        <div class="gWel-greet-new">
+                            <span class="gWel-greet-trueName">您好，<br>
+                                <span data-bind="text:$data.EnterpriseName"></span></span>
+                        </div>
+                    </div>
+<!--                    <div class="gWel-greet-text-new">
+                        <a href="javascript:void(0);" target="_blank" data-bind="text:$data.Update,attr:{href:'/Default/UpdateInfo'}"
+                            title=""></a>
+                    </div>-->
+                </div>
+                <div class="gWel-right-new">
+                    <div class="gWel-mailInfo">
+                        <ul class="gWel-mailInfo-list">
+                            <li>
+                                <div id="divWarm">
+                                    <div class="gWel-mailInfo-ico">
+                                        <img src="/newmenu/images/ico-ind-ts.png">
+                                    </div>
+                                    <div class="gWel-mailInfo-txt">
+                                        温馨提示 <span class="gWel-mailInfo-status" data-bind="text:getReminderCount()"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="divMessage">
+                                    <div class="gWel-mailInfo-ico">
+                                        <img src="/newmenu/images/ico-ind-message.png">
+                                    </div>
+                                    <div class="gWel-mailInfo-txt">
+                                        消息<span class="gWel-mailInfo-status" data-bind="text:newsCount"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="divComplaint">
+                                    <div class="gWel-mailInfo-ico">
+                                        <img src="/newmenu/images/ico-ind-tsgl.png">
+                                    </div>
+                                    <div class="gWel-mailInfo-txt">
+                                        投诉管理<span class="gWel-mailInfo-status" data-bind="text:getcomplaintCount()"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                               <!--  <div id="div4">
+                                    <div class="gWel-mailInfo-ico">
+                                        <a target="_blank" data-bind="attr:{href:'/Default/Video'}">
+                                            <img src="/newmenu/images/help_03.png"></a>
+                                    </div>
+                                   <a target="_blank" data-bind="attr:{href:'/Default/Video'}">
+                                        <div class="gWel-mailInfo-txt">
+                                            视频教程
+                                        </div>
+                                    </a>-->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ind-iconmenu line-block">
+                <ul class="iconmenu-item">
+                    <li><a href="#" data-bind="click: function(data, event) {navigateToUrl('UDI管理','requestsettingmanage?menu=25000','25000','20000',data,event);}">
+                        <img src="/newmenu/images/ind-iconmenu-zs.png">
+                        <p>
+                            我要追溯</p>
+                    </a></li>
+                  <!--  <li><a data-bind="click: function(data, event) {navigateToUrl('生成防伪码','securitycode?menu=22000','24000','20000',data,event);}">
+                        <img src="/newmenu/images/ind-iconmenu-fw.png">
+                        <p>
+                            我要防伪</p>
+                    </a></li>-->
+                    <li><a href="#" data-bind="click: function(data, event) {navigateToUrl('经销商','dealer?menu=65000','65000','60000',data,event);}">
+                        <img src="/newmenu/images/ind-iconmenu-shop.png">
+                        <p>
+                            仓储流通</p>
+                    </a></li>
+                    <li><a href="#" data-bind="click: function(data, event) {navigateToUrl('企业宣传','showcompany?menu=42100','42100','40000',data,event);}">
+                        <img src="/newmenu/images/ind-iconmenu-xc.png">
+                        <p>
+                            我要宣传</p>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="ind-data">
+                <div class="ind-tubiao line-block">
+                    <h2 class="title">
+                        扫码统计</h2>
+                    <div class="tubiao" style="height: 212px" id="chartDIV">
+                    </div>
+                </div>
+                <div class="ind-basedata line-block">
+                    <div class="hot-question">
+                        <div class="title">
+                            用码情况
+                        </div>
+                        <div class="details clearfix">
+                            <ul>
+                                <li><span class="dot"></span><span class="text">您的生成码总数为 <i data-bind="html:$data.RequestCodeCount">
+                                </i>个</span> </li>
+                                <li><span class="dot"></span><span class="text">您的生成码次数为 <i data-bind="html:$data.RequestCodeTimes">
+                                </i>次</span> </li>
+                                <li><span class="dot"></span><span class="text">您的二维码解析次数为 <i data-bind="html:$data.ScanCodeTimes">
+                                </i>次</span> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hot-question basedata" style="">
+                        <div class="title">
+                            基础数据情况
+                        </div>
+                        <div class="details clearfix">
+                            <ul>
+                                <li><span class="dot"></span><span class="text">您已有 <i data-bind="html:$data.BrancCount">
+                                </i>个品牌数据</span> </li>
+                                <li><span class="dot"></span><span class="text">您已有 <i data-bind="html:$data.MaterialCount">
+                                </i>个产品数据</span> </li>
+                                <li><span class="dot"></span><span class="text">您已有 <i data-bind="html:$data.OriginCount">
+                                </i>种原料数据</span> </li>
+                                <li><span class="dot"></span><span class="text">您已有 <i data-bind="html:$data.ProcessCount">
+                                </i>种生产流程数据</span> </li>
+                            </ul>
+                        </div>
+                        <!--                            <p class="more">
+                                <a href="#">查看更多</a></p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-menu">
+        <a id="Div1" class="fixed-menu-write">
+            <img class="fixed-menu-write" src="/images/zaixianbangzhu.png" /></a>
+        <div style="display: none">
+            <div id="Div2">
+                <div class="fixed-menu">
+                    <div class="fixed-menu-help-more">
+                        <div class="help-main">
+                            <a target="_blank" data-bind="attr:{href:'/Default/HelpList?typeId=0&id=1'}">
+                                <div style="float: left; margin-left: 21px; margin-top: 21px;" class="three-icon">
+                                    <img src="/images/remenwenti.png" />
+                                    <div style="margin: 6px 0px 25px 0px; color: #323232" class="wenzi">
+                                        热门问题</div>
+                                </div>
+                            </a><a href="/Public/OperaManual" title="">
+                                <div style="float: left; margin-left: 21px; margin-top: 21px;" class="three-icon">
+                                    <img src="/images/ziliaoxiazai.png" />
+                                    <div style="margin: 6px 0px 25px 0px; color: #323232" class="wenzi">
+                                        资料下载</div>
+                                </div>
+                            </a><!--<a target="_blank" data-bind="attr:{href:'/Default/Video'}">
+                                <div style="float: left; margin-left: 21px; margin-top: 21px;" class="three-icon">
+                                   
+                                    <div style="margin: 6px 0px 25px 0px; color: #323232" class="wenzi">
+                                        视频教程</div>
+                                </div>
+                            </a>-->
+                            <div class="clearfix">
+                            </div>
+                            <div style="margin-left: 20px" class="helpphone clearfix">
+                                <p class="phone">
+                                    <!--                   <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2353956790&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2353956790:41" alt="QQ交谈" title="QQ交谈"/></a>-->
+                                    <!--<img  style="CURSOR: pointer" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=2353956790&o=ncp.idcode.cn&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"  border="0" SRC=http://wpa.qq.com/pa?p=1:2353956790:7 alt="QQ交谈">-->
+                                    QQ客服：164576026 <span>8:00-18:00</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <!--ko compose: 'footer.html'-->
+    <!--/ko-->
+</div>

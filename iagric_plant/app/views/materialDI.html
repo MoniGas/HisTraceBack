@@ -1,0 +1,127 @@
+﻿<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fl">
+                <button class="btn btn-lg btn-success" data-bind="click:tongbuUDIDI">
+                    同步UDI-DI</button>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="输入相关信息搜索" data-bind="value:searchTitle,valueUpdate: 'afterkeydown'">
+                    <span class="input-group-addon btn-success">
+                        <button type="submit" data-bind="click:searchMaDI">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <!-- ko if:CodeType==2-->
+            <div class="fl" style="margin-left: 15px">
+                <button class="btn btn-lg btn-success" data-bind="click:interExcel">
+                    导入Excel</button>
+            </div>
+            <!--/ko-->
+             <!-- ko if:CodeType==3-->
+            <div class="fl" style="margin-left: 15px">
+                <button class="btn btn-lg btn-success" data-bind="click:interExcel">
+                    导入Excel</button>
+            </div>
+            <!--/ko-->
+        </div>
+    </div>
+    <div class="row mat10">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            品类编码
+                        </th>
+                        <th>
+                            包装规格
+                        </th>
+                       <th>
+                            UDI-DI编码
+                        </th>
+                        <th>
+                            产品型号
+                        </th>
+                        <th>
+                            来源
+                        </th>
+                        <th>
+                            GS1编码
+                        </th>
+                        <th>
+                            商品编码
+                        </th>
+                        <th>
+                            包装级别
+                        </th>
+                        <th>
+                            包装数量
+                        </th>
+                        <th>
+                            医用耗材编码
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:vmMarerialDI.ObjList">
+                    <tr>
+                        <td>
+                            <p class="cut width150" data-bind="text:$data.MaterialName,attr:{title:$data.MaterialName}">
+                            </p>
+                        </td>
+                        <td>
+                             <p class="cut width150" data-bind="text:$data.CategoryCode,attr:{title:$data.CategoryCode}">
+                            </p>
+                        </td>
+                        <td>
+                             <p class="cut width150" data-bind="text:$data.SpecificationName,attr:{title:$data.SpecificationName}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width200" data-bind="text:$data.MaterialUDIDI,attr:{title:$data.MaterialUDIDI}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.MaterialXH,attr:{title:$data.MaterialXH}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$parent.getCreatetype($data.createtype)">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.GSIDI,attr:{title:$data.GSIDI}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.SPCode,attr:{title:$data.SPCode}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.SpecLevel,attr:{title:$data.SpecLevel}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.SpecNum,attr:{title:$data.SpecNum}">
+                            </p>
+                        </td>
+                        <td>
+                            <p class="cut width100" data-bind="text:$data.HisCode,attr:{title:$data.HisCode}">
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer no-margin-top no-t-border">
+            <ul class="pagination" id="brandPager" data-bind="brandPager:vmMarerialDI.pageSize,totalCounts:vmMarerialDI.totalCounts,pageIndex:vmMarerialDI.pageIndex">
+            </ul>
+        </div>
+    </div>
+</div>

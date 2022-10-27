@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Audit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(function () {
+   $("#btnSave").click(function(){
+        if($.trim($("#sqcount").val())==""){
+        alert("请输入企业初始码量！");
+             return;
+        };
+        var sqcount = $("#sqcount").val();
+        if (!isNumber(sqcount)) {
+            alert('企业初始码量请输入整数！');
+            return;
+        }
+//          if($.trim($("#tzcount").val())==""){
+//        alert("请输入企业可透支码量！");
+//             return;
+//        };
+         var tzcount = $("#tzcount").val();
+        if ($.trim($("#tzcount").val())!=""&&!isNumberfu(tzcount)) {
+            alert('企业可透支码量请输入大于等于-1的整数！');
+            return;
+        }
+  if($.trim($("#tzcount").val())==""||$.trim($("#tzcount").val())==null)
+            {
+            tzcount=0;
+            }
+            $.post("@Url.Action("Audit")",
+            {
+            eid:$("#eid").val(),
+            sqcount:$("#sqcount").val(),
+            tzcount:tzcount,
+            type:1
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        art.dialog.close();
+                    }
+                }
+            })
+    });
+     $("#btnSave2").click(function(){
+        if($.trim($("#sqcount").val())==""){
+        alert("请输入企业初始码量！");
+             return;
+        };
+        var sqcount = $("#sqcount").val();
+        if (!isNumber(sqcount)) {
+            alert('企业初始码量请输入整数！');
+            return;
+        }
+                 var tzcount = $("#tzcount").val();
+        if ($.trim($("#tzcount").val())!=""&&!isNumberfu(tzcount)) {
+            alert('企业可透支码量请输入整数！');
+            return;
+        }
+         if($.trim($("#tzcount").val())==""||$.trim($("#tzcount").val())==null)
+            {
+            tzcount=0;
+            }
+            $.post("@Url.Action("Audit")",
+            {
+            eid:$("#eid").val(),
+            sqcount:$("#sqcount").val(),
+            tzcount:tzcount,
+            type:2
+            }
+            ,function(data){
+              if (data.info != null && data.info != "") {
+                    alert(data.info);
+                }
+                if (data.res) {
+                    if (data.url != null && data.url != "") {
+                        art.dialog.close();
+                    }
+                }
+            })
+    });
+    });
+</script>
+<html style="overflow-x: hidden">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="mc clearfix">
+        <div class="user-set userset-lcol">
+            <div class="form hd-manage-det">
+                <input id="eid" type="hidden"  value="@Model.Enterprise_Info_ID" />
+                <div class="infoitem">
+                    <span class="label" style="width: 120px">企业名称：</span>
+                    <div class="fl">
+                        <span class="yellow">@Model.EnterpriseName</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 120px"><em>*</em>企业初始码量：</span>
+                    <div class="fl">
+                        <input type="text" value="@Model.RequestCodeCount" id="sqcount" style="width: 180px;"/>
+                        <span style="color: #ed7049">请输入企业初始码量</span>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 120px">企业可透支码量：</span>
+                    <div class="fl">
+                        <input type="text"  value="@Model.OverDraftCount" id="tzcount" style="width: 180px;"/>
+                    </div>
+                </div>
+                <div class="infoitem">
+                    <span class="label" style="width: 50px"></span>
+                    <div class="fl">
+                        <span class="yellow">注：透支码量输入-1标识不控制企业用码</span>
+                    </div>
+                </div>
+            </div>
+            <p style="padding-left: 75px" class="center mat40">
+                <input type="button" id="btnSave" value="审核通过" class="button">
+                <input type="button" id="btnSave2" value="审核并设置用码量" class="button">
+                <input type="button" id="btnQuXiao" onclick="art.dialog.close();" value="取消" class="button"></p>
+        </div>
+    </div>
+</body>
+</html>

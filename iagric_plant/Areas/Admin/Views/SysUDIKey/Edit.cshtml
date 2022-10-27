@@ -1,0 +1,112 @@
+﻿@model LinqModel.UDIKey
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var materialCount = $.trim($("#MaterialCount").val());
+            if (materialCount.length == 0) {
+                alert('请输入产品解析数量！');
+                $("#MacAddress").focus();
+                return;
+            }
+            if (!isNumber(materialCount)) {
+                alert('产品解析数量请输入整数！');
+                return;
+            }
+            if ($.trim($("#endDate").val()) == "") {
+                alert("请选择到期日期！");
+                return;
+            };
+            var sendData = {
+                id: $("#ID").val(),
+                count: materialCount,
+                linkMan: $("#LinkMan").val(),
+                linkPhone: $("#LinkPhone").val(),
+                reason: $("#AddReason").val(),
+                endDate: $("#endDate").val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/SysUDIKey/EditUDIKey',
+                contentType: "application/json;charset=utf-8", //必须有
+                dataType: "json", //表示返回值类型，不必须
+                data: JSON.stringify(sendData),
+                async: false,
+                success: function (data) {
+                    if (data.res == 1) {
+                        alert(data.info);
+                        var parentwin = artDialog.open.origin;
+                        parentwin.CloseWindow('@Url.Action("Index")');
+                        art.dialog.close();
+                    }
+                    else {
+                        alert(data.info);
+                    }
+                }
+            })
+        })
+    });
+</script>
+<div>
+    <body style="min-width: 0;">
+        <!-------------------main start---------------------------------->
+        <div class="card_pa20 clearfix">
+            <form id="form1">
+            <input type="hidden" id="ID" value="@Model.ID" />
+            <div class="mod-main">
+                <div class="mc clearfix">
+                    <div class="user-set userset-lcol">
+                        <div class="form hd-manage-det">
+                            <div class="infoitem">
+                                <span class="label" style="width: 120px"><em>*</em>产品解析数量：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="MaterialCount" name="MaterialCount" maxlength="20" value="@Model.MaterialCount"/>
+                                    <span style="color: #ed7049">请输入产品解析数量</span>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                 <span class="label" style="width: 120px">联系人：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="LinkMan" name="LinkMan" maxlength="50" value="@Model.LinkMan"/>
+                                </div>
+                            </div>
+                             <div class="infoitem">
+                                 <span class="label" style="width: 120px">联系电话：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 180px;" id="LinkPhone" name="LinkPhone" maxlength="50" value="@Model.LinkPhone"/>
+                                </div>
+                            </div>
+                             <div class="infoitem">
+                                <span class="label" style="width: 130px"><em>*</em>到期日期：</span>
+                                <div class="fl">
+                                    <input type="text" style="width: 120px;" id="endDate" name="endDate" cssclass="Wdate"
+                                        onclick="WdatePicker()" readonly="readonly" value="@Model.EndDate.Value.ToString("yyyy-MM-dd")">
+                                 <span style="color: #ed7049">请选择授权到期日期</span>
+                                </div>
+                            </div>
+                             <div class="infoitem">
+                                 <span class="label" style="width: 120px">添加原因：</span>
+                                <div class="fl">
+                                    <textarea type="text" cols="100" rows="5" style="width: 180px;"  id="AddReason" name="AddReason"
+                                        maxlength="2000">@Model.AddReason</textarea>
+                                </div>
+                            </div>
+                            <div class="infoitem">
+                                <p class="center mat20">
+                                    <input type="button" value="保 存" id="btnSubmit" name="btnSubmit" class="button" />&nbsp;&nbsp;
+                                    <input type="button" value="返 回" class="button" onclick="art.dialog.close();" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-------------------main end---------------------------------->
+    </body>
+</div>
+

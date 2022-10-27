@@ -1,0 +1,94 @@
+﻿@model List<LinqModel.Order_Integral>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>积分明细</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        id="viewport">
+    <link rel="stylesheet" type="text/css" href="../public_css/base.css">
+    <link rel="stylesheet" type="text/css" href="../public_css/public-style.css">
+    <link rel="stylesheet" type="text/css" href="../public_css/login.css">
+    <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    @*    <script src="../../Scripts/My97DatePicker/WdatePicker.js" type="text/javascript"></script>*@
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#eDate").change(function () {
+                $("#form1").submit();
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="OriginHead bar-green">
+        <a href="/Wap_Integral/Index" class="bar-item pull-left"><i class="icon bar-arrow-left"></i></a>
+        <h1 class="bar-title">
+            明细查询</h1>
+    </header>
+    <form id="form1" method="get" action="/Wap_Integral/IntegralDetail?OrderConsumersId=@ViewBag.OrderConsumersId">
+    <input type="hidden" name="OrderConsumersId" id="OrderConsumersId" value="@ViewBag.OrderConsumersId" />
+    <div class="coupon-content">
+        <div class="page__bd">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">
+                            开始日期</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="date"  id="sDate" name="sDate" value="@ViewBag.sDate">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">
+                            结束日期</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="date" id="eDate" name="eDate" value="@ViewBag.eDate">
+                    </div> 
+                </div>
+            </div>
+            <div class="weui-cells__title">
+                查询结果</div>
+            <div class="weui-form-preview">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                    <div class="weui-form-preview__bd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">
+                                交易日期</label>
+                            <span class="weui-form-preview__value">@item.AddDate</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">
+                                交易描述</label>
+                            @if (item.IntegralType == 1)
+                            {
+                                <span class="weui-form-preview__value">注册</span>
+                            }
+                            else
+                            {
+                                <span class="weui-form-preview__value">在线购买产品</span>
+                            }
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">
+                                积分变动值</label>
+                            <span class="weui-form-preview__value">@item.IntergralChange</span>
+                        </div>
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

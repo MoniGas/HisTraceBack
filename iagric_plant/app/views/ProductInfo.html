@@ -1,0 +1,100 @@
+﻿<div class="page-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">首页</a> </li>
+            <li class="active">配置产品信息</li>
+        </ul>
+        <span><a href="javascript:void(0);" data-bind="click:goBack"><i class="ace-icon fa fa-angle-double-left">
+        </i>返回</a> </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mat10">
+            <div class="input-group stylish-input-group">
+                <select class="form-control" data-placeholder="选择产品..." id="Select1" data-bind="options:VmMaterial.MaterialArray,value:VmMaterial.SelectedId,optionsCaption:'选择产品',optionsText:'MaterialFullName',optionsValue:'Material_ID'">
+                </select>
+                <span class="input-group-addon btn-success">
+                    <button type="submit" data-bind="click:SearchProductInfo">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row hr pat10">
+        <div class="col-md-12">
+            <button class="btn btn-lg btn-success" data-bind="click: function(data, event) {AddInfoModel(data,event);}">
+                配置信息模块</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            显示活动名称
+                        </th>
+                        <th>
+                            显示订购热线
+                        </th>
+                        <th>
+                            显示产品价格
+                        </th>
+                        <th>
+                            显示生产日期
+                        </th>
+                        <th>
+                            显示生产厂家
+                        </th>
+                        <th>
+                            显示投诉电话
+                        </th>
+                        <th width="300">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:ViewModel.ObjList">
+                    <tr data-bind="event: { mouseover: $parent.MouseoverFun, mouseout: $parent.MouseoutFun}">
+                        <td>
+                            <span data-bind="text:$data.MaterialFullName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewPropertyIdArray($data.ViewPropertyIdArray)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewStatus($data.ViewOrderHotline)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewStatus($data.ViewMaterialPrice)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewStatus($data.ViewProductionTime)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewStatus($data.ViewFactory)"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$parent.ViewStatus($data.ViewComplaintPhone)"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'BtnEdit_'+$data.Id()},click: function(data,event) {$parent.EditInfoModel($data.Id,data,event);}">
+                                修改
+                            </button>
+                            <button class="btn btn-xs btn-success mar8" data-bind="visible:false,attr:{id:'BtnDel_'+$data.Id()},click: function(data,event) {$parent.DelInfoModel($data.Id,data,event);}">
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer no-margin-top no-t-border">
+        <ul class="pagination" id="ProductInfoPagerBH" data-bind="ProductInfoPagerBH:ViewModel.pageSize,totalCounts:ViewModel.totalCounts,pageIndex:ViewModel.pageIndex">
+        </ul>
+    </div>
+</div>

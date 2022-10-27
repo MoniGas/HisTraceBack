@@ -1,0 +1,15 @@
+﻿<!--<ul class="tablist">
+     ko foreach:tabTestArray
+    <li data-bind="click: function(data, event) {$parent.navigateTo(data,event);},css: { active: isActive }">
+        <div class="tabs-item-text" data-bind="html:$data.title">
+        </div>
+        <a href="#" data-bind="click: function(data, event) {$parent.closeTable(data,event);}"
+            class="tabs-item-close" title="点击关闭标签"><b class="ico-close"></b></a></li>
+    <!-- /ko 
+</ul>-->
+<ul class="tablist">
+    <li data-bind="click: function(data, event) {$parent.navigateTo(data,event);}" class="active">
+        <div class="tabs-item-text" data-bind="html:title">
+        </div>
+    </li>
+</ul>
